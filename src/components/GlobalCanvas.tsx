@@ -2,48 +2,37 @@
 
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 
-// Import Scenes
+// Import the unified Dark Aurora background
 import HomeScene from './scenes/HomeScene';
-import AboutScene from './scenes/AboutScene';
-import ServicesScene from './scenes/ServicesScene';
-import WorkScene from './scenes/WorkScene';
-import ContactScene from './scenes/ContactScene';
 
 export default function GlobalCanvas() {
-  const pathname = usePathname();
-
   return (
-    <div className="fixed inset-0 z-[-1] pointer-events-none bg-[#050505]">
-      {/* We use a simple fade transition when the route changes */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={pathname}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.5 }}
-          className="w-full h-full"
-        >
-          <Canvas camera={{ position: [0, 2, 8], fov: 60 }}>
-            <Suspense fallback={null}>
-              {pathname === '/' && <HomeScene />}
-              {pathname === '/about' && <AboutScene />}
-              {pathname === '/services' && <ServicesScene />}
-              {pathname === '/work' && <WorkScene />}
-              {pathname === '/contact' && <ContactScene />}
-              {/* Fallback to HomeScene if route not matched explicitly */}
-              {pathname !== '/' && 
-               pathname !== '/about' && 
-               pathname !== '/services' && 
-               pathname !== '/work' && 
-               pathname !== '/contact' && <HomeScene />}
-            </Suspense>
-          </Canvas>
-        </motion.div>
-      </AnimatePresence>
+    <div className="fixed inset-0 z-0 pointer-events-none bg-[#020617]">
+      <Canvas
+        camera={{ position: [0, 0, 10], fov: 45 }}
+        gl={{ antialias: true, alpha: true }}
+        dpr={[1, 2]}
+      >
+        <Suspense fallback={null}>
+          <AnimatePresence mode="wait">
+            {/* We use a single, elegant Dark Aurora background for all pages */}
+            <motion.group
+              key="dark-aurora"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 2 }}
+            >
+              <HomeScene />
+            </motion.group>
+          </AnimatePresence>
+        </Suspense>
+      </Canvas>
+      
+      {/* CSS overlay to ensure dark glassmorphism works well over the 3D */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#020617]/50 to-[#020617] pointer-events-none" />
     </div>
   );
 }
