@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react';
 
 const CTA = () => {
   return (
-    <section id="contact" className="px-8 md:px-16 lg:px-24 py-32 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border/50 relative z-10">
+    <section id="contact" className="px-4 sm:px-8 md:px-16 lg:px-24 py-20 sm:py-28 md:py-32 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border/50 relative z-10">
       <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -26,7 +26,7 @@ const CTA = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-serif text-5xl md:text-7xl font-bold text-white leading-[1.1] tracking-tight mb-8"
+          className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-[1.1] tracking-tight mb-6 sm:mb-8"
         >
           Let's build something <br className="hidden md:block" />
           <span className="text-krudex-blue">worth talking about.</span>
@@ -37,7 +37,7 @@ const CTA = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-krudex-muted text-lg max-w-xl mb-12 leading-relaxed"
+          className="text-krudex-muted text-base sm:text-lg max-w-xl mb-8 sm:mb-12 leading-relaxed"
         >
           Tell us what you're architecting. We'll respond within 24 hours with a clear path forward.
         </motion.p>
@@ -48,7 +48,7 @@ const CTA = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <a href="#consultation" className="group flex items-center gap-2 bg-krudex-blue text-krudex-black px-10 py-5 font-semibold text-sm hover:bg-krudex-blue-hover transition-colors">
+          <a href="#consultation" className="group flex items-center justify-center gap-2 bg-krudex-blue text-krudex-black w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 font-semibold text-sm hover:bg-krudex-blue-hover transition-colors">
             Initialize Consultation
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
