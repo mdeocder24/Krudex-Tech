@@ -39,7 +39,8 @@ const Footer = () => {
           <div className="md:col-span-3 lg:col-span-3 flex flex-col">
             <h4 className="text-[10px] text-krudex-green font-mono uppercase tracking-[0.2em] mb-6">Contact</h4>
             <div className="flex flex-col gap-4 text-sm text-krudex-muted">
-              <a href="mailto:hello@krudex.in" className="hover:text-white transition-colors w-fit">hello@krudex.in</a>
+              <a href="mailto:contact@krudextechnologies.in" className="hover:text-white transition-colors w-fit">contact@krudextechnologies.in</a>
+              <p>+91 89782 61053, +91 94902 48160</p>
               <p>Hyderabad, Telangana</p>
               <p>Response within 24 hrs</p>
             </div>

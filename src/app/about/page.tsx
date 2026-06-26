@@ -34,6 +34,33 @@ const skillsData = [
   "UI/UX Design & Brand Identity"
 ];
 
+const foundersData = [
+  {
+    initials: "KK",
+    name: "Kushwant Kumar Reddy Avuthu",
+    role: "Founder & Principal Engineer",
+    location: "Hyderabad, Telangana \u00b7 Available for enterprise engagements",
+    bio: [
+      "Kushwant is the founding engineer and principal at Krudex Technologies. He leads every client engagement end-to-end \u2014 from initial technical scoping through production deployment. There are no account managers between you and the engineer doing the work.",
+      "His technical specialization spans full-stack web engineering, computer vision, machine learning systems, and cross-platform mobile development. He has shipped production systems for enterprise clients, research institutions, and high-traffic event platforms.",
+      "Outside of client work, Kushwant contributes to open-source tooling and maintains an active interest in the intersection of AI and accessibility \u2014 which led to the Sign Language Recognition Platform that achieved 94.7% gesture accuracy running entirely in-browser."
+    ],
+    showSkills: true
+  },
+  {
+    initials: "SL",
+    name: "Sri Likhin Prasad",
+    role: "Co-Founder",
+    location: "Hyderabad, Telangana \u00b7 Available for enterprise engagements",
+    bio: [
+      "Sri Likhin Prasad is a co-founder at Krudex Technologies. He partners directly with clients to architect scalable solutions, ensuring that every digital product we ship meets our rigorous standards for performance and reliability.",
+      "With a strong foundation in modern web architectures and systems integration, Likhin oversees critical engineering workflows and ensures that complex integrations operate seamlessly under load.",
+      "He is deeply committed to the firm's 'Architecture first' principle, spending significant time in the planning and modeling phases to eliminate technical debt before the first line of code is ever written."
+    ],
+    showSkills: false
+  }
+];
+
 const principlesData = [
   {
     num: "01",
@@ -178,58 +205,58 @@ export default function AboutPage() {
               </span>
             </div>
             <h2 className="font-serif text-5xl md:text-6xl text-white font-bold">
-              The person behind the work.
+              The people behind the work.
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6 }}
-              className="lg:col-span-4"
-            >
-              <div className="bg-krudex-card/40 border border-krudex-border/50 p-8 border-t-4 border-t-krudex-green h-full">
-                <div className="w-20 h-20 bg-krudex-black border border-krudex-border flex items-center justify-center mb-8">
-                  <span className="font-serif text-2xl font-bold text-krudex-green">KK</span>
-                </div>
-                <h3 className="text-white font-bold text-xl mb-2">Kushwant Kumar Reddy Avuthu</h3>
-                <p className="text-krudex-green text-sm font-medium mb-8">Founder & Principal Engineer</p>
-                <p className="text-krudex-muted/70 text-xs leading-relaxed">
-                  Hyderabad, Telangana \u00b7 Available for enterprise engagements
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="lg:col-span-8 flex flex-col justify-center"
-            >
-              <div className="flex flex-col gap-6 text-krudex-muted text-base leading-relaxed mb-12">
-                <p>
-                  Kushwant is the founding engineer and principal at Krudex Technologies. He leads every client engagement end-to-end \u2014 from initial technical scoping through production deployment. There are no account managers between you and the engineer doing the work.
-                </p>
-                <p>
-                  His technical specialization spans full-stack web engineering, computer vision, machine learning systems, and cross-platform mobile development. He has shipped production systems for enterprise clients, research institutions, and high-traffic event platforms.
-                </p>
-                <p>
-                  Outside of client work, Kushwant contributes to open-source tooling and maintains an active interest in the intersection of AI and accessibility \u2014 which led to the Sign Language Recognition Platform that achieved 94.7% gesture accuracy running entirely in-browser.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {skillsData.map((skill, idx) => (
-                  <div key={idx} className="flex items-center gap-4 bg-krudex-card/30 border border-krudex-border/30 p-4">
-                    <div className="w-1.5 h-1.5 rounded-full bg-krudex-green flex-shrink-0"></div>
-                    <span className="text-krudex-muted text-sm">{skill}</span>
+          <div className="flex flex-col gap-24 lg:gap-32">
+            {foundersData.map((founder, index) => (
+              <div key={index} className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6 }}
+                  className="lg:col-span-4"
+                >
+                  <div className="bg-krudex-card/40 border border-krudex-border/50 p-8 border-t-4 border-t-krudex-green h-full">
+                    <div className="w-20 h-20 bg-krudex-black border border-krudex-border flex items-center justify-center mb-8">
+                      <span className="font-serif text-2xl font-bold text-krudex-green">{founder.initials}</span>
+                    </div>
+                    <h3 className="text-white font-bold text-xl mb-2">{founder.name}</h3>
+                    <p className="text-krudex-green text-sm font-medium mb-8">{founder.role}</p>
+                    <p className="text-krudex-muted/70 text-xs leading-relaxed">
+                      {founder.location}
+                    </p>
                   </div>
-                ))}
+                </motion.div>
+
+                <motion.div 
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="lg:col-span-8 flex flex-col justify-center"
+                >
+                  <div className="flex flex-col gap-6 text-krudex-muted text-base leading-relaxed mb-12">
+                    {founder.bio.map((paragraph, pIdx) => (
+                      <p key={pIdx}>{paragraph}</p>
+                    ))}
+                  </div>
+
+                  {founder.showSkills && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {skillsData.map((skill, idx) => (
+                        <div key={idx} className="flex items-center gap-4 bg-krudex-card/30 border border-krudex-border/30 p-4">
+                          <div className="w-1.5 h-1.5 rounded-full bg-krudex-green flex-shrink-0"></div>
+                          <span className="text-krudex-muted text-sm">{skill}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </motion.div>
               </div>
-            </motion.div>
+            ))}
           </div>
         </div>
       </section>
