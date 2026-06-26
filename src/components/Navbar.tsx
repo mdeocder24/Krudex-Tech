@@ -43,8 +43,8 @@ const Navbar = () => {
             {item}
           </Link>
         ))}
-        <Link 
-          href="#hire-us"
+        <Link
+          href="/contact"
           className="bg-krudex-blue text-krudex-black font-semibold text-sm px-6 py-2.5 hover:bg-krudex-blue-hover transition-colors shadow-[0_0_15px_rgba(204,255,0,0.15)]"
         >
           Hire Us
@@ -109,8 +109,8 @@ const Navbar = () => {
                 transition={{ delay: 0.6 }}
                 className="mt-8"
               >
-                <Link 
-                  href="#hire-us"
+                <Link
+                  href="/contact"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="bg-krudex-blue text-krudex-black font-semibold text-base px-8 py-4 inline-block hover:bg-krudex-blue-hover transition-colors shadow-[0_0_15px_rgba(204,255,0,0.15)]"
                 >

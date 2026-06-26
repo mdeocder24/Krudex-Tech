@@ -1,31 +1,77 @@
 @import "tailwindcss";
 
 @theme {
-  --color-krudex-blue: #3b82f6;
-  --color-krudex-blue-hover: #2563eb;
-  --color-krudex-black: #050505;
-  --color-krudex-card: #0a0a0a;
-  --color-krudex-border: #171717;
-  --color-krudex-text: #e5e5e5;
-  --color-krudex-muted: #737373;
-  --font-sans: var(--font-sans-primary);
-  --font-serif: var(--font-serif-primary);
+  /* Background scale */
+  --color-bg:        #0A0A0A;
+  --color-surface:   #111111;
+  --color-card:      #1A1A1A;
+  --color-border:    #2A2A2A;
+
+  /* Text */
+  --color-text-primary:   #FFFFFF;
+  --color-text-secondary: #A1A1A1;
+
+  /* Accents */
+  --color-accent:       #5B5BFF;
+  --color-accent-hover: #4A4AEE;
+  --color-mint:         #00E5A0;
+
+  /* Legacy aliases */
+  --color-krudex-blue:       #5B5BFF;
+  --color-krudex-blue-hover: #4A4AEE;
+  --color-krudex-black:      #0A0A0A;
+  --color-krudex-card:       #1A1A1A;
+  --color-krudex-border:     #2A2A2A;
+  --color-krudex-text:       #FFFFFF;
+  --color-krudex-muted:      #A1A1A1;
+
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
 }
 
 :root {
-  --background: var(--color-krudex-black);
-  --foreground: var(--color-krudex-text);
+  --background: var(--color-bg);
+  --foreground: var(--color-text-primary);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes draw-underline {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
+}
+
+.animate-underline {
+  animation: draw-underline 400ms cubic-bezier(0.16,1,0.3,1) 600ms both;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
 ::selection {
-  background: var(--color-krudex-green);
-  color: var(--color-krudex-black);
+  background: var(--color-accent);
+  color: #fff;
 }

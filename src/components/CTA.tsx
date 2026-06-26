@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
@@ -48,10 +49,10 @@ const CTA = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <a href="#consultation" className="group flex items-center justify-center gap-2 bg-krudex-blue text-krudex-black w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 font-semibold text-sm hover:bg-krudex-blue-hover transition-colors">
+          <Link href="/contact" className="group flex items-center justify-center gap-2 bg-krudex-blue text-krudex-black w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 font-semibold text-sm hover:bg-krudex-blue-hover transition-colors">
             Initialize Consultation
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>
