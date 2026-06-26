@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --color-krudex-green: #22c55e;
+  --color-krudex-green-hover: #16a34a;
+  --color-krudex-black: #050505;
+  --color-krudex-card: #0a0a0a;
+  --color-krudex-border: #171717;
+  --color-krudex-text: #e5e5e5;
+  --color-krudex-muted: #737373;
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
+}
+
+:root {
+  --background: var(--color-krudex-black);
+  --foreground: var(--color-krudex-text);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--color-krudex-green);
+  color: var(--color-krudex-black);
+}
