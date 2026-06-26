@@ -3,7 +3,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
-import CTA from '@/components/CTA';
+import ServicesCTA from '@/components/ServicesCTA';
+import Footer from '@/components/Footer';
 
 const servicesData = [
   {
@@ -161,16 +162,8 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <CTA />
-      
-      <footer className="w-full border-t border-krudex-border py-8 px-8 md:px-16 lg:px-24 flex items-center justify-between text-sm text-krudex-muted mt-auto">
-        <p>&copy; {new Date().getFullYear()} Krudex Technologies PVT. LTD.</p>
-        <div className="flex gap-6">
-          <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
-          <a href="#" className="hover:text-white transition-colors">Twitter</a>
-          <a href="#" className="hover:text-white transition-colors">GitHub</a>
-        </div>
-      </footer>
+      <ServicesCTA />
+      <Footer />
     </main>
   );
 }
