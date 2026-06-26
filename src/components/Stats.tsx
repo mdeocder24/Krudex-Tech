@@ -1,49 +1,84 @@
 "use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from "react";
 
 const stats = [
-  {
-    value: "50+",
-    label: "Projects Delivered",
-    description: "Across web, mobile, and AI disciplines"
-  },
-  {
-    value: "99",
-    label: "Lighthouse Score",
-    description: "Performance standard on every delivery"
-  },
-  {
-    value: "3x",
-    label: "Average Performance Gain",
-    description: "Over client's existing systems"
-  }
+  { numeric: 50, suffix: "+", label: "Projects Delivered", className: "text-text-primary" },
+  { numeric: 99, suffix: "", label: "Lighthouse Score", className: "text-mint" },
+  { numeric: 3, suffix: "×", label: "Avg Performance Gain", className: "text-text-primary" },
+  { numeric: 4, suffix: " yrs", label: "In Practice", className: "text-text-primary" },
 ];
 
-const Stats = () => {
+function useCountUp(target: number, duration: number, active: boolean) {
+  const [value, setValue] = useState(0);
+  const rafRef = useRef<number | null>(null);
+  const startRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (!active) return;
+    startRef.current = null;
+
+    const tick = (ts: number) => {
+      if (startRef.current === null) startRef.current = ts;
+      const elapsed = ts - startRef.current;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setValue(Math.round(eased * target));
+      if (progress < 1) rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [active, target, duration]);
+
+  return value;
+}
+
+function StatItem({ stat, active }: { stat: (typeof stats)[0]; active: boolean }) {
+  const count = useCountUp(stat.numeric, 1200, active);
   return (
-    <section className="px-4 sm:px-8 md:px-16 lg:px-24 py-14 sm:py-16 md:py-20 border-t border-b border-krudex-border/50 bg-krudex-black/40 backdrop-blur-xl relative z-10">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-krudex-border/50">
-        {stats.map((stat, index) => (
-          <motion.div 
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className={`flex flex-col ${index !== 0 ? 'md:pl-12' : ''} pt-8 md:pt-0`}
+    <div className="flex flex-col items-center gap-2 text-center px-6">
+      <span className={`font-sans font-semibold text-4xl md:text-5xl leading-none ${stat.className}`}>
+        {count}{stat.suffix}
+      </span>
+      <span className="text-text-secondary text-sm font-medium">{stat.label}</span>
+    </div>
+  );
+}
+
+export default function Stats() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setActive(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className="border-t border-b border-border py-12">
+      <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4">
+        {stats.map((stat, i) => (
+          <div
+            key={i}
+            className={`${i < stats.length - 1 ? "border-r border-border" : ""} py-4`}
           >
-            <div className="font-serif text-4xl sm:text-5xl md:text-6xl text-krudex-blue font-medium mb-3 sm:mb-4">
-              {stat.value}
-            </div>
-            <h3 className="text-white font-bold text-lg mb-2">{stat.label}</h3>
-            <p className="text-krudex-muted text-sm">{stat.description}</p>
-          </motion.div>
+            <StatItem stat={stat} active={active} />
+          </div>
         ))}
       </div>
-    </section>
+    </div>
   );
-};
-
-export default Stats;
+}
