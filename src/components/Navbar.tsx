@@ -26,7 +26,7 @@ const Navbar = () => {
         {['Services', 'Our Work', 'About', 'Contact'].map((item) => (
           <Link 
             key={item} 
-            href={`#${item.toLowerCase().replace(' ', '-')}`}
+            href={item === 'Services' ? '/services' : `/#${item.toLowerCase().replace(' ', '-')}`}
             className="text-sm text-krudex-muted hover:text-white transition-colors"
           >
             {item}

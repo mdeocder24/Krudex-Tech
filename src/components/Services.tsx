@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 const services = [
   {
@@ -29,7 +30,7 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="services" className="px-8 md:px-16 lg:px-24 py-32 bg-krudex-black">
+    <section id="services-overview" className="px-8 md:px-16 lg:px-24 py-32 bg-krudex-black">
       <div className="max-w-6xl mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -85,10 +86,10 @@ const Services = () => {
           transition={{ duration: 0.5 }}
           className="flex justify-center"
         >
-          <a href="#all-services" className="group flex items-center gap-2 border border-krudex-green text-krudex-green px-8 py-4 font-semibold text-sm hover:bg-krudex-green/10 transition-colors">
+          <Link href="/services" className="group flex items-center gap-2 border border-krudex-green text-krudex-green px-8 py-4 font-semibold text-sm hover:bg-krudex-green/10 transition-colors">
             Explore All Services
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>
