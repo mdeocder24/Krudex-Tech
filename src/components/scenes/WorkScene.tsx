@@ -55,7 +55,7 @@ const Vortex = () => {
   return (
     <points ref={pointsRef} position={[0, -2, -10]}>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position" count={particleCount} array={positions} itemSize={3} />
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
       <pointsMaterial size={0.05} color="#22c55e" transparent opacity={0.6} blending={THREE.AdditiveBlending} sizeAttenuation />
     </points>

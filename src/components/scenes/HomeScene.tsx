@@ -72,7 +72,7 @@ const AmbientParticles = () => {
   return (
     <points ref={pointsRef}>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position" count={particleCount} array={positions} itemSize={3} />
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
       <pointsMaterial size={0.06} color="#22c55e" transparent opacity={0.5} blending={THREE.AdditiveBlending} sizeAttenuation />
     </points>

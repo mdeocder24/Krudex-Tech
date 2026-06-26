@@ -45,7 +45,7 @@ const DataParticles = ({ count = 40 }) => {
   return (
     <points ref={pointsRef}>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position" count={count} array={positions} itemSize={3} />
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
       <pointsMaterial size={0.05} color="#22c55e" transparent opacity={0.8} blending={THREE.AdditiveBlending} />
     </points>
