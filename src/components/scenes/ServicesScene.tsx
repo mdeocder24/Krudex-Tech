@@ -7,6 +7,7 @@ import * as THREE from 'three';
 
 const Monoliths = () => {
   const groupRef = useRef<THREE.Group>(null);
+  const monolithsRef = useRef<(THREE.Mesh | null)[]>([]);
   
   const blocks = useMemo(() => {
     const items = [];
@@ -27,7 +28,13 @@ const Monoliths = () => {
           Math.random() * Math.PI,
           Math.random() * 0.2
         ],
-        speed: 0.1 + Math.random() * 0.3
+        speed: 0.1 + Math.random() * 0.3,
+        // Store initial positions for scroll scattering
+        initPos: [
+          (Math.random() - 0.5) * 15,
+          (Math.random() - 0.5) * 10,
+          (Math.random() - 0.5) * 10
+        ]
       });
     }
     return items;
@@ -36,6 +43,25 @@ const Monoliths = () => {
   useFrame(({ clock }) => {
     if (groupRef.current) {
       groupRef.current.rotation.y = clock.getElapsedTime() * 0.05;
+      
+      const scrollY = window.scrollY;
+      
+      // Scatter monoliths as user scrolls
+      blocks.forEach((b, i) => {
+        const mesh = monolithsRef.current[i];
+        if (mesh) {
+          // Push them outward based on scroll
+          const scatterFactor = scrollY * 0.005;
+          const direction = new THREE.Vector3(...b.initPos).normalize();
+          
+          mesh.position.x = b.initPos[0] + direction.x * scatterFactor * b.speed * 10;
+          mesh.position.y = b.initPos[1] + direction.y * scatterFactor * b.speed * 10;
+          mesh.position.z = b.initPos[2] + direction.z * scatterFactor * b.speed * 10;
+          
+          // Add some spin
+          mesh.rotation.y = b.rotation[1] + scrollY * 0.001 * b.speed;
+        }
+      });
     }
   });
 
@@ -44,7 +70,8 @@ const Monoliths = () => {
       {blocks.map((b, i) => (
         <Float key={i} speed={b.speed} rotationIntensity={0.2} floatIntensity={2} floatingRange={[-1, 1]}>
           <mesh 
-            position={b.position as [number, number, number]} 
+            ref={(el) => { monolithsRef.current[i] = el; }}
+            position={b.initPos as [number, number, number]} 
             scale={b.scale as [number, number, number]}
             rotation={b.rotation as [number, number, number]}
           >
@@ -80,8 +107,9 @@ const Monoliths = () => {
 export default function ServicesScene() {
   useFrame(({ camera }) => {
     const scrollY = window.scrollY;
-    camera.position.z = THREE.MathUtils.lerp(camera.position.z, 10 - (scrollY * 0.003), 0.05);
-    camera.position.y = THREE.MathUtils.lerp(camera.position.y, 2 - (scrollY * 0.002), 0.05);
+    // Camera pulls back and rises up to see the scattering
+    camera.position.z = THREE.MathUtils.lerp(camera.position.z, 10 + (scrollY * 0.005), 0.05);
+    camera.position.y = THREE.MathUtils.lerp(camera.position.y, 2 + (scrollY * 0.003), 0.05);
   });
 
   return (
@@ -89,7 +117,6 @@ export default function ServicesScene() {
       <fog attach="fog" args={['#050505', 10, 35]} />
       <ambientLight intensity={0.1} />
       
-      {/* Dramatic lighting hitting the edges of the dark monoliths */}
       <spotLight position={[15, 20, 10]} angle={0.3} penumbra={1} intensity={5} color="#3b82f6" castShadow />
       <directionalLight position={[-10, -10, -10]} intensity={2} color="#1d4ed8" />
 
