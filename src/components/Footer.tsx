@@ -4,8 +4,8 @@ import Image from 'next/image';
 const Footer = () => {
   return (
     <footer className="w-full bg-[#0A0A0A]/80 backdrop-blur-md border-t border-krudex-border/50">
-      <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16 lg:px-24 py-12 sm:py-16 md:py-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-8 sm:gap-10 lg:gap-8 mb-12 sm:mb-16">
           <div className="md:col-span-6 lg:col-span-5 flex flex-col">
             <Link href="/" className="flex items-center gap-3 group mb-6">
               <div className="relative w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-md overflow-hidden">
