@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useMemo } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 const TerrainWave = () => {
@@ -17,7 +17,6 @@ const TerrainWave = () => {
       const x = positions[i];
       const y = positions[i + 1];
       
-      // Complex undulating wave calculation
       const z = Math.sin(x * 0.15 + time) * 1.5 + 
                 Math.cos(y * 0.15 + time * 0.8) * 1.5 + 
                 Math.sin((x + y) * 0.1 - time * 0.5) * 1.0;
@@ -50,10 +49,9 @@ const AmbientParticles = () => {
     const pos = new Float32Array(particleCount * 3);
     const p = new Float32Array(particleCount);
     for (let i = 0; i < particleCount; i++) {
-      // Widespread particle field
-      pos[i * 3] = (Math.random() - 0.5) * 60; // X
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 40; // Y
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 40 - 10; // Z
+      pos[i * 3] = (Math.random() - 0.5) * 60; 
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 40; 
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 40 - 10;
       p[i] = Math.random() * Math.PI * 2;
     }
     return [pos, p];
@@ -64,7 +62,6 @@ const AmbientParticles = () => {
     const time = clock.getElapsedTime();
     const pos = pointsRef.current.geometry.attributes.position.array as Float32Array;
     
-    // Slow drifting motion
     for (let i = 0; i < particleCount; i++) {
       pos[i * 3 + 1] += Math.sin(time * 0.5 + phases[i]) * 0.005;
       pos[i * 3] += Math.cos(time * 0.3 + phases[i]) * 0.005;
@@ -82,26 +79,19 @@ const AmbientParticles = () => {
   );
 };
 
-const ScrollCamera = () => {
+export default function HomeScene() {
   useFrame(({ camera }) => {
     const scrollY = window.scrollY;
-    // Map scroll pixels to 3D space movement: camera pans down and zooms slightly as you scroll down
     camera.position.z = THREE.MathUtils.lerp(camera.position.z, 8 - (scrollY * 0.002), 0.05);
     camera.position.y = THREE.MathUtils.lerp(camera.position.y, 1 - (scrollY * 0.001), 0.05);
+    camera.position.x = THREE.MathUtils.lerp(camera.position.x, 0, 0.05);
   });
-  return null;
-};
 
-export default function GlobalCanvas() {
   return (
-    <div className="fixed inset-0 z-[-1] pointer-events-none bg-[#050505]">
-      <Canvas camera={{ position: [0, 1, 8], fov: 60 }}>
-        {/* Fog perfectly blends the background geometry into the dark background */}
-        <fog attach="fog" args={['#050505', 5, 35]} />
-        <ScrollCamera />
-        <TerrainWave />
-        <AmbientParticles />
-      </Canvas>
-    </div>
+    <>
+      <fog attach="fog" args={['#050505', 5, 35]} />
+      <TerrainWave />
+      <AmbientParticles />
+    </>
   );
 }
