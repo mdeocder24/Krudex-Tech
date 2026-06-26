@@ -76,7 +76,7 @@ export default function ContactPage() {
                 </div>
                 <div className="flex flex-col">
                   <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">EMAIL</span>
-                  <a href="mailto:hello@krudex.in" className="text-white font-medium text-sm hover:text-krudex-green transition-colors">hello@krudex.in</a>
+                  <a href="mailto:krudextechnologies@gmail.com" className="text-white font-medium text-sm hover:text-krudex-green transition-colors">krudextechnologies@gmail.com</a>
                 </div>
               </div>
               
@@ -87,7 +87,7 @@ export default function ContactPage() {
                 </div>
                 <div className="flex flex-col">
                   <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">PHONE</span>
-                  <a href="tel:+910000000000" className="text-white font-medium text-sm hover:text-krudex-green transition-colors">+91 (Hyderabad)</a>
+                  <a href="tel:+918978261053" className="text-white font-medium text-sm hover:text-krudex-green transition-colors">+91 89782 61053, +91 94902 48160</a>
                 </div>
               </div>
 
@@ -141,7 +141,7 @@ export default function ContactPage() {
                     <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">COMPANY / STARTUP</label>
                     <input 
                       type="text" 
-                      placeholder="Acme Technologies Pvt. Ltd." 
+                      placeholder="Acme Technologies" 
                       className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-green transition-colors"
                     />
                   </div>

@@ -16,17 +16,16 @@ const Navbar = () => {
         <div className="w-10 h-10 bg-krudex-green flex items-center justify-center font-bold text-krudex-black text-sm tracking-wider group-hover:bg-krudex-green-hover transition-colors">
           KT
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col justify-center">
           <span className="font-bold text-white text-lg leading-none tracking-wide">Krudex Technologies</span>
-          <span className="text-[10px] text-krudex-green font-bold tracking-[0.2em] mt-1">PVT. LTD.</span>
         </div>
       </Link>
 
       <div className="hidden md:flex items-center gap-8">
-        {['Services', 'Our Work', 'About', 'Contact'].map((item) => (
+        {['Home', 'Services', 'Our Work', 'About', 'Contact'].map((item) => (
           <Link 
             key={item} 
-            href={item === 'Services' ? '/services' : item === 'About' ? '/about' : item === 'Contact' ? '/contact' : item === 'Our Work' ? '/work' : `/#${item.toLowerCase().replace(' ', '-')}`}
+            href={item === 'Home' ? '/' : item === 'Services' ? '/services' : item === 'About' ? '/about' : item === 'Contact' ? '/contact' : item === 'Our Work' ? '/work' : `/#${item.toLowerCase().replace(' ', '-')}`}
             className="text-sm text-krudex-muted hover:text-white transition-colors"
           >
             {item}

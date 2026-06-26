@@ -21,7 +21,7 @@ const timelineData = [
   },
   {
     year: "2025",
-    text: "Krudex Technologies incorporated as a Private Limited entity in Telangana, India."
+    text: "Krudex Technologies incorporated as an entity in Telangana, India."
   }
 ];
 
@@ -152,7 +152,7 @@ export default function AboutPage() {
                   Over three years, the practice expanded: first into AI and machine learning, then into UI/UX design and brand identity. Each discipline reinforced the others. A product that performs well needs clean engineering and clean design in equal measure.
                 </p>
                 <p>
-                  In 2025, Krudex Technologies was incorporated as a Private Limited company in Telangana \u2014 formalizing what had already become a serious operation. The incorporation wasn't a milestone. It was a signal: we're here to build companies, not just websites.
+                  In 2025, Krudex Technologies was incorporated in Telangana \u2014 formalizing what had already become a serious operation. The incorporation wasn't a milestone. It was a signal: we're here to build companies, not just websites.
                 </p>
               </div>
             </motion.div>

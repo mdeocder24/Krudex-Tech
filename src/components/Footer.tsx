@@ -11,9 +11,8 @@ const Footer = () => {
               <div className="w-8 h-8 bg-krudex-green flex items-center justify-center font-bold text-krudex-black text-xs tracking-wider group-hover:bg-krudex-green-hover transition-colors">
                 KT
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col justify-center">
                 <span className="font-bold text-white text-base leading-none tracking-wide">Krudex Technologies</span>
-                <span className="text-[9px] text-krudex-green font-bold tracking-[0.2em] mt-1">PVT. LTD.</span>
               </div>
             </Link>
             <p className="text-krudex-muted text-sm leading-relaxed max-w-sm">
@@ -39,7 +38,7 @@ const Footer = () => {
           <div className="md:col-span-3 lg:col-span-3 flex flex-col">
             <h4 className="text-[10px] text-krudex-green font-mono uppercase tracking-[0.2em] mb-6">Contact</h4>
             <div className="flex flex-col gap-4 text-sm text-krudex-muted">
-              <a href="mailto:contact@krudextechnologies.in" className="hover:text-white transition-colors w-fit">contact@krudextechnologies.in</a>
+              <a href="mailto:krudextechnologies@gmail.com" className="hover:text-white transition-colors w-fit">krudextechnologies@gmail.com</a>
               <p>+91 89782 61053, +91 94902 48160</p>
               <p>Hyderabad, Telangana</p>
               <p>Response within 24 hrs</p>
@@ -49,7 +48,7 @@ const Footer = () => {
 
         <div className="border-t border-krudex-border/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-krudex-muted/60">
-            &copy; 2025 Krudex Technologies Private Limited &middot; CIN: U72900TG2024PTC000000
+            &copy; 2026 Krudex Technologies
           </p>
           <p className="text-[10px] text-krudex-green font-mono uppercase tracking-[0.15em]">
             INCORPORATED &middot; TELANGANA, INDIA

@@ -28,75 +28,97 @@ const wordVariants: Variants = {
 
 const Hero = () => {
   return (
-    <section className="min-h-screen flex flex-col justify-center px-8 md:px-16 lg:px-24 pt-32 pb-20 relative">
-      <div className="max-w-4xl z-10">
+    <section className="h-screen w-full flex flex-col justify-center items-center px-4 md:px-16 lg:px-24 relative overflow-hidden">
+      <div className="max-w-5xl z-10 flex flex-col items-center text-center mt-16 md:mt-20">
+        {/* Top Label */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-8"
+          className="inline-flex items-center gap-2 border border-krudex-border/50 px-4 py-1.5 mb-6 md:mb-8"
         >
-          <div className="w-1.5 h-1.5 rounded-full bg-krudex-green"></div>
-          <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-green font-semibold">
-            INCORPORATED ENGINEERING FIRM &middot; HYDERABAD
+          <span className="text-[9px] md:text-[10px] uppercase tracking-[0.25em] text-krudex-green font-semibold">
+            HYDERABAD &middot; TELANGANA &middot; INDIA
           </span>
         </motion.div>
 
+        {/* Main Headline */}
         <motion.h1 
           variants={titleVariants}
           initial="hidden"
           animate="visible"
-          className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.1] tracking-tight text-white mb-8 perspective-1000"
+          className="font-serif text-5xl md:text-7xl lg:text-[6.5rem] font-bold leading-[1.05] tracking-tight text-white mb-8 md:mb-12 perspective-1000"
         >
-          <span className="block overflow-hidden">
-            {["We", "Build", "Digital"].map((word, i) => (
+          <span className="block overflow-hidden mb-2">
+            {["Architecting", "Scalable"].map((word, i) => (
               <motion.span key={i} variants={wordVariants} className="inline-block mr-[0.25em] origin-bottom">{word}</motion.span>
             ))}
           </span>
-          <span className="block overflow-hidden text-krudex-green">
-            {["Products", "That"].map((word, i) => (
+          <span className="block overflow-hidden text-krudex-green mb-2">
+            {["Web", "&"].map((word, i) => (
               <motion.span key={i} variants={wordVariants} className="inline-block mr-[0.25em] origin-bottom">{word}</motion.span>
             ))}
           </span>
+          <span className="block overflow-hidden text-krudex-green mb-2">
+            <motion.span variants={wordVariants} className="inline-block origin-bottom">Mobile</motion.span>
+          </span>
           <span className="block overflow-hidden text-krudex-green">
-            <motion.span variants={wordVariants} className="inline-block origin-bottom">Perform.</motion.span>
+            <motion.span variants={wordVariants} className="inline-block origin-bottom">Ecosystems.</motion.span>
           </span>
         </motion.h1>
 
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-krudex-muted text-lg md:text-xl max-w-2xl mb-12 leading-relaxed"
-        >
-          Krudex Technologies delivers full-stack engineering, AI integration, 
-          and precision design for startups and enterprises that need results, 
-          not promises.
-        </motion.p>
-
+        {/* CTA Buttons */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="flex flex-wrap items-center gap-4"
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="flex flex-wrap items-center justify-center gap-4 md:gap-6 mb-8 md:mb-10"
         >
-          <a href="#work" className="group flex items-center gap-2 bg-krudex-green text-krudex-black px-8 py-4 font-semibold text-sm hover:bg-krudex-green-hover transition-colors">
-            View Our Work
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          <a href="/work" className="group flex items-center gap-3 border border-krudex-border text-white px-8 md:px-10 py-4 font-semibold text-xs tracking-[0.1em] hover:border-krudex-green transition-colors">
+            VIEW OUR WORK
+            <ArrowRight className="w-4 h-4 text-krudex-muted group-hover:text-krudex-green group-hover:translate-x-1 transition-all" />
           </a>
-          <a href="#contact" className="group flex items-center gap-2 border border-krudex-border text-white px-8 py-4 font-semibold text-sm hover:border-krudex-green transition-colors">
-            Start a Project
-            <ArrowRight className="w-4 h-4 text-krudex-green group-hover:translate-x-1 transition-transform" />
+          <a href="/contact" className="group flex items-center gap-2 bg-krudex-green text-krudex-black px-8 md:px-10 py-4 font-bold text-xs tracking-[0.1em] hover:bg-krudex-green-hover transition-colors shadow-[0_0_20px_rgba(204,255,0,0.15)]">
+            INITIALIZE CONSULTATION
           </a>
         </motion.div>
+
+        {/* Subtitle Paragraph */}
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="text-krudex-muted/80 text-xs md:text-sm max-w-2xl leading-relaxed px-4"
+        >
+          Krudex Technologies is an incorporated engineering firm operating at the
+          intersection of robust software architecture, intelligent AI systems, and
+          precision digital design.
+        </motion.p>
       </div>
+      
+      {/* Scroll Indicator */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+      >
+        <div className="w-px h-8 md:h-12 bg-gradient-to-b from-krudex-border/0 via-krudex-border to-krudex-border/0 relative overflow-hidden">
+          <motion.div 
+            animate={{ top: ["-100%", "100%"] }}
+            transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+            className="absolute left-0 w-full h-1/2 bg-krudex-green"
+          />
+        </div>
+        <span className="text-[9px] uppercase tracking-[0.3em] text-krudex-muted font-mono">SCROLL</span>
+      </motion.div>
 
       {/* 3D Interactive Background */}
       <CanvasBackground />
       
       {/* Abstract Background Element */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10 mix-blend-screen">
-         <div className="absolute -top-40 -left-40 w-96 h-96 bg-krudex-green/10 blur-[120px] rounded-full"></div>
+         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-krudex-green/5 blur-[150px] rounded-full"></div>
       </div>
     </section>
   );
