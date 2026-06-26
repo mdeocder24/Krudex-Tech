@@ -1,59 +1,78 @@
 "use client";
 
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { Float, Environment, Lightformer } from '@react-three/drei';
 import * as THREE from 'three';
 
-const ArchitectureGeometry = () => {
+const Monoliths = () => {
   const groupRef = useRef<THREE.Group>(null);
-  const coreRef = useRef<THREE.Mesh>(null);
-  const outerRef1 = useRef<THREE.Mesh>(null);
-  const outerRef2 = useRef<THREE.Mesh>(null);
+  
+  const blocks = useMemo(() => {
+    const items = [];
+    for (let i = 0; i < 12; i++) {
+      items.push({
+        position: [
+          (Math.random() - 0.5) * 15,
+          (Math.random() - 0.5) * 10,
+          (Math.random() - 0.5) * 10
+        ],
+        scale: [
+          1 + Math.random() * 2,
+          4 + Math.random() * 6,
+          1 + Math.random() * 2
+        ],
+        rotation: [
+          Math.random() * 0.2,
+          Math.random() * Math.PI,
+          Math.random() * 0.2
+        ],
+        speed: 0.1 + Math.random() * 0.3
+      });
+    }
+    return items;
+  }, []);
 
   useFrame(({ clock }) => {
-    if (!groupRef.current || !coreRef.current || !outerRef1.current || !outerRef2.current) return;
-    
-    const t = clock.getElapsedTime();
-    
-    groupRef.current.rotation.y = t * 0.1;
-    groupRef.current.position.y = Math.sin(t * 0.5) * 0.5;
-
-    coreRef.current.rotation.x = t * 0.2;
-    coreRef.current.rotation.y = t * 0.3;
-
-    outerRef1.current.rotation.x = -t * 0.15;
-    outerRef1.current.rotation.z = t * 0.2;
-
-    outerRef2.current.rotation.y = -t * 0.25;
-    outerRef2.current.rotation.z = -t * 0.1;
+    if (groupRef.current) {
+      groupRef.current.rotation.y = clock.getElapsedTime() * 0.05;
+    }
   });
 
   return (
-    <group ref={groupRef} position={[4, 0, -8]}>
-      {/* Core solid structure */}
-      <mesh ref={coreRef}>
-        <icosahedronGeometry args={[1.5, 1]} />
-        <meshStandardMaterial color="#050505" emissive="#3b82f6" emissiveIntensity={0.2} wireframe={false} />
-      </mesh>
+    <group ref={groupRef} position={[0, -2, -15]}>
+      {blocks.map((b, i) => (
+        <Float key={i} speed={b.speed} rotationIntensity={0.2} floatIntensity={2} floatingRange={[-1, 1]}>
+          <mesh 
+            position={b.position as [number, number, number]} 
+            scale={b.scale as [number, number, number]}
+            rotation={b.rotation as [number, number, number]}
+          >
+            <boxGeometry args={[1, 1, 1]} />
+            <meshStandardMaterial 
+              color="#0a0a0a" 
+              metalness={0.8} 
+              roughness={0.2}
+              envMapIntensity={2}
+            />
+          </mesh>
+        </Float>
+      ))}
       
-      <mesh ref={coreRef}>
-        <icosahedronGeometry args={[1.5, 1]} />
-        <meshBasicMaterial color="#3b82f6" wireframe={true} transparent opacity={0.5} blending={THREE.AdditiveBlending} />
-      </mesh>
-
-      {/* Outer wireframe structures */}
-      <mesh ref={outerRef1}>
-        <boxGeometry args={[4, 4, 4]} />
-        <meshBasicMaterial color="#3b82f6" wireframe={true} transparent opacity={0.3} blending={THREE.AdditiveBlending} />
-      </mesh>
-
-      <mesh ref={outerRef2}>
-        <octahedronGeometry args={[5, 0]} />
-        <meshBasicMaterial color="#3b82f6" wireframe={true} transparent opacity={0.15} blending={THREE.AdditiveBlending} />
-      </mesh>
-      
-      {/* Background grid */}
-      <gridHelper args={[40, 40, '#3b82f6', '#3b82f6']} position={[0, -5, 0]} material-transparent material-opacity={0.1} />
+      {/* Central massive monolith */}
+      <Float speed={0.5} rotationIntensity={0} floatIntensity={1} floatingRange={[-0.5, 0.5]}>
+        <mesh position={[4, 0, -5]}>
+          <boxGeometry args={[3, 12, 3]} />
+          <meshPhysicalMaterial 
+            color="#050505"
+            metalness={0.9}
+            roughness={0.1}
+            clearcoat={1}
+            clearcoatRoughness={0.1}
+            envMapIntensity={3}
+          />
+        </mesh>
+      </Float>
     </group>
   );
 };
@@ -61,16 +80,27 @@ const ArchitectureGeometry = () => {
 export default function ServicesScene() {
   useFrame(({ camera }) => {
     const scrollY = window.scrollY;
-    camera.position.z = THREE.MathUtils.lerp(camera.position.z, 8 - (scrollY * 0.002), 0.05);
-    camera.position.y = THREE.MathUtils.lerp(camera.position.y, -(scrollY * 0.003), 0.05);
-    camera.position.x = THREE.MathUtils.lerp(camera.position.x, 0, 0.05);
+    camera.position.z = THREE.MathUtils.lerp(camera.position.z, 10 - (scrollY * 0.003), 0.05);
+    camera.position.y = THREE.MathUtils.lerp(camera.position.y, 2 - (scrollY * 0.002), 0.05);
   });
 
   return (
     <>
-      <fog attach="fog" args={['#050505', 5, 25]} />
-      <ambientLight intensity={1} />
-      <ArchitectureGeometry />
+      <fog attach="fog" args={['#050505', 10, 35]} />
+      <ambientLight intensity={0.1} />
+      
+      {/* Dramatic lighting hitting the edges of the dark monoliths */}
+      <spotLight position={[15, 20, 10]} angle={0.3} penumbra={1} intensity={5} color="#3b82f6" castShadow />
+      <directionalLight position={[-10, -10, -10]} intensity={2} color="#1d4ed8" />
+
+      <Environment resolution={256}>
+        <group rotation={[-Math.PI / 4, 0, 0]}>
+          <Lightformer form="rect" intensity={10} position={[0, 10, -10]} scale={[20, 2, 1]} color="#60a5fa" />
+          <Lightformer form="rect" intensity={5} position={[-10, 0, -10]} scale={[2, 20, 1]} color="#1e3a8a" />
+        </group>
+      </Environment>
+
+      <Monoliths />
     </>
   );
 }

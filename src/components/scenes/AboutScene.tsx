@@ -2,122 +2,76 @@
 
 import React, { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { Float, Environment, Lightformer } from '@react-three/drei';
 import * as THREE from 'three';
 
-const Constellation = () => {
-  const pointsRef = useRef<THREE.Points>(null);
-  const linesRef = useRef<THREE.LineSegments>(null);
+const MetallicHelix = () => {
   const groupRef = useRef<THREE.Group>(null);
   
-  const particleCount = 150;
-  const maxDistance = 4.0;
-
-  const [positions, velocities] = useMemo(() => {
-    const pos = new Float32Array(particleCount * 3);
-    const vel = [];
-    
-    for (let i = 0; i < particleCount; i++) {
-      // Sphere distribution
-      const r = 8 + Math.random() * 4;
-      const theta = Math.random() * 2 * Math.PI;
-      const phi = Math.acos(2 * Math.random() - 1);
+  const sphereCount = 80;
+  
+  const spheres = useMemo(() => {
+    const items = [];
+    for (let i = 0; i < sphereCount; i++) {
+      const t = i / sphereCount;
+      const angle = t * Math.PI * 8; // 4 full turns
+      const radius = 2.5;
+      const y = (t - 0.5) * 15; // spread vertically
       
-      pos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-      pos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-      pos[i * 3 + 2] = r * Math.cos(phi);
+      // Strand 1
+      items.push({
+        position: [Math.cos(angle) * radius, y, Math.sin(angle) * radius],
+        scale: 0.3 + Math.random() * 0.4,
+        isGlass: Math.random() > 0.5
+      });
       
-      vel.push({
-        x: (Math.random() - 0.5) * 0.01,
-        y: (Math.random() - 0.5) * 0.01,
-        z: (Math.random() - 0.5) * 0.01,
+      // Strand 2 (offset by PI)
+      items.push({
+        position: [Math.cos(angle + Math.PI) * radius, y, Math.sin(angle + Math.PI) * radius],
+        scale: 0.3 + Math.random() * 0.4,
+        isGlass: Math.random() > 0.5
       });
     }
-    return [pos, vel];
-  }, [particleCount]);
+    return items;
+  }, [sphereCount]);
 
-  const [linePositions, lineColors] = useMemo(() => {
-    const maxLines = particleCount * particleCount;
-    return [
-      new Float32Array(maxLines * 6),
-      new Float32Array(maxLines * 6)
-    ];
-  }, [particleCount]);
-
-  useFrame(() => {
-    if (!pointsRef.current || !linesRef.current || !groupRef.current) return;
-    
-    const pos = pointsRef.current.geometry.attributes.position.array as Float32Array;
-    
-    for (let i = 0; i < particleCount; i++) {
-      pos[i * 3] += velocities[i].x;
-      pos[i * 3 + 1] += velocities[i].y;
-      pos[i * 3 + 2] += velocities[i].z;
-
-      // Keep within sphere loosely
-      const dist = Math.sqrt(pos[i*3]**2 + pos[i*3+1]**2 + pos[i*3+2]**2);
-      if (dist > 15) {
-        velocities[i].x *= -1;
-        velocities[i].y *= -1;
-        velocities[i].z *= -1;
-      }
+  useFrame(({ clock }) => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y = clock.getElapsedTime() * 0.2;
+      groupRef.current.position.y = Math.sin(clock.getElapsedTime() * 0.5) * 1;
     }
-    pointsRef.current.geometry.attributes.position.needsUpdate = true;
-
-    let lineIndex = 0;
-    let colorIndex = 0;
-    
-    for (let i = 0; i < particleCount; i++) {
-      for (let j = i + 1; j < particleCount; j++) {
-        const dx = pos[i * 3] - pos[j * 3];
-        const dy = pos[i * 3 + 1] - pos[j * 3 + 1];
-        const dz = pos[i * 3 + 2] - pos[j * 3 + 2];
-        const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-        if (dist < maxDistance) {
-          linePositions[lineIndex++] = pos[i * 3];
-          linePositions[lineIndex++] = pos[i * 3 + 1];
-          linePositions[lineIndex++] = pos[i * 3 + 2];
-          
-          linePositions[lineIndex++] = pos[j * 3];
-          linePositions[lineIndex++] = pos[j * 3 + 1];
-          linePositions[lineIndex++] = pos[j * 3 + 2];
-          
-          const alpha = 1.0 - (dist / maxDistance);
-          const c = 0.13 * alpha;
-          const c2 = 0.77 * alpha;
-          const c3 = 0.37 * alpha;
-          
-          lineColors[colorIndex++] = c; lineColors[colorIndex++] = c2; lineColors[colorIndex++] = c3;
-          lineColors[colorIndex++] = c; lineColors[colorIndex++] = c2; lineColors[colorIndex++] = c3;
-        }
-      }
-    }
-    
-    const lineGeo = linesRef.current.geometry;
-    lineGeo.setDrawRange(0, lineIndex / 3);
-    lineGeo.attributes.position.needsUpdate = true;
-    lineGeo.attributes.color.needsUpdate = true;
-    
-    groupRef.current.rotation.y += 0.001;
-    groupRef.current.rotation.x += 0.0005;
   });
 
   return (
-    <group ref={groupRef} position={[5, 0, -5]}>
-      <points ref={pointsRef}>
-        <bufferGeometry>
-          <bufferAttribute attach="attributes-position" args={[positions, 3]} />
-        </bufferGeometry>
-        <pointsMaterial size={0.06} color="#3b82f6" transparent opacity={0.8} sizeAttenuation blending={THREE.AdditiveBlending} />
-      </points>
-
-      <lineSegments ref={linesRef}>
-        <bufferGeometry>
-          <bufferAttribute attach="attributes-position" args={[linePositions, 3]} />
-          <bufferAttribute attach="attributes-color" args={[lineColors, 3]} />
-        </bufferGeometry>
-        <lineBasicMaterial vertexColors={true} transparent opacity={0.6} blending={THREE.AdditiveBlending} />
-      </lineSegments>
+    <group ref={groupRef} position={[4, 0, -8]} rotation={[0.2, 0, 0]}>
+      {spheres.map((s, i) => (
+        <mesh key={i} position={s.position as [number, number, number]} scale={s.scale}>
+          <sphereGeometry args={[1, 32, 32]} />
+          {s.isGlass ? (
+            <meshPhysicalMaterial 
+              color="#bfdbfe"
+              transmission={1}
+              opacity={1}
+              metalness={0.1}
+              roughness={0.1}
+              ior={1.5}
+              thickness={1.5}
+            />
+          ) : (
+            <meshStandardMaterial 
+              color="#1e3a8a"
+              metalness={0.9}
+              roughness={0.2}
+            />
+          )}
+        </mesh>
+      ))}
+      
+      {/* Central connecting core/energy line */}
+      <mesh>
+        <cylinderGeometry args={[0.1, 0.1, 15, 16]} />
+        <meshBasicMaterial color="#3b82f6" transparent opacity={0.3} />
+      </mesh>
     </group>
   );
 };
@@ -125,15 +79,25 @@ const Constellation = () => {
 export default function AboutScene() {
   useFrame(({ camera }) => {
     const scrollY = window.scrollY;
-    camera.position.z = THREE.MathUtils.lerp(camera.position.z, 10 - (scrollY * 0.002), 0.05);
-    camera.position.y = THREE.MathUtils.lerp(camera.position.y, -(scrollY * 0.002), 0.05);
-    camera.position.x = THREE.MathUtils.lerp(camera.position.x, 0, 0.05);
+    camera.position.z = THREE.MathUtils.lerp(camera.position.z, 12 - (scrollY * 0.002), 0.05);
+    camera.position.y = THREE.MathUtils.lerp(camera.position.y, -(scrollY * 0.003), 0.05);
   });
 
   return (
     <>
-      <fog attach="fog" args={['#050505', 5, 25]} />
-      <Constellation />
+      <fog attach="fog" args={['#050505', 8, 30]} />
+      <ambientLight intensity={0.2} />
+      <directionalLight position={[10, 10, 5]} intensity={3} color="#60a5fa" />
+      <directionalLight position={[-10, 5, -5]} intensity={2} color="#3b82f6" />
+      
+      <Environment resolution={256}>
+        <group rotation={[-Math.PI / 2, 0, 0]}>
+          <Lightformer intensity={4} rotation-x={Math.PI / 2} position={[0, 5, -9]} scale={[10, 10, 1]} color="#bfdbfe" />
+          <Lightformer intensity={2} rotation-y={Math.PI / 2} position={[-5, 1, -1]} scale={[20, 2, 1]} color="#1e3a8a" />
+        </group>
+      </Environment>
+
+      <MetallicHelix />
     </>
   );
 }

@@ -2,78 +2,97 @@
 
 import React, { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { Float, Environment, Lightformer } from '@react-three/drei';
 import * as THREE from 'three';
 
-const Vortex = () => {
-  const pointsRef = useRef<THREE.Points>(null);
-  const particleCount = 2000;
-
-  const [positions, params] = useMemo(() => {
-    const pos = new Float32Array(particleCount * 3);
-    const par = new Float32Array(particleCount * 2); // speed, radius
-    
-    for (let i = 0; i < particleCount; i++) {
-      const radius = Math.random() * 15;
-      const angle = Math.random() * Math.PI * 2;
-      const y = (Math.random() - 0.5) * 10 * (1 - radius/15); // thicker in middle
+const GlassGallery = () => {
+  const groupRef = useRef<THREE.Group>(null);
+  
+  const panels = useMemo(() => {
+    const items = [];
+    for (let i = 0; i < 25; i++) {
+      const radius = 8 + Math.random() * 10;
+      const angle = (i / 25) * Math.PI * 2;
+      const height = (Math.random() - 0.5) * 8;
       
-      pos[i * 3] = Math.cos(angle) * radius;
-      pos[i * 3 + 1] = y;
-      pos[i * 3 + 2] = Math.sin(angle) * radius;
-      
-      par[i * 2] = 0.01 + Math.random() * 0.02; // angular speed
-      par[i * 2 + 1] = radius;
+      items.push({
+        position: [
+          Math.cos(angle) * radius,
+          height,
+          Math.sin(angle) * radius
+        ],
+        rotation: [
+          (Math.random() - 0.5) * 0.5,
+          -angle + Math.PI / 2, // Face inwards roughly
+          0
+        ],
+        scale: [
+          2 + Math.random() * 2,
+          3 + Math.random() * 2,
+          0.1
+        ]
+      });
     }
-    return [pos, par];
-  }, [particleCount]);
+    return items;
+  }, []);
 
   useFrame(({ clock }) => {
-    if (!pointsRef.current) return;
-    const time = clock.getElapsedTime();
-    const pos = pointsRef.current.geometry.attributes.position.array as Float32Array;
-    
-    for (let i = 0; i < particleCount; i++) {
-      const radius = params[i * 2 + 1];
-      const speed = params[i * 2];
-      
-      // Calculate current angle based on starting position and time
-      const initialAngle = Math.atan2(pos[i * 3 + 2], pos[i * 3]);
-      const newAngle = initialAngle + speed;
-      
-      pos[i * 3] = Math.cos(newAngle) * radius;
-      pos[i * 3 + 2] = Math.sin(newAngle) * radius;
-      
-      // Slight vertical wobble
-      pos[i * 3 + 1] += Math.sin(time * 2 + i) * 0.01;
+    if (groupRef.current) {
+      groupRef.current.rotation.y = clock.getElapsedTime() * -0.05;
+      groupRef.current.position.y = Math.sin(clock.getElapsedTime() * 0.2) * 1;
     }
-    pointsRef.current.geometry.attributes.position.needsUpdate = true;
-    
-    pointsRef.current.rotation.x = 0.2;
-    pointsRef.current.rotation.z = -0.2;
   });
 
   return (
-    <points ref={pointsRef} position={[0, -2, -10]}>
-      <bufferGeometry>
-        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
-      </bufferGeometry>
-      <pointsMaterial size={0.05} color="#3b82f6" transparent opacity={0.6} blending={THREE.AdditiveBlending} sizeAttenuation />
-    </points>
+    <group ref={groupRef} position={[0, -2, -10]}>
+      {panels.map((p, i) => (
+        <Float key={i} speed={1} rotationIntensity={0.1} floatIntensity={0.5} floatingRange={[-0.5, 0.5]}>
+          <mesh 
+            position={p.position as [number, number, number]}
+            rotation={p.rotation as [number, number, number]}
+            scale={p.scale as [number, number, number]}
+          >
+            <boxGeometry args={[1, 1, 1]} />
+            <meshPhysicalMaterial 
+              color="#bfdbfe"
+              transmission={1}
+              opacity={1}
+              metalness={0.1}
+              roughness={0.2}
+              ior={1.4}
+              thickness={0.5}
+              envMapIntensity={2}
+            />
+          </mesh>
+        </Float>
+      ))}
+      
+      {/* Central light source inside the ring */}
+      <pointLight position={[0, 0, 0]} intensity={5} color="#3b82f6" distance={20} />
+    </group>
   );
 };
 
 export default function WorkScene() {
   useFrame(({ camera }) => {
     const scrollY = window.scrollY;
-    camera.position.z = THREE.MathUtils.lerp(camera.position.z, 8 - (scrollY * 0.003), 0.05);
-    camera.position.y = THREE.MathUtils.lerp(camera.position.y, 2 - (scrollY * 0.002), 0.05);
-    camera.position.x = THREE.MathUtils.lerp(camera.position.x, 0, 0.05);
+    camera.position.z = THREE.MathUtils.lerp(camera.position.z, 5 - (scrollY * 0.002), 0.05);
+    camera.position.y = THREE.MathUtils.lerp(camera.position.y, 1 - (scrollY * 0.002), 0.05);
   });
 
   return (
     <>
-      <fog attach="fog" args={['#050505', 2, 25]} />
-      <Vortex />
+      <fog attach="fog" args={['#050505', 5, 25]} />
+      <ambientLight intensity={0.2} />
+      
+      <Environment resolution={256}>
+        <group rotation={[0, 0, 0]}>
+          <Lightformer form="rect" intensity={5} position={[0, 5, -10]} scale={[20, 20, 1]} color="#60a5fa" />
+          <Lightformer form="circle" intensity={10} position={[10, 0, -10]} scale={5} color="#1d4ed8" />
+        </group>
+      </Environment>
+
+      <GlassGallery />
     </>
   );
 }
