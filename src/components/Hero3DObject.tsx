@@ -151,7 +151,7 @@ const Hero3DObject = () => {
 
         <PresentationControls 
           global={false} 
-          config={{ mass: 2, tension: 500 }} 
+
           snap={true} 
           rotation={[0.2, -0.4, 0]} 
           polar={[-Math.PI / 4, Math.PI / 4]} 
