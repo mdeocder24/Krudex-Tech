@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { Logo } from './Logo';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -28,7 +28,9 @@ const Navbar = () => {
       className="w-full flex items-center justify-between py-6 px-8 md:px-16 lg:px-24 bg-krudex-black/80 backdrop-blur-md fixed top-0 z-50 border-b border-krudex-border/50"
     >
       <Link href="/" className="flex items-center gap-3 group">
-        <Logo width={48} height={48} />
+        <div className="relative w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-lg overflow-hidden">
+          <Image src="/Krudex.jpeg" alt="Krudex Technologies" fill className="object-cover" priority />
+        </div>
       </Link>
 
       <div className="hidden md:flex items-center gap-8">
@@ -71,7 +73,9 @@ const Navbar = () => {
           >
             <div className="flex items-center justify-between w-full mb-12">
               <Link href="/" className="flex items-center gap-3 group" onClick={() => setIsMobileMenuOpen(false)}>
-                <Logo width={48} height={48} />
+                <div className="relative w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-lg overflow-hidden">
+                  <Image src="/Krudex.jpeg" alt="Krudex Technologies" fill className="object-cover" priority />
+                </div>
               </Link>
               <button 
                 onClick={() => setIsMobileMenuOpen(false)}
