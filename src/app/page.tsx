@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-krudex-black selection:bg-krudex-green selection:text-krudex-black flex flex-col">
+    <main className="min-h-screen bg-transparent selection:bg-krudex-green selection:text-krudex-black flex flex-col">
       <Navbar />
       <Hero />
       <Stats />

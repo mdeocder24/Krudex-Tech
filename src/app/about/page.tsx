@@ -86,11 +86,11 @@ const principlesData = [
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-krudex-black selection:bg-krudex-green selection:text-krudex-black flex flex-col">
+    <main className="min-h-screen bg-transparent selection:bg-krudex-green selection:text-krudex-black flex flex-col">
       <Navbar />
       
       {/* 1. Hero Section */}
-      <section className="px-8 md:px-16 lg:px-24 pt-48 pb-32 bg-krudex-black">
+      <section className="px-8 md:px-16 lg:px-24 pt-48 pb-32 bg-krudex-black/40 backdrop-blur-md relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <motion.div 
@@ -125,7 +125,7 @@ export default function AboutPage() {
       </section>
 
       {/* 2. Our Story / Timeline Section */}
-      <section className="px-8 md:px-16 lg:px-24 py-32 bg-krudex-black border-t border-krudex-border/50">
+      <section className="px-8 md:px-16 lg:px-24 py-32 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border/50 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 lg:gap-32">
             <motion.div 
@@ -189,7 +189,7 @@ export default function AboutPage() {
       </section>
 
       {/* 3. Leadership Section */}
-      <section className="px-8 md:px-16 lg:px-24 py-32 bg-krudex-black border-t border-krudex-border/50">
+      <section className="px-8 md:px-16 lg:px-24 py-32 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border/50 relative z-10">
         <div className="max-w-7xl mx-auto">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -262,7 +262,7 @@ export default function AboutPage() {
       </section>
 
       {/* 4. Principles Section */}
-      <section className="px-8 md:px-16 lg:px-24 py-32 bg-krudex-black border-t border-krudex-border/50">
+      <section className="px-8 md:px-16 lg:px-24 py-32 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border/50 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col items-center text-center mb-24">
             <motion.div 
@@ -321,7 +321,7 @@ export default function AboutPage() {
       </section>
 
       {/* 5. About CTA */}
-      <section className="px-8 md:px-16 lg:px-24 py-32 bg-krudex-black border-t border-krudex-border/50">
+      <section className="px-8 md:px-16 lg:px-24 py-32 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border/50 relative z-10">
         <div className="max-w-3xl mx-auto flex flex-col items-center text-center">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}

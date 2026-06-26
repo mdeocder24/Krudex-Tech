@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
+import GlobalCanvas from "@/components/GlobalCanvas";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-sans-primary",
@@ -25,8 +26,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${plusJakartaSans.variable} ${dmSerifDisplay.variable} dark scroll-smooth`}>
-      <body className="min-h-screen bg-krudex-black text-krudex-text antialiased selection:bg-krudex-green selection:text-krudex-black">
-        {children}
+      <body className="min-h-screen bg-transparent text-krudex-text antialiased selection:bg-krudex-green selection:text-krudex-black">
+        <GlobalCanvas />
+        <main className="relative z-10">
+          {children}
+        </main>
       </body>
     </html>
   );

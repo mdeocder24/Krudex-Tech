@@ -3,7 +3,6 @@
 import React from 'react';
 import { motion, Variants } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import CanvasBackground from './CanvasBackground';
 
 const titleVariants: Variants = {
   hidden: { opacity: 0 },
@@ -28,7 +27,7 @@ const wordVariants: Variants = {
 
 const Hero = () => {
   return (
-    <section className="h-screen w-full flex flex-col justify-center items-center px-4 md:px-16 lg:px-24 relative overflow-hidden">
+    <section className="h-screen w-full flex flex-col justify-center items-center px-4 md:px-16 lg:px-24 relative overflow-hidden bg-transparent">
       <div className="max-w-5xl z-10 flex flex-col items-center text-center mt-16 md:mt-20">
         {/* Top Label */}
         <motion.div 
@@ -114,8 +113,6 @@ const Hero = () => {
       </motion.div>
 
       {/* 3D Interactive Background */}
-      <CanvasBackground />
-      
       {/* Abstract Background Element */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10 mix-blend-screen">
          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-krudex-green/5 blur-[150px] rounded-full"></div>

@@ -71,10 +71,10 @@ const servicesData = [
 
 export default function ServicesPage() {
   return (
-    <main className="min-h-screen bg-krudex-black selection:bg-krudex-green selection:text-krudex-black flex flex-col">
+    <main className="min-h-screen bg-transparent selection:bg-krudex-green selection:text-krudex-black flex flex-col">
       <Navbar />
       
-      <section className="px-8 md:px-16 lg:px-24 pt-48 pb-32 bg-krudex-black">
+      <section className="px-8 md:px-16 lg:px-24 pt-48 pb-32 bg-krudex-black/40 backdrop-blur-md relative z-10">
         <div className="max-w-7xl mx-auto">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}

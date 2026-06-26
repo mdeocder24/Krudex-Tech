@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react';
 
 const CTA = () => {
   return (
-    <section id="contact" className="px-8 md:px-16 lg:px-24 py-32 bg-krudex-black border-t border-krudex-border/50">
+    <section id="contact" className="px-8 md:px-16 lg:px-24 py-32 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border/50 relative z-10">
       <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

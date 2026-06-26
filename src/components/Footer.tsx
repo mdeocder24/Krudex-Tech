@@ -1,15 +1,16 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-krudex-black border-t border-krudex-border/50">
+    <footer className="w-full bg-[#0A0A0A]/80 backdrop-blur-md border-t border-krudex-border/50">
       <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-16">
           <div className="md:col-span-6 lg:col-span-5 flex flex-col">
-            <Link href="/" className="flex items-center gap-3 group mb-6 inline-flex">
-              <div className="w-8 h-8 bg-krudex-green flex items-center justify-center font-bold text-krudex-black text-xs tracking-wider group-hover:bg-krudex-green-hover transition-colors">
-                KT
+            <Link href="/" className="flex items-center gap-3 group mb-6">
+              <div className="relative w-8 h-8 flex-shrink-0 flex items-center justify-center">
+                <Image src="/logo.png" alt="Krudex Technologies" fill className="object-contain" />
               </div>
               <div className="flex flex-col justify-center">
                 <span className="font-bold text-white text-base leading-none tracking-wide">Krudex Technologies</span>

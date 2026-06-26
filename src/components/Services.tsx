@@ -30,7 +30,7 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="services-overview" className="px-8 md:px-16 lg:px-24 py-32 bg-krudex-black">
+    <section id="services-overview" className="px-8 md:px-16 lg:px-24 py-32 bg-transparent relative z-10">
       <div className="max-w-6xl mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -69,7 +69,7 @@ const Services = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="bg-krudex-card p-10 hover:bg-[#111] transition-colors"
+                className="bg-krudex-black/60 backdrop-blur-md p-10 hover:bg-krudex-black/80 transition-colors"
               >
                 <div className="text-krudex-green font-mono text-sm mb-6">{svc.num}</div>
                 <h3 className="text-white font-bold text-lg mb-3">{svc.title}</h3>

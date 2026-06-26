@@ -37,10 +37,10 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="min-h-screen bg-krudex-black selection:bg-krudex-green selection:text-krudex-black flex flex-col">
+    <main className="min-h-screen bg-transparent selection:bg-krudex-green selection:text-krudex-black flex flex-col">
       <Navbar />
       
-      <section className="px-8 md:px-16 lg:px-24 pt-48 pb-32 bg-krudex-black">
+      <section className="px-8 md:px-16 lg:px-24 pt-48 pb-32 bg-krudex-black/40 backdrop-blur-md relative z-10">
         <div className="max-w-7xl mx-auto">
           {/* Header Row */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center mb-32">

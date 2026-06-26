@@ -23,7 +23,7 @@ const stats = [
 
 const Stats = () => {
   return (
-    <section className="px-8 md:px-16 lg:px-24 py-20 border-t border-b border-krudex-border/50 bg-krudex-black">
+    <section className="px-8 md:px-16 lg:px-24 py-20 border-t border-b border-krudex-border/50 bg-krudex-black/40 backdrop-blur-xl relative z-10">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-krudex-border/50">
         {stats.map((stat, index) => (
           <motion.div 
