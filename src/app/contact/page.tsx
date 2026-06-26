@@ -161,10 +161,10 @@ export default function ContactPage() {
                       <div className="relative">
                         <select className="w-full bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm appearance-none focus:outline-none focus:border-krudex-green transition-colors">
                           <option value="" disabled selected hidden>Select</option>
-                          <option value="under-10k" className="bg-krudex-card text-white">Under $10k</option>
-                          <option value="10k-25k" className="bg-krudex-card text-white">$10k - $25k</option>
-                          <option value="25k-50k" className="bg-krudex-card text-white">$25k - $50k</option>
-                          <option value="50k+" className="bg-krudex-card text-white">$50k+</option>
+                          <option value="under-10l" className="bg-krudex-card text-white">Under ₹10 Lakhs</option>
+                          <option value="10l-25l" className="bg-krudex-card text-white">₹10 Lakhs - ₹25 Lakhs</option>
+                          <option value="25l-50l" className="bg-krudex-card text-white">₹25 Lakhs - ₹50 Lakhs</option>
+                          <option value="50l+" className="bg-krudex-card text-white">₹50 Lakhs+</option>
                         </select>
                         <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-krudex-muted pointer-events-none" />
                       </div>

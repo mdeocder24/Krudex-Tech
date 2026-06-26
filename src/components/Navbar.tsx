@@ -1,10 +1,24 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Prevent scrolling when menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
   return (
     <motion.nav 
       initial={{ opacity: 0, y: -20 }}
@@ -33,11 +47,85 @@ const Navbar = () => {
         ))}
         <Link 
           href="#hire-us"
-          className="bg-krudex-green text-krudex-black font-semibold text-sm px-6 py-2.5 hover:bg-krudex-green-hover transition-colors"
+          className="bg-krudex-green text-krudex-black font-semibold text-sm px-6 py-2.5 hover:bg-krudex-green-hover transition-colors shadow-[0_0_15px_rgba(204,255,0,0.15)]"
         >
           Hire Us
         </Link>
       </div>
+
+      {/* Mobile Menu Toggle */}
+      <div className="md:hidden flex items-center">
+        <button 
+          onClick={() => setIsMobileMenuOpen(true)}
+          className="text-white hover:text-krudex-green transition-colors focus:outline-none"
+        >
+          <Menu className="w-6 h-6" />
+        </button>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: "-100%" }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: "-100%" }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            className="fixed inset-0 bg-krudex-black z-[60] flex flex-col pt-6 px-8"
+          >
+            <div className="flex items-center justify-between w-full mb-12">
+              <Link href="/" className="flex items-center gap-3 group" onClick={() => setIsMobileMenuOpen(false)}>
+                <div className="w-10 h-10 bg-krudex-green flex items-center justify-center font-bold text-krudex-black text-sm tracking-wider">
+                  KT
+                </div>
+                <div className="flex flex-col justify-center">
+                  <span className="font-bold text-white text-lg leading-none tracking-wide">Krudex</span>
+                </div>
+              </Link>
+              <button 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-white hover:text-krudex-green transition-colors focus:outline-none"
+              >
+                <X className="w-8 h-8" />
+              </button>
+            </div>
+            
+            <div className="flex flex-col gap-8 mt-8">
+              {['Home', 'Services', 'Our Work', 'About', 'Contact'].map((item, idx) => (
+                <motion.div
+                  key={item}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 + (idx * 0.1) }}
+                >
+                  <Link 
+                    href={item === 'Home' ? '/' : item === 'Services' ? '/services' : item === 'About' ? '/about' : item === 'Contact' ? '/contact' : item === 'Our Work' ? '/work' : `/#${item.toLowerCase().replace(' ', '-')}`}
+                    className="text-3xl font-serif text-white hover:text-krudex-green transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item}
+                  </Link>
+                </motion.div>
+              ))}
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="mt-8"
+              >
+                <Link 
+                  href="#hire-us"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="bg-krudex-green text-krudex-black font-semibold text-base px-8 py-4 inline-block hover:bg-krudex-green-hover transition-colors shadow-[0_0_15px_rgba(204,255,0,0.15)]"
+                >
+                  Hire Us
+                </Link>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 };
