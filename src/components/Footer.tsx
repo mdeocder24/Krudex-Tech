@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-
+import { Logo } from './Logo';
 const Footer = () => {
   return (
     <footer className="w-full bg-[#0A0A0A]/80 backdrop-blur-md border-t border-krudex-border/50">
@@ -9,12 +8,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-16">
           <div className="md:col-span-6 lg:col-span-5 flex flex-col">
             <Link href="/" className="flex items-center gap-3 group mb-6">
-              <div className="relative w-8 h-8 flex-shrink-0 flex items-center justify-center">
-                <Image src="/logo.png" alt="Krudex Technologies" fill className="object-contain" />
-              </div>
-              <div className="flex flex-col justify-center">
-                <span className="font-bold text-white text-base leading-none tracking-wide">Krudex Technologies</span>
-              </div>
+              <Logo width={32} height={32} />
             </Link>
             <p className="text-krudex-muted text-sm leading-relaxed max-w-sm">
               An incorporated engineering firm delivering high-performance digital products from Hyderabad, Telangana.
