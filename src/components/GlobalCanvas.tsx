@@ -2,7 +2,6 @@
 
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { AnimatePresence, motion } from 'framer-motion';
 
 // Import the unified Dark Aurora background
 import HomeScene from './scenes/HomeScene';
@@ -16,18 +15,7 @@ export default function GlobalCanvas() {
         dpr={[1, 2]}
       >
         <Suspense fallback={null}>
-          <AnimatePresence mode="wait">
-            {/* We use a single, elegant Dark Aurora background for all pages */}
-            <motion.group
-              key="dark-aurora"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 2 }}
-            >
-              <HomeScene />
-            </motion.group>
-          </AnimatePresence>
+          <HomeScene />
         </Suspense>
       </Canvas>
       
