@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-krudex-blue: #d4af37;
-  --color-krudex-blue-hover: #b8962e;
+  --color-krudex-blue: #3b82f6;
+  --color-krudex-blue-hover: #2563eb;
   --color-krudex-black: #050505;
   --color-krudex-card: #0a0a0a;
   --color-krudex-border: #171717;
