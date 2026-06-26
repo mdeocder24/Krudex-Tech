@@ -28,8 +28,8 @@ const Navbar = () => {
       className="w-full flex items-center justify-between py-6 px-8 md:px-16 lg:px-24 bg-krudex-black/80 backdrop-blur-md fixed top-0 z-50 border-b border-krudex-border/50"
     >
       <Link href="/" className="flex items-center gap-3 group">
-        <div className="relative w-24 h-20 flex-shrink-0 flex items-center justify-center">
-          <Image src="/Krudex.jpeg" alt="Krudex Technologies" fill className="object-contain" priority />
+        <div className="relative w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-lg overflow-hidden">
+          <Image src="/Krudex.jpeg" alt="Krudex Technologies" fill className="object-cover" priority />
         </div>
       </Link>
 
@@ -73,8 +73,8 @@ const Navbar = () => {
           >
             <div className="flex items-center justify-between w-full mb-12">
               <Link href="/" className="flex items-center gap-3 group" onClick={() => setIsMobileMenuOpen(false)}>
-                <div className="relative w-24 h-20 flex-shrink-0 flex items-center justify-center">
-                  <Image src="/Krudex.jpeg" alt="Krudex Technologies" fill className="object-contain" priority />
+                <div className="relative w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-lg overflow-hidden">
+                  <Image src="/Krudex.jpeg" alt="Krudex Technologies" fill className="object-cover" priority />
                 </div>
               </Link>
               <button 

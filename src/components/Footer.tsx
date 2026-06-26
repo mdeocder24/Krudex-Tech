@@ -8,8 +8,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-16">
           <div className="md:col-span-6 lg:col-span-5 flex flex-col">
             <Link href="/" className="flex items-center gap-3 group mb-6">
-              <div className="relative w-32 h-24 flex-shrink-0 flex items-center justify-center">
-                <Image src="/Krudex.jpeg" alt="Krudex Technologies" fill className="object-contain" />
+              <div className="relative w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-md overflow-hidden">
+                <Image src="/Krudex.jpeg" alt="Krudex Technologies" fill className="object-cover" />
               </div>
             </Link>
             <p className="text-krudex-muted text-sm leading-relaxed max-w-sm">
