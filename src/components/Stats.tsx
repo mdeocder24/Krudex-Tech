@@ -23,7 +23,7 @@ const stats = [
 
 const Stats = () => {
   return (
-    <section className="px-8 md:px-16 lg:px-24 py-20 border-t border-b border-krudex-border/50 bg-krudex-black/40 backdrop-blur-xl relative z-10">
+    <section className="px-4 sm:px-8 md:px-16 lg:px-24 py-14 sm:py-16 md:py-20 border-t border-b border-krudex-border/50 bg-krudex-black/40 backdrop-blur-xl relative z-10">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-krudex-border/50">
         {stats.map((stat, index) => (
           <motion.div 
@@ -34,7 +34,7 @@ const Stats = () => {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             className={`flex flex-col ${index !== 0 ? 'md:pl-12' : ''} pt-8 md:pt-0`}
           >
-            <div className="font-serif text-5xl md:text-6xl text-krudex-blue font-medium mb-4">
+            <div className="font-serif text-4xl sm:text-5xl md:text-6xl text-krudex-blue font-medium mb-3 sm:mb-4">
               {stat.value}
             </div>
             <h3 className="text-white font-bold text-lg mb-2">{stat.label}</h3>
