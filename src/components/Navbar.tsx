@@ -29,7 +29,7 @@ const Navbar = () => {
     >
       <Link href="/" className="flex items-center gap-3 group">
         <div className="relative w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-lg overflow-hidden">
-          <Image src="/Krudex.jpeg" alt="Krudex Technologies" fill className="object-cover" priority />
+          <Image src="/K.jpeg" alt="Krudex Technologies" fill className="object-contain" priority />
         </div>
       </Link>
 
@@ -74,7 +74,7 @@ const Navbar = () => {
             <div className="flex items-center justify-between w-full mb-12">
               <Link href="/" className="flex items-center gap-3 group" onClick={() => setIsMobileMenuOpen(false)}>
                 <div className="relative w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-lg overflow-hidden">
-                  <Image src="/Krudex.jpeg" alt="Krudex Technologies" fill className="object-cover" priority />
+                  <Image src="/K.jpeg" alt="Krudex Technologies" fill className="object-contain" priority />
                 </div>
               </Link>
               <button 
