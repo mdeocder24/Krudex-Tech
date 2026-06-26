@@ -8,8 +8,8 @@
   --color-krudex-border: #171717;
   --color-krudex-text: #e5e5e5;
   --color-krudex-muted: #737373;
-  --font-sans: var(--font-inter);
-  --font-serif: var(--font-playfair);
+  --font-sans: var(--font-sans-primary);
+  --font-serif: var(--font-serif-primary);
 }
 
 :root {

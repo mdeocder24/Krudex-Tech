@@ -1,8 +1,30 @@
 "use client";
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import CanvasBackground from './CanvasBackground';
+
+const titleVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const wordVariants: Variants = {
+  hidden: { opacity: 0, y: 50, rotateX: -30 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    rotateX: 0,
+    transition: { type: "spring", damping: 12, stiffness: 100 }
+  }
+};
 
 const Hero = () => {
   return (
@@ -21,13 +43,24 @@ const Hero = () => {
         </motion.div>
 
         <motion.h1 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.1] tracking-tight text-white mb-8"
+          variants={titleVariants}
+          initial="hidden"
+          animate="visible"
+          className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.1] tracking-tight text-white mb-8 perspective-1000"
         >
-          We Build Digital <br />
-          <span className="text-krudex-green">Products That <br /> Perform.</span>
+          <span className="block overflow-hidden">
+            {["We", "Build", "Digital"].map((word, i) => (
+              <motion.span key={i} variants={wordVariants} className="inline-block mr-[0.25em] origin-bottom">{word}</motion.span>
+            ))}
+          </span>
+          <span className="block overflow-hidden text-krudex-green">
+            {["Products", "That"].map((word, i) => (
+              <motion.span key={i} variants={wordVariants} className="inline-block mr-[0.25em] origin-bottom">{word}</motion.span>
+            ))}
+          </span>
+          <span className="block overflow-hidden text-krudex-green">
+            <motion.span variants={wordVariants} className="inline-block origin-bottom">Perform.</motion.span>
+          </span>
         </motion.h1>
 
         <motion.p 
@@ -58,9 +91,12 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Abstract Background Element (Optional, to mimic the faint golden/green glow in corner if requested, though design seems very dark) */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
-         <div className="absolute -top-40 -left-40 w-96 h-96 bg-krudex-green/5 blur-[120px] rounded-full"></div>
+      {/* 3D Interactive Background */}
+      <CanvasBackground />
+      
+      {/* Abstract Background Element */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10 mix-blend-screen">
+         <div className="absolute -top-40 -left-40 w-96 h-96 bg-krudex-green/10 blur-[120px] rounded-full"></div>
       </div>
     </section>
   );
