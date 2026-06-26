@@ -36,7 +36,7 @@ const Hero = () => {
           transition={{ duration: 0.5 }}
           className="inline-flex items-center gap-2 border border-krudex-border/50 px-4 py-1.5 mb-6 md:mb-8"
         >
-          <span className="text-[9px] md:text-[10px] uppercase tracking-[0.25em] text-krudex-green font-semibold">
+          <span className="text-[9px] md:text-[10px] uppercase tracking-[0.25em] text-krudex-blue font-semibold">
             HYDERABAD &middot; TELANGANA &middot; INDIA
           </span>
         </motion.div>
@@ -53,15 +53,15 @@ const Hero = () => {
               <motion.span key={i} variants={wordVariants} className="inline-block mr-[0.25em] origin-bottom">{word}</motion.span>
             ))}
           </span>
-          <span className="block overflow-hidden text-krudex-green mb-2">
+          <span className="block overflow-hidden text-krudex-blue mb-2">
             {["Web", "&"].map((word, i) => (
               <motion.span key={i} variants={wordVariants} className="inline-block mr-[0.25em] origin-bottom">{word}</motion.span>
             ))}
           </span>
-          <span className="block overflow-hidden text-krudex-green mb-2">
+          <span className="block overflow-hidden text-krudex-blue mb-2">
             <motion.span variants={wordVariants} className="inline-block origin-bottom">Mobile</motion.span>
           </span>
-          <span className="block overflow-hidden text-krudex-green">
+          <span className="block overflow-hidden text-krudex-blue">
             <motion.span variants={wordVariants} className="inline-block origin-bottom">Ecosystems.</motion.span>
           </span>
         </motion.h1>
@@ -73,11 +73,11 @@ const Hero = () => {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="flex flex-wrap items-center justify-center gap-4 md:gap-6 mb-8 md:mb-10"
         >
-          <a href="/work" className="group flex items-center gap-3 border border-krudex-border text-white px-8 md:px-10 py-4 font-semibold text-xs tracking-[0.1em] hover:border-krudex-green transition-colors">
+          <a href="/work" className="group flex items-center gap-3 border border-krudex-border text-white px-8 md:px-10 py-4 font-semibold text-xs tracking-[0.1em] hover:border-krudex-blue transition-colors">
             VIEW OUR WORK
-            <ArrowRight className="w-4 h-4 text-krudex-muted group-hover:text-krudex-green group-hover:translate-x-1 transition-all" />
+            <ArrowRight className="w-4 h-4 text-krudex-muted group-hover:text-krudex-blue group-hover:translate-x-1 transition-all" />
           </a>
-          <a href="/contact" className="group flex items-center gap-2 bg-krudex-green text-krudex-black px-8 md:px-10 py-4 font-bold text-xs tracking-[0.1em] hover:bg-krudex-green-hover transition-colors shadow-[0_0_20px_rgba(204,255,0,0.15)]">
+          <a href="/contact" className="group flex items-center gap-2 bg-krudex-blue text-krudex-black px-8 md:px-10 py-4 font-bold text-xs tracking-[0.1em] hover:bg-krudex-blue-hover transition-colors shadow-[0_0_20px_rgba(204,255,0,0.15)]">
             INITIALIZE CONSULTATION
           </a>
         </motion.div>
@@ -106,7 +106,7 @@ const Hero = () => {
           <motion.div 
             animate={{ top: ["-100%", "100%"] }}
             transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
-            className="absolute left-0 w-full h-1/2 bg-krudex-green"
+            className="absolute left-0 w-full h-1/2 bg-krudex-blue"
           />
         </div>
         <span className="text-[9px] uppercase tracking-[0.3em] text-krudex-muted font-mono">SCROLL</span>
@@ -115,7 +115,7 @@ const Hero = () => {
       {/* 3D Interactive Background */}
       {/* Abstract Background Element */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10 mix-blend-screen">
-         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-krudex-green/5 blur-[150px] rounded-full"></div>
+         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-krudex-blue/5 blur-[150px] rounded-full"></div>
       </div>
     </section>
   );

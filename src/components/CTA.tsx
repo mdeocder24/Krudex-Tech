@@ -15,8 +15,8 @@ const CTA = () => {
           transition={{ duration: 0.5 }}
           className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-10"
         >
-          <div className="w-1.5 h-1.5 rounded-full bg-krudex-green"></div>
-          <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-green font-semibold">
+          <div className="w-1.5 h-1.5 rounded-full bg-krudex-blue"></div>
+          <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-blue font-semibold">
             READY TO START?
           </span>
         </motion.div>
@@ -29,7 +29,7 @@ const CTA = () => {
           className="font-serif text-5xl md:text-7xl font-bold text-white leading-[1.1] tracking-tight mb-8"
         >
           Let's build something <br className="hidden md:block" />
-          <span className="text-krudex-green">worth talking about.</span>
+          <span className="text-krudex-blue">worth talking about.</span>
         </motion.h2>
 
         <motion.p 
@@ -48,7 +48,7 @@ const CTA = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <a href="#consultation" className="group flex items-center gap-2 bg-krudex-green text-krudex-black px-10 py-5 font-semibold text-sm hover:bg-krudex-green-hover transition-colors">
+          <a href="#consultation" className="group flex items-center gap-2 bg-krudex-blue text-krudex-black px-10 py-5 font-semibold text-sm hover:bg-krudex-blue-hover transition-colors">
             Initialize Consultation
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>

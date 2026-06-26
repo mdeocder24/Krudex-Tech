@@ -47,7 +47,7 @@ const DataParticles = ({ count = 40 }) => {
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
-      <pointsMaterial size={0.05} color="#22c55e" transparent opacity={0.8} blending={THREE.AdditiveBlending} />
+      <pointsMaterial size={0.05} color="#3b82f6" transparent opacity={0.8} blending={THREE.AdditiveBlending} />
     </points>
   );
 };
@@ -78,7 +78,7 @@ const ArchitectureCore = () => {
 
   // Glowing wireframe material for the edges and AI core
   const glowMaterial = new THREE.MeshBasicMaterial({
-    color: '#22c55e',
+    color: '#3b82f6',
     wireframe: true,
     transparent: true,
     opacity: 0.15,
@@ -114,12 +114,12 @@ const ArchitectureCore = () => {
         {/* Dense grid representing AI compute */}
         <mesh scale={1.01}>
           <boxGeometry args={[4.2, 0.4, 4.2]} />
-          <meshBasicMaterial color="#22c55e" wireframe={true} transparent={true} opacity={0.4} />
+          <meshBasicMaterial color="#3b82f6" wireframe={true} transparent={true} opacity={0.4} />
         </mesh>
         {/* Inner AI Core Engine Block */}
         <mesh position={[0, 0.4, 0]}>
           <boxGeometry args={[1.5, 0.8, 1.5]} />
-          <meshBasicMaterial color="#22c55e" wireframe={true} transparent={true} opacity={0.6} />
+          <meshBasicMaterial color="#3b82f6" wireframe={true} transparent={true} opacity={0.6} />
         </mesh>
       </group>
 
@@ -129,7 +129,7 @@ const ArchitectureCore = () => {
       {/* Central Axis Beam */}
       <mesh position={[0, 0, 0]}>
         <cylinderGeometry args={[0.02, 0.02, 5, 8]} />
-        <meshBasicMaterial color="#22c55e" transparent={true} opacity={0.5} blending={THREE.AdditiveBlending} />
+        <meshBasicMaterial color="#3b82f6" transparent={true} opacity={0.5} blending={THREE.AdditiveBlending} />
       </mesh>
     </group>
   );
@@ -147,7 +147,7 @@ const Hero3DObject = () => {
         
         {/* Dramatic directional lights */}
         <directionalLight position={[5, 10, 5]} intensity={1.5} color="#ffffff" />
-        <directionalLight position={[-5, -10, -5]} intensity={1} color="#22c55e" />
+        <directionalLight position={[-5, -10, -5]} intensity={1} color="#3b82f6" />
 
         <PresentationControls 
           global={false} 

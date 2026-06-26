@@ -30,8 +30,8 @@ const SelectedWork = () => {
           transition={{ duration: 0.5 }}
           className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-8"
         >
-          <div className="w-1.5 h-1.5 rounded-full bg-krudex-green"></div>
-          <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-green font-semibold">
+          <div className="w-1.5 h-1.5 rounded-full bg-krudex-blue"></div>
+          <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-blue font-semibold">
             SELECTED WORK
           </span>
         </motion.div>
@@ -59,12 +59,12 @@ const SelectedWork = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
-              className="group bg-krudex-card border border-krudex-border p-8 md:p-12 hover:border-krudex-green/50 transition-colors"
+              className="group bg-krudex-card border border-krudex-border p-8 md:p-12 hover:border-krudex-blue/50 transition-colors"
             >
-              <div className="text-[10px] text-krudex-green font-mono uppercase tracking-[0.15em] mb-6">
+              <div className="text-[10px] text-krudex-blue font-mono uppercase tracking-[0.15em] mb-6">
                 {project.category}
               </div>
-              <h3 className="text-xl text-white font-bold mb-4 group-hover:text-krudex-green transition-colors">
+              <h3 className="text-xl text-white font-bold mb-4 group-hover:text-krudex-blue transition-colors">
                 {project.title}
               </h3>
               <p className="text-krudex-muted text-sm leading-relaxed mb-8">
@@ -72,7 +72,7 @@ const SelectedWork = () => {
               </p>
               <div className="flex flex-wrap gap-3">
                 {project.tags.map((tag, i) => (
-                  <span key={i} className="text-xs font-mono text-krudex-green border border-krudex-green/30 bg-krudex-green/5 px-3 py-1">
+                  <span key={i} className="text-xs font-mono text-krudex-blue border border-krudex-blue/30 bg-krudex-blue/5 px-3 py-1">
                     {tag}
                   </span>
                 ))}
@@ -88,7 +88,7 @@ const SelectedWork = () => {
           transition={{ duration: 0.5 }}
           className="flex justify-center"
         >
-          <a href="#all-work" className="group flex items-center gap-2 bg-krudex-green text-krudex-black px-8 py-4 font-semibold text-sm hover:bg-krudex-green-hover transition-colors">
+          <a href="#all-work" className="group flex items-center gap-2 bg-krudex-blue text-krudex-black px-8 py-4 font-semibold text-sm hover:bg-krudex-blue-hover transition-colors">
             See All Projects
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>

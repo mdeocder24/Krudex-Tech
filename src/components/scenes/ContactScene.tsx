@@ -41,7 +41,7 @@ const PulsingCore = () => {
       {/* Central Core */}
       <mesh ref={coreRef}>
         <icosahedronGeometry args={[2, 2]} />
-        <meshBasicMaterial color="#22c55e" wireframe={true} transparent opacity={0.8} blending={THREE.AdditiveBlending} />
+        <meshBasicMaterial color="#3b82f6" wireframe={true} transparent opacity={0.8} blending={THREE.AdditiveBlending} />
       </mesh>
       
       {/* Inner solid core */}
@@ -53,15 +53,15 @@ const PulsingCore = () => {
       {/* Signal Rings */}
       <mesh ref={ring1Ref} rotation={[Math.PI / 2, 0, 0]}>
         <ringGeometry args={[2, 2.05, 64]} />
-        <meshBasicMaterial color="#22c55e" transparent opacity={0} side={THREE.DoubleSide} blending={THREE.AdditiveBlending} />
+        <meshBasicMaterial color="#3b82f6" transparent opacity={0} side={THREE.DoubleSide} blending={THREE.AdditiveBlending} />
       </mesh>
       <mesh ref={ring2Ref} rotation={[Math.PI / 2, 0, 0]}>
         <ringGeometry args={[2, 2.05, 64]} />
-        <meshBasicMaterial color="#22c55e" transparent opacity={0} side={THREE.DoubleSide} blending={THREE.AdditiveBlending} />
+        <meshBasicMaterial color="#3b82f6" transparent opacity={0} side={THREE.DoubleSide} blending={THREE.AdditiveBlending} />
       </mesh>
       <mesh ref={ring3Ref} rotation={[Math.PI / 2, 0, 0]}>
         <ringGeometry args={[2, 2.05, 64]} />
-        <meshBasicMaterial color="#22c55e" transparent opacity={0} side={THREE.DoubleSide} blending={THREE.AdditiveBlending} />
+        <meshBasicMaterial color="#3b82f6" transparent opacity={0} side={THREE.DoubleSide} blending={THREE.AdditiveBlending} />
       </mesh>
     </group>
   );

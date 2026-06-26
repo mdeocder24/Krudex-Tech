@@ -57,7 +57,7 @@ const Vortex = () => {
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
-      <pointsMaterial size={0.05} color="#22c55e" transparent opacity={0.6} blending={THREE.AdditiveBlending} sizeAttenuation />
+      <pointsMaterial size={0.05} color="#3b82f6" transparent opacity={0.6} blending={THREE.AdditiveBlending} sizeAttenuation />
     </points>
   );
 };

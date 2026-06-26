@@ -22,7 +22,7 @@ const Footer = () => {
           </div>
 
           <div className="md:col-span-3 lg:col-span-3 lg:col-start-7 flex flex-col">
-            <h4 className="text-[10px] text-krudex-green font-mono uppercase tracking-[0.2em] mb-6">Navigation</h4>
+            <h4 className="text-[10px] text-krudex-blue font-mono uppercase tracking-[0.2em] mb-6">Navigation</h4>
             <div className="flex flex-col gap-4">
               {['Services', 'Our Work', 'About', 'Contact'].map((item) => (
                 <Link 
@@ -37,7 +37,7 @@ const Footer = () => {
           </div>
 
           <div className="md:col-span-3 lg:col-span-3 flex flex-col">
-            <h4 className="text-[10px] text-krudex-green font-mono uppercase tracking-[0.2em] mb-6">Contact</h4>
+            <h4 className="text-[10px] text-krudex-blue font-mono uppercase tracking-[0.2em] mb-6">Contact</h4>
             <div className="flex flex-col gap-4 text-sm text-krudex-muted">
               <a href="mailto:krudextechnologies@gmail.com" className="hover:text-white transition-colors w-fit">krudextechnologies@gmail.com</a>
               <p>+91 89782 61053, +91 94902 48160</p>
@@ -51,7 +51,7 @@ const Footer = () => {
           <p className="text-xs text-krudex-muted/60">
             &copy; 2026 Krudex Technologies
           </p>
-          <p className="text-[10px] text-krudex-green font-mono uppercase tracking-[0.15em]">
+          <p className="text-[10px] text-krudex-blue font-mono uppercase tracking-[0.15em]">
             INCORPORATED &middot; TELANGANA, INDIA
           </p>
         </div>

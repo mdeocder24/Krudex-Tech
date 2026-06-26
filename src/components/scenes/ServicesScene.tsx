@@ -33,27 +33,27 @@ const ArchitectureGeometry = () => {
       {/* Core solid structure */}
       <mesh ref={coreRef}>
         <icosahedronGeometry args={[1.5, 1]} />
-        <meshStandardMaterial color="#050505" emissive="#22c55e" emissiveIntensity={0.2} wireframe={false} />
+        <meshStandardMaterial color="#050505" emissive="#3b82f6" emissiveIntensity={0.2} wireframe={false} />
       </mesh>
       
       <mesh ref={coreRef}>
         <icosahedronGeometry args={[1.5, 1]} />
-        <meshBasicMaterial color="#22c55e" wireframe={true} transparent opacity={0.5} blending={THREE.AdditiveBlending} />
+        <meshBasicMaterial color="#3b82f6" wireframe={true} transparent opacity={0.5} blending={THREE.AdditiveBlending} />
       </mesh>
 
       {/* Outer wireframe structures */}
       <mesh ref={outerRef1}>
         <boxGeometry args={[4, 4, 4]} />
-        <meshBasicMaterial color="#22c55e" wireframe={true} transparent opacity={0.3} blending={THREE.AdditiveBlending} />
+        <meshBasicMaterial color="#3b82f6" wireframe={true} transparent opacity={0.3} blending={THREE.AdditiveBlending} />
       </mesh>
 
       <mesh ref={outerRef2}>
         <octahedronGeometry args={[5, 0]} />
-        <meshBasicMaterial color="#22c55e" wireframe={true} transparent opacity={0.15} blending={THREE.AdditiveBlending} />
+        <meshBasicMaterial color="#3b82f6" wireframe={true} transparent opacity={0.15} blending={THREE.AdditiveBlending} />
       </mesh>
       
       {/* Background grid */}
-      <gridHelper args={[40, 40, '#22c55e', '#22c55e']} position={[0, -5, 0]} material-transparent material-opacity={0.1} />
+      <gridHelper args={[40, 40, '#3b82f6', '#3b82f6']} position={[0, -5, 0]} material-transparent material-opacity={0.1} />
     </group>
   );
 };

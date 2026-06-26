@@ -71,7 +71,7 @@ const servicesData = [
 
 export default function ServicesPage() {
   return (
-    <main className="min-h-screen bg-transparent selection:bg-krudex-green selection:text-krudex-black flex flex-col">
+    <main className="min-h-screen bg-transparent selection:bg-krudex-blue selection:text-krudex-black flex flex-col">
       <Navbar />
       
       <section className="px-8 md:px-16 lg:px-24 pt-48 pb-32 bg-krudex-black/40 backdrop-blur-md relative z-10">
@@ -82,8 +82,8 @@ export default function ServicesPage() {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-10"
           >
-            <div className="w-1.5 h-1.5 rounded-full bg-krudex-green"></div>
-            <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-green font-semibold">
+            <div className="w-1.5 h-1.5 rounded-full bg-krudex-blue"></div>
+            <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-blue font-semibold">
               SERVICES
             </span>
           </motion.div>
@@ -96,7 +96,7 @@ export default function ServicesPage() {
           >
             <h1 className="font-serif text-5xl md:text-7xl text-white font-bold mb-8 leading-[1.1] tracking-tight">
               What Krudex <br />
-              <span className="text-krudex-green">builds for you.</span>
+              <span className="text-krudex-blue">builds for you.</span>
             </h1>
             <p className="text-krudex-muted text-lg leading-relaxed max-w-2xl">
               Four core disciplines. Senior engineers on every project. <br className="hidden md:block" />
@@ -115,14 +115,14 @@ export default function ServicesPage() {
                   transition={{ duration: 0.6 }}
                   className="flex flex-col"
                 >
-                  <div className="text-krudex-green font-mono text-sm mb-6 border-b border-krudex-border/50 pb-4 inline-block w-full">{service.num}</div>
+                  <div className="text-krudex-blue font-mono text-sm mb-6 border-b border-krudex-border/50 pb-4 inline-block w-full">{service.num}</div>
                   <h2 className="font-serif text-4xl text-white font-bold mb-4">{service.title}</h2>
-                  <h3 className="text-krudex-green font-semibold mb-6">{service.subtitle}</h3>
+                  <h3 className="text-krudex-blue font-semibold mb-6">{service.subtitle}</h3>
                   <p className="text-krudex-muted text-base leading-loose mb-10">
                     {service.desc}
                   </p>
-                  <div className="border-l-2 border-krudex-green pl-6 py-2 bg-gradient-to-r from-krudex-green/5 to-transparent">
-                    <div className="text-[10px] text-krudex-green font-mono uppercase tracking-[0.15em] mb-2">
+                  <div className="border-l-2 border-krudex-blue pl-6 py-2 bg-gradient-to-r from-krudex-blue/5 to-transparent">
+                    <div className="text-[10px] text-krudex-blue font-mono uppercase tracking-[0.15em] mb-2">
                       OUTCOME
                     </div>
                     <p className="text-white font-medium text-sm">
@@ -139,16 +139,16 @@ export default function ServicesPage() {
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="flex flex-col pt-12"
                 >
-                  <div className="text-[10px] text-krudex-green font-mono uppercase tracking-[0.2em] mb-6">
+                  <div className="text-[10px] text-krudex-blue font-mono uppercase tracking-[0.2em] mb-6">
                     CAPABILITIES
                   </div>
                   <div className="flex flex-col gap-2">
                     {service.capabilities.map((cap, capIdx) => (
                       <div 
                         key={capIdx} 
-                        className="bg-krudex-card/50 border border-krudex-border/50 p-5 flex items-center gap-4 hover:border-krudex-green/30 transition-colors"
+                        className="bg-krudex-card/50 border border-krudex-border/50 p-5 flex items-center gap-4 hover:border-krudex-blue/30 transition-colors"
                       >
-                        <span className="text-krudex-green font-mono text-xs opacity-70">
+                        <span className="text-krudex-blue font-mono text-xs opacity-70">
                           {String(capIdx + 1).padStart(2, '0')}
                         </span>
                         <span className="text-krudex-text text-sm">{cap}</span>

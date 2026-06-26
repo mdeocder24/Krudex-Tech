@@ -8,7 +8,7 @@ import ServicesCTA from '@/components/ServicesCTA';
 
 export default function WorkPage() {
   return (
-    <main className="min-h-screen bg-transparent selection:bg-krudex-green selection:text-krudex-black flex flex-col">
+    <main className="min-h-screen bg-transparent selection:bg-krudex-blue selection:text-krudex-black flex flex-col">
       <Navbar />
       {/* Adding padding to account for the fixed navbar */}
       <div className="pt-24">

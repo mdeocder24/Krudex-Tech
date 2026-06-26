@@ -48,7 +48,7 @@ const Navbar = () => {
         ))}
         <Link 
           href="#hire-us"
-          className="bg-krudex-green text-krudex-black font-semibold text-sm px-6 py-2.5 hover:bg-krudex-green-hover transition-colors shadow-[0_0_15px_rgba(204,255,0,0.15)]"
+          className="bg-krudex-blue text-krudex-black font-semibold text-sm px-6 py-2.5 hover:bg-krudex-blue-hover transition-colors shadow-[0_0_15px_rgba(204,255,0,0.15)]"
         >
           Hire Us
         </Link>
@@ -58,7 +58,7 @@ const Navbar = () => {
       <div className="md:hidden flex items-center">
         <button 
           onClick={() => setIsMobileMenuOpen(true)}
-          className="text-white hover:text-krudex-green transition-colors focus:outline-none"
+          className="text-white hover:text-krudex-blue transition-colors focus:outline-none"
         >
           <Menu className="w-6 h-6" />
         </button>
@@ -85,7 +85,7 @@ const Navbar = () => {
               </Link>
               <button 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-white hover:text-krudex-green transition-colors focus:outline-none"
+                className="text-white hover:text-krudex-blue transition-colors focus:outline-none"
               >
                 <X className="w-8 h-8" />
               </button>
@@ -101,7 +101,7 @@ const Navbar = () => {
                 >
                   <Link 
                     href={item === 'Home' ? '/' : item === 'Services' ? '/services' : item === 'About' ? '/about' : item === 'Contact' ? '/contact' : item === 'Our Work' ? '/work' : `/#${item.toLowerCase().replace(' ', '-')}`}
-                    className="text-3xl font-serif text-white hover:text-krudex-green transition-colors"
+                    className="text-3xl font-serif text-white hover:text-krudex-blue transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item}
@@ -118,7 +118,7 @@ const Navbar = () => {
                 <Link 
                   href="#hire-us"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="bg-krudex-green text-krudex-black font-semibold text-base px-8 py-4 inline-block hover:bg-krudex-green-hover transition-colors shadow-[0_0_15px_rgba(204,255,0,0.15)]"
+                  className="bg-krudex-blue text-krudex-black font-semibold text-base px-8 py-4 inline-block hover:bg-krudex-blue-hover transition-colors shadow-[0_0_15px_rgba(204,255,0,0.15)]"
                 >
                   Hire Us
                 </Link>

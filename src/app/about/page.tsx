@@ -86,7 +86,7 @@ const principlesData = [
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-transparent selection:bg-krudex-green selection:text-krudex-black flex flex-col">
+    <main className="min-h-screen bg-transparent selection:bg-krudex-blue selection:text-krudex-black flex flex-col">
       <Navbar />
       
       {/* 1. Hero Section */}
@@ -100,14 +100,14 @@ export default function AboutPage() {
               className="flex flex-col items-start"
             >
               <div className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-10">
-                <div className="w-1.5 h-1.5 rounded-full bg-krudex-green"></div>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-green font-semibold">
+                <div className="w-1.5 h-1.5 rounded-full bg-krudex-blue"></div>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-blue font-semibold">
                   ABOUT US
                 </span>
               </div>
               <h1 className="font-serif text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight">
                 <span className="text-white">Built to last.</span><br />
-                <span className="text-krudex-green">Not just to<br />ship.</span>
+                <span className="text-krudex-blue">Not just to<br />ship.</span>
               </h1>
             </motion.div>
             
@@ -136,8 +136,8 @@ export default function AboutPage() {
               className="flex flex-col"
             >
               <div className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-10 self-start">
-                <div className="w-1.5 h-1.5 rounded-full bg-krudex-green"></div>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-green font-semibold">
+                <div className="w-1.5 h-1.5 rounded-full bg-krudex-blue"></div>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-blue font-semibold">
                   OUR STORY
                 </span>
               </div>
@@ -173,7 +173,7 @@ export default function AboutPage() {
                   )}
                   
                   <div className="flex-shrink-0">
-                    <div className="border border-krudex-border bg-krudex-black px-4 py-2 text-krudex-green font-mono text-sm relative z-10">
+                    <div className="border border-krudex-border bg-krudex-black px-4 py-2 text-krudex-blue font-mono text-sm relative z-10">
                       {item.year}
                     </div>
                   </div>
@@ -199,8 +199,8 @@ export default function AboutPage() {
             className="mb-20"
           >
             <div className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-10">
-              <div className="w-1.5 h-1.5 rounded-full bg-krudex-green"></div>
-              <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-green font-semibold">
+              <div className="w-1.5 h-1.5 rounded-full bg-krudex-blue"></div>
+              <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-blue font-semibold">
                 LEADERSHIP
               </span>
             </div>
@@ -219,12 +219,12 @@ export default function AboutPage() {
                   transition={{ duration: 0.6 }}
                   className="lg:col-span-4"
                 >
-                  <div className="bg-krudex-card/40 border border-krudex-border/50 p-8 border-t-4 border-t-krudex-green h-full">
+                  <div className="bg-krudex-card/40 border border-krudex-border/50 p-8 border-t-4 border-t-krudex-blue h-full">
                     <div className="w-20 h-20 bg-krudex-black border border-krudex-border flex items-center justify-center mb-8">
-                      <span className="font-serif text-2xl font-bold text-krudex-green">{founder.initials}</span>
+                      <span className="font-serif text-2xl font-bold text-krudex-blue">{founder.initials}</span>
                     </div>
                     <h3 className="text-white font-bold text-xl mb-2">{founder.name}</h3>
-                    <p className="text-krudex-green text-sm font-medium mb-8">{founder.role}</p>
+                    <p className="text-krudex-blue text-sm font-medium mb-8">{founder.role}</p>
                     <p className="text-krudex-muted/70 text-xs leading-relaxed">
                       {founder.location}
                     </p>
@@ -248,7 +248,7 @@ export default function AboutPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {skillsData.map((skill, idx) => (
                         <div key={idx} className="flex items-center gap-4 bg-krudex-card/30 border border-krudex-border/30 p-4">
-                          <div className="w-1.5 h-1.5 rounded-full bg-krudex-green flex-shrink-0"></div>
+                          <div className="w-1.5 h-1.5 rounded-full bg-krudex-blue flex-shrink-0"></div>
                           <span className="text-krudex-muted text-sm">{skill}</span>
                         </div>
                       ))}
@@ -272,8 +272,8 @@ export default function AboutPage() {
               transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-8"
             >
-              <div className="w-1.5 h-1.5 rounded-full bg-krudex-green"></div>
-              <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-green font-semibold">
+              <div className="w-1.5 h-1.5 rounded-full bg-krudex-blue"></div>
+              <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-blue font-semibold">
                 OUR PRINCIPLES
               </span>
             </motion.div>
@@ -309,7 +309,7 @@ export default function AboutPage() {
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
                 className="bg-krudex-card/40 border border-krudex-border/30 p-10 lg:p-12"
               >
-                <div className="text-krudex-green font-mono text-sm mb-6">{principle.num}</div>
+                <div className="text-krudex-blue font-mono text-sm mb-6">{principle.num}</div>
                 <h3 className="text-white font-bold text-xl mb-4">{principle.title}</h3>
                 <p className="text-krudex-muted text-sm leading-relaxed">
                   {principle.text}
@@ -349,7 +349,7 @@ export default function AboutPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <a href="#contact" className="group flex items-center gap-2 bg-krudex-green text-krudex-black px-8 py-4 font-semibold text-sm hover:bg-krudex-green-hover transition-colors">
+            <a href="#contact" className="group flex items-center gap-2 bg-krudex-blue text-krudex-black px-8 py-4 font-semibold text-sm hover:bg-krudex-blue-hover transition-colors">
               Get in Touch
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>

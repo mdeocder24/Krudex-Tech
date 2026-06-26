@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${plusJakartaSans.variable} ${dmSerifDisplay.variable} dark scroll-smooth`}>
-      <body className="min-h-screen bg-transparent text-krudex-text antialiased selection:bg-krudex-green selection:text-krudex-black">
+      <body className="min-h-screen bg-transparent text-krudex-text antialiased selection:bg-krudex-blue selection:text-krudex-black">
         <GlobalCanvas />
         <main className="relative z-10">
           {children}

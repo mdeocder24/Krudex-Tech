@@ -108,7 +108,7 @@ const Constellation = () => {
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" args={[positions, 3]} />
         </bufferGeometry>
-        <pointsMaterial size={0.06} color="#22c55e" transparent opacity={0.8} sizeAttenuation blending={THREE.AdditiveBlending} />
+        <pointsMaterial size={0.06} color="#3b82f6" transparent opacity={0.8} sizeAttenuation blending={THREE.AdditiveBlending} />
       </points>
 
       <lineSegments ref={linesRef}>

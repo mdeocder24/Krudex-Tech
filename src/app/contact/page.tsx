@@ -37,7 +37,7 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="min-h-screen bg-transparent selection:bg-krudex-green selection:text-krudex-black flex flex-col">
+    <main className="min-h-screen bg-transparent selection:bg-krudex-blue selection:text-krudex-black flex flex-col">
       <Navbar />
       
       <section className="px-8 md:px-16 lg:px-24 pt-48 pb-32 bg-krudex-black/40 backdrop-blur-md relative z-10">
@@ -51,15 +51,15 @@ export default function ContactPage() {
               className="lg:col-span-7 flex flex-col items-start"
             >
               <div className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-10">
-                <div className="w-1.5 h-1.5 rounded-full bg-krudex-green"></div>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-green font-semibold">
+                <div className="w-1.5 h-1.5 rounded-full bg-krudex-blue"></div>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-blue font-semibold">
                   CONTACT
                 </span>
               </div>
               <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight">
                 <span className="text-white">Let's build</span><br />
-                <span className="text-krudex-green">something</span><br />
-                <span className="text-krudex-green">serious.</span>
+                <span className="text-krudex-blue">something</span><br />
+                <span className="text-krudex-blue">serious.</span>
               </h1>
             </motion.div>
             
@@ -72,29 +72,29 @@ export default function ContactPage() {
               {/* Contact Item 1 */}
               <div className="flex items-center gap-6">
                 <div className="w-12 h-12 border border-krudex-border/50 flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-5 h-5 text-krudex-green" />
+                  <Mail className="w-5 h-5 text-krudex-blue" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">EMAIL</span>
-                  <a href="mailto:krudextechnologies@gmail.com" className="text-white font-medium text-sm hover:text-krudex-green transition-colors">krudextechnologies@gmail.com</a>
+                  <a href="mailto:krudextechnologies@gmail.com" className="text-white font-medium text-sm hover:text-krudex-blue transition-colors">krudextechnologies@gmail.com</a>
                 </div>
               </div>
               
               {/* Contact Item 2 */}
               <div className="flex items-center gap-6">
                 <div className="w-12 h-12 border border-krudex-border/50 flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-5 h-5 text-krudex-green" />
+                  <Phone className="w-5 h-5 text-krudex-blue" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">PHONE</span>
-                  <a href="tel:+918978261053" className="text-white font-medium text-sm hover:text-krudex-green transition-colors">+91 89782 61053, +91 94902 48160</a>
+                  <a href="tel:+918978261053" className="text-white font-medium text-sm hover:text-krudex-blue transition-colors">+91 89782 61053, +91 94902 48160</a>
                 </div>
               </div>
 
               {/* Contact Item 3 */}
               <div className="flex items-center gap-6">
                 <div className="w-12 h-12 border border-krudex-border/50 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-5 h-5 text-krudex-green" />
+                  <MapPin className="w-5 h-5 text-krudex-blue" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">OFFICE</span>
@@ -116,7 +116,7 @@ export default function ContactPage() {
               className="lg:col-span-7 flex flex-col"
             >
               <h2 className="text-white text-2xl font-bold mb-8">Send an inquiry</h2>
-              <div className="bg-krudex-card/30 border border-krudex-border/30 border-t-2 border-t-krudex-green p-8 md:p-12">
+              <div className="bg-krudex-card/30 border border-krudex-border/30 border-t-2 border-t-krudex-blue p-8 md:p-12">
                 <form className="flex flex-col gap-8">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="flex flex-col gap-3">
@@ -124,7 +124,7 @@ export default function ContactPage() {
                       <input 
                         type="text" 
                         placeholder="Vishwanath Rao" 
-                        className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-green transition-colors"
+                        className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-blue transition-colors"
                       />
                     </div>
                     <div className="flex flex-col gap-3">
@@ -132,7 +132,7 @@ export default function ContactPage() {
                       <input 
                         type="email" 
                         placeholder="vishwa@company.in" 
-                        className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-green transition-colors"
+                        className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-blue transition-colors"
                       />
                     </div>
                   </div>
@@ -142,7 +142,7 @@ export default function ContactPage() {
                     <input 
                       type="text" 
                       placeholder="Acme Technologies" 
-                      className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-green transition-colors"
+                      className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-blue transition-colors"
                     />
                   </div>
                   
@@ -151,7 +151,7 @@ export default function ContactPage() {
                     <input 
                       type="text" 
                       placeholder="Full-stack SaaS with an AI-powered recommendation engine" 
-                      className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-green transition-colors"
+                      className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-blue transition-colors"
                     />
                   </div>
 
@@ -159,7 +159,7 @@ export default function ContactPage() {
                     <div className="flex flex-col gap-3">
                       <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">BUDGET RANGE</label>
                       <div className="relative">
-                        <select className="w-full bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm appearance-none focus:outline-none focus:border-krudex-green transition-colors">
+                        <select className="w-full bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm appearance-none focus:outline-none focus:border-krudex-blue transition-colors">
                           <option value="" disabled selected hidden>Select</option>
                           <option value="under-10l" className="bg-krudex-card text-white">Under ₹10 Lakhs</option>
                           <option value="10l-25l" className="bg-krudex-card text-white">₹10 Lakhs - ₹25 Lakhs</option>
@@ -172,7 +172,7 @@ export default function ContactPage() {
                     <div className="flex flex-col gap-3">
                       <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">TIMELINE</label>
                       <div className="relative">
-                        <select className="w-full bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm appearance-none focus:outline-none focus:border-krudex-green transition-colors">
+                        <select className="w-full bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm appearance-none focus:outline-none focus:border-krudex-blue transition-colors">
                           <option value="" disabled selected hidden>Select</option>
                           <option value="asap" className="bg-krudex-card text-white">ASAP</option>
                           <option value="1-3-months" className="bg-krudex-card text-white">1 - 3 Months</option>
@@ -189,13 +189,13 @@ export default function ContactPage() {
                     <textarea 
                       placeholder="Existing stack, compliance requirements, integration constraints, deadline pressure..." 
                       rows={4}
-                      className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-green transition-colors resize-none"
+                      className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-blue transition-colors resize-none"
                     ></textarea>
                   </div>
 
                   <button 
                     type="button" 
-                    className="w-full bg-krudex-green text-krudex-black font-bold py-4 hover:bg-krudex-green-hover transition-colors mt-4"
+                    className="w-full bg-krudex-blue text-krudex-black font-bold py-4 hover:bg-krudex-blue-hover transition-colors mt-4"
                   >
                     Send Inquiry
                   </button>
@@ -220,7 +220,7 @@ export default function ContactPage() {
                       className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
                     >
                       <span className="text-white text-sm font-medium pr-8">{faq.question}</span>
-                      <ChevronDown className={`w-4 h-4 text-krudex-muted flex-shrink-0 transition-transform duration-300 ${openFaq === idx ? 'rotate-180 text-krudex-green' : ''}`} />
+                      <ChevronDown className={`w-4 h-4 text-krudex-muted flex-shrink-0 transition-transform duration-300 ${openFaq === idx ? 'rotate-180 text-krudex-blue' : ''}`} />
                     </button>
                     <AnimatePresence>
                       {openFaq === idx && (
@@ -242,7 +242,7 @@ export default function ContactPage() {
 
               {/* SLA Block */}
               <div className="bg-krudex-card/30 border border-krudex-border/30 p-8">
-                <div className="text-[10px] uppercase tracking-[0.2em] text-krudex-green font-mono mb-4">
+                <div className="text-[10px] uppercase tracking-[0.2em] text-krudex-blue font-mono mb-4">
                   RESPONSE SLA
                 </div>
                 <h3 className="text-white font-bold text-lg mb-3">Within 24 hours</h3>

@@ -31,7 +31,7 @@ const TerrainWave = () => {
     <mesh rotation={[-Math.PI / 2.2, 0, 0]} position={[0, -6, -15]}>
       <planeGeometry ref={geometryRef} args={[120, 120, 70, 70]} />
       <meshBasicMaterial 
-        color="#22c55e"
+        color="#3b82f6"
         wireframe={true}
         transparent={true}
         opacity={0.15}
@@ -74,7 +74,7 @@ const AmbientParticles = () => {
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
-      <pointsMaterial size={0.06} color="#22c55e" transparent opacity={0.5} blending={THREE.AdditiveBlending} sizeAttenuation />
+      <pointsMaterial size={0.06} color="#3b82f6" transparent opacity={0.5} blending={THREE.AdditiveBlending} sizeAttenuation />
     </points>
   );
 };

@@ -39,8 +39,8 @@ const Services = () => {
           transition={{ duration: 0.5 }}
           className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-8"
         >
-          <div className="w-1.5 h-1.5 rounded-full bg-krudex-green"></div>
-          <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-green font-semibold">
+          <div className="w-1.5 h-1.5 rounded-full bg-krudex-blue"></div>
+          <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-blue font-semibold">
             WHAT WE DO
           </span>
         </motion.div>
@@ -71,7 +71,7 @@ const Services = () => {
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 className="bg-krudex-black/60 backdrop-blur-md p-10 hover:bg-krudex-black/80 transition-colors"
               >
-                <div className="text-krudex-green font-mono text-sm mb-6">{svc.num}</div>
+                <div className="text-krudex-blue font-mono text-sm mb-6">{svc.num}</div>
                 <h3 className="text-white font-bold text-lg mb-3">{svc.title}</h3>
                 <p className="text-krudex-muted text-sm leading-relaxed">{svc.desc}</p>
               </motion.div>
@@ -86,7 +86,7 @@ const Services = () => {
           transition={{ duration: 0.5 }}
           className="flex justify-center"
         >
-          <Link href="/services" className="group flex items-center gap-2 border border-krudex-green text-krudex-green px-8 py-4 font-semibold text-sm hover:bg-krudex-green/10 transition-colors">
+          <Link href="/services" className="group flex items-center gap-2 border border-krudex-blue text-krudex-blue px-8 py-4 font-semibold text-sm hover:bg-krudex-blue/10 transition-colors">
             Explore All Services
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
