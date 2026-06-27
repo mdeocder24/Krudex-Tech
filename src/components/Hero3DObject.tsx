@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment } from '@react-three/drei';
 import * as THREE from 'three';
 
 /* ─────────────────────────────────────────────
-   Platform — Flat diamond with neon edge and solid base
+   Platform — Flat diamond with seamless neon edge and solid base
    ───────────────────────────────────────────── */
 interface PlatformProps {
   position: [number, number, number];
@@ -15,10 +15,53 @@ interface PlatformProps {
 
 const Platform = ({ position, size }: PlatformProps) => {
   const [w, d] = size;
-  const t = 0.04; // Neon tube thickness
-  const depth = 25; // Depth of the pillar body for fading into fog
+  const depth = 30; // Depth of the pillar body for fading into fog
 
   const groupRef = useRef<THREE.Group>(null);
+
+  // Create a seamless frame geometry using a Shape with a hole
+  const frameGeometry = useMemo(() => {
+    const t = 0.035; // Neon tube thickness
+    const shape = new THREE.Shape();
+    // Outer rectangle
+    shape.moveTo(-w / 2 - t, -d / 2 - t);
+    shape.lineTo(w / 2 + t, -d / 2 - t);
+    shape.lineTo(w / 2 + t, d / 2 + t);
+    shape.lineTo(-w / 2 - t, d / 2 + t);
+    shape.lineTo(-w / 2 - t, -d / 2 - t);
+
+    // Inner rectangle (hole)
+    const hole = new THREE.Path();
+    hole.moveTo(-w / 2, -d / 2);
+    hole.lineTo(-w / 2, d / 2);
+    hole.lineTo(w / 2, d / 2);
+    hole.lineTo(w / 2, -d / 2);
+    hole.lineTo(-w / 2, -d / 2);
+    shape.holes.push(hole);
+
+    return new THREE.ShapeGeometry(shape);
+  }, [w, d]);
+
+  // Create a larger, softer frame geometry for the bloom effect
+  const bloomGeometry = useMemo(() => {
+    const t = 0.15; // Bloom spread thickness
+    const shape = new THREE.Shape();
+    shape.moveTo(-w / 2 - t, -d / 2 - t);
+    shape.lineTo(w / 2 + t, -d / 2 - t);
+    shape.lineTo(w / 2 + t, d / 2 + t);
+    shape.lineTo(-w / 2 - t, d / 2 + t);
+    shape.lineTo(-w / 2 - t, -d / 2 - t);
+
+    const hole = new THREE.Path();
+    hole.moveTo(-w / 2, -d / 2);
+    hole.lineTo(-w / 2, d / 2);
+    hole.lineTo(w / 2, d / 2);
+    hole.lineTo(w / 2, -d / 2);
+    hole.lineTo(-w / 2, -d / 2);
+    shape.holes.push(hole);
+
+    return new THREE.ShapeGeometry(shape);
+  }, [w, d]);
 
   useFrame(({ clock }) => {
     if (groupRef.current) {
@@ -30,20 +73,18 @@ const Platform = ({ position, size }: PlatformProps) => {
   return (
     // Rotated 45 degrees to create the isometric diamond shape from the camera's perspective
     <group ref={groupRef} position={position} rotation={[0, Math.PI / 4, 0]}>
-      
-      {/* 1. Neon Glowing Edge Frame */}
-      <group>
+
+      {/* 1. Neon Glowing Edge Frame (Seamless) */}
+      <group rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, 0]}>
         {/* Core solid bright white frame */}
-        <mesh position={[0, 0, d/2]}><boxGeometry args={[w+t, t, t]} /><meshBasicMaterial color="#ffffff" /></mesh>
-        <mesh position={[0, 0, -d/2]}><boxGeometry args={[w+t, t, t]} /><meshBasicMaterial color="#ffffff" /></mesh>
-        <mesh position={[-w/2, 0, 0]}><boxGeometry args={[t, t, d-t]} /><meshBasicMaterial color="#ffffff" /></mesh>
-        <mesh position={[w/2, 0, 0]}><boxGeometry args={[t, t, d-t]} /><meshBasicMaterial color="#ffffff" /></mesh>
+        <mesh geometry={frameGeometry}>
+          <meshBasicMaterial color="#ffffff" />
+        </mesh>
 
         {/* Soft Bloom layer (larger, transparent, additive blending) */}
-        <mesh position={[0, 0, d/2]}><boxGeometry args={[w+t*4, t*4, t*4]} /><meshBasicMaterial color="#ffffff" transparent opacity={0.15} blending={THREE.AdditiveBlending} depthWrite={false} /></mesh>
-        <mesh position={[0, 0, -d/2]}><boxGeometry args={[w+t*4, t*4, t*4]} /><meshBasicMaterial color="#ffffff" transparent opacity={0.15} blending={THREE.AdditiveBlending} depthWrite={false} /></mesh>
-        <mesh position={[-w/2, 0, 0]}><boxGeometry args={[t*4, t*4, d-t]} /><meshBasicMaterial color="#ffffff" transparent opacity={0.15} blending={THREE.AdditiveBlending} depthWrite={false} /></mesh>
-        <mesh position={[w/2, 0, 0]}><boxGeometry args={[t*4, t*4, d-t]} /><meshBasicMaterial color="#ffffff" transparent opacity={0.15} blending={THREE.AdditiveBlending} depthWrite={false} /></mesh>
+        <mesh geometry={bloomGeometry} position={[0, 0, -0.01]}>
+          <meshBasicMaterial color="#ffffff" transparent opacity={0.12} blending={THREE.AdditiveBlending} depthWrite={false} />
+        </mesh>
       </group>
 
       {/* 2. Top Dark Surface (inside the neon frame) */}
@@ -67,7 +108,7 @@ const Platform = ({ position, size }: PlatformProps) => {
    ───────────────────────────────────────────── */
 const FloatingFigure = () => {
   const groupRef = useRef<THREE.Group>(null);
-  
+
   useFrame(({ clock }) => {
     if (groupRef.current) {
       const t = clock.getElapsedTime();
@@ -79,38 +120,39 @@ const FloatingFigure = () => {
     }
   });
 
+  // Positioned carefully to sit exactly between the middle and top platforms
   return (
-    <group ref={groupRef} position={[2, 1.0, -1.8]} scale={0.3} rotation={[0, -0.5, 0]}>
+    <group ref={groupRef} position={[2.5, 1.0, -2.5]} scale={0.3} rotation={[0, -0.5, 0]}>
       {/* Head/Visor - metallic bronze */}
       <mesh position={[0, 1.0, 0]}>
         <sphereGeometry args={[0.3, 16, 16]} />
         <meshStandardMaterial color="#b87333" roughness={0.2} metalness={0.9} />
       </mesh>
-      
+
       {/* Torso */}
       <mesh position={[0, 0, 0]}>
         <capsuleGeometry args={[0.3, 0.8, 4, 8]} />
         <meshStandardMaterial color="#333333" roughness={0.7} metalness={0.3} />
       </mesh>
-      
+
       {/* Left Arm */}
       <mesh position={[-0.4, 0.1, 0]} rotation={[0, 0, 0.6]}>
         <capsuleGeometry args={[0.1, 0.6, 4, 8]} />
         <meshStandardMaterial color="#222222" />
       </mesh>
-      
+
       {/* Right Arm (raised) */}
       <mesh position={[0.4, 0.3, 0]} rotation={[0, 0, -2.5]}>
         <capsuleGeometry args={[0.1, 0.6, 4, 8]} />
         <meshStandardMaterial color="#222222" />
       </mesh>
-      
+
       {/* Left Leg */}
       <mesh position={[-0.15, -0.8, 0]} rotation={[0, 0, 0.1]}>
         <capsuleGeometry args={[0.12, 0.6, 4, 8]} />
         <meshStandardMaterial color="#222222" />
       </mesh>
-      
+
       {/* Right Leg */}
       <mesh position={[0.15, -0.7, -0.2]} rotation={[0.4, 0, -0.1]}>
         <capsuleGeometry args={[0.12, 0.6, 4, 8]} />
@@ -125,28 +167,27 @@ const FloatingFigure = () => {
    ───────────────────────────────────────────── */
 const DataArchitectureScene = () => {
   return (
-    <group position={[0.5, -0.5, 0]}>
+    <group position={[1.5, -0.5, 0]}>
       <ambientLight intensity={0.1} />
-      
+
       {/* Main light from left to illuminate the left-facing walls of the pillars */}
       <directionalLight position={[-15, 10, 5]} intensity={1.5} color="#ffffff" />
-      
+
       {/* Subtle fill light from right */}
       <directionalLight position={[15, 5, -5]} intensity={0.2} color="#ffffff" />
 
       {/* Deep fog to blend the pillars seamlessly into the pitch-black background */}
-      {/* 050505 matches the bg-krudex-black Tailwind class perfectly */}
-      <fog attach="fog" args={['#050505', 15, 35]} />
+      <fog attach="fog" args={['#050505', 15, 45]} />
 
       {/* ── Platforms Stepping Up ── */}
       {/* 1. Lowest, largest, front-left */}
-      <Platform position={[-3, -3.5, 3]} size={[4.2, 4.2]} />
-      
+      <Platform position={[-4, -3.5, 4]} size={[5, 5]} />
+
       {/* 2. Middle, medium, center */}
-      <Platform position={[0.5, -0.5, -0.5]} size={[3.0, 3.0]} />
-      
+      <Platform position={[0, -0.5, 0]} size={[3.5, 3.5]} />
+
       {/* 3. Highest, smallest, back-right */}
-      <Platform position={[3.5, 2.5, -3.5]} size={[1.8, 1.8]} />
+      <Platform position={[3.5, 2.5, -3.5]} size={[2.2, 2.2]} />
 
       {/* Tiny astronaut floating between middle and top platform */}
       <FloatingFigure />
@@ -161,10 +202,10 @@ const Hero3DObject = () => {
   return (
     <div className="w-full h-full absolute inset-0 pointer-events-none">
       <Canvas
-        // Positioned perfectly to view the 45-deg rotated platforms as isometric diamonds
+        // Camera pulled back further and positioned perfectly for the isometric framing
         camera={{
-          position: [0, 8, 18],
-          fov: 30,
+          position: [0, 10, 26],
+          fov: 25,
           near: 0.1,
           far: 100,
         }}
