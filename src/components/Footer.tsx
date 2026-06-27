@@ -2,7 +2,10 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+
+const MotionLink = motion.create ? motion.create(Link) : motion(Link);
 
 const footerLinks = [
   {
@@ -53,13 +56,14 @@ const Footer = () => {
               <ul className="space-y-3">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    <Link
+                    <MotionLink
                       href={link.href}
+                      whileHover={{ x: 4 }}
                       className="text-krudex-muted text-sm hover:text-white transition-colors inline-flex items-center gap-1 group"
                     >
                       {link.label}
                       <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </Link>
+                    </MotionLink>
                   </li>
                 ))}
               </ul>

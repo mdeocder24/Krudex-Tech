@@ -4,6 +4,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
+const MotionA = motion.create ? motion.create('a') : motion('a');
+
 const projects = [
   {
     category: "Enterprise \u00B7 2024",
@@ -57,6 +59,7 @@ const SelectedWork = () => {
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -5, borderColor: 'rgba(255,255,255,0.2)' }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
               className="group bg-krudex-card border border-krudex-border p-8 md:p-12 hover:border-krudex-blue/50 transition-colors"
@@ -88,10 +91,15 @@ const SelectedWork = () => {
           transition={{ duration: 0.5 }}
           className="flex justify-center"
         >
-          <a href="#all-work" className="group flex items-center gap-2 bg-krudex-blue text-krudex-black px-8 py-4 font-semibold text-sm hover:bg-krudex-blue-hover transition-colors">
+          <MotionA 
+            href="#all-work" 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="group flex items-center gap-2 bg-krudex-blue text-krudex-black px-8 py-4 font-semibold text-sm hover:bg-krudex-blue-hover transition-colors"
+          >
             See All Projects
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
+          </MotionA>
         </motion.div>
       </div>
     </section>

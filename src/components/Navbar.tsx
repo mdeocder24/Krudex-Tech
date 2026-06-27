@@ -13,6 +13,8 @@ const navLinks = [
   { label: 'Contact', href: '/contact' },
 ];
 
+const MotionLink = motion.create ? motion.create(Link) : motion(Link);
+
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -46,37 +48,43 @@ const Navbar = () => {
         </span>
       </Link>
 
-      {/* Desktop Nav — Center */}
-      <div className="hidden md:flex items-center gap-8">
+      {/* Desktop Nav Links */}
+      <div className="hidden md:flex items-center gap-10">
         {navLinks.map((link) => (
-          <Link
+          <MotionLink
             key={link.label}
             href={link.href}
+            whileHover={{ scale: 1.05, opacity: 1 }}
+            whileTap={{ scale: 0.95 }}
             className="text-[13px] text-krudex-muted hover:text-white transition-colors duration-200"
           >
             {link.label}
-          </Link>
+          </MotionLink>
         ))}
       </div>
 
       {/* Desktop CTA */}
       <div className="hidden md:flex items-center">
-        <Link
+        <MotionLink
           href="/contact"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           className="text-[13px] text-white border border-white/30 px-5 py-2 rounded-sm hover:bg-white hover:text-krudex-black transition-all duration-300"
         >
           Book Call
-        </Link>
+        </MotionLink>
       </div>
 
       {/* Mobile Menu Toggle */}
       <div className="md:hidden flex items-center">
-        <button
+        <motion.button
           onClick={() => setIsMobileMenuOpen(true)}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
           className="text-white hover:text-krudex-muted transition-colors focus:outline-none"
         >
           <Menu className="w-6 h-6" />
-        </button>
+        </motion.button>
       </div>
 
       {/* Mobile Menu Overlay */}

@@ -68,7 +68,7 @@ const Hero = () => {
         >
           <span className="w-2 h-2 rounded-full bg-[#e65c00] animate-pulse" />
           <span className="text-[11px] text-krudex-muted tracking-wide">
-            GrowthAgent for SaaS Teams
+            GrowthAgent for SaaS Companies
           </span>
         </motion.div>
 
@@ -108,8 +108,7 @@ const Hero = () => {
           {...fadeUp(0.9)}
           className="text-krudex-muted text-[15px] leading-relaxed max-w-md mb-10"
         >
-          We help startups and enterprises integrate AI into marketing,
-          operations, and product, without complexity, without chaos.
+          We help startups and enterprises to build their websites, apps
         </motion.p>
 
         {/* CTA Buttons */}
@@ -128,7 +127,7 @@ const Hero = () => {
             className="group inline-flex items-center gap-2 text-krudex-muted hover:text-white text-[13px] font-medium tracking-wide transition-colors"
           >
             View Case
-            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transfor  m" />
           </a>
         </motion.div>
       </div>

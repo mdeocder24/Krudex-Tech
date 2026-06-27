@@ -224,8 +224,22 @@ const FloatingFigure = ({ position }: { position: [number, number, number] }) =>
    Main Scene
    ───────────────────────────────────────────── */
 const DataArchitectureScene = () => {
+  const groupRef = useRef<THREE.Group>(null);
+
+  useFrame((state, delta) => {
+    if (groupRef.current) {
+      // Calculate target rotation based on normalized pointer coordinates (-1 to +1)
+      const targetRotationY = (state.pointer.x * Math.PI) / 20; // Subtle horizontal rotation
+      const targetRotationX = -(state.pointer.y * Math.PI) / 40; // Very subtle vertical tilt
+
+      // Apply frame-rate independent dampening for a smooth, premium feel
+      groupRef.current.rotation.y = THREE.MathUtils.damp(groupRef.current.rotation.y, targetRotationY, 4, delta);
+      groupRef.current.rotation.x = THREE.MathUtils.damp(groupRef.current.rotation.x, targetRotationX, 4, delta);
+    }
+  });
+
   return (
-    <group position={[1.5, 1.5, 0]}>
+    <group ref={groupRef} position={[1.5, 1.5, 0]}>
       <ambientLight intensity={0.1} />
 
       {/* Main light from left to illuminate the left-facing walls of the pillars */}

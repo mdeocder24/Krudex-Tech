@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
+const MotionLink = motion.create ? motion.create(Link) : motion(Link);
+
 const services = [
   {
     num: "01",
@@ -67,9 +69,10 @@ const Services = () => {
                 key={index}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
+                whileHover={{ y: -5, backgroundColor: 'rgba(255,255,255,0.03)' }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="bg-krudex-black/80 backdrop-blur-md p-10 hover:bg-krudex-surface/30 transition-colors duration-300"
+                className="bg-krudex-black/80 backdrop-blur-md p-10 transition-colors duration-300"
               >
                 <div className="text-krudex-muted font-mono text-sm mb-6">{svc.num}</div>
                 <h3 className="text-white font-medium text-lg mb-3">{svc.title}</h3>
@@ -86,10 +89,15 @@ const Services = () => {
           transition={{ duration: 0.5 }}
           className="flex justify-center"
         >
-          <Link href="/services" className="group flex items-center gap-2 border border-white/30 text-white px-8 py-4 font-medium text-sm hover:bg-white hover:text-krudex-black transition-all duration-300">
+          <MotionLink 
+            href="/services" 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="group flex items-center gap-2 border border-white/30 text-white px-8 py-4 font-medium text-sm hover:bg-white hover:text-krudex-black transition-all duration-300"
+          >
             Explore All Services
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
+          </MotionLink>
         </motion.div>
       </div>
     </section>
