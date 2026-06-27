@@ -66,7 +66,7 @@ const Hero = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="inline-flex items-center gap-2.5 bg-krudex-surface/80 border border-krudex-border px-4 py-2 rounded-full mb-8"
         >
-          <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-[#e65c00] animate-pulse" />
           <span className="text-[11px] text-krudex-muted tracking-wide">
             GrowthAgent for SaaS Teams
           </span>
@@ -119,7 +119,7 @@ const Hero = () => {
         >
           <a
             href="/contact"
-            className="group inline-flex items-center gap-2 border border-white/80 text-white px-7 py-3.5 text-[13px] font-medium tracking-wide hover:bg-white hover:text-krudex-black transition-all duration-300 rounded-sm"
+            className="group inline-flex items-center gap-2 bg-white text-krudex-black px-8 py-3.5 text-[14px] font-medium tracking-wide hover:bg-gray-200 transition-colors rounded"
           >
             Start AI Journey
           </a>

@@ -1,198 +1,121 @@
 "use client";
 
-import React, { useRef, useMemo } from 'react';
+import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment } from '@react-three/drei';
 import * as THREE from 'three';
 
 /* ─────────────────────────────────────────────
-   Glowing Platform — Dark slab with white edge glow
+   Platform — Flat diamond with neon edge and solid base
    ───────────────────────────────────────────── */
-interface GlowPlatformProps {
+interface PlatformProps {
   position: [number, number, number];
-  size: [number, number, number];
-  rotation?: [number, number, number];
-  edgeOpacity?: number;
-  edgeColor?: string;
+  size: [number, number]; // width, depth (square)
 }
 
-const GlowPlatform = ({
-  position,
-  size,
-  rotation = [0, 0, 0],
-  edgeOpacity = 0.7,
-  edgeColor = '#ffffff',
-}: GlowPlatformProps) => {
-  const edgesRef = useRef<THREE.LineSegments>(null);
+const Platform = ({ position, size }: PlatformProps) => {
+  const [w, d] = size;
+  const t = 0.04; // Neon tube thickness
+  const depth = 25; // Depth of the pillar body for fading into fog
 
-  const edgesGeo = useMemo(() => {
-    const box = new THREE.BoxGeometry(size[0], size[1], size[2]);
-    return new THREE.EdgesGeometry(box);
-  }, [size]);
+  const groupRef = useRef<THREE.Group>(null);
 
   useFrame(({ clock }) => {
-    if (edgesRef.current) {
-      const mat = edgesRef.current.material as THREE.LineBasicMaterial;
-      mat.opacity = edgeOpacity + Math.sin(clock.getElapsedTime() * 1.5) * 0.08;
+    if (groupRef.current) {
+      // Very subtle floating motion for the whole platform
+      groupRef.current.position.y = position[1] + Math.sin(clock.getElapsedTime() + position[0]) * 0.05;
     }
   });
 
   return (
-    <group position={position} rotation={rotation}>
-      {/* Dark surface body */}
-      <mesh castShadow receiveShadow>
-        <boxGeometry args={size} />
-        <meshStandardMaterial
-          color="#080808"
-          metalness={0.92}
-          roughness={0.25}
-          envMapIntensity={0.5}
-        />
+    // Rotated 45 degrees to create the isometric diamond shape from the camera's perspective
+    <group ref={groupRef} position={position} rotation={[0, Math.PI / 4, 0]}>
+      
+      {/* 1. Neon Glowing Edge Frame */}
+      <group>
+        {/* Core solid bright white frame */}
+        <mesh position={[0, 0, d/2]}><boxGeometry args={[w+t, t, t]} /><meshBasicMaterial color="#ffffff" /></mesh>
+        <mesh position={[0, 0, -d/2]}><boxGeometry args={[w+t, t, t]} /><meshBasicMaterial color="#ffffff" /></mesh>
+        <mesh position={[-w/2, 0, 0]}><boxGeometry args={[t, t, d-t]} /><meshBasicMaterial color="#ffffff" /></mesh>
+        <mesh position={[w/2, 0, 0]}><boxGeometry args={[t, t, d-t]} /><meshBasicMaterial color="#ffffff" /></mesh>
+
+        {/* Soft Bloom layer (larger, transparent, additive blending) */}
+        <mesh position={[0, 0, d/2]}><boxGeometry args={[w+t*4, t*4, t*4]} /><meshBasicMaterial color="#ffffff" transparent opacity={0.15} blending={THREE.AdditiveBlending} depthWrite={false} /></mesh>
+        <mesh position={[0, 0, -d/2]}><boxGeometry args={[w+t*4, t*4, t*4]} /><meshBasicMaterial color="#ffffff" transparent opacity={0.15} blending={THREE.AdditiveBlending} depthWrite={false} /></mesh>
+        <mesh position={[-w/2, 0, 0]}><boxGeometry args={[t*4, t*4, d-t]} /><meshBasicMaterial color="#ffffff" transparent opacity={0.15} blending={THREE.AdditiveBlending} depthWrite={false} /></mesh>
+        <mesh position={[w/2, 0, 0]}><boxGeometry args={[t*4, t*4, d-t]} /><meshBasicMaterial color="#ffffff" transparent opacity={0.15} blending={THREE.AdditiveBlending} depthWrite={false} /></mesh>
+      </group>
+
+      {/* 2. Top Dark Surface (inside the neon frame) */}
+      <mesh position={[0, -0.01, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[w, d]} />
+        <meshBasicMaterial color="#020202" />
       </mesh>
 
-      {/* Top face — slightly lighter for depth */}
-      <mesh position={[0, size[1] / 2 + 0.001, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[size[0] - 0.02, size[2] - 0.02]} />
-        <meshStandardMaterial
-          color="#0e0e0e"
-          metalness={0.95}
-          roughness={0.15}
-          envMapIntensity={0.8}
-        />
-      </mesh>
-
-      {/* Bright white glowing edges */}
-      <lineSegments ref={edgesRef} geometry={edgesGeo}>
-        <lineBasicMaterial
-          color={edgeColor}
-          transparent
-          opacity={edgeOpacity}
-          linewidth={1}
-        />
-      </lineSegments>
-
-      {/* Second edge pass — additive blend for glow bloom */}
-      <lineSegments geometry={edgesGeo}>
-        <lineBasicMaterial
-          color="#ffffff"
-          transparent
-          opacity={edgeOpacity * 0.4}
-          blending={THREE.AdditiveBlending}
-        />
-      </lineSegments>
-
-      {/* Edge glow — top face outline using thin planes */}
-      {/* Top edge strip */}
-      <mesh position={[0, size[1] / 2 + 0.005, size[2] / 2]} rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[size[0], 0.03]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={0.5} blending={THREE.AdditiveBlending} side={THREE.DoubleSide} />
-      </mesh>
-      <mesh position={[0, size[1] / 2 + 0.005, -size[2] / 2]} rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[size[0], 0.03]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={0.5} blending={THREE.AdditiveBlending} side={THREE.DoubleSide} />
-      </mesh>
-      <mesh position={[size[0] / 2, size[1] / 2 + 0.005, 0]} rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
-        <planeGeometry args={[size[2], 0.03]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={0.5} blending={THREE.AdditiveBlending} side={THREE.DoubleSide} />
-      </mesh>
-      <mesh position={[-size[0] / 2, size[1] / 2 + 0.005, 0]} rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
-        <planeGeometry args={[size[2], 0.03]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={0.5} blending={THREE.AdditiveBlending} side={THREE.DoubleSide} />
-      </mesh>
-
-      {/* Subtle inner glow plane on top face */}
-      <mesh position={[0, size[1] / 2 + 0.003, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[size[0] * 0.95, size[2] * 0.95]} />
-        <meshBasicMaterial
-          color="#ffffff"
-          transparent
-          opacity={0.02}
-          blending={THREE.AdditiveBlending}
-        />
+      {/* 3. Pillar Body extending downwards into the fog */}
+      <mesh position={[0, -depth / 2 - 0.02, 0]}>
+        <boxGeometry args={[w, depth, d]} />
+        {/* Standard material to catch directional light on the sides */}
+        <meshStandardMaterial color="#030303" metalness={0.1} roughness={0.9} />
       </mesh>
     </group>
   );
 };
 
 /* ─────────────────────────────────────────────
-   Ambient Dust Particles
+   Floating Figure (The Astronaut)
    ───────────────────────────────────────────── */
-const AmbientDust = ({ count = 60 }) => {
-  const pointsRef = useRef<THREE.Points>(null);
-
-  const positions = useMemo(() => {
-    const pos = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 16;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 12;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 16;
-    }
-    return pos;
-  }, [count]);
-
-  useFrame(({ clock }) => {
-    if (!pointsRef.current) return;
-    pointsRef.current.rotation.y = clock.getElapsedTime() * 0.01;
-  });
-
-  return (
-    <points ref={pointsRef}>
-      <bufferGeometry>
-        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.015}
-        color="#ffffff"
-        transparent
-        opacity={0.15}
-        sizeAttenuation
-      />
-    </points>
-  );
-};
-
-/* ─────────────────────────────────────────────
-   Platform Stack — The cascading 3D architecture
-   ───────────────────────────────────────────── */
-const PlatformStack = () => {
+const FloatingFigure = () => {
   const groupRef = useRef<THREE.Group>(null);
-
+  
   useFrame(({ clock }) => {
     if (groupRef.current) {
-      // Very slow, gentle rotation
-      groupRef.current.rotation.y = -0.4 + Math.sin(clock.getElapsedTime() * 0.15) * 0.08;
+      const t = clock.getElapsedTime();
+      // Gentle floating bob
+      groupRef.current.position.y = 1.0 + Math.sin(t * 1.5) * 0.15;
+      // Slight rotation bobbing
+      groupRef.current.rotation.x = Math.sin(t * 0.5) * 0.1;
+      groupRef.current.rotation.z = Math.sin(t * 0.8) * 0.1;
     }
   });
 
   return (
-    <group ref={groupRef} rotation={[0.35, -0.4, 0]}>
-      {/* Bottom — Largest platform */}
-      <GlowPlatform
-        position={[0, -1.8, 0]}
-        size={[4.5, 0.18, 3.0]}
-        edgeOpacity={0.85}
-      />
-
-      {/* Middle — Medium platform */}
-      <GlowPlatform
-        position={[0.3, 0, 0.1]}
-        size={[3.5, 0.16, 2.4]}
-        edgeOpacity={0.75}
-      />
-
-      {/* Upper — Smaller platform */}
-      <GlowPlatform
-        position={[0.5, 1.7, 0.2]}
-        size={[2.6, 0.14, 1.8]}
-        edgeOpacity={0.65}
-      />
-
-      {/* Top — Smallest platform */}
-      <GlowPlatform
-        position={[0.7, 3.2, 0.3]}
-        size={[1.8, 0.12, 1.3]}
-        edgeOpacity={0.55}
-      />
+    <group ref={groupRef} position={[2, 1.0, -1.8]} scale={0.3} rotation={[0, -0.5, 0]}>
+      {/* Head/Visor - metallic bronze */}
+      <mesh position={[0, 1.0, 0]}>
+        <sphereGeometry args={[0.3, 16, 16]} />
+        <meshStandardMaterial color="#b87333" roughness={0.2} metalness={0.9} />
+      </mesh>
+      
+      {/* Torso */}
+      <mesh position={[0, 0, 0]}>
+        <capsuleGeometry args={[0.3, 0.8, 4, 8]} />
+        <meshStandardMaterial color="#333333" roughness={0.7} metalness={0.3} />
+      </mesh>
+      
+      {/* Left Arm */}
+      <mesh position={[-0.4, 0.1, 0]} rotation={[0, 0, 0.6]}>
+        <capsuleGeometry args={[0.1, 0.6, 4, 8]} />
+        <meshStandardMaterial color="#222222" />
+      </mesh>
+      
+      {/* Right Arm (raised) */}
+      <mesh position={[0.4, 0.3, 0]} rotation={[0, 0, -2.5]}>
+        <capsuleGeometry args={[0.1, 0.6, 4, 8]} />
+        <meshStandardMaterial color="#222222" />
+      </mesh>
+      
+      {/* Left Leg */}
+      <mesh position={[-0.15, -0.8, 0]} rotation={[0, 0, 0.1]}>
+        <capsuleGeometry args={[0.12, 0.6, 4, 8]} />
+        <meshStandardMaterial color="#222222" />
+      </mesh>
+      
+      {/* Right Leg */}
+      <mesh position={[0.15, -0.7, -0.2]} rotation={[0.4, 0, -0.1]}>
+        <capsuleGeometry args={[0.12, 0.6, 4, 8]} />
+        <meshStandardMaterial color="#222222" />
+      </mesh>
     </group>
   );
 };
@@ -202,71 +125,32 @@ const PlatformStack = () => {
    ───────────────────────────────────────────── */
 const DataArchitectureScene = () => {
   return (
-    <>
-      {/* Lighting */}
-      <ambientLight intensity={0.08} />
+    <group position={[0.5, -0.5, 0]}>
+      <ambientLight intensity={0.1} />
+      
+      {/* Main light from left to illuminate the left-facing walls of the pillars */}
+      <directionalLight position={[-15, 10, 5]} intensity={1.5} color="#ffffff" />
+      
+      {/* Subtle fill light from right */}
+      <directionalLight position={[15, 5, -5]} intensity={0.2} color="#ffffff" />
 
-      {/* Key light — warm amber from behind-right */}
-      <directionalLight
-        position={[4, 3, -5]}
-        intensity={2.5}
-        color="#c49a3c"
-        castShadow
-      />
+      {/* Deep fog to blend the pillars seamlessly into the pitch-black background */}
+      {/* 050505 matches the bg-krudex-black Tailwind class perfectly */}
+      <fog attach="fog" args={['#050505', 15, 35]} />
 
-      {/* Fill light — subtle cool from left */}
-      <directionalLight
-        position={[-6, 2, 3]}
-        intensity={0.3}
-        color="#8899bb"
-      />
+      {/* ── Platforms Stepping Up ── */}
+      {/* 1. Lowest, largest, front-left */}
+      <Platform position={[-3, -3.5, 3]} size={[4.2, 4.2]} />
+      
+      {/* 2. Middle, medium, center */}
+      <Platform position={[0.5, -0.5, -0.5]} size={[3.0, 3.0]} />
+      
+      {/* 3. Highest, smallest, back-right */}
+      <Platform position={[3.5, 2.5, -3.5]} size={[1.8, 1.8]} />
 
-      {/* Top light — white for edge highlights */}
-      <directionalLight
-        position={[0, 8, 2]}
-        intensity={0.5}
-        color="#ffffff"
-      />
-
-      {/* Rim light — warm from below-right for edge highlights */}
-      <pointLight
-        position={[3, -3, -2]}
-        intensity={12}
-        color="#b08030"
-        distance={14}
-        decay={2}
-      />
-
-      {/* Warm glow behind platforms */}
-      <pointLight
-        position={[1, 0, -4]}
-        intensity={25}
-        color="#a07828"
-        distance={18}
-        decay={2}
-      />
-
-      {/* Secondary warm fill from below */}
-      <pointLight
-        position={[-1, -4, -2]}
-        intensity={8}
-        color="#c49a3c"
-        distance={12}
-        decay={2}
-      />
-
-      {/* Environment for metallic reflections */}
-      <Environment preset="night" />
-
-      {/* Platform stack */}
-      <PlatformStack />
-
-      {/* Atmospheric dust */}
-      <AmbientDust count={50} />
-
-      {/* Fog for depth fade */}
-      <fog attach="fog" args={['#050505', 6, 22]} />
-    </>
+      {/* Tiny astronaut floating between middle and top platform */}
+      <FloatingFigure />
+    </group>
   );
 };
 
@@ -275,15 +159,15 @@ const DataArchitectureScene = () => {
    ───────────────────────────────────────────── */
 const Hero3DObject = () => {
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full absolute inset-0 pointer-events-none">
       <Canvas
+        // Positioned perfectly to view the 45-deg rotated platforms as isometric diamonds
         camera={{
-          position: [5, 3.5, 7],
-          fov: 40,
+          position: [0, 8, 18],
+          fov: 30,
           near: 0.1,
-          far: 50,
+          far: 100,
         }}
-        shadows
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
         style={{ background: 'transparent' }}
         dpr={[1, 2]}
