@@ -1,196 +1,124 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import React from 'react';
+import { motion, Variants } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 
-const EASE = [0.16, 1, 0.3, 1] as const;
+const titleVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+};
 
-export default function Hero() {
-  const prefersReducedMotion = useReducedMotion();
-  const blobLeftRef = useRef<HTMLDivElement>(null);
-  const blobRightRef = useRef<HTMLDivElement>(null);
-  const lerpRef = useRef({ x: 0, y: 0 });
-  const targetRef = useRef({ x: 0, y: 0 });
-  const rafRef = useRef<number | null>(null);
+const wordVariants: Variants = {
+  hidden: { opacity: 0, y: 50, rotateX: -30 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    rotateX: 0,
+    transition: { type: "spring", damping: 12, stiffness: 100 }
+  }
+};
 
-  useEffect(() => {
-    if (prefersReducedMotion) return;
-
-    const onMove = (e: MouseEvent) => {
-      const cx = window.innerWidth / 2;
-      const cy = window.innerHeight / 2;
-      targetRef.current = {
-        x: ((e.clientX - cx) / cx) * 30,
-        y: ((e.clientY - cy) / cy) * 30,
-      };
-    };
-
-    const tick = () => {
-      lerpRef.current.x += (targetRef.current.x - lerpRef.current.x) * 0.03;
-      lerpRef.current.y += (targetRef.current.y - lerpRef.current.y) * 0.03;
-      if (blobLeftRef.current) {
-        blobLeftRef.current.style.transform = `translate(${lerpRef.current.x}px, ${lerpRef.current.y}px)`;
-      }
-      if (blobRightRef.current) {
-        blobRightRef.current.style.transform = `translate(${-lerpRef.current.x}px, ${-lerpRef.current.y}px)`;
-      }
-      rafRef.current = requestAnimationFrame(tick);
-    };
-
-    window.addEventListener("mousemove", onMove);
-    rafRef.current = requestAnimationFrame(tick);
-    return () => {
-      window.removeEventListener("mousemove", onMove);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, [prefersReducedMotion]);
-
-  const fadeUp = prefersReducedMotion
-    ? {}
-    : { initial: { opacity: 0, y: 24 }, animate: { opacity: 1, y: 0 } };
-
+const Hero = () => {
   return (
-    <section className="relative min-h-[100dvh] flex flex-col items-center justify-center px-6 md:px-12 overflow-hidden">
-      {/* Background blobs */}
-      <div
-        ref={blobLeftRef}
-        className="pointer-events-none absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full opacity-[0.05]"
-        style={{ background: "#5B5BFF", filter: "blur(160px)" }}
-        aria-hidden
-      />
-      <div
-        ref={blobRightRef}
-        className="pointer-events-none absolute -bottom-32 -right-32 w-[600px] h-[600px] rounded-full opacity-[0.05]"
-        style={{ background: "#00E5A0", filter: "blur(160px)" }}
-        aria-hidden
-      />
-
-      <div className="relative z-10 flex flex-col items-center text-center max-w-4xl pt-16">
-        {/* Eyebrow */}
-        <motion.div
-          {...fadeUp}
-          transition={{ duration: 0.5, ease: EASE }}
-          className="inline-flex items-center border border-border px-3 py-1.5 rounded-full mb-8"
+    <section className="h-screen w-full flex flex-col justify-center items-center px-4 md:px-16 lg:px-24 relative overflow-hidden bg-transparent">
+      <div className="max-w-5xl z-10 flex flex-col items-center text-center mt-16 md:mt-20">
+        {/* Top Label */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="inline-flex items-center gap-2 border border-krudex-border/50 px-4 py-1.5 mb-6 md:mb-8"
         >
-          <span className="text-[11px] font-medium tracking-[0.1em] uppercase text-text-secondary">
-            Hyderabad · Telangana · India
+          <span className="text-[9px] md:text-[10px] uppercase tracking-[0.25em] text-krudex-blue font-semibold">
+            HYDERABAD &middot; TELANGANA &middot; INDIA
           </span>
         </motion.div>
 
-        {/* H1 */}
-        <motion.h1
-          className="font-sans font-semibold leading-[1.08] tracking-tight text-6xl md:text-7xl lg:text-8xl mb-6"
-          transition={{ staggerChildren: prefersReducedMotion ? 0 : 0.06 }}
+        {/* Main Headline */}
+        <motion.h1 
+          variants={titleVariants}
           initial="hidden"
           animate="visible"
-          variants={
-            prefersReducedMotion
-              ? {}
-              : {
-                  hidden: {},
-                  visible: { transition: { staggerChildren: 0.06, delayChildren: 0.15 } },
-                }
-          }
+          className="font-serif text-5xl md:text-7xl lg:text-[6.5rem] font-bold leading-[1.05] tracking-tight text-white mb-8 md:mb-12 perspective-1000"
         >
-          {["We", "build", "digital"].map((w) => (
-            <motion.span
-              key={w}
-              className="inline-block mr-[0.2em] text-text-primary"
-              variants={
-                prefersReducedMotion
-                  ? {}
-                  : {
-                      hidden: { opacity: 0, y: 24 },
-                      visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
-                    }
-              }
-            >
-              {w}
-            </motion.span>
-          ))}
-          <br />
-          {["products", "that"].map((w) => (
-            <motion.span
-              key={w}
-              className="inline-block mr-[0.2em] text-text-primary"
-              variants={
-                prefersReducedMotion
-                  ? {}
-                  : {
-                      hidden: { opacity: 0, y: 24 },
-                      visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
-                    }
-              }
-            >
-              {w}
-            </motion.span>
-          ))}
-          <motion.span
-            className="inline-block text-accent relative"
-            variants={
-              prefersReducedMotion
-                ? {}
-                : {
-                    hidden: { opacity: 0, y: 24 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
-                  }
-            }
-          >
-            perform.
-            <span
-              className="animate-underline absolute left-0 bottom-1 h-[3px] w-full bg-accent block"
-              aria-hidden
-            />
-          </motion.span>
+          <span className="block overflow-hidden mb-2">
+            {["Architecting", "Scalable"].map((word, i) => (
+              <motion.span key={i} variants={wordVariants} className="inline-block mr-[0.25em] origin-bottom">{word}</motion.span>
+            ))}
+          </span>
+          <span className="block overflow-hidden text-krudex-blue mb-2">
+            {["Web", "&"].map((word, i) => (
+              <motion.span key={i} variants={wordVariants} className="inline-block mr-[0.25em] origin-bottom">{word}</motion.span>
+            ))}
+          </span>
+          <span className="block overflow-hidden text-krudex-blue mb-2">
+            <motion.span variants={wordVariants} className="inline-block origin-bottom">Mobile</motion.span>
+          </span>
+          <span className="block overflow-hidden text-krudex-blue">
+            <motion.span variants={wordVariants} className="inline-block origin-bottom">Ecosystems.</motion.span>
+          </span>
         </motion.h1>
 
-        {/* Subheadline */}
-        <motion.p
-          {...fadeUp}
-          transition={{ duration: 0.5, delay: 0.55, ease: EASE }}
-          className="text-text-secondary text-lg leading-[1.7] max-w-xl mb-10"
+        {/* CTA Buttons */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="flex flex-wrap items-center justify-center gap-4 md:gap-6 mb-8 md:mb-10"
         >
-          Krudex Technologies is a Hyderabad-based engineering firm at the
-          intersection of software architecture, AI systems, and precision design.
-        </motion.p>
-
-        {/* CTAs */}
-        <motion.div
-          {...fadeUp}
-          transition={{ duration: 0.5, delay: 0.7, ease: EASE }}
-          className="flex flex-col sm:flex-row items-center gap-4"
-        >
-          <Link
-            href="/work"
-            className="group flex items-center gap-2 border border-border text-text-primary px-6 py-3 rounded-lg font-semibold text-sm hover:border-accent transition-colors duration-150 min-w-[160px] justify-center"
-          >
-            View our work
-            <ArrowRight className="w-4 h-4 text-text-secondary group-hover:text-accent group-hover:translate-x-0.5 transition-all duration-150" />
-          </Link>
-          <Link
-            href="/contact"
-            className="bg-accent hover:bg-accent-hover text-white px-6 py-3 rounded-lg font-semibold text-sm transition-colors duration-150 min-w-[160px] text-center"
-          >
-            Book a free call
-          </Link>
+          <a href="/work" className="group flex items-center gap-3 border border-krudex-border text-white px-8 md:px-10 py-4 font-semibold text-xs tracking-[0.1em] hover:border-krudex-blue transition-colors">
+            VIEW OUR WORK
+            <ArrowRight className="w-4 h-4 text-krudex-muted group-hover:text-krudex-blue group-hover:translate-x-1 transition-all" />
+          </a>
+          <a href="/contact" className="group flex items-center gap-2 bg-krudex-blue text-krudex-black px-8 md:px-10 py-4 font-bold text-xs tracking-[0.1em] hover:bg-krudex-blue-hover transition-colors shadow-[0_0_20px_rgba(204,255,0,0.15)]">
+            INITIALIZE CONSULTATION
+          </a>
         </motion.div>
-      </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-        <div className="w-px h-10 bg-border relative overflow-hidden">
-          <motion.div
-            animate={prefersReducedMotion ? {} : { y: ["-100%", "200%"] }}
-            transition={{ repeat: Infinity, duration: 1.8, ease: "linear" }}
-            className="absolute inset-x-0 h-1/2 bg-accent"
+        {/* Subtitle Paragraph */}
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="text-krudex-muted/80 text-xs md:text-sm max-w-2xl leading-relaxed px-4"
+        >
+          Krudex Technologies is an incorporated engineering firm operating at the
+          intersection of robust software architecture, intelligent AI systems, and
+          precision digital design.
+        </motion.p>
+      </div>
+      
+      {/* Scroll Indicator */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+      >
+        <div className="w-px h-8 md:h-12 bg-gradient-to-b from-krudex-border/0 via-krudex-border to-krudex-border/0 relative overflow-hidden">
+          <motion.div 
+            animate={{ top: ["-100%", "100%"] }}
+            transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+            className="absolute left-0 w-full h-1/2 bg-krudex-blue"
           />
         </div>
-        <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-text-secondary">
-          Scroll
-        </span>
+        <span className="text-[9px] uppercase tracking-[0.3em] text-krudex-muted font-mono">SCROLL</span>
+      </motion.div>
+
+      {/* 3D Interactive Background */}
+      {/* Abstract Background Element */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10 mix-blend-screen">
+         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-krudex-blue/5 blur-[150px] rounded-full"></div>
       </div>
     </section>
   );
-}
+};
+
+export default Hero;

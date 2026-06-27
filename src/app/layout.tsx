@@ -1,38 +1,36 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
+import GlobalCanvas from "@/components/GlobalCanvas";
 
-const inter = Inter({
-  variable: "--font-inter",
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-sans-primary",
   subsets: ["latin"],
-  display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains",
+const dmSerifDisplay = DM_Serif_Display({
+  variable: "--font-serif-primary",
+  weight: "400",
   subsets: ["latin"],
-  display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "Krudex Technologies | We Build Digital Products That Perform",
-  description:
-    "Krudex Technologies delivers full-stack engineering, AI integration, and precision design for startups and enterprises that need results, not promises.",
-  metadataBase: new URL("https://krudex.in"),
+  description: "Krudex Technologies delivers full-stack engineering, AI integration, and precision design for startups and enterprises that need results, not promises.",
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} scroll-smooth`}
-    >
-      <body className="min-h-screen bg-bg text-text-primary antialiased">
-        {children}
+    <html lang="en" className={`${plusJakartaSans.variable} ${dmSerifDisplay.variable} dark scroll-smooth`}>
+      <body className="min-h-screen bg-transparent text-krudex-text antialiased selection:bg-krudex-blue selection:text-krudex-black">
+        <GlobalCanvas />
+        <main className="relative z-10">
+          {children}
+        </main>
       </body>
     </html>
   );

@@ -1,142 +1,128 @@
 "use client";
 
-import React, { useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 
-const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Services", href: "/services" },
-  { label: "Our Work", href: "/work" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
+const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-export default function Navbar() {
-  const pathname = usePathname();
-  const [open, setOpen] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
-
-  const drawerVariants = prefersReducedMotion
-    ? {}
-    : {
-        hidden: { x: "100%" },
-        visible: { x: 0 },
-        exit: { x: "100%" },
-      };
-
+  // Prevent scrolling when menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
   return (
-    <>
-      <nav
-        className="fixed top-0 inset-x-0 z-50 h-16 flex items-center px-6 md:px-12 border-b border-border"
-        style={{ background: "rgba(10,10,10,0.85)", backdropFilter: "blur(20px)" }}
-      >
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 mr-auto md:mr-0">
-          <span className="w-2 h-2 rounded-sm bg-accent inline-block" />
-          <span className="font-mono font-bold tracking-widest text-text-primary text-sm">
-            KRUDEX
-          </span>
-        </Link>
-
-        {/* Center nav */}
-        <div className="hidden md:flex items-center gap-8 mx-auto">
-          {navLinks.map(({ label, href }) => {
-            const active = pathname === href;
-            return (
-              <Link
-                key={href}
-                href={href}
-                className="relative flex flex-col items-center gap-0.5 text-sm text-text-secondary hover:text-text-primary transition-colors duration-150"
-              >
-                <span>{label}</span>
-                {active && (
-                  <span className="w-1 h-1 rounded-full bg-accent" />
-                )}
-              </Link>
-            );
-          })}
+    <motion.nav 
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="w-full flex items-center justify-between py-6 px-8 md:px-16 lg:px-24 bg-krudex-black/80 backdrop-blur-md fixed top-0 z-50 border-b border-krudex-border/50"
+    >
+      <Link href="/" className="flex items-center gap-3 group">
+        <div className="relative w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-lg overflow-hidden">
+          <Image src="/Krudex.jpeg" alt="Krudex Technologies" fill className="object-cover" priority />
         </div>
+      </Link>
 
-        {/* Hire Us */}
-        <div className="hidden md:block ml-auto">
-          <Link
-            href="/contact"
-            className="bg-accent hover:bg-accent-hover text-white font-semibold text-sm px-4 py-2 rounded-lg transition-colors duration-150"
+      <div className="hidden md:flex items-center gap-8">
+        {['Home', 'Services', 'Our Work', 'About', 'Contact'].map((item) => (
+          <Link 
+            key={item} 
+            href={item === 'Home' ? '/' : item === 'Services' ? '/services' : item === 'About' ? '/about' : item === 'Contact' ? '/contact' : item === 'Our Work' ? '/work' : `/#${item.toLowerCase().replace(' ', '-')}`}
+            className="text-sm text-krudex-muted hover:text-white transition-colors"
           >
-            Hire Us
+            {item}
           </Link>
-        </div>
-
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden ml-auto text-text-secondary hover:text-text-primary transition-colors"
-          onClick={() => setOpen(true)}
-          aria-label="Open menu"
+        ))}
+        <Link 
+          href="#hire-us"
+          className="bg-krudex-blue text-krudex-black font-semibold text-sm px-6 py-2.5 hover:bg-krudex-blue-hover transition-colors shadow-[0_0_15px_rgba(204,255,0,0.15)]"
         >
-          <Menu className="w-5 h-5" />
-        </button>
-      </nav>
+          Hire Us
+        </Link>
+      </div>
 
-      {/* Mobile drawer */}
+      {/* Mobile Menu Toggle */}
+      <div className="md:hidden flex items-center">
+        <button 
+          onClick={() => setIsMobileMenuOpen(true)}
+          className="text-white hover:text-krudex-blue transition-colors focus:outline-none"
+        >
+          <Menu className="w-6 h-6" />
+        </button>
+      </div>
+
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
-        {open && (
-          <>
-            <motion.div
-              key="overlay"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-40 bg-black/60"
-              onClick={() => setOpen(false)}
-            />
-            <motion.div
-              key="drawer"
-              variants={drawerVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              transition={{ type: "spring", damping: 28, stiffness: 260 }}
-              className="fixed inset-y-0 right-0 z-50 w-72 bg-surface flex flex-col p-6"
-            >
-              <button
-                className="self-end text-text-secondary hover:text-text-primary transition-colors mb-10"
-                onClick={() => setOpen(false)}
-                aria-label="Close menu"
-              >
-                <X className="w-5 h-5" />
-              </button>
-              <div className="flex flex-col gap-6 flex-1">
-                {navLinks.map(({ label, href }) => {
-                  const active = pathname === href;
-                  return (
-                    <Link
-                      key={href}
-                      href={href}
-                      onClick={() => setOpen(false)}
-                      className={`text-lg font-semibold transition-colors duration-150 ${
-                        active ? "text-accent" : "text-text-secondary hover:text-text-primary"
-                      }`}
-                    >
-                      {label}
-                    </Link>
-                  );
-                })}
-              </div>
-              <Link
-                href="/contact"
-                onClick={() => setOpen(false)}
-                className="bg-accent hover:bg-accent-hover text-white font-semibold text-sm px-4 py-3 rounded-lg transition-colors text-center mt-8"
-              >
-                Hire Us
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: "-100%" }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: "-100%" }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            className="fixed inset-0 bg-krudex-black z-[60] flex flex-col pt-6 px-8"
+          >
+            <div className="flex items-center justify-between w-full mb-12">
+              <Link href="/" className="flex items-center gap-3 group" onClick={() => setIsMobileMenuOpen(false)}>
+                <div className="relative w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-lg overflow-hidden">
+                  <Image src="/Krudex.jpeg" alt="Krudex Technologies" fill className="object-cover" priority />
+                </div>
               </Link>
-            </motion.div>
-          </>
+              <button 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-white hover:text-krudex-blue transition-colors focus:outline-none"
+              >
+                <X className="w-8 h-8" />
+              </button>
+            </div>
+            
+            <div className="flex flex-col gap-8 mt-8">
+              {['Home', 'Services', 'Our Work', 'About', 'Contact'].map((item, idx) => (
+                <motion.div
+                  key={item}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 + (idx * 0.1) }}
+                >
+                  <Link 
+                    href={item === 'Home' ? '/' : item === 'Services' ? '/services' : item === 'About' ? '/about' : item === 'Contact' ? '/contact' : item === 'Our Work' ? '/work' : `/#${item.toLowerCase().replace(' ', '-')}`}
+                    className="text-3xl font-serif text-white hover:text-krudex-blue transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item}
+                  </Link>
+                </motion.div>
+              ))}
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="mt-8"
+              >
+                <Link 
+                  href="#hire-us"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="bg-krudex-blue text-krudex-black font-semibold text-base px-8 py-4 inline-block hover:bg-krudex-blue-hover transition-colors shadow-[0_0_15px_rgba(204,255,0,0.15)]"
+                >
+                  Hire Us
+                </Link>
+              </motion.div>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </motion.nav>
   );
-}
+};
+
+export default Navbar;
