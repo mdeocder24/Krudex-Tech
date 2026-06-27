@@ -51,7 +51,6 @@ const CTA = () => {
           className="flex flex-wrap items-center justify-center gap-5"
         >
           <MagneticButton
-            as="a"
             href="/contact"
             className="inline-flex items-center gap-2 bg-white text-krudex-black px-8 py-4 font-medium text-sm hover:bg-krudex-text transition-colors duration-300"
           >
@@ -59,8 +58,7 @@ const CTA = () => {
             <ArrowRight className="w-4 h-4" />
           </MagneticButton>
           <MagneticButton
-            as="a"
-            href="/services"
+            href="mailto:hello@krudex.com"
             className="inline-flex items-center gap-2 border border-white/30 text-white px-8 py-4 text-sm font-medium hover:bg-white hover:text-krudex-black transition-all duration-300"
           >
             Explore Services

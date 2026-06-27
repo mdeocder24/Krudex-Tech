@@ -152,7 +152,7 @@ export default function AboutPage() {
                   Over three years, the practice expanded: first into AI and machine learning, then into UI/UX design and brand identity. Each discipline reinforced the others. A product that performs well needs clean engineering and clean design in equal measure.
                 </p>
                 <p>
-                  In 2025, Krudex Technologies was incorporated in Telangana \u2014 formalizing what had already become a serious operation. The incorporation wasn't a milestone. It was a signal: we're here to build companies, not just websites.
+                  In 2025, Krudex Technologies was incorporated in Telangana \u2014 formalizing what had already become a serious operation. The incorporation wasn&apos;t a milestone. It was a signal: we&apos;re here to build companies, not just websites.
                 </p>
               </div>
             </motion.div>
@@ -340,7 +340,7 @@ export default function AboutPage() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-krudex-muted text-lg max-w-xl mb-12 leading-relaxed"
           >
-            We take on a limited number of new client engagements each quarter. If your project is the right fit, we'd like to hear from you.
+            We take on a limited number of new client engagements each quarter. If your project is the right fit, we&apos;d like to hear from you.
           </motion.p>
 
           <motion.div

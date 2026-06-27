@@ -1,44 +1,44 @@
 "use client";
 
-import React, { useRef, useMemo } from 'react';
+import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Float, Environment, Lightformer } from '@react-three/drei';
 import * as THREE from 'three';
 
+const blocks = (() => {
+  const items = [];
+  for (let i = 0; i < 12; i++) {
+    items.push({
+      position: [
+        (Math.random() - 0.5) * 15,
+        (Math.random() - 0.5) * 10,
+        (Math.random() - 0.5) * 10
+      ],
+      scale: [
+        1 + Math.random() * 2,
+        4 + Math.random() * 6,
+        1 + Math.random() * 2
+      ],
+      rotation: [
+        Math.random() * 0.2,
+        Math.random() * Math.PI,
+        Math.random() * 0.2
+      ],
+      speed: 0.1 + Math.random() * 0.3,
+      // Store initial positions for scroll scattering
+      initPos: [
+        (Math.random() - 0.5) * 15,
+        (Math.random() - 0.5) * 10,
+        (Math.random() - 0.5) * 10
+      ]
+    });
+  }
+  return items;
+})();
+
 const Monoliths = () => {
   const groupRef = useRef<THREE.Group>(null);
   const monolithsRef = useRef<(THREE.Mesh | null)[]>([]);
-  
-  const blocks = useMemo(() => {
-    const items = [];
-    for (let i = 0; i < 12; i++) {
-      items.push({
-        position: [
-          (Math.random() - 0.5) * 15,
-          (Math.random() - 0.5) * 10,
-          (Math.random() - 0.5) * 10
-        ],
-        scale: [
-          1 + Math.random() * 2,
-          4 + Math.random() * 6,
-          1 + Math.random() * 2
-        ],
-        rotation: [
-          Math.random() * 0.2,
-          Math.random() * Math.PI,
-          Math.random() * 0.2
-        ],
-        speed: 0.1 + Math.random() * 0.3,
-        // Store initial positions for scroll scattering
-        initPos: [
-          (Math.random() - 0.5) * 15,
-          (Math.random() - 0.5) * 10,
-          (Math.random() - 0.5) * 10
-        ]
-      });
-    }
-    return items;
-  }, []);
 
   useFrame(({ clock }) => {
     if (groupRef.current) {

@@ -1,39 +1,39 @@
 "use client";
 
-import React, { useRef, useMemo } from 'react';
+import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Float, Environment, Lightformer } from '@react-three/drei';
 import * as THREE from 'three';
 
+const sphereCount = 80;
+
+const spheres = (() => {
+  const items = [];
+  for (let i = 0; i < sphereCount; i++) {
+    const t = i / sphereCount;
+    const angle = t * Math.PI * 8; // 4 full turns
+    const radius = 2.5;
+    const y = (t - 0.5) * 15; // spread vertically
+    
+    // Strand 1
+    items.push({
+      position: [Math.cos(angle) * radius, y, Math.sin(angle) * radius],
+      scale: 0.3 + Math.random() * 0.4,
+      isGlass: Math.random() > 0.5
+    });
+    
+    // Strand 2 (offset by PI)
+    items.push({
+      position: [Math.cos(angle + Math.PI) * radius, y, Math.sin(angle + Math.PI) * radius],
+      scale: 0.3 + Math.random() * 0.4,
+      isGlass: Math.random() > 0.5
+    });
+  }
+  return items;
+})();
+
 const MetallicHelix = () => {
   const groupRef = useRef<THREE.Group>(null);
-  
-  const sphereCount = 80;
-  
-  const spheres = useMemo(() => {
-    const items = [];
-    for (let i = 0; i < sphereCount; i++) {
-      const t = i / sphereCount;
-      const angle = t * Math.PI * 8; // 4 full turns
-      const radius = 2.5;
-      const y = (t - 0.5) * 15; // spread vertically
-      
-      // Strand 1
-      items.push({
-        position: [Math.cos(angle) * radius, y, Math.sin(angle) * radius],
-        scale: 0.3 + Math.random() * 0.4,
-        isGlass: Math.random() > 0.5
-      });
-      
-      // Strand 2 (offset by PI)
-      items.push({
-        position: [Math.cos(angle + Math.PI) * radius, y, Math.sin(angle + Math.PI) * radius],
-        scale: 0.3 + Math.random() * 0.4,
-        isGlass: Math.random() > 0.5
-      });
-    }
-    return items;
-  }, [sphereCount]);
 
   useFrame(({ clock }) => {
     if (groupRef.current) {

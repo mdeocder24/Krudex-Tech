@@ -48,6 +48,7 @@ const fadeUp = (delay: number) => ({
   animate: {
     opacity: 1,
     y: 0,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     transition: { duration: 0.7, delay, ease: "easeOut" as any },
   },
 });
@@ -118,14 +119,12 @@ const Hero = () => {
           className="flex items-center gap-6"
         >
           <MagneticButton
-            as="a"
             href="/contact"
             className="group inline-flex items-center gap-2 bg-white text-krudex-black px-8 py-3.5 text-[14px] font-medium tracking-wide hover:bg-gray-200 transition-colors rounded"
           >
             View Our Work
           </MagneticButton>
           <MagneticButton
-            as="a"
             href="/contact"
             className="group inline-flex items-center gap-2 text-krudex-muted hover:text-white text-[13px] font-medium tracking-wide transition-colors"
           >

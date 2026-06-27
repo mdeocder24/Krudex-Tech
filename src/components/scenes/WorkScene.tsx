@@ -1,40 +1,40 @@
 "use client";
 
-import React, { useRef, useMemo } from 'react';
+import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Float, Environment, Lightformer } from '@react-three/drei';
 import * as THREE from 'three';
 
+const panels = (() => {
+  const items = [];
+  for (let i = 0; i < 25; i++) {
+    const radius = 8 + Math.random() * 10;
+    const angle = (i / 25) * Math.PI * 2;
+    const height = (Math.random() - 0.5) * 8;
+    
+    items.push({
+      position: [
+        Math.cos(angle) * radius,
+        height,
+        Math.sin(angle) * radius
+      ],
+      rotation: [
+        (Math.random() - 0.5) * 0.5,
+        -angle + Math.PI / 2, // Face inwards roughly
+        0
+      ],
+      scale: [
+        2 + Math.random() * 2,
+        3 + Math.random() * 2,
+        0.1
+      ]
+    });
+  }
+  return items;
+})();
+
 const GlassGallery = () => {
   const groupRef = useRef<THREE.Group>(null);
-  
-  const panels = useMemo(() => {
-    const items = [];
-    for (let i = 0; i < 25; i++) {
-      const radius = 8 + Math.random() * 10;
-      const angle = (i / 25) * Math.PI * 2;
-      const height = (Math.random() - 0.5) * 8;
-      
-      items.push({
-        position: [
-          Math.cos(angle) * radius,
-          height,
-          Math.sin(angle) * radius
-        ],
-        rotation: [
-          (Math.random() - 0.5) * 0.5,
-          -angle + Math.PI / 2, // Face inwards roughly
-          0
-        ],
-        scale: [
-          2 + Math.random() * 2,
-          3 + Math.random() * 2,
-          0.1
-        ]
-      });
-    }
-    return items;
-  }, []);
 
   useFrame(({ clock }) => {
     if (groupRef.current) {

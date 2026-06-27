@@ -57,7 +57,7 @@ export default function ContactPage() {
                 </span>
               </div>
               <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight">
-                <span className="text-white">Let's build</span><br />
+                <span className="text-white">Let&apos;s build</span><br />
                 <span className="text-krudex-blue">something</span><br />
                 <span className="text-krudex-blue">serious.</span>
               </h1>

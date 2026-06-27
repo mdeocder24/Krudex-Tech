@@ -49,7 +49,7 @@ const SelectedWork = () => {
           className="mb-16"
         >
           <TextReveal className="font-serif text-5xl md:text-6xl text-white font-bold mb-6 tracking-tight">
-            What we've shipped
+            What we&apos;ve shipped
           </TextReveal>
           <p className="text-krudex-muted text-lg">
             Two of our most technically demanding engagements.
@@ -95,8 +95,7 @@ const SelectedWork = () => {
           className="flex justify-center"
         >
           <MagneticButton 
-            as="a"
-            href="#all-work" 
+            href="/work" 
             className="group flex items-center gap-2 bg-krudex-blue text-krudex-black px-8 py-4 font-semibold text-sm hover:bg-krudex-blue-hover transition-colors"
           >
             See All Projects

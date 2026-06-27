@@ -26,7 +26,7 @@ const ServicesCTA = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-krudex-muted text-lg max-w-xl mb-12 leading-relaxed"
         >
-          We offer a free 30-minute technical consultation. Bring your requirements \u2014 we'll bring clarity.
+          We offer a free 30-minute technical consultation. Bring your requirements &mdash; we&apos;ll bring clarity.
         </motion.p>
 
         <motion.div
@@ -36,7 +36,6 @@ const ServicesCTA = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <MagneticButton 
-            as="a"
             href="#book" 
             className="group flex items-center gap-2 bg-krudex-blue text-krudex-black px-8 py-4 font-semibold text-sm hover:bg-krudex-blue-hover transition-colors"
           >

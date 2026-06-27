@@ -1,24 +1,20 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
 import { motion, useSpring } from "framer-motion";
 
 interface MagneticButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  as?: any;
   href?: string;
   className?: string;
 }
 
-export default function MagneticButton({ children, as: Component = "button", href, className, ...props }: MagneticButtonProps) {
+export default function MagneticButton({ children, href, className, ...props }: MagneticButtonProps) {
   const ref = useRef<HTMLDivElement>(null);
   
   // Create physics-based springs for the x and y offset
   const springX = useSpring(0, { stiffness: 150, damping: 15, mass: 0.1 });
   const springY = useSpring(0, { stiffness: 150, damping: 15, mass: 0.1 });
-  
-  // To handle hover state
-  const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!ref.current) return;
@@ -35,35 +31,40 @@ export default function MagneticButton({ children, as: Component = "button", hre
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
     springX.set(0);
     springY.set(0);
   };
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const MotionComponent = motion(Component);
 
   return (
     <motion.div
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      onMouseEnter={handleMouseEnter}
       style={{ x: springX, y: springY }}
       className="inline-block relative z-10"
     >
-      <MotionComponent
-        href={href}
-        className={className}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        {...props}
-      >
-        {children}
-      </MotionComponent>
+      {href ? (
+        <motion.a
+          href={href}
+          className={className}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          {...(props as any)}
+        >
+          {children}
+        </motion.a>
+      ) : (
+        <motion.button
+          className={className}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          {...(props as any)}
+        >
+          {children}
+        </motion.button>
+      )}
     </motion.div>
   );
 }
