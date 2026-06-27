@@ -82,7 +82,7 @@ const Hero = () => {
           className="font-serif text-[2.75rem] md:text-[3.5rem] lg:text-[3.75rem] xl:text-[4.25rem] font-normal leading-[1.08] tracking-tight text-white mb-7"
         >
           <span className="block overflow-hidden">
-            {['Turn', 'Intelligence', 'Into'].map((word, i) => (
+            {['Architecting', 'Web', 'And'].map((word, i) => (
               <motion.span
                 key={i}
                 variants={wordVariants}
@@ -93,7 +93,7 @@ const Hero = () => {
             ))}
           </span>
           <span className="block overflow-hidden">
-            {['Growth', 'Infrastructure.'].map((word, i) => (
+            {['Mobile', 'ecosystems.'].map((word, i) => (
               <motion.span
                 key={i}
                 variants={wordVariants}
