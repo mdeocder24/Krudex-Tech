@@ -43,7 +43,7 @@ const wordVariants: Variants = {
   },
 };
 
-const fadeUp = (delay: number) => ({
+const fadeInUp = (delay: number) => ({
   initial: { opacity: 0, y: 25 },
   animate: {
     opacity: 1,
@@ -107,7 +107,7 @@ const Hero = () => {
 
         {/* Subtitle */}
         <motion.p
-          {...fadeUp(0.9)}
+          {...fadeInUp(0.9)}
           className="text-krudex-muted text-[15px] leading-relaxed max-w-md mb-10"
         >
           We help startups and enterprises to build their websites, apps
@@ -115,7 +115,7 @@ const Hero = () => {
 
         {/* CTA Buttons */}
         <motion.div
-          {...fadeUp(1.1)}
+          {...fadeInUp(1.1)}
           className="flex items-center gap-6"
         >
           <MagneticButton
