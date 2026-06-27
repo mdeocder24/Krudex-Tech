@@ -48,7 +48,7 @@ const fadeUp = (delay: number) => ({
   animate: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, delay, ease: [0.25, 0.46, 0.45, 0.94] },
+    transition: { duration: 0.7, delay, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] },
   },
 });
 
@@ -122,14 +122,14 @@ const Hero = () => {
             href="/contact"
             className="group inline-flex items-center gap-2 bg-white text-krudex-black px-8 py-3.5 text-[14px] font-medium tracking-wide hover:bg-gray-200 transition-colors rounded"
           >
-            Start AI Journey
+            View Our Work
           </MagneticButton>
           <MagneticButton
             as="a"
-            href="/work"
+            href="/contact"
             className="group inline-flex items-center gap-2 text-krudex-muted hover:text-white text-[13px] font-medium tracking-wide transition-colors"
           >
-            View Case
+            Initialize Consultation
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </MagneticButton>
         </motion.div>

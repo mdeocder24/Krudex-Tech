@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
 const navLinks = [
+  { label: 'Home', href: '/' },
   { label: 'Services', href: '/services' },
   { label: 'Work', href: '/work' },
   { label: 'Process', href: '/process' },
@@ -35,11 +36,10 @@ const Navbar = () => {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className={`w-full flex items-center justify-between py-5 px-8 md:px-14 lg:px-20 fixed top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-krudex-black/90 backdrop-blur-md border-b border-krudex-border/30'
-          : 'bg-transparent'
-      }`}
+      className={`w-full flex items-center justify-between px-8 md:px-14 lg:px-20 fixed top-0 z-50 transition-all duration-300
+        bg-krudex-black/30 backdrop-blur-2xl backdrop-saturate-150 border-b border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_4px_30px_rgba(0,0,0,0.1)]
+        ${scrolled ? 'py-4' : 'py-6'}
+      `}
     >
       {/* Brand */}
       <Link href="/" className="flex items-center">
