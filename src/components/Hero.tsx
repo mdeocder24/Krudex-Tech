@@ -55,7 +55,7 @@ const fadeInUp = (delay: number) => ({
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen w-full flex flex-col lg:flex-row items-center overflow-hidden bg-krudex-black">
+    <section className="relative min-h-screen w-full flex flex-col lg:flex-row-reverse items-center overflow-hidden bg-krudex-black">
       {/* Dot grid pattern overlay — left side */}
       <div className="absolute inset-0 dot-grid opacity-100 pointer-events-none" />
 
