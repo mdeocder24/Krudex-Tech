@@ -1,13 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-krudex-blue: #3b82f6;
-  --color-krudex-blue-hover: #2563eb;
+  --color-krudex-white: #ffffff;
+  --color-krudex-white-dim: #cccccc;
   --color-krudex-black: #050505;
   --color-krudex-card: #0a0a0a;
-  --color-krudex-border: #171717;
+  --color-krudex-surface: #111111;
+  --color-krudex-border: #1a1a1a;
   --color-krudex-text: #e5e5e5;
-  --color-krudex-muted: #737373;
+  --color-krudex-muted: #666666;
+  --color-krudex-glow: #c49a3c;
   --font-sans: var(--font-sans-primary);
   --font-serif: var(--font-serif-primary);
 }
@@ -26,6 +28,12 @@ body {
 }
 
 ::selection {
-  background: var(--color-krudex-green);
-  color: var(--color-krudex-black);
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+/* Dot grid pattern */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
 }

@@ -1,55 +1,81 @@
+"use client";
+
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { ArrowUpRight } from 'lucide-react';
+
+const footerLinks = [
+  {
+    title: 'Company',
+    links: [
+      { label: 'About', href: '/about' },
+      { label: 'Careers', href: '#' },
+      { label: 'Contact', href: '/contact' },
+    ],
+  },
+  {
+    title: 'Services',
+    links: [
+      { label: 'Web Development', href: '/services' },
+      { label: 'Mobile Apps', href: '/services' },
+      { label: 'AI Integration', href: '/services' },
+    ],
+  },
+  {
+    title: 'Resources',
+    links: [
+      { label: 'Blog', href: '#' },
+      { label: 'Case Studies', href: '/work' },
+      { label: 'Documentation', href: '#' },
+    ],
+  },
+];
+
 const Footer = () => {
   return (
-    <footer className="w-full bg-[#0A0A0A]/80 backdrop-blur-md border-t border-krudex-border/50">
-      <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-16">
-          <div className="md:col-span-6 lg:col-span-5 flex flex-col">
-            <Link href="/" className="flex items-center gap-3 group mb-6">
-              <div className="relative w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-md overflow-hidden">
-                <Image src="/Krudex.jpeg" alt="Krudex Technologies" fill className="object-cover" />
-              </div>
-            </Link>
-            <p className="text-krudex-muted text-sm leading-relaxed max-w-sm">
-              An incorporated engineering firm delivering high-performance digital products from Hyderabad, Telangana.
+    <footer className="px-8 md:px-14 lg:px-20 pt-20 pb-8 bg-krudex-black border-t border-krudex-border/30 relative z-10">
+      <div className="max-w-6xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
+          {/* Brand */}
+          <div className="col-span-2 md:col-span-1">
+            <span className="text-white font-bold text-lg tracking-[0.15em] uppercase block mb-4">
+              KRUDEX
+            </span>
+            <p className="text-krudex-muted text-sm leading-relaxed max-w-xs">
+              Building digital products that perform. Engineering, AI, and design under one roof.
             </p>
           </div>
 
-          <div className="md:col-span-3 lg:col-span-3 lg:col-start-7 flex flex-col">
-            <h4 className="text-[10px] text-krudex-blue font-mono uppercase tracking-[0.2em] mb-6">Navigation</h4>
-            <div className="flex flex-col gap-4">
-              {['Services', 'Our Work', 'About', 'Contact'].map((item) => (
-                <Link 
-                  key={item} 
-                  href={item === 'Services' ? '/services' : `/#${item.toLowerCase().replace(' ', '-')}`}
-                  className="text-sm text-krudex-muted hover:text-white transition-colors w-fit"
-                >
-                  {item}
-                </Link>
-              ))}
+          {/* Link Columns */}
+          {footerLinks.map((col) => (
+            <div key={col.title}>
+              <h4 className="text-white/60 text-xs uppercase tracking-[0.15em] mb-5">{col.title}</h4>
+              <ul className="space-y-3">
+                {col.links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-krudex-muted text-sm hover:text-white transition-colors inline-flex items-center gap-1 group"
+                    >
+                      {link.label}
+                      <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-
-          <div className="md:col-span-3 lg:col-span-3 flex flex-col">
-            <h4 className="text-[10px] text-krudex-blue font-mono uppercase tracking-[0.2em] mb-6">Contact</h4>
-            <div className="flex flex-col gap-4 text-sm text-krudex-muted">
-              <a href="mailto:krudextechnologies@gmail.com" className="hover:text-white transition-colors w-fit">krudextechnologies@gmail.com</a>
-              <p>+91 89782 61053, +91 94902 48160</p>
-              <p>Hyderabad, Telangana</p>
-              <p>Response within 24 hrs</p>
-            </div>
-          </div>
+          ))}
         </div>
 
-        <div className="border-t border-krudex-border/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-krudex-muted/60">
-            &copy; 2026 Krudex Technologies
+        {/* Bottom bar */}
+        <div className="border-t border-krudex-border/20 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-krudex-muted/60 text-xs">
+            © {new Date().getFullYear()} Krudex Technologies. All rights reserved.
           </p>
-          <p className="text-[10px] text-krudex-blue font-mono uppercase tracking-[0.15em]">
-            INCORPORATED &middot; TELANGANA, INDIA
-          </p>
+          <div className="flex items-center gap-6">
+            <a href="#" className="text-krudex-muted/60 text-xs hover:text-white transition-colors">Privacy</a>
+            <a href="#" className="text-krudex-muted/60 text-xs hover:text-white transition-colors">Terms</a>
+          </div>
         </div>
       </div>
     </footer>

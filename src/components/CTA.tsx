@@ -6,51 +6,61 @@ import { ArrowRight } from 'lucide-react';
 
 const CTA = () => {
   return (
-    <section id="contact" className="px-8 md:px-16 lg:px-24 py-32 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border/50 relative z-10">
-      <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
-        <motion.div 
+    <section className="px-8 md:px-14 lg:px-20 py-32 bg-krudex-black relative z-10">
+      <div className="max-w-4xl mx-auto text-center">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-10"
+          className="inline-flex items-center gap-2.5 bg-krudex-surface/50 border border-krudex-border px-4 py-2 rounded-full mb-8"
         >
-          <div className="w-1.5 h-1.5 rounded-full bg-krudex-blue"></div>
-          <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-blue font-semibold">
-            READY TO START?
+          <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+          <span className="text-[11px] text-krudex-muted tracking-wide">
+            READY TO START
           </span>
         </motion.div>
 
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-serif text-5xl md:text-7xl font-bold text-white leading-[1.1] tracking-tight mb-8"
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="font-serif text-4xl md:text-5xl lg:text-6xl text-white font-normal mb-6 leading-[1.1] tracking-tight"
         >
-          Let's build something <br className="hidden md:block" />
-          <span className="text-krudex-blue">worth talking about.</span>
+          Let&apos;s build something<br />extraordinary together.
         </motion.h2>
 
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-krudex-muted text-lg max-w-xl mb-12 leading-relaxed"
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-krudex-muted text-base leading-relaxed max-w-xl mx-auto mb-10"
         >
-          Tell us what you're architecting. We'll respond within 24 hours with a clear path forward.
+          From concept to production — we bring the engineering, AI, and design expertise
+          to transform your vision into reality.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="flex flex-wrap items-center justify-center gap-5"
         >
-          <a href="#consultation" className="group flex items-center gap-2 bg-krudex-blue text-krudex-black px-10 py-5 font-semibold text-sm hover:bg-krudex-blue-hover transition-colors">
-            Initialize Consultation
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          <a
+            href="/contact"
+            className="inline-flex items-center gap-2 bg-white text-krudex-black px-8 py-4 font-medium text-sm hover:bg-krudex-text transition-colors duration-300"
+          >
+            Book a Call
+            <ArrowRight className="w-4 h-4" />
+          </a>
+          <a
+            href="/services"
+            className="inline-flex items-center gap-2 border border-white/30 text-white px-8 py-4 text-sm font-medium hover:bg-white hover:text-krudex-black transition-all duration-300"
+          >
+            Explore Services
           </a>
         </motion.div>
       </div>

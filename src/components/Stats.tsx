@@ -1,46 +1,66 @@
 "use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useEffect, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
 
-const stats = [
-  {
-    value: "50+",
-    label: "Projects Delivered",
-    description: "Across web, mobile, and AI disciplines"
-  },
-  {
-    value: "99",
-    label: "Lighthouse Score",
-    description: "Performance standard on every delivery"
-  },
-  {
-    value: "3x",
-    label: "Average Performance Gain",
-    description: "Over client's existing systems"
-  }
-];
+interface StatItemProps {
+  value: number;
+  suffix: string;
+  label: string;
+  delay: number;
+}
+
+const StatItem = ({ value, suffix, label, delay }: StatItemProps) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+    const timeout = setTimeout(() => {
+      let start = 0;
+      const duration = 1800;
+      const startTime = performance.now();
+
+      const step = (now: number) => {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        start = Math.floor(eased * value);
+        setCount(start);
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }, delay * 1000);
+
+    return () => clearTimeout(timeout);
+  }, [isInView, value, delay]);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay }}
+      className="text-center"
+    >
+      <div className="text-white font-serif text-5xl md:text-6xl font-normal mb-2 tracking-tight">
+        {count}{suffix}
+      </div>
+      <div className="text-krudex-muted text-xs uppercase tracking-[0.2em]">{label}</div>
+    </motion.div>
+  );
+};
 
 const Stats = () => {
   return (
-    <section className="px-8 md:px-16 lg:px-24 py-20 border-t border-b border-krudex-border/50 bg-krudex-black/40 backdrop-blur-xl relative z-10">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-krudex-border/50">
-        {stats.map((stat, index) => (
-          <motion.div 
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className={`flex flex-col ${index !== 0 ? 'md:pl-12' : ''} pt-8 md:pt-0`}
-          >
-            <div className="font-serif text-5xl md:text-6xl text-krudex-blue font-medium mb-4">
-              {stat.value}
-            </div>
-            <h3 className="text-white font-bold text-lg mb-2">{stat.label}</h3>
-            <p className="text-krudex-muted text-sm">{stat.description}</p>
-          </motion.div>
-        ))}
+    <section className="px-8 md:px-14 lg:px-20 py-24 bg-krudex-black border-t border-b border-krudex-border/20 relative z-10">
+      <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12">
+        <StatItem value={50} suffix="+" label="Clients Served" delay={0} />
+        <StatItem value={120} suffix="+" label="Projects Delivered" delay={0.1} />
+        <StatItem value={99} suffix="%" label="Client Retention" delay={0.2} />
+        <StatItem value={15} suffix="+" label="Team Members" delay={0.3} />
       </div>
     </section>
   );

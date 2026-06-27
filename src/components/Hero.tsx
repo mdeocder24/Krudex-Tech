@@ -1,122 +1,153 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, Variants } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+
+// Client-only mount to avoid SSR issues with Three.js Canvas
+const Hero3DWrapper = () => {
+  const [Hero3D, setHero3D] = useState<React.ComponentType | null>(null);
+
+  useEffect(() => {
+    import('./Hero3DObject').then((mod) => {
+      setHero3D(() => mod.default);
+    });
+  }, []);
+
+  if (!Hero3D) {
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <div className="w-10 h-10 border border-krudex-border/40 border-t-white/40 rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  return <Hero3D />;
+};
 
 const titleVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2
-    }
-  }
+    transition: { staggerChildren: 0.12, delayChildren: 0.4 },
+  },
 };
 
 const wordVariants: Variants = {
-  hidden: { opacity: 0, y: 50, rotateX: -30 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    rotateX: 0,
-    transition: { type: "spring", damping: 12, stiffness: 100 }
-  }
+  hidden: { opacity: 0, y: 60 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: 'spring', damping: 20, stiffness: 90 },
+  },
 };
+
+const fadeUp = (delay: number) => ({
+  initial: { opacity: 0, y: 25 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, delay, ease: [0.25, 0.46, 0.45, 0.94] },
+  },
+});
 
 const Hero = () => {
   return (
-    <section className="h-screen w-full flex flex-col justify-center items-center px-4 md:px-16 lg:px-24 relative overflow-hidden bg-transparent">
-      <div className="max-w-5xl z-10 flex flex-col items-center text-center mt-16 md:mt-20">
-        {/* Top Label */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 border border-krudex-border/50 px-4 py-1.5 mb-6 md:mb-8"
+    <section className="relative min-h-screen w-full flex flex-col lg:flex-row items-center overflow-hidden bg-krudex-black">
+      {/* Dot grid pattern overlay — left side */}
+      <div className="absolute inset-0 dot-grid opacity-100 pointer-events-none" />
+
+      {/* ── Left: Text Content ───────────────── */}
+      <div className="w-full lg:w-[45%] z-10 flex flex-col justify-center items-start px-8 md:px-14 lg:px-20 pt-32 lg:pt-0 pb-8 lg:pb-0">
+        {/* Badge */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="inline-flex items-center gap-2.5 bg-krudex-surface/80 border border-krudex-border px-4 py-2 rounded-full mb-8"
         >
-          <span className="text-[9px] md:text-[10px] uppercase tracking-[0.25em] text-krudex-blue font-semibold">
-            HYDERABAD &middot; TELANGANA &middot; INDIA
+          <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+          <span className="text-[11px] text-krudex-muted tracking-wide">
+            GrowthAgent for SaaS Teams
           </span>
         </motion.div>
 
-        {/* Main Headline */}
-        <motion.h1 
+        {/* Headline */}
+        <motion.h1
           variants={titleVariants}
           initial="hidden"
           animate="visible"
-          className="font-serif text-5xl md:text-7xl lg:text-[6.5rem] font-bold leading-[1.05] tracking-tight text-white mb-8 md:mb-12 perspective-1000"
+          className="font-serif text-[2.75rem] md:text-[3.5rem] lg:text-[3.75rem] xl:text-[4.25rem] font-normal leading-[1.08] tracking-tight text-white mb-7"
         >
-          <span className="block overflow-hidden mb-2">
-            {["Architecting", "Scalable"].map((word, i) => (
-              <motion.span key={i} variants={wordVariants} className="inline-block mr-[0.25em] origin-bottom">{word}</motion.span>
+          <span className="block overflow-hidden">
+            {['Turn', 'Intelligence', 'Into'].map((word, i) => (
+              <motion.span
+                key={i}
+                variants={wordVariants}
+                className="inline-block mr-[0.22em]"
+              >
+                {word}
+              </motion.span>
             ))}
           </span>
-          <span className="block overflow-hidden text-krudex-blue mb-2">
-            {["Web", "&"].map((word, i) => (
-              <motion.span key={i} variants={wordVariants} className="inline-block mr-[0.25em] origin-bottom">{word}</motion.span>
+          <span className="block overflow-hidden">
+            {['Growth', 'Infrastructure.'].map((word, i) => (
+              <motion.span
+                key={i}
+                variants={wordVariants}
+                className="inline-block mr-[0.22em]"
+              >
+                {word}
+              </motion.span>
             ))}
-          </span>
-          <span className="block overflow-hidden text-krudex-blue mb-2">
-            <motion.span variants={wordVariants} className="inline-block origin-bottom">Mobile</motion.span>
-          </span>
-          <span className="block overflow-hidden text-krudex-blue">
-            <motion.span variants={wordVariants} className="inline-block origin-bottom">Ecosystems.</motion.span>
           </span>
         </motion.h1>
 
-        {/* CTA Buttons */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="flex flex-wrap items-center justify-center gap-4 md:gap-6 mb-8 md:mb-10"
+        {/* Subtitle */}
+        <motion.p
+          {...fadeUp(0.9)}
+          className="text-krudex-muted text-[15px] leading-relaxed max-w-md mb-10"
         >
-          <a href="/work" className="group flex items-center gap-3 border border-krudex-border text-white px-8 md:px-10 py-4 font-semibold text-xs tracking-[0.1em] hover:border-krudex-blue transition-colors">
-            VIEW OUR WORK
-            <ArrowRight className="w-4 h-4 text-krudex-muted group-hover:text-krudex-blue group-hover:translate-x-1 transition-all" />
+          We help startups and enterprises integrate AI into marketing,
+          operations, and product, without complexity, without chaos.
+        </motion.p>
+
+        {/* CTA Buttons */}
+        <motion.div
+          {...fadeUp(1.1)}
+          className="flex items-center gap-6"
+        >
+          <a
+            href="/contact"
+            className="group inline-flex items-center gap-2 border border-white/80 text-white px-7 py-3.5 text-[13px] font-medium tracking-wide hover:bg-white hover:text-krudex-black transition-all duration-300 rounded-sm"
+          >
+            Start AI Journey
           </a>
-          <a href="/contact" className="group flex items-center gap-2 bg-krudex-blue text-krudex-black px-8 md:px-10 py-4 font-bold text-xs tracking-[0.1em] hover:bg-krudex-blue-hover transition-colors shadow-[0_0_20px_rgba(204,255,0,0.15)]">
-            INITIALIZE CONSULTATION
+          <a
+            href="/work"
+            className="group inline-flex items-center gap-2 text-krudex-muted hover:text-white text-[13px] font-medium tracking-wide transition-colors"
+          >
+            View Case
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </a>
         </motion.div>
-
-        {/* Subtitle Paragraph */}
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="text-krudex-muted/80 text-xs md:text-sm max-w-2xl leading-relaxed px-4"
-        >
-          Krudex Technologies is an incorporated engineering firm operating at the
-          intersection of robust software architecture, intelligent AI systems, and
-          precision digital design.
-        </motion.p>
       </div>
-      
-      {/* Scroll Indicator */}
-      <motion.div 
+
+      {/* ── Right: 3D Visualization ──────────── */}
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        transition={{ duration: 1.5, delay: 0.6 }}
+        className="w-full lg:w-[55%] h-[55vh] lg:h-screen relative"
       >
-        <div className="w-px h-8 md:h-12 bg-gradient-to-b from-krudex-border/0 via-krudex-border to-krudex-border/0 relative overflow-hidden">
-          <motion.div 
-            animate={{ top: ["-100%", "100%"] }}
-            transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
-            className="absolute left-0 w-full h-1/2 bg-krudex-blue"
-          />
-        </div>
-        <span className="text-[9px] uppercase tracking-[0.3em] text-krudex-muted font-mono">SCROLL</span>
-      </motion.div>
+        <Hero3DWrapper />
 
-      {/* 3D Interactive Background */}
-      {/* Abstract Background Element */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10 mix-blend-screen">
-         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-krudex-blue/5 blur-[150px] rounded-full"></div>
-      </div>
+        {/* Warm ambient glow behind 3D */}
+        <div className="absolute inset-0 pointer-events-none -z-10">
+          <div className="absolute top-[35%] left-[40%] -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#c49a3c]/8 blur-[150px] rounded-full" />
+          <div className="absolute top-[55%] left-[55%] w-[350px] h-[350px] bg-[#a07828]/6 blur-[120px] rounded-full" />
+        </div>
+      </motion.div>
     </section>
   );
 };
