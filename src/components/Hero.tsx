@@ -5,12 +5,12 @@ import { motion, Variants } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import MagneticButton from './MagneticButton';
 
-// Client-only mount to avoid SSR issues with Three.js Canvas
+// Client-only mount to avoid SSR issues with WebGL canvas
 const Hero3DWrapper = () => {
   const [Hero3D, setHero3D] = useState<React.ComponentType | null>(null);
 
   useEffect(() => {
-    import('./Hero3DObject').then((mod) => {
+    import('./GlobeObject').then((mod) => {
       setHero3D(() => mod.default);
     });
   }, []);
@@ -143,10 +143,9 @@ const Hero = () => {
       >
         <Hero3DWrapper />
 
-        {/* Warm ambient glow behind 3D */}
+        {/* Ambient glow layer (globe has its own inner glow) */}
         <div className="absolute inset-0 pointer-events-none -z-10">
-          <div className="absolute top-[35%] left-[40%] -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#c49a3c]/8 blur-[150px] rounded-full" />
-          <div className="absolute top-[55%] left-[55%] w-[350px] h-[350px] bg-[#a07828]/6 blur-[120px] rounded-full" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#c49a3c]/5 blur-[160px] rounded-full" />
         </div>
       </motion.div>
     </section>
