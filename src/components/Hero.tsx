@@ -6,16 +6,16 @@ import { ArrowRight } from 'lucide-react';
 import MagneticButton from './MagneticButton';
 
 // Client-only mount to avoid SSR issues with WebGL canvas
-const Hero3DWrapper = () => {
-  const [Hero3D, setHero3D] = useState<React.ComponentType | null>(null);
+const PillarsWrapper = () => {
+  const [Component, setComponent] = useState<React.ComponentType | null>(null);
 
   useEffect(() => {
-    import('./GlobeObject').then((mod) => {
-      setHero3D(() => mod.default);
+    import('./Hero3DObject').then((mod) => {
+      setComponent(() => mod.default);
     });
   }, []);
 
-  if (!Hero3D) {
+  if (!Component) {
     return (
       <div className="w-full h-full flex items-center justify-center">
         <div className="w-10 h-10 border border-krudex-border/40 border-t-white/40 rounded-full animate-spin" />
@@ -23,7 +23,21 @@ const Hero3DWrapper = () => {
     );
   }
 
-  return <Hero3D />;
+  return <Component />;
+};
+
+const GlobeWrapper = () => {
+  const [Component, setComponent] = useState<React.ComponentType | null>(null);
+
+  useEffect(() => {
+    import('./GlobeObject').then((mod) => {
+      setComponent(() => mod.default);
+    });
+  }, []);
+
+  if (!Component) return null;
+
+  return <Component />;
 };
 
 const titleVariants: Variants = {
@@ -55,9 +69,14 @@ const fadeInUp = (delay: number) => ({
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen w-full flex flex-col lg:flex-row-reverse items-center overflow-hidden bg-krudex-black">
-      {/* Dot grid pattern overlay — left side */}
-      <div className="absolute inset-0 dot-grid opacity-100 pointer-events-none" />
+    <section className="relative min-h-screen w-full flex flex-col lg:flex-row items-center overflow-hidden bg-krudex-black">
+      {/* Translucent Globe overlay — bottom left */}
+      <div className="absolute -bottom-[10%] -left-[10%] w-[120vw] h-[120vw] lg:w-[60vw] lg:h-[60vw] opacity-40 pointer-events-none z-0">
+        <GlobeWrapper />
+      </div>
+
+      {/* Dot grid pattern overlay */}
+      <div className="absolute inset-0 dot-grid opacity-100 pointer-events-none z-0" />
 
       {/* ── Left: Text Content ───────────────── */}
       <div className="w-full lg:w-[45%] z-10 flex flex-col justify-center items-start px-8 md:px-14 lg:px-20 pt-32 lg:pt-0 pb-8 lg:pb-0">
@@ -139,11 +158,11 @@ const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5, delay: 0.6 }}
-        className="w-full lg:w-[55%] h-[55vh] lg:h-screen relative"
+        className="w-full lg:w-[55%] h-[55vh] lg:h-screen relative z-10"
       >
-        <Hero3DWrapper />
+        <PillarsWrapper />
 
-        {/* Ambient glow layer (globe has its own inner glow) */}
+        {/* Ambient glow layer (pillars have their own inner glow) */}
         <div className="absolute inset-0 pointer-events-none -z-10">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#c49a3c]/5 blur-[160px] rounded-full" />
         </div>
