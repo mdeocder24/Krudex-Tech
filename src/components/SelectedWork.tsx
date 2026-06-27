@@ -3,6 +3,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import TiltCard from './TiltCard';
+import MagneticButton from './MagneticButton';
+import TextReveal from './TextReveal';
 
 const MotionA = motion.create ? motion.create('a') : motion('a');
 
@@ -45,9 +48,9 @@ const SelectedWork = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mb-16"
         >
-          <h2 className="font-serif text-5xl md:text-6xl text-white font-bold mb-6 tracking-tight">
+          <TextReveal className="font-serif text-5xl md:text-6xl text-white font-bold mb-6 tracking-tight">
             What we've shipped
-          </h2>
+          </TextReveal>
           <p className="text-krudex-muted text-lg">
             Two of our most technically demanding engagements.
           </p>
@@ -59,27 +62,27 @@ const SelectedWork = () => {
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ y: -5, borderColor: 'rgba(255,255,255,0.2)' }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
-              className="group bg-krudex-card border border-krudex-border p-8 md:p-12 hover:border-krudex-blue/50 transition-colors"
             >
-              <div className="text-[10px] text-krudex-blue font-mono uppercase tracking-[0.15em] mb-6">
-                {project.category}
-              </div>
-              <h3 className="text-xl text-white font-bold mb-4 group-hover:text-krudex-blue transition-colors">
-                {project.title}
-              </h3>
-              <p className="text-krudex-muted text-sm leading-relaxed mb-8">
-                {project.desc}
-              </p>
-              <div className="flex flex-wrap gap-3">
-                {project.tags.map((tag, i) => (
-                  <span key={i} className="text-xs font-mono text-krudex-blue border border-krudex-blue/30 bg-krudex-blue/5 px-3 py-1">
-                    {tag}
-                  </span>
-                ))}
-              </div>
+              <TiltCard className="h-full group bg-krudex-card border border-krudex-border p-8 md:p-12 hover:border-krudex-blue/50 transition-colors">
+                <div className="text-[10px] text-krudex-blue font-mono uppercase tracking-[0.15em] mb-6">
+                  {project.category}
+                </div>
+                <h3 className="text-xl text-white font-bold mb-4 group-hover:text-krudex-blue transition-colors">
+                  {project.title}
+                </h3>
+                <p className="text-krudex-muted text-sm leading-relaxed mb-8">
+                  {project.desc}
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  {project.tags.map((tag, i) => (
+                    <span key={i} className="text-xs font-mono text-krudex-blue border border-krudex-blue/30 bg-krudex-blue/5 px-3 py-1">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </TiltCard>
             </motion.div>
           ))}
         </div>
@@ -91,15 +94,14 @@ const SelectedWork = () => {
           transition={{ duration: 0.5 }}
           className="flex justify-center"
         >
-          <MotionA 
+          <MagneticButton 
+            as="a"
             href="#all-work" 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             className="group flex items-center gap-2 bg-krudex-blue text-krudex-black px-8 py-4 font-semibold text-sm hover:bg-krudex-blue-hover transition-colors"
           >
             See All Projects
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </MotionA>
+          </MagneticButton>
         </motion.div>
       </div>
     </section>

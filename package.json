@@ -12,6 +12,7 @@
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
     "@react-three/postprocessing": "^3.0.4",
+    "@studio-freight/lenis": "^1.0.42",
     "@types/three": "^0.185.0",
     "framer-motion": "^12.42.0",
     "lucide-react": "^1.21.0",

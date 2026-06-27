@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-sans-primary",
@@ -24,11 +25,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${plusJakartaSans.variable} ${dmSerifDisplay.variable} dark scroll-smooth`}>
+    <html lang="en" className={`${plusJakartaSans.variable} ${dmSerifDisplay.variable} dark`}>
       <body className="min-h-screen bg-krudex-black text-krudex-text antialiased">
-        <main className="relative">
-          {children}
-        </main>
+        <SmoothScroll>
+          <main className="relative">
+            {children}
+          </main>
+        </SmoothScroll>
       </body>
     </html>
   );

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, Variants } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import MagneticButton from './MagneticButton';
 
 // Client-only mount to avoid SSR issues with Three.js Canvas
 const Hero3DWrapper = () => {
@@ -68,7 +69,7 @@ const Hero = () => {
         >
           <span className="w-2 h-2 rounded-full bg-[#e65c00] animate-pulse" />
           <span className="text-[11px] text-krudex-muted tracking-wide">
-            GrowthAgent for SaaS Companies
+            Grow With Us!
           </span>
         </motion.div>
 
@@ -116,19 +117,21 @@ const Hero = () => {
           {...fadeUp(1.1)}
           className="flex items-center gap-6"
         >
-          <a
+          <MagneticButton
+            as="a"
             href="/contact"
             className="group inline-flex items-center gap-2 bg-white text-krudex-black px-8 py-3.5 text-[14px] font-medium tracking-wide hover:bg-gray-200 transition-colors rounded"
           >
             Start AI Journey
-          </a>
-          <a
+          </MagneticButton>
+          <MagneticButton
+            as="a"
             href="/work"
             className="group inline-flex items-center gap-2 text-krudex-muted hover:text-white text-[13px] font-medium tracking-wide transition-colors"
           >
             View Case
-            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transfor  m" />
-          </a>
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+          </MagneticButton>
         </motion.div>
       </div>
 

@@ -3,8 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-
-const MotionA = motion.create ? motion.create('a') : motion('a');
+import MagneticButton from './MagneticButton';
 
 const ServicesCTA = () => {
   return (
@@ -36,15 +35,14 @@ const ServicesCTA = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <MotionA 
+          <MagneticButton 
+            as="a"
             href="#book" 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             className="group flex items-center gap-2 bg-krudex-blue text-krudex-black px-8 py-4 font-semibold text-sm hover:bg-krudex-blue-hover transition-colors"
           >
             Book a Consultation
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </MotionA>
+          </MagneticButton>
         </motion.div>
       </div>
     </section>
