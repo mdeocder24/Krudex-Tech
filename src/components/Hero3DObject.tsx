@@ -47,7 +47,7 @@ interface PlatformProps {
 
 const Platform = ({ position, size, label, sideLabel }: PlatformProps) => {
   const [w, d] = size;
-  const depth = 30; // Depth of the pillar body for fading into fog
+  const depth = 18; // Depth of the pillar body for fading into fog
 
   const groupRef = useRef<THREE.Group>(null);
 
@@ -290,7 +290,7 @@ const DataArchitectureScene = () => {
 
       {/* ── Platforms Stepping Up ── */}
       {/* 1. Lowest, largest, front-left */}
-      <Platform position={[-2.5, -2.5, 2.5]} size={[4.2, 4.2]} label="WEB" sideLabel="REACT // NEXT.JS" />
+      <Platform position={[-3.2, -2.5, 3.2]} size={[4.2, 4.2]} label="WEB" sideLabel="REACT // NEXT.JS" />
 
       {/* 2. Middle, medium, center */}
       <Platform position={[0, -0.5, 0]} size={[3.2, 3.2]} label="APP" sideLabel="IOS // ANDROID" />
