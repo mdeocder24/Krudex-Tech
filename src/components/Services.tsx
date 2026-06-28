@@ -11,22 +11,22 @@ const services = [
   {
     num: "01",
     title: "Full-Stack Web Platforms",
-    desc: "High-throughput portals and SPAs engineered from architecture to CI/CD."
+    desc: "High-performance marketing sites, SaaS portals, and web apps built to scale with your user base."
   },
   {
     num: "02",
     title: "Mobile Applications",
-    desc: "Cross-platform iOS & Android apps with native performance."
+    desc: "Cross-platform iOS & Android apps designed for speed, native feel, and maximum retention."
   },
   {
     num: "03",
-    title: "AI & ML Integration",
-    desc: "Real-time inference pipelines and LLM-powered features in production."
+    title: "AI Integrations",
+    desc: "Custom LLMs, AI agents, and intelligent workflows that give your startup an unfair advantage."
   },
   {
     num: "04",
-    title: "UI/UX & Brand Design",
-    desc: "Design systems, visual identities, and investor-grade materials."
+    title: "UI/UX & MVP Design",
+    desc: "Fast-moving design sprints to get your Minimum Viable Product (MVP) looking premium from day one."
   }
 ];
 
@@ -56,10 +56,10 @@ const Services = () => {
             className="lg:col-span-5"
           >
             <h2 className="font-serif text-5xl md:text-6xl text-white font-normal mb-6 leading-[1.1] tracking-tight">
-              Four disciplines. <br /> One partner.
+              Your Startup's <br /> Technical Partner.
             </h2>
             <p className="text-krudex-muted text-base leading-relaxed">
-              We handle the full stack of a digital product — engineering, AI, and design — under one roof.
+              We handle the end-to-end technical heavy lifting—from MVP to scalable product—so you can focus on your users.
             </p>
           </motion.div>
 

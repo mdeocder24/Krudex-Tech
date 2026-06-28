@@ -89,7 +89,7 @@ const Hero = () => {
         >
           <span className="w-2 h-2 rounded-full bg-[#e65c00] animate-pulse" />
           <span className="text-[11px] text-krudex-muted tracking-wide">
-            Grow With Us!
+            Empowering Startups
           </span>
         </motion.div>
 
@@ -101,7 +101,7 @@ const Hero = () => {
           className="font-serif text-[2.75rem] md:text-[3.5rem] lg:text-[3.75rem] xl:text-[4.25rem] font-normal leading-[1.08] tracking-tight text-white mb-7"
         >
           <span className="block overflow-hidden">
-            {['Architecting', 'Web', 'And'].map((word, i) => (
+            {['Building', 'Web,', 'App,'].map((word, i) => (
               <motion.span
                 key={i}
                 variants={wordVariants}
@@ -112,7 +112,7 @@ const Hero = () => {
             ))}
           </span>
           <span className="block overflow-hidden">
-            {['Mobile', 'ecosystems.'].map((word, i) => (
+            {['&', 'AI', 'Products.'].map((word, i) => (
               <motion.span
                 key={i}
                 variants={wordVariants}
@@ -129,7 +129,7 @@ const Hero = () => {
           {...fadeInUp(0.9)}
           className="text-krudex-muted text-[15px] leading-relaxed max-w-md mb-10"
         >
-          We help startups and enterprises to build their websites, apps
+          Your dedicated technical partner. We engineer high-performance websites, scalable mobile apps, and custom AI integrations so you can focus on your vision.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -147,7 +147,7 @@ const Hero = () => {
             href="/contact"
             className="group inline-flex items-center gap-2 text-krudex-muted hover:text-white text-[13px] font-medium tracking-wide transition-colors"
           >
-            Initialize Consultation
+            Start Your Project
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </MagneticButton>
         </motion.div>
