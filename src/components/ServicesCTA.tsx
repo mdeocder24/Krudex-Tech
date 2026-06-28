@@ -36,10 +36,10 @@ const ServicesCTA = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <MagneticButton 
-            href="#book" 
-            className="group flex items-center gap-2 bg-krudex-blue text-krudex-black px-8 py-4 font-semibold text-sm hover:bg-krudex-blue-hover transition-colors"
+            href="/contact" 
+            className="group flex items-center gap-2 bg-white text-krudex-black px-8 py-4 font-semibold text-sm hover:bg-gray-200 transition-colors"
           >
-            Book a Consultation
+            Contact Us
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </MagneticButton>
         </motion.div>

@@ -54,7 +54,7 @@ const CTA = () => {
             href="/contact"
             className="inline-flex items-center gap-2 bg-white text-krudex-black px-8 py-4 font-medium text-sm hover:bg-krudex-text transition-colors duration-300"
           >
-            Book a Call
+            Contact Us
             <ArrowRight className="w-4 h-4" />
           </MagneticButton>
           <MagneticButton
