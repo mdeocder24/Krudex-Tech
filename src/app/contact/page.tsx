@@ -159,8 +159,8 @@ export default function ContactPage() {
                     <div className="flex flex-col gap-3">
                       <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">BUDGET RANGE</label>
                       <div className="relative">
-                        <select className="w-full bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm appearance-none focus:outline-none focus:border-krudex-blue transition-colors">
-                          <option value="" disabled selected hidden>Select</option>
+                        <select defaultValue="" className="w-full bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm appearance-none focus:outline-none focus:border-krudex-blue transition-colors">
+                          <option value="" disabled hidden>Select</option>
                           <option value="under-10l" className="bg-krudex-card text-white">Under ₹10 Lakhs</option>
                           <option value="10l-25l" className="bg-krudex-card text-white">₹10 Lakhs - ₹25 Lakhs</option>
                           <option value="25l-50l" className="bg-krudex-card text-white">₹25 Lakhs - ₹50 Lakhs</option>
@@ -172,8 +172,8 @@ export default function ContactPage() {
                     <div className="flex flex-col gap-3">
                       <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">TIMELINE</label>
                       <div className="relative">
-                        <select className="w-full bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm appearance-none focus:outline-none focus:border-krudex-blue transition-colors">
-                          <option value="" disabled selected hidden>Select</option>
+                        <select defaultValue="" className="w-full bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm appearance-none focus:outline-none focus:border-krudex-blue transition-colors">
+                          <option value="" disabled hidden>Select</option>
                           <option value="asap" className="bg-krudex-card text-white">ASAP</option>
                           <option value="1-3-months" className="bg-krudex-card text-white">1 - 3 Months</option>
                           <option value="3-6-months" className="bg-krudex-card text-white">3 - 6 Months</option>
