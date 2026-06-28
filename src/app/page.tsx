@@ -1,6 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import Partners from '@/components/Partners';
+import ScrollTools from '@/components/scrolltools';
 import Stats from '@/components/Stats';
 import Services from '@/components/Services';
 import CTA from '@/components/CTA';
@@ -11,7 +11,7 @@ export default function Home() {
     <main className="min-h-screen bg-krudex-black flex flex-col">
       <Navbar />
       <Hero />
-      <Partners />
+      <ScrollTools />
       <Stats />
       <Services />
       <CTA />
