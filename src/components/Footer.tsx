@@ -48,7 +48,7 @@ const Footer = () => {
                 alt="Krudex" 
                 width={240} 
                 height={80} 
-                className="h-16 w-auto object-contain scale-[1.5] md:scale-[1.8] origin-left"
+                className="h-16 w-auto object-contain scale-[2] md:scale-[2.5] origin-left mix-blend-screen"
                 priority
               />
             </Link>

@@ -43,67 +43,76 @@ const Navbar = () => {
         ${scrolled ? 'py-4' : 'py-6'}
       `}
     >
-      {/* Brand */}
-      <Link href="/" className="flex items-center">
-        <Image 
-          src="/krudex-nav.png" 
-          alt="Krudex" 
-          width={240} 
-          height={80} 
-          className="h-16 md:h-20 w-auto object-contain scale-[1.5] md:scale-[1.8] origin-left"
-          priority
-        />
-      </Link>
-
-      {/* Desktop Nav Links */}
-      <div className="hidden md:flex items-center gap-10">
-        {navLinks.map((link) => {
-          const isActive = pathname === link.href;
-          return (
-            <MotionLink
-              key={link.label}
-              href={link.href}
-              whileHover={{ scale: 1.05, opacity: 1 }}
-              whileTap={{ scale: 0.95 }}
-              className={`text-[13px] transition-colors duration-200 relative ${
-                isActive ? 'text-white font-medium' : 'text-krudex-muted hover:text-white'
-              }`}
-            >
-              {link.label}
-              {isActive && (
-                <motion.div
-                  layoutId="active-nav-indicator"
-                  className="absolute -bottom-2 left-0 right-0 h-[2px] bg-white rounded-full"
-                />
-              )}
-            </MotionLink>
-          );
-        })}
+      {/* Left side: Nav Links (Desktop) & Menu Toggle (Mobile) */}
+      <div className="flex-1 flex items-center justify-start">
+        {/* Desktop Nav Links */}
+        <div className="hidden md:flex items-center gap-10">
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <MotionLink
+                key={link.label}
+                href={link.href}
+                whileHover={{ scale: 1.05, opacity: 1 }}
+                whileTap={{ scale: 0.95 }}
+                className={`text-[13px] transition-colors duration-200 relative ${
+                  isActive ? 'text-white font-medium' : 'text-krudex-muted hover:text-white'
+                }`}
+              >
+                {link.label}
+                {isActive && (
+                  <motion.div
+                    layoutId="active-nav-indicator"
+                    className="absolute -bottom-2 left-0 right-0 h-[2px] bg-white rounded-full"
+                  />
+                )}
+              </MotionLink>
+            );
+          })}
+        </div>
+        
+        {/* Mobile Menu Toggle */}
+        <div className="md:hidden flex items-center">
+          <motion.button
+            onClick={() => setIsMobileMenuOpen(true)}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="text-white hover:text-krudex-muted transition-colors focus:outline-none"
+          >
+            <Menu className="w-6 h-6" />
+          </motion.button>
+        </div>
       </div>
 
-      {/* Desktop CTA */}
-      <div className="hidden md:flex items-center">
-        <MotionLink
-          href="/contact"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="text-[13px] text-white border border-white/30 px-5 py-2 rounded-sm hover:bg-white hover:text-krudex-black transition-all duration-300"
-        >
-          Contact Us
-        </MotionLink>
+      {/* Center: Brand */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+        <Link href="/" className="flex items-center">
+          <Image 
+            src="/krudex-nav.png" 
+            alt="Krudex" 
+            width={240} 
+            height={80} 
+            className="h-16 md:h-20 w-auto object-contain scale-[1.5] md:scale-[1.8] mix-blend-screen"
+            priority
+          />
+        </Link>
       </div>
 
-      {/* Mobile Menu Toggle */}
-      <div className="md:hidden flex items-center">
-        <motion.button
-          onClick={() => setIsMobileMenuOpen(true)}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          className="text-white hover:text-krudex-muted transition-colors focus:outline-none"
-        >
-          <Menu className="w-6 h-6" />
-        </motion.button>
+      {/* Right side: Desktop CTA */}
+      <div className="flex-1 flex justify-end items-center">
+        <div className="hidden md:flex items-center">
+          <MotionLink
+            href="/contact"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="text-[13px] text-white border border-white/30 px-5 py-2 rounded-sm hover:bg-white hover:text-krudex-black transition-all duration-300"
+          >
+            Contact Us
+          </MotionLink>
+        </div>
       </div>
+
+
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
