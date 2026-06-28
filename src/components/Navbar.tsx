@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
@@ -19,6 +20,7 @@ const MotionLink = motion.create ? motion.create(Link) : motion(Link);
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30);
@@ -46,26 +48,37 @@ const Navbar = () => {
         <Image 
           src="/krudex-nav.png" 
           alt="Krudex" 
-          width={180} 
-          height={60} 
-          className="h-10 md:h-14 w-auto object-contain"
+          width={240} 
+          height={80} 
+          className="h-16 md:h-20 w-auto object-contain scale-[1.5] md:scale-[1.8] origin-left"
           priority
         />
       </Link>
 
       {/* Desktop Nav Links */}
       <div className="hidden md:flex items-center gap-10">
-        {navLinks.map((link) => (
-          <MotionLink
-            key={link.label}
-            href={link.href}
-            whileHover={{ scale: 1.05, opacity: 1 }}
-            whileTap={{ scale: 0.95 }}
-            className="text-[13px] text-krudex-muted hover:text-white transition-colors duration-200"
-          >
-            {link.label}
-          </MotionLink>
-        ))}
+        {navLinks.map((link) => {
+          const isActive = pathname === link.href;
+          return (
+            <MotionLink
+              key={link.label}
+              href={link.href}
+              whileHover={{ scale: 1.05, opacity: 1 }}
+              whileTap={{ scale: 0.95 }}
+              className={`text-[13px] transition-colors duration-200 relative ${
+                isActive ? 'text-white font-medium' : 'text-krudex-muted hover:text-white'
+              }`}
+            >
+              {link.label}
+              {isActive && (
+                <motion.div
+                  layoutId="active-nav-indicator"
+                  className="absolute -bottom-2 left-0 right-0 h-[2px] bg-white rounded-full"
+                />
+              )}
+            </MotionLink>
+          );
+        })}
       </div>
 
       {/* Desktop CTA */}
@@ -111,9 +124,9 @@ const Navbar = () => {
                 <Image 
                   src="/krudex-nav.png" 
                   alt="Krudex" 
-                  width={160} 
-                  height={48} 
-                  className="h-10 w-auto object-contain"
+                  width={200} 
+                  height={60} 
+                  className="h-14 w-auto object-contain scale-[1.5] origin-left"
                   priority
                 />
               </Link>
@@ -126,22 +139,33 @@ const Navbar = () => {
             </div>
 
             <div className="flex flex-col gap-8">
-              {navLinks.map((link, idx) => (
-                <motion.div
-                  key={link.label}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 + idx * 0.08 }}
-                >
-                  <Link
-                    href={link.href}
-                    className="text-3xl font-serif text-white hover:text-krudex-muted transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
+              {navLinks.map((link, idx) => {
+                const isActive = pathname === link.href;
+                return (
+                  <motion.div
+                    key={link.label}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + idx * 0.08 }}
                   >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
+                    <Link
+                      href={link.href}
+                      className={`text-3xl font-serif transition-colors flex items-center gap-4 ${
+                        isActive ? 'text-white' : 'text-krudex-muted hover:text-white'
+                      }`}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {isActive && (
+                        <motion.div
+                          layoutId="active-mobile-indicator"
+                          className="w-2 h-2 rounded-full bg-white"
+                        />
+                      )}
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                );
+              })}
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
