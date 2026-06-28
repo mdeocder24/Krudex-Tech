@@ -10,7 +10,7 @@ const navLinks = [
   { label: 'Services', href: '/services' },
   { label: 'Work', href: '/work' },
   { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Our Team', href: '/our-team' },
 ];
 
 const MotionLink = motion.create ? motion.create(Link) : motion(Link);
