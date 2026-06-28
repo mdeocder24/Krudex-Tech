@@ -40,15 +40,15 @@ export default function ContactPage() {
     <main className="min-h-screen bg-transparent selection:bg-krudex-blue selection:text-krudex-black flex flex-col">
       <Navbar />
       
-      <section className="px-8 md:px-16 lg:px-24 pt-48 pb-32 bg-krudex-black/40 backdrop-blur-md relative z-10">
+      <section className="px-8 md:px-16 lg:px-24 pt-48 pb-16 bg-krudex-black/40 backdrop-blur-md relative z-10">
         <div className="max-w-7xl mx-auto">
-          {/* Header Row */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center mb-32">
+          {/* Header + Form Row */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="lg:col-span-7 flex flex-col items-start"
+              className="lg:col-span-5 flex flex-col items-start"
             >
               <div className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-10">
                 <div className="w-1.5 h-1.5 rounded-full bg-krudex-blue"></div>
@@ -56,63 +56,21 @@ export default function ContactPage() {
                   CONTACT
                 </span>
               </div>
-              <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight">
+              <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight mb-8">
                 <span className="text-white">Let&apos;s build</span><br />
                 <span className="text-krudex-blue">something</span><br />
                 <span className="text-krudex-blue">serious.</span>
               </h1>
+              <p className="text-krudex-muted text-base leading-relaxed max-w-md">
+                Fill out the form and our team will get back to you within 24 hours.
+              </p>
             </motion.div>
             
-            <motion.div 
+            {/* Form */}
+            <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="lg:col-span-5 flex flex-col gap-8 lg:pl-12"
-            >
-              {/* Contact Item 1 */}
-              <div className="flex items-center gap-6">
-                <div className="w-12 h-12 border border-krudex-border/50 flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-5 h-5 text-krudex-blue" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">EMAIL</span>
-                  <a href="mailto:krudextechnologies@gmail.com" className="text-white font-medium text-sm hover:text-krudex-blue transition-colors">krudextechnologies@gmail.com</a>
-                </div>
-              </div>
-              
-              {/* Contact Item 2 */}
-              <div className="flex items-center gap-6">
-                <div className="w-12 h-12 border border-krudex-border/50 flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-5 h-5 text-krudex-blue" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">PHONE</span>
-                  <a href="tel:+918978261053" className="text-white font-medium text-sm hover:text-krudex-blue transition-colors">+91 89782 61053, +91 94902 48160</a>
-                </div>
-              </div>
-
-              {/* Contact Item 3 */}
-              <div className="flex items-center gap-6">
-                <div className="w-12 h-12 border border-krudex-border/50 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-5 h-5 text-krudex-blue" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">OFFICE</span>
-                  <span className="text-white font-medium text-sm">Hyderabad, Telangana, India</span>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Form and FAQ Row */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
-            
-            {/* Left: Form */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6 }}
               className="lg:col-span-7 flex flex-col"
             >
               <h2 className="text-white text-2xl font-bold mb-8">Send an inquiry</h2>
@@ -202,17 +160,80 @@ export default function ContactPage() {
                 </form>
               </div>
             </motion.div>
+          </div>
+        </div>
+      </section>
 
-            {/* Right: FAQ & SLA */}
+      {/* Contact Info + FAQ Section */}
+      <section className="px-8 md:px-16 lg:px-24 py-24 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border/50 relative z-10">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+
+            {/* Left: Contact Details */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-5 flex flex-col gap-8"
+            >
+              <h2 className="text-white text-2xl font-bold mb-4">Get in touch</h2>
+
+              {/* Email */}
+              <div className="flex items-center gap-6">
+                <div className="w-12 h-12 border border-krudex-border/50 flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-5 h-5 text-krudex-blue" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">EMAIL</span>
+                  <a href="mailto:krudextechnologies@gmail.com" className="text-white font-medium text-sm hover:text-krudex-blue transition-colors">krudextechnologies@gmail.com</a>
+                </div>
+              </div>
+              
+              {/* Phone */}
+              <div className="flex items-center gap-6">
+                <div className="w-12 h-12 border border-krudex-border/50 flex items-center justify-center flex-shrink-0">
+                  <Phone className="w-5 h-5 text-krudex-blue" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">PHONE</span>
+                  <a href="tel:+918978261053" className="text-white font-medium text-sm hover:text-krudex-blue transition-colors">+91 89782 61053, +91 94902 48160</a>
+                </div>
+              </div>
+
+              {/* Office */}
+              <div className="flex items-center gap-6">
+                <div className="w-12 h-12 border border-krudex-border/50 flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-5 h-5 text-krudex-blue" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">OFFICE</span>
+                  <span className="text-white font-medium text-sm">Hyderabad, Telangana, India</span>
+                </div>
+              </div>
+
+              {/* SLA Block */}
+              <div className="bg-krudex-card/30 border border-krudex-border/30 p-8 mt-4">
+                <div className="text-[10px] uppercase tracking-[0.2em] text-krudex-blue font-mono mb-4">
+                  RESPONSE SLA
+                </div>
+                <h3 className="text-white font-bold text-lg mb-3">Within 24 hours</h3>
+                <p className="text-krudex-muted text-sm leading-relaxed">
+                  All inquiries receive a response within one business day. Complex technical queries may receive a follow-up call request.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Right: FAQ */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="lg:col-span-5 flex flex-col pt-2 lg:pt-0"
+              className="lg:col-span-7 flex flex-col"
             >
               <h2 className="text-white text-2xl font-bold mb-8">Frequently asked</h2>
-              <div className="flex flex-col gap-3 mb-10">
+              <div className="flex flex-col gap-3">
                 {faqs.map((faq, idx) => (
                   <div key={idx} className="bg-krudex-card/30 border border-krudex-border/30 overflow-hidden transition-colors hover:border-krudex-border/60">
                     <button 
@@ -238,17 +259,6 @@ export default function ContactPage() {
                     </AnimatePresence>
                   </div>
                 ))}
-              </div>
-
-              {/* SLA Block */}
-              <div className="bg-krudex-card/30 border border-krudex-border/30 p-8">
-                <div className="text-[10px] uppercase tracking-[0.2em] text-krudex-blue font-mono mb-4">
-                  RESPONSE SLA
-                </div>
-                <h3 className="text-white font-bold text-lg mb-3">Within 24 hours</h3>
-                <p className="text-krudex-muted text-sm leading-relaxed">
-                  All inquiries receive a response within one business day. Complex technical queries may receive a follow-up call request.
-                </p>
               </div>
             </motion.div>
 
