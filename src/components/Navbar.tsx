@@ -100,7 +100,7 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: '-100%' }}
             transition={{ duration: 0.4, ease: 'easeInOut' }}
-            className="fixed inset-0 bg-krudex-black z-[60] flex flex-col pt-6 px-8"
+            className="fixed inset-0 bg-krudex-black/95 backdrop-blur-3xl z-[60] flex flex-col pt-6 px-8"
           >
             <div className="flex items-center justify-between w-full mb-16">
               <Link
