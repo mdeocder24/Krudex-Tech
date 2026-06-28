@@ -46,9 +46,9 @@ const Navbar = () => {
         <Image 
           src="/krudex-nav.png" 
           alt="Krudex" 
-          width={140} 
-          height={40} 
-          className="h-8 md:h-10 w-auto object-contain"
+          width={180} 
+          height={60} 
+          className="h-10 md:h-14 w-auto object-contain"
           priority
         />
       </Link>
@@ -100,7 +100,7 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: '-100%' }}
             transition={{ duration: 0.4, ease: 'easeInOut' }}
-            className="fixed inset-0 bg-krudex-black/40 backdrop-blur-2xl backdrop-saturate-150 z-[60] flex flex-col pt-6 px-8"
+            className="fixed inset-0 bg-krudex-black z-[60] flex flex-col pt-6 px-8"
           >
             <div className="flex items-center justify-between w-full mb-16">
               <Link
@@ -111,9 +111,9 @@ const Navbar = () => {
                 <Image 
                   src="/krudex-nav.png" 
                   alt="Krudex" 
-                  width={120} 
-                  height={32} 
-                  className="h-8 w-auto object-contain"
+                  width={160} 
+                  height={48} 
+                  className="h-10 w-auto object-contain"
                   priority
                 />
               </Link>
