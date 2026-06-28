@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 
@@ -40,10 +41,17 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
-            <span className="text-white font-bold text-lg tracking-[0.15em] uppercase block mb-4">
-              KRUDEX
-            </span>
+          <div className="col-span-2 md:col-span-1 flex flex-col items-start">
+            <Link href="/" className="mb-6 block">
+              <Image 
+                src="/krudex-logo.png" 
+                alt="Krudex" 
+                width={140} 
+                height={40} 
+                className="h-10 w-auto object-contain"
+                priority
+              />
+            </Link>
             <p className="text-krudex-muted text-sm leading-relaxed max-w-xs">
               Building digital products that perform. Engineering, AI, and design under one roof.
             </p>

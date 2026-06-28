@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
@@ -42,9 +43,14 @@ const Navbar = () => {
     >
       {/* Brand */}
       <Link href="/" className="flex items-center">
-        <span className="text-white font-bold text-lg tracking-[0.15em] uppercase">
-          KRUDEX
-        </span>
+        <Image 
+          src="/krudex-nav.png" 
+          alt="Krudex" 
+          width={140} 
+          height={40} 
+          className="h-8 md:h-10 w-auto object-contain"
+          priority
+        />
       </Link>
 
       {/* Desktop Nav Links */}
@@ -102,9 +108,14 @@ const Navbar = () => {
                 className="flex items-center"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <span className="text-white font-bold text-lg tracking-[0.15em] uppercase">
-                  KRUDEX
-                </span>
+                <Image 
+                  src="/krudex-nav.png" 
+                  alt="Krudex" 
+                  width={120} 
+                  height={32} 
+                  className="h-8 w-auto object-contain"
+                  priority
+                />
               </Link>
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
