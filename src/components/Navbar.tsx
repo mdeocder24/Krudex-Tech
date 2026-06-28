@@ -70,7 +70,7 @@ const Navbar = () => {
           whileTap={{ scale: 0.95 }}
           className="text-[13px] text-white border border-white/30 px-5 py-2 rounded-sm hover:bg-white hover:text-krudex-black transition-all duration-300"
         >
-          Book Call
+          Contact Us
         </MotionLink>
       </div>
 
@@ -143,7 +143,7 @@ const Navbar = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="text-white border border-white/30 px-8 py-4 inline-block text-[14px] font-medium hover:bg-white hover:text-krudex-black transition-all duration-300"
                 >
-                  Book Call
+                  Contact Us
                 </Link>
               </motion.div>
             </div>
