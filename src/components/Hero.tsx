@@ -79,13 +79,13 @@ const Hero = () => {
       <div className="absolute inset-0 dot-grid opacity-100 pointer-events-none z-0" />
 
       {/* ── Left: Text Content ───────────────── */}
-      <div className="w-full lg:w-[45%] z-10 flex flex-col justify-center items-start px-8 md:px-14 lg:px-20 pt-32 lg:pt-0 pb-8 lg:pb-0">
+      <div className="w-full lg:w-[45%] z-10 flex flex-col justify-center items-start px-6 md:px-14 lg:px-20 pt-28 md:pt-32 lg:pt-0 pb-4 lg:pb-0">
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="inline-flex items-center gap-2.5 bg-krudex-surface/80 border border-krudex-border px-4 py-2 rounded-full mb-8"
+          className="inline-flex items-center gap-2.5 bg-krudex-surface/80 border border-krudex-border px-3 md:px-4 py-1.5 md:py-2 rounded-full mb-6 md:mb-8"
         >
           <span className="w-2 h-2 rounded-full bg-[#e65c00] animate-pulse" />
           <span className="text-[11px] text-krudex-muted tracking-wide">
@@ -98,7 +98,7 @@ const Hero = () => {
           variants={titleVariants}
           initial="hidden"
           animate="visible"
-          className="font-serif text-[2.75rem] md:text-[3.5rem] lg:text-[3.75rem] xl:text-[4.25rem] font-normal leading-[1.08] tracking-tight text-white mb-7"
+          className="font-serif text-[2.25rem] md:text-[3.5rem] lg:text-[3.75rem] xl:text-[4.25rem] font-normal leading-[1.08] tracking-tight text-white mb-5 md:mb-7"
         >
           <span className="block overflow-hidden">
             {['Building', 'Web,', 'App,'].map((word, i) => (
@@ -127,7 +127,7 @@ const Hero = () => {
         {/* Subtitle */}
         <motion.p
           {...fadeInUp(0.9)}
-          className="text-krudex-muted text-[15px] leading-relaxed max-w-md mb-10"
+          className="text-krudex-muted text-[14px] md:text-[15px] leading-relaxed max-w-md mb-8 md:mb-10"
         >
           Your dedicated technical partner. We engineer high-performance websites, scalable mobile apps, and custom AI integrations so you can focus on your vision.
         </motion.p>
@@ -135,11 +135,11 @@ const Hero = () => {
         {/* CTA Buttons */}
         <motion.div
           {...fadeInUp(1.1)}
-          className="flex items-center gap-6"
+          className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6"
         >
           <MagneticButton
             href="/contact"
-            className="group inline-flex items-center gap-2 bg-white text-krudex-black px-8 py-3.5 text-[14px] font-medium tracking-wide hover:bg-gray-200 transition-colors rounded"
+            className="group inline-flex items-center gap-2 bg-white text-krudex-black px-6 md:px-8 py-3 md:py-3.5 text-[13px] md:text-[14px] font-medium tracking-wide hover:bg-gray-200 transition-colors rounded"
           >
             View Our Work
           </MagneticButton>
@@ -158,7 +158,7 @@ const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5, delay: 0.6 }}
-        className="w-full lg:w-[55%] h-[55vh] lg:h-screen relative z-10"
+        className="w-full lg:w-[55%] h-[45vh] sm:h-[55vh] lg:h-screen relative z-10"
       >
         <PillarsWrapper />
 

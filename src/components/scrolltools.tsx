@@ -34,7 +34,7 @@ const tools = [
 
 const ScrollTools = () => {
   return (
-    <section className="w-full py-12 border-t border-krudex-border/30 bg-krudex-black relative z-10 overflow-hidden">
+    <section className="w-full py-8 md:py-12 border-t border-krudex-border/30 bg-krudex-black relative z-10 overflow-hidden">
       <style>{`
         @keyframes marquee {
           0% { transform: translateX(0); }
@@ -45,7 +45,7 @@ const ScrollTools = () => {
         }
       `}</style>
       
-      <div className="flex w-max animate-marquee items-center gap-16 pr-16 hover:[animation-play-state:paused]">
+      <div className="flex w-max animate-marquee items-center gap-8 md:gap-16 pr-8 md:pr-16 hover:[animation-play-state:paused]">
         {[...tools, ...tools].map((tool, i) => (
           <span
             key={i}

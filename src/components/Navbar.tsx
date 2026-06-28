@@ -35,10 +35,16 @@ const Navbar = () => {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className={`w-full flex items-center justify-between px-8 md:px-14 lg:px-20 fixed top-0 z-50 transition-all duration-300
-        bg-krudex-black/30 backdrop-blur-2xl backdrop-saturate-150 border-b border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_4px_30px_rgba(0,0,0,0.1)]
-        ${scrolled ? 'py-4' : 'py-6'}
+      className={`w-full flex items-center justify-between px-6 md:px-14 lg:px-20 fixed top-0 z-50 transition-all duration-300
+        ${scrolled ? 'py-3' : 'py-4 md:py-6'}
       `}
+      style={{
+        background: 'linear-gradient(135deg, rgba(20, 20, 25, 0.92) 0%, rgba(30, 30, 40, 0.88) 50%, rgba(20, 20, 25, 0.92) 100%)',
+        backdropFilter: 'blur(40px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+        boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.06), inset 0 -1px 0 rgba(0, 0, 0, 0.3), 0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3)',
+      }}
     >
       {/* Brand */}
       <Link href="/" className="flex items-center">
@@ -94,7 +100,12 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: '-100%' }}
             transition={{ duration: 0.4, ease: 'easeInOut' }}
-            className="fixed inset-0 bg-krudex-black/40 backdrop-blur-2xl backdrop-saturate-150 z-[60] flex flex-col pt-6 px-8"
+            className="fixed inset-0 z-[60] flex flex-col pt-6 px-6"
+            style={{
+              background: 'linear-gradient(180deg, rgba(15, 15, 20, 0.97) 0%, rgba(20, 20, 30, 0.95) 100%)',
+              backdropFilter: 'blur(60px) saturate(200%)',
+              WebkitBackdropFilter: 'blur(60px) saturate(200%)',
+            }}
           >
             <div className="flex items-center justify-between w-full mb-16">
               <Link
