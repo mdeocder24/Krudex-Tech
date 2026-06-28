@@ -2,7 +2,7 @@
 
 import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, Edges } from '@react-three/drei';
+import { Environment, Edges, Text } from '@react-three/drei';
 import * as THREE from 'three';
 
 /* ─────────────────────────────────────────────
@@ -41,9 +41,11 @@ const pillarMaterial = new THREE.ShaderMaterial({
 interface PlatformProps {
   position: [number, number, number];
   size: [number, number]; // width, depth (square)
+  label?: string;
+  sideLabel?: string;
 }
 
-const Platform = ({ position, size }: PlatformProps) => {
+const Platform = ({ position, size, label, sideLabel }: PlatformProps) => {
   const [w, d] = size;
   const depth = 30; // Depth of the pillar body for fading into fog
 
@@ -51,7 +53,7 @@ const Platform = ({ position, size }: PlatformProps) => {
 
   // Create a seamless frame geometry using a Shape with a hole
   const frameGeometry = useMemo(() => {
-    const t = 0.035; // Neon tube thickness
+    const t = 0.015; // Thinner neon tube
     const shape = new THREE.Shape();
     // Outer rectangle
     shape.moveTo(-w / 2 - t, -d / 2 - t);
@@ -74,7 +76,7 @@ const Platform = ({ position, size }: PlatformProps) => {
 
   // Create a larger, softer frame geometry for the bloom effect
   const bloomGeometry = useMemo(() => {
-    const t = 0.3; // Wider bloom spread thickness
+    const t = 0.1; // Thinner bloom spread
     const shape = new THREE.Shape();
     shape.moveTo(-w / 2 - t, -d / 2 - t);
     shape.lineTo(w / 2 + t, -d / 2 - t);
@@ -95,7 +97,7 @@ const Platform = ({ position, size }: PlatformProps) => {
 
   // Create an even larger, much softer frame for the outer glow
   const outerGlowGeometry = useMemo(() => {
-    const t = 0.7; // Huge outer glow spread
+    const t = 0.25; // Thinner outer glow spread
     const shape = new THREE.Shape();
     shape.moveTo(-w / 2 - t, -d / 2 - t);
     shape.lineTo(w / 2 + t, -d / 2 - t);
@@ -136,7 +138,7 @@ const Platform = ({ position, size }: PlatformProps) => {
         <mesh geometry={bloomGeometry} position={[0, 0, -0.01]}>
           <meshBasicMaterial color="#ffffff" transparent opacity={0.25} blending={THREE.AdditiveBlending} depthWrite={false} />
         </mesh>
-        
+
         {/* Outer large diffuse glow */}
         <mesh geometry={outerGlowGeometry} position={[0, 0, -0.02]}>
           <meshBasicMaterial color="#ffffff" transparent opacity={0.08} blending={THREE.AdditiveBlending} depthWrite={false} />
@@ -149,6 +151,22 @@ const Platform = ({ position, size }: PlatformProps) => {
         <meshBasicMaterial color="#1a1a1a" />
       </mesh>
 
+      {/* Label Text on top of the platform */}
+      {label && (
+        <Text
+          position={[0, 0.05, 0]}
+          rotation={[-Math.PI / 2, 0, -Math.PI / 4]}
+          fontSize={w * 0.20}
+          color="#ffffff"
+          anchorX="center"
+          anchorY="middle"
+          fillOpacity={0.9}
+          letterSpacing={0.1}
+        >
+          {label}
+        </Text>
+      )}
+
       {/* 3. Pillar Body extending downwards into the fog */}
       <mesh position={[0, -depth / 2 - 0.02, 0]}>
         <boxGeometry args={[w, depth, d]} />
@@ -157,6 +175,25 @@ const Platform = ({ position, size }: PlatformProps) => {
         {/* Subtle structural edge highlights to enhance the 3D volume */}
         <Edges scale={1.001} threshold={15} color="#ffffff" transparent opacity={0.1} />
       </mesh>
+
+      {/* 4. Side Label Text on the pillar face */}
+      {sideLabel && (
+        <Text
+          position={[0, -1.2, d / 2 + 0.05]} // Positioned cleanly on the top part of the side face
+          rotation={[0, 0, 0]} // Horizontal across the face
+          fontSize={w * 0.11}
+          color="#ffffff"
+          anchorX="center"
+          anchorY="middle"
+          fillOpacity={0.6}
+          letterSpacing={0.1}
+          maxWidth={w * 0.85} // Constrain text inside the pillar width
+          lineHeight={1.2}
+          textAlign="center"
+        >
+          {sideLabel}
+        </Text>
+      )}
     </group>
   );
 };
@@ -253,13 +290,13 @@ const DataArchitectureScene = () => {
 
       {/* ── Platforms Stepping Up ── */}
       {/* 1. Lowest, largest, front-left */}
-      <Platform position={[-2.5, -2.5, 2.5]} size={[3.5, 3.5]} />
+      <Platform position={[-2.5, -2.5, 2.5]} size={[4.2, 4.2]} label="WEB" sideLabel="REACT // NEXT.JS" />
 
       {/* 2. Middle, medium, center */}
-      <Platform position={[0, -0.5, 0]} size={[2.5, 2.5]} />
+      <Platform position={[0, -0.5, 0]} size={[3.2, 3.2]} label="APP" sideLabel="IOS // ANDROID" />
 
       {/* 3. Highest, smallest, back-right */}
-      <Platform position={[2.5, 1.5, -2.5]} size={[1.6, 1.6]} />
+      <Platform position={[2.5, 1.5, -2.5]} size={[2.2, 2.2]} label="AI" sideLabel="MACHINE LEARNING" />
 
       {/* Tiny astronaut floating high between middle and top platform */}
       <FloatingFigure position={[1.25, 2.2, -1.25]} />
