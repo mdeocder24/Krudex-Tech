@@ -76,33 +76,35 @@ export default function ServicesPage() {
       
       <section className="px-8 md:px-16 lg:px-24 pt-48 pb-32 bg-krudex-black/40 backdrop-blur-md relative z-10">
         <div className="max-w-7xl mx-auto">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-10"
-          >
-            <div className="w-1.5 h-1.5 rounded-full bg-krudex-blue"></div>
-            <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-blue font-semibold">
-              SERVICES
-            </span>
-          </motion.div>
+          <div className="flex flex-col items-center text-center w-full">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-10"
+            >
+              <div className="w-1.5 h-1.5 rounded-full bg-krudex-blue"></div>
+              <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-blue font-semibold">
+                SERVICES
+              </span>
+            </motion.div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-32"
-          >
-            <h1 className="font-serif text-5xl md:text-7xl text-white font-bold mb-8 leading-[1.1] tracking-tight">
-              What Krudex <br />
-              <span className="text-krudex-blue">builds for you.</span>
-            </h1>
-            <p className="text-krudex-muted text-lg leading-relaxed max-w-2xl">
-              Four core disciplines. Senior engineers on every project. <br className="hidden md:block" />
-              Measurable outcomes as the only deliverable that counts.
-            </p>
-          </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="mb-32 flex flex-col items-center"
+            >
+              <h1 className="font-serif text-5xl md:text-7xl text-white font-bold mb-8 leading-[1.1] tracking-tight">
+                What Krudex <br />
+                <span className="text-krudex-blue">builds for you.</span>
+              </h1>
+              <p className="text-krudex-muted text-lg leading-relaxed max-w-2xl text-center">
+                Four core disciplines. Senior engineers on every project. <br className="hidden md:block" />
+                Measurable outcomes as the only deliverable that counts.
+              </p>
+            </motion.div>
+          </div>
 
           <div className="flex flex-col gap-32">
             {servicesData.map((service, idx) => (
