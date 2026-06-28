@@ -5,6 +5,7 @@ import Stats from '@/components/Stats';
 import Services from '@/components/Services';
 import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
+import ScrollAstronaut from '@/components/ScrollAstronaut';
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Services />
       <CTA />
       <Footer />
+      <ScrollAstronaut />
     </main>
   );
 }
