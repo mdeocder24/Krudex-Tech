@@ -1,43 +1,60 @@
 "use client";
 
 import React from 'react';
-import { motion } from 'framer-motion';
 
-const partners = [
-  { name: 'attentive', style: 'italic' },
-  { name: 'coinbase', style: 'normal' },
-  { name: 'coinbase', style: 'normal' },
-  { name: 'upwork', style: 'italic' },
-  { name: 'DocuSign', style: 'normal' },
-  { name: 'drips', style: 'italic font-serif' },
-  { name: 'NETFLIX', style: 'tracking-[0.3em]' },
-  { name: 'braze', style: 'italic font-serif' },
-  { name: 'zapier', style: 'normal' },
+const tools = [
+  { name: 'React', style: 'font-semibold tracking-wide' },
+  { name: 'Next.js', style: 'font-bold' },
+  { name: 'TypeScript', style: 'italic' },
+  { name: 'Node.js', style: 'font-medium' },
+  { name: 'Python', style: 'tracking-wider' },
+  { name: 'TensorFlow', style: 'font-serif italic' },
+  { name: 'PyTorch', style: 'font-bold' },
+  { name: 'OpenAI', style: 'font-mono uppercase' },
+  { name: 'LangChain', style: 'font-semibold' },
+  { name: 'Hugging Face', style: 'italic' },
+  { name: 'React Native', style: 'italic' },
+  { name: 'Flutter', style: 'font-medium tracking-wide' },
+  { name: 'Swift', style: 'font-semibold' },
+  { name: 'Kotlin', style: 'tracking-widest' },
+  { name: 'Figma', style: 'font-medium' },
+  { name: 'Tailwind CSS', style: 'italic' },
+  { name: 'Prisma', style: 'font-bold tracking-widest' },
+  { name: 'Supabase', style: 'font-mono' },
+  { name: 'Firebase', style: 'font-semibold' },
+  { name: 'PostgreSQL', style: 'font-serif' },
+  { name: 'MongoDB', style: 'italic' },
+  { name: 'Redis', style: 'font-bold' },
+  { name: 'AWS', style: 'font-bold uppercase' },
+  { name: 'Vercel', style: 'tracking-wider' },
+  { name: 'Docker', style: 'italic' },
+  { name: 'Kubernetes', style: 'font-semibold' },
+  { name: 'Stripe', style: 'font-bold' },
 ];
 
 const Partners = () => {
   return (
-    <section className="w-full py-10 px-8 md:px-14 lg:px-20 border-t border-krudex-border/30 bg-krudex-black relative z-10">
-      <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-y-6 gap-x-4"
-      >
-        {partners.map((p, i) => (
-          <motion.span
+    <section className="w-full py-12 border-t border-krudex-border/30 bg-krudex-black relative z-10 overflow-hidden">
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          animation: marquee 35s linear infinite;
+        }
+      `}</style>
+      
+      <div className="flex w-max animate-marquee items-center gap-16 pr-16 hover:[animation-play-state:paused]">
+        {[...tools, ...tools].map((tool, i) => (
+          <span
             key={i}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: i * 0.06 }}
-            className={`text-krudex-muted/50 text-base md:text-lg font-medium select-none ${p.style}`}
+            className={`text-krudex-muted/50 text-base md:text-xl select-none whitespace-nowrap transition-colors hover:text-white ${tool.style}`}
           >
-            {p.name}
-          </motion.span>
+            {tool.name}
+          </span>
         ))}
-      </motion.div>
+      </div>
     </section>
   );
 };
