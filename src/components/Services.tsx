@@ -21,7 +21,7 @@ const services = [
   {
     num: "03",
     title: "AI Integrations",
-    desc: "Custom LLMs, AI agents, and intelligent workflows that give your startup an unfair advantage."
+    desc: "Production-ready custom LLMs, RAG knowledge bases, and secure agentic workflows backed by SOC 2 compliance readiness and data sovereignty."
   },
   {
     num: "04",
@@ -89,8 +89,8 @@ const Services = () => {
           transition={{ duration: 0.5 }}
           className="flex justify-center"
         >
-          <MotionLink 
-            href="/services" 
+          <MotionLink
+            href="/services"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="group flex items-center gap-2 border border-white/30 text-white px-8 py-4 font-medium text-sm hover:bg-white hover:text-krudex-black transition-all duration-300"
