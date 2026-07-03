@@ -5,40 +5,21 @@ import { motion, Variants } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import MagneticButton from './MagneticButton';
 
-// Client-only mount to avoid SSR issues with WebGL canvas
-const PillarsWrapper = () => {
-  const [Component, setComponent] = useState<React.ComponentType | null>(null);
+import dynamic from 'next/dynamic';
 
-  useEffect(() => {
-    import('./Hero3DObject').then((mod) => {
-      setComponent(() => mod.default);
-    });
-  }, []);
+// Dynamically import 3D components with SSR disabled to optimize initial load
+const Hero3DObject = dynamic(() => import('./Hero3DObject'), { 
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full flex items-center justify-center">
+      <div className="w-10 h-10 border border-krudex-border/40 border-t-white/40 rounded-full animate-spin" />
+    </div>
+  )
+});
 
-  if (!Component) {
-    return (
-      <div className="w-full h-full flex items-center justify-center">
-        <div className="w-10 h-10 border border-krudex-border/40 border-t-white/40 rounded-full animate-spin" />
-      </div>
-    );
-  }
-
-  return <Component />;
-};
-
-const GlobeWrapper = () => {
-  const [Component, setComponent] = useState<React.ComponentType | null>(null);
-
-  useEffect(() => {
-    import('./GlobeObject').then((mod) => {
-      setComponent(() => mod.default);
-    });
-  }, []);
-
-  if (!Component) return null;
-
-  return <Component />;
-};
+const GlobeObject = dynamic(() => import('./GlobeObject'), { 
+  ssr: false 
+});
 
 const titleVariants: Variants = {
   hidden: { opacity: 0 },
@@ -72,7 +53,7 @@ const Hero = () => {
     <section className="relative min-h-screen w-full flex flex-col lg:flex-row items-center overflow-hidden bg-krudex-black">
       {/* Translucent Globe overlay — bottom left */}
       <div className="absolute bottom-0 left-0 w-[120vw] h-[120vw] lg:w-[50vw] lg:h-[50vw] translate-y-[40%] -translate-x-[20%] opacity-40 pointer-events-none z-0">
-        <GlobeWrapper />
+        <GlobeObject />
       </div>
 
       {/* Dot grid pattern overlay */}
@@ -160,7 +141,7 @@ const Hero = () => {
         transition={{ duration: 1.5, delay: 0.6 }}
         className="w-full lg:w-[55%] h-[45vh] sm:h-[55vh] lg:h-screen relative z-10"
       >
-        <PillarsWrapper />
+        <Hero3DObject />
 
         {/* Ambient glow layer (pillars have their own inner glow) */}
         <div className="absolute inset-0 pointer-events-none -z-10">
