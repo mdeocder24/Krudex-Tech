@@ -8,7 +8,7 @@ import MagneticButton from './MagneticButton';
 import dynamic from 'next/dynamic';
 
 // Dynamically import 3D components with SSR disabled to optimize initial load
-const Hero3DObject = dynamic(() => import('./Hero3DObject'), { 
+const Hero3DObject = dynamic(() => import('./Hero3DObject'), {
   ssr: false,
   loading: () => (
     <div className="w-full h-full flex items-center justify-center">
@@ -17,8 +17,8 @@ const Hero3DObject = dynamic(() => import('./Hero3DObject'), {
   )
 });
 
-const GlobeObject = dynamic(() => import('./GlobeObject'), { 
-  ssr: false 
+const GlobeObject = dynamic(() => import('./GlobeObject'), {
+  ssr: false
 });
 
 const titleVariants: Variants = {
@@ -110,7 +110,7 @@ const Hero = () => {
           {...fadeInUp(0.9)}
           className="text-krudex-muted text-[14px] md:text-[15px] leading-relaxed max-w-md mb-8 md:mb-10"
         >
-          Your dedicated technical partner. We engineer high-performance websites, scalable mobile apps, and custom AI integrations so you can focus on your vision.
+          We build high-performance websites, scalable mobile apps, and custom AI integrations so you can focus entirely on scaling your business.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -128,7 +128,7 @@ const Hero = () => {
             href="/contact"
             className="group inline-flex items-center gap-2 text-krudex-muted hover:text-white text-[13px] font-medium tracking-wide transition-colors"
           >
-            Start Your Project
+            Book a Strategy Call
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </MagneticButton>
         </motion.div>

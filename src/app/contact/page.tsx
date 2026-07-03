@@ -20,12 +20,20 @@ const faqs = [
     answer: "Yes. Every project includes a 30-day warranty period, after which we offer structured retainers for ongoing feature development and infrastructure maintenance."
   },
   {
+    question: "Who owns the IP and source code upon completion?",
+    answer: "Krudex transfers 100% of custom source code and intellectual property (IP) rights to you upon final project milestone payment. We do not lock you into proprietary vendor frameworks."
+  },
+  {
     question: "What's the minimum project size you take on?",
     answer: "We typically engage on projects starting from 4-6 weeks in duration. Our focus is on complex, high-impact systems rather than simple brochure websites."
   },
   {
-    question: "Can I see a full contract before committing?",
-    answer: "Absolutely. We believe in complete transparency. Our Master Services Agreement (MSA) and standard Statement of Work (SOW) templates are available upon request."
+    question: "What if our internal data is messy or incomplete for AI integration?",
+    answer: "Our AI discovery phase includes a thorough data audit. We build secure data pipelines to clean, structure, and sanitize your datasets before models are trained or RAG databases are compiled, ensuring complete security."
+  },
+  {
+    question: "How do you handle data security and compliance?",
+    answer: "We treat data privacy as a primary engineering requirement. We sign comprehensive NDAs, utilize end-to-end encryption for all pipeline stages, and design integrations adhering to SOC 2, HIPAA, and GDPR standards."
   }
 ];
 
@@ -39,12 +47,12 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen bg-transparent selection:bg-krudex-blue selection:text-krudex-black flex flex-col">
       <Navbar />
-      
+
       <section className="px-8 md:px-16 lg:px-24 pt-48 pb-16 bg-krudex-black/40 backdrop-blur-md relative z-10">
         <div className="max-w-7xl mx-auto">
           {/* Header + Form Row */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
@@ -65,7 +73,7 @@ export default function ContactPage() {
                 Fill out the form and our team will get back to you within 24 hours.
               </p>
             </motion.div>
-            
+
             {/* Form */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
@@ -79,36 +87,36 @@ export default function ContactPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="flex flex-col gap-3">
                       <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">YOUR NAME *</label>
-                      <input 
-                        type="text" 
-                        placeholder="Vishwanath Rao" 
+                      <input
+                        type="text"
+                        placeholder="Vishwanath Rao"
                         className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-blue transition-colors"
                       />
                     </div>
                     <div className="flex flex-col gap-3">
                       <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">EMAIL ADDRESS *</label>
-                      <input 
-                        type="email" 
-                        placeholder="vishwa@company.in" 
+                      <input
+                        type="email"
+                        placeholder="vishwa@company.in"
                         className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-blue transition-colors"
                       />
                     </div>
                   </div>
-                  
+
                   <div className="flex flex-col gap-3">
                     <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">COMPANY / STARTUP</label>
-                    <input 
-                      type="text" 
-                      placeholder="Acme Technologies" 
+                    <input
+                      type="text"
+                      placeholder="Acme Technologies"
                       className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-blue transition-colors"
                     />
                   </div>
-                  
+
                   <div className="flex flex-col gap-3">
                     <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">PROJECT SCOPE *</label>
-                    <input 
-                      type="text" 
-                      placeholder="Full-stack SaaS with an AI-powered recommendation engine" 
+                    <input
+                      type="text"
+                      placeholder="Full-stack SaaS with an AI-powered recommendation engine"
                       className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-blue transition-colors"
                     />
                   </div>
@@ -144,15 +152,15 @@ export default function ContactPage() {
 
                   <div className="flex flex-col gap-3">
                     <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">ADDITIONAL DETAILS</label>
-                    <textarea 
-                      placeholder="Existing stack, compliance requirements, integration constraints, deadline pressure..." 
+                    <textarea
+                      placeholder="Existing stack, compliance requirements, integration constraints, deadline pressure..."
                       rows={4}
                       className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-blue transition-colors resize-none"
                     ></textarea>
                   </div>
 
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     className="w-full bg-krudex-blue text-krudex-black font-bold py-4 hover:bg-krudex-blue-hover transition-colors mt-4"
                   >
                     Send Inquiry
@@ -189,7 +197,7 @@ export default function ContactPage() {
                   <a href="mailto:krudextechnologies@gmail.com" className="text-white font-medium text-sm hover:text-krudex-blue transition-colors">krudextechnologies@gmail.com</a>
                 </div>
               </div>
-              
+
               {/* Phone */}
               <div className="flex items-center gap-6">
                 <div className="w-12 h-12 border border-krudex-border/50 flex items-center justify-center flex-shrink-0">
@@ -236,7 +244,7 @@ export default function ContactPage() {
               <div className="flex flex-col gap-3">
                 {faqs.map((faq, idx) => (
                   <div key={idx} className="bg-krudex-card/30 border border-krudex-border/30 overflow-hidden transition-colors hover:border-krudex-border/60">
-                    <button 
+                    <button
                       onClick={() => toggleFaq(idx)}
                       className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
                     >
