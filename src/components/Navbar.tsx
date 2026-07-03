@@ -76,8 +76,10 @@ const Navbar = () => {
                 {link.label}
                 {isActive && (
                   <motion.div
-                    layoutId="active-nav-indicator"
-                    className="absolute -bottom-2 left-0 right-0 h-[2px] bg-white rounded-full"
+                    initial={{ opacity: 0, scaleX: 0 }}
+                    animate={{ opacity: 1, scaleX: 1 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute -bottom-2 left-0 right-0 h-[2px] bg-white rounded-full origin-center"
                   />
                 )}
               </MotionLink>
@@ -164,8 +166,10 @@ const Navbar = () => {
                     >
                       {isActive && (
                         <motion.div
-                          layoutId="active-mobile-indicator"
-                          className="w-2 h-2 rounded-full bg-white"
+                          initial={{ opacity: 0, scale: 0 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.3 }}
+                          className="w-2 h-2 rounded-full bg-white origin-center"
                         />
                       )}
                       {link.label}
