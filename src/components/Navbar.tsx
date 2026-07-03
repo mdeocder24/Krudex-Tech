@@ -43,8 +43,22 @@ const Navbar = () => {
         ${scrolled ? 'py-4' : 'py-6'}
       `}
     >
-      {/* Left side: Nav Links (Desktop) & Menu Toggle (Mobile) */}
+      {/* Left side: Brand */}
       <div className="flex-1 flex items-center justify-start">
+        <Link href="/" className="flex items-center">
+          <Image 
+            src="/krudex-logo.png" 
+            alt="Krudex" 
+            width={240} 
+            height={80} 
+            className="h-16 md:h-20 w-auto object-contain scale-[2] md:scale-[2.5] origin-left mix-blend-screen"
+            priority
+          />
+        </Link>
+      </div>
+
+      {/* Right side: Nav Links & CTA */}
+      <div className="flex-1 flex justify-end items-center gap-6 md:gap-10">
         {/* Desktop Nav Links */}
         <div className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => {
@@ -70,6 +84,18 @@ const Navbar = () => {
             );
           })}
         </div>
+
+        {/* Desktop CTA */}
+        <div className="hidden md:flex items-center">
+          <MotionLink
+            href="/contact"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="text-[13px] text-white border border-white/30 px-5 py-2 rounded-sm hover:bg-white hover:text-krudex-black transition-all duration-300"
+          >
+            Contact Us
+          </MotionLink>
+        </div>
         
         {/* Mobile Menu Toggle */}
         <div className="md:hidden flex items-center">
@@ -81,34 +107,6 @@ const Navbar = () => {
           >
             <Menu className="w-6 h-6" />
           </motion.button>
-        </div>
-      </div>
-
-      {/* Center: Brand */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
-        <Link href="/" className="flex items-center">
-          <Image 
-            src="/krudex-nav.png" 
-            alt="Krudex" 
-            width={240} 
-            height={80} 
-            className="h-16 md:h-20 w-auto object-contain scale-[1.5] md:scale-[1.8] mix-blend-screen"
-            priority
-          />
-        </Link>
-      </div>
-
-      {/* Right side: Desktop CTA */}
-      <div className="flex-1 flex justify-end items-center">
-        <div className="hidden md:flex items-center">
-          <MotionLink
-            href="/contact"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="text-[13px] text-white border border-white/30 px-5 py-2 rounded-sm hover:bg-white hover:text-krudex-black transition-all duration-300"
-          >
-            Contact Us
-          </MotionLink>
         </div>
       </div>
 
@@ -131,11 +129,11 @@ const Navbar = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <Image 
-                  src="/krudex-nav.png" 
+                  src="/krudex-logo.png" 
                   alt="Krudex" 
                   width={200} 
                   height={60} 
-                  className="h-14 w-auto object-contain scale-[1.5] origin-left"
+                  className="h-14 w-auto object-contain scale-[2] origin-left mix-blend-screen"
                   priority
                 />
               </Link>
