@@ -56,7 +56,7 @@ const Services = () => {
             className="lg:col-span-5"
           >
             <h2 className="font-serif text-5xl md:text-6xl text-white font-normal mb-6 leading-[1.1] tracking-tight">
-              Your Startup's <br /> Technical Partner.
+              Your Startup&apos;s <br /> Technical Partner.
             </h2>
             <p className="text-krudex-muted text-base leading-relaxed">
               We handle the end-to-end technical heavy lifting—from MVP to scalable product—so you can focus on your users.

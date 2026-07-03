@@ -7,7 +7,6 @@ import TiltCard from './TiltCard';
 import MagneticButton from './MagneticButton';
 import TextReveal from './TextReveal';
 
-const MotionA = motion.create ? motion.create('a') : motion('a');
 
 const projects = [
   {

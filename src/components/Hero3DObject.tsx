@@ -2,7 +2,7 @@
 
 import React, { useRef, useMemo, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, Edges, Text } from '@react-three/drei';
+import { Edges, Text } from '@react-three/drei';
 import * as THREE from 'three';
 
 /* ─────────────────────────────────────────────
