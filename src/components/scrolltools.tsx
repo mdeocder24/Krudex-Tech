@@ -22,7 +22,7 @@ const tools = [
   { name: 'Prisma', style: 'font-bold tracking-widest' },
   { name: 'GraphQL', style: 'font-semibold' },
   { name: 'Supabase', style: 'font-semibold' },
-  { name: 'Next.js', style: 'italic text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500' },
+  { name: 'Next.js', style: 'italic text-transparent bg-clip-text bg-gradient-to-r from-gray-500 via-white to-gray-500 animate-shine' },
   { name: 'PostgreSQL', style: 'font-serif' },
   { name: 'MongoDB', style: 'italic' },
   { name: 'Redis', style: 'font-bold' },
@@ -41,8 +41,16 @@ const ScrollTools = () => {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
+        @keyframes shine {
+          0% { background-position: 200% center; }
+          100% { background-position: -200% center; }
+        }
         .animate-marquee {
           animation: marquee 35s linear infinite;
+        }
+        .animate-shine {
+          background-size: 200% auto;
+          animation: shine 3s linear infinite;
         }
       `}</style>
       
