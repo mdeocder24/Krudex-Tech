@@ -46,11 +46,11 @@ const Navbar = () => {
       {/* Left side: Brand */}
       <div className="flex-1 flex items-center justify-start">
         <Link href="/" className="flex items-center">
-          <Image 
-            src="/krudex-bg.png" 
-            alt="Krudex" 
-            width={240} 
-            height={80} 
+          <Image
+            src="/krudex-bg.png"
+            alt="Krudex"
+            width={240}
+            height={80}
             className="h-16 md:h-20 w-auto object-contain scale-[2] md:scale-[2.5] origin-left"
             priority
           />
@@ -69,9 +69,8 @@ const Navbar = () => {
                 href={link.href}
                 whileHover={{ scale: 1.05, opacity: 1 }}
                 whileTap={{ scale: 0.95 }}
-                className={`text-[13px] transition-colors duration-200 relative ${
-                  isActive ? 'text-white font-medium' : 'text-krudex-muted hover:text-white'
-                }`}
+                className={`text-[13px] transition-colors duration-200 relative ${isActive ? 'text-white font-medium' : 'text-krudex-muted hover:text-white'
+                  }`}
               >
                 {link.label}
                 {isActive && (
@@ -98,7 +97,7 @@ const Navbar = () => {
             Contact Us
           </MotionLink>
         </div>
-        
+
         {/* Mobile Menu Toggle */}
         <div className="md:hidden flex items-center">
           <motion.button
@@ -118,81 +117,81 @@ const Navbar = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: '-100%' }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: '-100%' }}
-            transition={{ duration: 0.4, ease: 'easeInOut' }}
-            className="fixed inset-0 bg-krudex-black/95 backdrop-blur-3xl z-[60] flex flex-col pt-6 px-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60]"
           >
-            <div className="flex items-center justify-between w-full mb-16">
-              <Link
-                href="/"
-                className="flex items-center"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <Image 
-                  src="/krudex-bg.png" 
-                  alt="Krudex" 
-                  width={200} 
-                  height={60} 
-                  className="h-14 w-auto object-contain scale-[2] origin-left"
-                  priority
-                />
-              </Link>
+            {/* Clickable backdrop to close */}
+            <div
+              className="absolute inset-0"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+
+            {/* Black Card */}
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: -10 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: -10 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+              className="absolute top-24 right-6 w-64 bg-krudex-black border border-white/10 rounded-2xl p-6 flex flex-col shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-white hover:text-krudex-muted transition-colors focus:outline-none"
+                className="absolute top-4 right-4 text-white hover:text-krudex-muted transition-colors focus:outline-none bg-white/5 hover:bg-white/10 rounded-full p-1.5"
               >
-                <X className="w-7 h-7" />
+                <X className="w-4 h-4" />
               </button>
-            </div>
 
-            <div className="flex flex-col gap-8">
-              {navLinks.map((link, idx) => {
-                const isActive = pathname === link.href;
-                return (
-                  <motion.div
-                    key={link.label}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 + idx * 0.08 }}
-                  >
-                    <Link
-                      href={link.href}
-                      className={`text-3xl font-serif transition-colors flex items-center gap-4 ${
-                        isActive ? 'text-white' : 'text-krudex-muted hover:text-white'
-                      }`}
-                      onClick={() => setIsMobileMenuOpen(false)}
+              <div className="flex flex-col gap-4 pt-2">
+                {navLinks.map((link, idx) => {
+                  const isActive = pathname === link.href;
+                  return (
+                    <motion.div
+                      key={link.label}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.05 + idx * 0.05 }}
                     >
-                      {isActive && (
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ duration: 0.3 }}
-                          className="w-2 h-2 rounded-full bg-white origin-center"
-                        />
-                      )}
-                      {link.label}
-                    </Link>
-                  </motion.div>
-                );
-              })}
+                      <Link
+                        href={link.href}
+                        className={`text-xl font-serif transition-colors flex items-center gap-3 ${isActive ? 'text-white' : 'text-krudex-muted hover:text-white'
+                          }`}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {isActive && (
+                          <motion.div
+                            initial={{ opacity: 0, scale: 0 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.3 }}
+                            className="w-1.5 h-1.5 rounded-full bg-white origin-center"
+                          />
+                        )}
+                        {link.label}
+                      </Link>
+                    </motion.div>
+                  );
+                })}
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-                className="mt-8"
-              >
-                <Link
-                  href="/contact"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-white border border-white/30 px-8 py-4 inline-block text-[14px] font-medium hover:bg-white hover:text-krudex-black transition-all duration-300"
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="mt-2 pt-5 border-t border-white/10"
                 >
-                  Contact Us
-                </Link>
-              </motion.div>
-            </div>
+                  <Link
+                    href="/contact"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex justify-center w-full text-krudex-black bg-white px-6 py-2.5 rounded-md text-[13px] font-medium hover:bg-gray-200 transition-all duration-300"
+                  >
+                    Contact Us
+                  </Link>
+                </motion.div>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
