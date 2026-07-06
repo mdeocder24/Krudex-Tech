@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import TiltCard from './TiltCard';
@@ -76,6 +76,9 @@ const projects = [
 ];
 
 const SelectedWork = () => {
+  const [filter, setFilter] = useState<'All' | 'Website' | 'App'>('All');
+  const filteredProjects = projects.filter(p => filter === 'All' || p.type === filter);
+
   return (
     <section id="our-work" className="px-8 md:px-16 lg:px-24 py-32 bg-krudex-black border-t border-krudex-border/50">
       <div className="max-w-6xl mx-auto">
@@ -92,23 +95,46 @@ const SelectedWork = () => {
           </span>
         </motion.div>
 
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mb-16"
-        >
-          <TextReveal className="font-serif text-5xl md:text-6xl text-white font-bold mb-6 tracking-tight">
-            What we&apos;ve shipped
-          </TextReveal>
-          <p className="text-krudex-muted text-lg">
-            Two of our most technically demanding engagements.
-          </p>
-        </motion.div>
+        <div className="flex flex-col mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <TextReveal className="font-serif text-5xl md:text-6xl text-white font-bold mb-4 tracking-tight">
+              What we&apos;ve shipped
+            </TextReveal>
+            <p className="text-krudex-muted text-lg">
+              A selection of our most technically demanding engagements.
+            </p>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-wrap items-center gap-3 mt-8"
+          >
+            {['All', 'Website', 'App'].map((f) => (
+              <button
+                key={f}
+                onClick={() => setFilter(f as any)}
+                className={`px-5 py-2 text-xs font-mono uppercase tracking-wider transition-all duration-300 border ${
+                  filter === f 
+                    ? 'border-krudex-blue bg-krudex-blue/10 text-krudex-blue' 
+                    : 'border-krudex-border/50 text-krudex-muted hover:border-krudex-blue/50 hover:text-white'
+                }`}
+              >
+                {f}
+              </button>
+            ))}
+          </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          {projects.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <motion.div 
               key={index}
               initial={{ opacity: 0, y: 30 }}

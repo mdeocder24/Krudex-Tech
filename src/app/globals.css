@@ -10,6 +10,8 @@
   --color-krudex-text: #e5e5e5;
   --color-krudex-muted: #666666;
   --color-krudex-glow: #c49a3c;
+  --color-krudex-blue: #3b82f6;
+  --color-krudex-blue-hover: #2563eb;
   --font-sans: var(--font-sans-primary);
   --font-serif: var(--font-serif-primary);
 }
