@@ -28,14 +28,14 @@ export default function GlobeObject() {
     let width = canvas.offsetWidth;
 
     const globe = createGlobe(canvas, {
-      devicePixelRatio: 2,
+      devicePixelRatio: 1,
       width: width * 2,
       height: width * 2,
       phi: phi.current,
       theta: 0.3,
       dark: 1,
       diffuse: 1.4,
-      mapSamples: 16000,
+      mapSamples: 8000,
       mapBrightness: 2.8,
       baseColor: [0.05, 0.05, 0.05],
       markerColor: [0.769, 0.604, 0.235],
