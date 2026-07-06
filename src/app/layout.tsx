@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className={`${plusJakartaSans.variable} ${dmSerifDisplay.variable} dark`}>
-      <body suppressHydrationWarning className="min-h-screen bg-krudex-black text-krudex-text antialiased">
+      <body suppressHydrationWarning className="min-h-screen bg-krudex-black text-krudex-text antialiased overflow-x-hidden">
 
         <SmoothScroll>
           <main className="relative">
