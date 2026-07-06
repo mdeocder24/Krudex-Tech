@@ -26,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${plusJakartaSans.variable} ${dmSerifDisplay.variable} dark`}>
-      <body className="min-h-screen bg-krudex-black text-krudex-text antialiased">
+    <html lang="en" suppressHydrationWarning className={`${plusJakartaSans.variable} ${dmSerifDisplay.variable} dark`}>
+      <body suppressHydrationWarning className="min-h-screen bg-krudex-black text-krudex-text antialiased">
 
         <SmoothScroll>
           <main className="relative">
