@@ -9,7 +9,7 @@ import { ArrowRight } from 'lucide-react';
 const timelineData = [
   {
     year: "2022",
-    text: "Kushwant begins freelancing \u2014 first client projects in full-stack React and Python."
+    text: "Kushwant begins freelancing — first client projects in full-stack React and Python."
   },
   {
     year: "2023",
@@ -29,7 +29,7 @@ const principlesData = [
   {
     num: "01",
     title: "Architecture first",
-    text: "We design systems before writing code. Every project begins with a technical specification that both parties agree on \u2014 so scope is clear before a single sprint starts."
+    text: "We design systems before writing code. Every project begins with a technical specification that both parties agree on — so scope is clear before a single sprint starts."
   },
   {
     num: "02",
@@ -39,7 +39,7 @@ const principlesData = [
   {
     num: "03",
     title: "Measurable outcomes",
-    text: "Every engagement has defined success criteria \u2014 Lighthouse scores, latency budgets, accuracy thresholds. If we can't measure it, we won't promise it."
+    text: "Every engagement has defined success criteria — Lighthouse scores, latency budgets, accuracy thresholds. If we can't measure it, we won't promise it."
   },
   {
     num: "04",
@@ -81,7 +81,7 @@ export default function AboutPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <p className="text-krudex-muted text-lg leading-relaxed pt-8 lg:pt-0">
-                Krudex Technologies is an incorporated engineering firm registered in Hyderabad, Telangana. We exist at the intersection of software engineering, artificial intelligence, and digital design \u2014 and we treat those disciplines as a unified craft, not separate silos.
+                Krudex Technologies is an incorporated engineering firm registered in Hyderabad, Telangana. We exist at the intersection of software engineering, artificial intelligence, and digital design — and we treat those disciplines as a unified craft, not separate silos.
               </p>
             </motion.div>
           </div>
@@ -110,13 +110,13 @@ export default function AboutPage() {
               </h2>
               <div className="flex flex-col gap-8 text-krudex-muted text-base leading-relaxed">
                 <p>
-                  Krudex started as one engineer \u2014 Kushwant Kumar Reddy Avuthu \u2014 taking on freelance projects in full-stack React and Python while studying in Hyderabad. The work was good. The clients came back. The scope grew.
+                  Krudex started as one engineer — Kushwant Kumar Reddy Avuthu — taking on freelance projects in full-stack React and Python while studying in Hyderabad. The work was good. The clients came back. The scope grew.
                 </p>
                 <p>
                   Over three years, the practice expanded: first into AI and machine learning, then into UI/UX design and brand identity. Each discipline reinforced the others. A product that performs well needs clean engineering and clean design in equal measure.
                 </p>
                 <p>
-                  In 2026, Krudex Technologies was incorporated in Telangana \u2014 formalizing what had already become a serious operation. The incorporation wasn&apos;t a milestone. It was a signal: we&apos;re here to build companies, not just websites.
+                  In 2026, Krudex Technologies was incorporated in Telangana — formalizing what had already become a serious operation. The incorporation wasn&apos;t a milestone. It was a signal: we&apos;re here to build companies, not just websites.
                 </p>
               </div>
             </motion.div>
