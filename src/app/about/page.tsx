@@ -9,7 +9,7 @@ import { ArrowRight } from 'lucide-react';
 const timelineData = [
   {
     year: "2022",
-    text: "Kushwant begins freelancing — first client projects in full-stack React and Python."
+    text: "Initial freelance practice established — delivering full-stack React and Python solutions."
   },
   {
     year: "2023",
@@ -110,13 +110,13 @@ export default function AboutPage() {
               </h2>
               <div className="flex flex-col gap-8 text-krudex-muted text-base leading-relaxed">
                 <p>
-                  Krudex started as one engineer — Kushwant Kumar Reddy Avuthu — taking on freelance projects in full-stack React and Python while studying in Hyderabad. The work was good. The clients came back. The scope grew.
+                  Krudex began as an independent engineering practice, taking on complex projects in full-stack React and Python. Driven by a commitment to quality and technical excellence, the work spoke for itself. Clients returned, and the scope of our engagements naturally evolved.
                 </p>
                 <p>
-                  Over three years, the practice expanded: first into AI and machine learning, then into UI/UX design and brand identity. Each discipline reinforced the others. A product that performs well needs clean engineering and clean design in equal measure.
+                  Over three years, the practice expanded: first into AI and machine learning, then into UI/UX design and brand identity. We realized that each discipline reinforces the others. A product that performs at scale requires robust engineering and intuitive design in equal measure.
                 </p>
                 <p>
-                  In 2026, Krudex Technologies was incorporated in Telangana — formalizing what had already become a serious operation. The incorporation wasn&apos;t a milestone. It was a signal: we&apos;re here to build companies, not just websites.
+                  In 2026, Krudex Technologies was incorporated in Telangana — formalizing what had already become a serious, multidisciplinary operation. The incorporation wasn&apos;t just a legal milestone. It was a clear signal: we are here to build enduring companies and scalable systems, not just websites.
                 </p>
               </div>
             </motion.div>
