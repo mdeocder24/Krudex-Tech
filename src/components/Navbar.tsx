@@ -47,11 +47,11 @@ const Navbar = () => {
       <div className="flex-1 flex items-center justify-start">
         <Link href="/" className="flex items-center">
           <Image 
-            src="/krudex-logo.png" 
+            src="/krudex-bg.png" 
             alt="Krudex" 
             width={240} 
             height={80} 
-            className="h-16 md:h-20 w-auto object-contain scale-[2] md:scale-[2.5] origin-left mix-blend-screen"
+            className="h-16 md:h-20 w-auto object-contain scale-[2] md:scale-[2.5] origin-left"
             priority
           />
         </Link>
@@ -131,11 +131,11 @@ const Navbar = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <Image 
-                  src="/krudex-logo.png" 
+                  src="/krudex-bg.png" 
                   alt="Krudex" 
                   width={200} 
                   height={60} 
-                  className="h-14 w-auto object-contain scale-[2] origin-left mix-blend-screen"
+                  className="h-14 w-auto object-contain scale-[2] origin-left"
                   priority
                 />
               </Link>

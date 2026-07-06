@@ -4,7 +4,9 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Mail, Phone, MapPin, ChevronDown } from 'lucide-react';
+import { Mail, Phone, MapPin, ChevronDown, CheckCircle2, Loader2 } from 'lucide-react';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 const faqs = [
   {
@@ -40,8 +42,52 @@ const faqs = [
 export default function ContactPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
+  // Form State
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    scope: '',
+    budget: '',
+    timeline: '',
+    details: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState('');
+
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError('');
+    
+    try {
+      // Write data to Firestore
+      await addDoc(collection(db, 'inquiries'), {
+        ...formData,
+        createdAt: new Date().toISOString()
+      });
+      setIsSuccess(true);
+      setFormData({ name: '', email: '', company: '', scope: '', budget: '', timeline: '', details: '' });
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => setIsSuccess(false), 5000);
+    } catch (err: any) {
+      console.error("Error submitting form: ", err);
+      // Firebase throws errors if the project isn't set up or security rules block it
+      setError('Failed to send inquiry. Please check your Firebase configuration or try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -82,13 +128,39 @@ export default function ContactPage() {
               className="lg:col-span-7 flex flex-col"
             >
               <h2 className="text-white text-2xl font-bold mb-8">Send an inquiry</h2>
-              <div className="bg-krudex-card/30 border border-krudex-border/30 border-t-2 border-t-krudex-blue p-8 md:p-12">
-                <form className="flex flex-col gap-8">
+              <div className="bg-krudex-card/30 border border-krudex-border/30 border-t-2 border-t-krudex-blue p-8 md:p-12 relative">
+                
+                {isSuccess && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="absolute top-0 left-0 w-full p-4 bg-green-500/20 border border-green-500/50 flex items-center gap-3 text-green-400 font-medium z-10"
+                  >
+                    <CheckCircle2 className="w-5 h-5" />
+                    Inquiry sent successfully! We will be in touch soon.
+                  </motion.div>
+                )}
+
+                {error && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="absolute top-0 left-0 w-full p-4 bg-red-500/20 border border-red-500/50 text-red-400 font-medium text-sm z-10"
+                  >
+                    {error}
+                  </motion.div>
+                )}
+
+                <form className={`flex flex-col gap-8 ${isSuccess || error ? 'mt-8' : ''}`} onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="flex flex-col gap-3">
                       <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">YOUR NAME *</label>
                       <input
                         type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
                         placeholder="Vishwanath Rao"
                         className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-blue transition-colors"
                       />
@@ -97,6 +169,10 @@ export default function ContactPage() {
                       <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">EMAIL ADDRESS *</label>
                       <input
                         type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
                         placeholder="vishwa@company.in"
                         className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-blue transition-colors"
                       />
@@ -107,6 +183,9 @@ export default function ContactPage() {
                     <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">COMPANY / STARTUP</label>
                     <input
                       type="text"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleChange}
                       placeholder="Acme Technologies"
                       className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-blue transition-colors"
                     />
@@ -116,6 +195,10 @@ export default function ContactPage() {
                     <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">PROJECT SCOPE *</label>
                     <input
                       type="text"
+                      name="scope"
+                      value={formData.scope}
+                      onChange={handleChange}
+                      required
                       placeholder="Full-stack SaaS with an AI-powered recommendation engine"
                       className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-blue transition-colors"
                     />
@@ -125,7 +208,12 @@ export default function ContactPage() {
                     <div className="flex flex-col gap-3">
                       <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">BUDGET RANGE</label>
                       <div className="relative">
-                        <select defaultValue="" className="w-full bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm appearance-none focus:outline-none focus:border-krudex-blue transition-colors">
+                        <select 
+                          name="budget"
+                          value={formData.budget}
+                          onChange={handleChange}
+                          className="w-full bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm appearance-none focus:outline-none focus:border-krudex-blue transition-colors"
+                        >
                           <option value="" disabled hidden>Select</option>
                           <option value="under-10l" className="bg-krudex-card text-white">Under ₹10 Lakhs</option>
                           <option value="10l-25l" className="bg-krudex-card text-white">₹10 Lakhs - ₹25 Lakhs</option>
@@ -138,7 +226,12 @@ export default function ContactPage() {
                     <div className="flex flex-col gap-3">
                       <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">TIMELINE</label>
                       <div className="relative">
-                        <select defaultValue="" className="w-full bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm appearance-none focus:outline-none focus:border-krudex-blue transition-colors">
+                        <select 
+                          name="timeline"
+                          value={formData.timeline}
+                          onChange={handleChange}
+                          className="w-full bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm appearance-none focus:outline-none focus:border-krudex-blue transition-colors"
+                        >
                           <option value="" disabled hidden>Select</option>
                           <option value="asap" className="bg-krudex-card text-white">ASAP</option>
                           <option value="1-3-months" className="bg-krudex-card text-white">1 - 3 Months</option>
@@ -153,6 +246,9 @@ export default function ContactPage() {
                   <div className="flex flex-col gap-3">
                     <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">ADDITIONAL DETAILS</label>
                     <textarea
+                      name="details"
+                      value={formData.details}
+                      onChange={handleChange}
                       placeholder="Existing stack, compliance requirements, integration constraints, deadline pressure..."
                       rows={4}
                       className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-blue transition-colors resize-none"
@@ -160,10 +256,18 @@ export default function ContactPage() {
                   </div>
 
                   <button
-                    type="button"
-                    className="w-full bg-krudex-blue text-krudex-black font-bold py-4 hover:bg-krudex-blue-hover transition-colors mt-4"
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-krudex-blue text-krudex-black font-bold py-4 hover:bg-krudex-blue-hover transition-colors mt-4 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    Send Inquiry
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      'Send Inquiry'
+                    )}
                   </button>
                 </form>
               </div>

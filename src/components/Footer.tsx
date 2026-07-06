@@ -44,11 +44,11 @@ const Footer = () => {
           <div className="col-span-2 md:col-span-1 flex flex-col items-start">
             <Link href="/" className="mb-6 block">
               <Image 
-                src="/krudex-logo.png" 
+                src="/krudex-bg.png" 
                 alt="Krudex" 
                 width={240} 
                 height={80} 
-                className="h-16 w-auto object-contain scale-[2] md:scale-[2.5] origin-left mix-blend-screen"
+                className="h-16 w-auto object-contain scale-[2] md:scale-[2.5] origin-left"
                 priority
               />
             </Link>
