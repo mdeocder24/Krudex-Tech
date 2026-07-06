@@ -10,60 +10,68 @@ import TextReveal from './TextReveal';
 
 const projects = [
   {
-    category: "Enterprise \u00B7 2024",
-    title: "Kemplast Inc. \u2014 Frontend Modernization",
+    type: "Website",
+    category: "Website",
+    title: "Kemplast Inc.",
     desc: "Rebuilt a legacy React 16 platform on Next.js 16 + React 19 with a Tailwind v4 design system. Lighthouse score moved from 71 to 99. LCP dropped from 2.8s to 0.9s.",
     tags: ["99 Lighthouse", "0.9s LCP", "-47% JS"],
-    demoLink: "#"
+    demoLink: "https://www.kemplast.in/"
   },
   {
-    category: "AI / ML \u00B7 2025",
+    type: "Website",
+    category: "Website",
     title: "Sign Language Recognition Platform",
     desc: "Real-time ASL gesture classification using MediaPipe Hands + TensorFlow.js \u2014 running entirely in-browser. 26 gestures recognized at 94.7% accuracy with 18ms inference.",
     tags: ["94.7% accuracy", "18ms latency", "0 server calls"],
-    demoLink: "#"
+    demoLink: "https://sign-language-recognitio-a7e2a.web.app/"
   },
   {
-    category: "FinTech \u00B7 2024",
-    title: "Aura Trading \u2014 Real-time Dashboard",
-    desc: "Engineered a high-frequency trading dashboard using Next.js, WebSockets, and Redis. Handled 10k+ concurrent connections with sub-50ms latency for live market data.",
-    tags: ["WebSockets", "<50ms Latency", "Redis"],
-    demoLink: "#"
+    type: "Website",
+    category: "Website",
+    title: "Knowvation Learnings",
+    desc: "Built a comprehensive ed-tech platform focused on 'Ignite, Innovate, Implement' for modern learners. Features interactive courses and real-time collaboration.",
+    tags: ["EdTech", "E-Learning", "Interactive"],
+    demoLink: "https://www.knowvationlearnings.in/"
   },
   {
-    category: "E-Commerce \u00B7 2023",
-    title: "Lumina \u2014 Headless Shopify Migration",
-    desc: "Migrated a monolith Shopify store to a headless Next.js architecture. Improved conversion rate by 40% and reduced page load times by 65% across mobile devices.",
-    tags: ["Headless Commerce", "+40% Conv.", "Next.js"],
-    demoLink: "#"
+    type: "Website",
+    category: "Website",
+    title: "GDG Hyderabad",
+    desc: "Designed and developed the community portal for Google Developer Group (GDG) Hyderabad. Handled event registrations and served as a central hub for thousands of developers.",
+    tags: ["Community", "Event Portal", "Google Tech"],
+    demoLink: "https://gdghyd.in/"
   },
   {
-    category: "Healthcare \u00B7 2024",
-    title: "MedSync \u2014 Patient Data System",
-    desc: "Developed a HIPAA-compliant patient management system using Supabase and Role-Based Access Control (RBAC). Secured over 2M+ records with end-to-end encryption.",
-    tags: ["HIPAA Compliant", "Supabase", "E2E Encryption"],
-    demoLink: "#"
+    type: "App",
+    category: "App",
+    title: "Pepperstone Trading App",
+    desc: "A highly responsive mobile trading application offering low-latency execution, real-time charting, and secure account management for Forex and CFD traders.",
+    tags: ["React Native", "Low Latency", "Trading"],
+    demoLink: "https://play.google.com/store/apps/details?id=com.pepperstone.app&hl=en_IN"
   },
   {
-    category: "SaaS \u00B7 2025",
-    title: "CopyFlow AI \u2014 Content Generator",
-    desc: "Built a generative AI SaaS for marketers using OpenAI's GPT-4. Integrated Stripe for tiered billing and processed over 500k API requests in the first month.",
-    tags: ["GPT-4 API", "Stripe Billing", "500k+ Req/mo"],
-    demoLink: "#"
+    type: "App",
+    category: "App",
+    title: "Farmable: Farm Management App",
+    desc: "A comprehensive farm management application enabling growers to track field activities, manage harvests, and monitor spray logs through an intuitive mobile interface.",
+    tags: ["AgriTech", "Offline Mode", "React Native"],
+    demoLink: "https://play.google.com/store/apps/details?id=tech.farmable.farmable&hl=en_IN"
   },
   {
-    category: "Logistics \u00B7 2023",
-    title: "RouteMate \u2014 Fleet Tracking",
-    desc: "Created a real-time fleet tracking and route optimization web app. Leveraged Google Maps API and WebGL for rendering thousands of moving vehicles simultaneously.",
-    tags: ["WebGL", "Google Maps API", "Optimization"],
-    demoLink: "#"
+    type: "Website",
+    category: "Website",
+    title: "TEDx MLRIT",
+    desc: "Designed and built the official TEDx MLRIT platform to manage speaker line-ups, ticket registrations, and showcase the event theme with rich interactive animations.",
+    tags: ["Next.js", "Animations", "Event Platform"],
+    demoLink: "https://tedx-mlrit.vercel.app/"
   },
   {
-    category: "EdTech \u00B7 2024",
-    title: "CollabLearn \u2014 Virtual Classrooms",
-    desc: "Designed an interactive learning platform with WebRTC for low-latency video streaming and collaborative whiteboarding, supporting up to 100 participants per room.",
-    tags: ["WebRTC", "Video Streaming", "Sockets"],
-    demoLink: "#"
+    type: "Website",
+    category: "Website",
+    title: "AI Career Coach",
+    desc: "Developed an AI-powered career coach providing personalized resume reviews, interview preparation, and career path guidance using advanced LLM integrations.",
+    tags: ["Generative AI", "LLM", "Next.js"],
+    demoLink: "https://ai-career-coach-mu.vercel.app/"
   }
 ];
 
@@ -128,7 +136,7 @@ const SelectedWork = () => {
                 {project.demoLink && (
                   <div className="mt-8">
                     <a href={project.demoLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-krudex-blue transition-colors group/link">
-                      Live demo
+                      {project.type === 'App' ? 'View app' : 'Live website'}
                       <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
                     </a>
                   </div>
