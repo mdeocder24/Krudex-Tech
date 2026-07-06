@@ -119,7 +119,7 @@ const Hero = () => {
           className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6"
         >
           <MagneticButton
-            href="/contact"
+            href="/work"
             className="group inline-flex items-center gap-2 bg-white text-krudex-black px-6 md:px-8 py-3 md:py-3.5 text-[13px] md:text-[14px] font-medium tracking-wide hover:bg-gray-200 transition-colors rounded"
           >
             View Our Work
