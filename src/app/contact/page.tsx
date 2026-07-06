@@ -5,8 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Mail, Phone, MapPin, ChevronDown, CheckCircle2, Loader2 } from 'lucide-react';
-import { collection, addDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { supabase } from '@/lib/supabase';
 
 const faqs = [
   {
@@ -71,11 +70,17 @@ export default function ContactPage() {
     setError('');
     
     try {
-      // Write data to Firestore
-      await addDoc(collection(db, 'inquiries'), {
-        ...formData,
-        createdAt: new Date().toISOString()
-      });
+      // Write data to Supabase
+      const { error } = await supabase
+        .from('inquiries')
+        .insert([{
+          ...formData,
+        }]);
+        
+      if (error) {
+        throw error;
+      }
+      
       setIsSuccess(true);
       setFormData({ name: '', email: '', company: '', scope: '', budget: '', timeline: '', details: '' });
       
@@ -83,8 +88,8 @@ export default function ContactPage() {
       setTimeout(() => setIsSuccess(false), 5000);
     } catch (err: any) {
       console.error("Error submitting form: ", err);
-      // Firebase throws errors if the project isn't set up or security rules block it
-      setError('Failed to send inquiry. Please check your Firebase configuration or try again later.');
+      // Supabase throws errors if the project isn't set up or RLS blocks it
+      setError('Failed to send inquiry. Please check your Supabase configuration or try again later.');
     } finally {
       setIsSubmitting(false);
     }
