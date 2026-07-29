@@ -120,11 +120,11 @@ const SelectedWork = () => {
             {['All', 'Website', 'App'].map((f) => (
               <button
                 key={f}
-                onClick={() => setFilter(f as any)}
-                className={`px-5 py-2 text-xs font-mono uppercase tracking-wider transition-all duration-300 border ${
+                onClick={() => setFilter(f as 'All' | 'Website' | 'App')}
+                className={`px-6 py-2.5 text-xs font-mono uppercase tracking-wider transition-all duration-300 rounded-full border cursor-pointer ${
                   filter === f 
-                    ? 'border-krudex-blue bg-krudex-blue/10 text-krudex-blue' 
-                    : 'border-krudex-border/50 text-krudex-muted hover:border-krudex-blue/50 hover:text-white'
+                    ? 'border-[#e65c00] bg-[#e65c00]/15 text-white shadow-[0_0_20px_rgba(230,92,0,0.25)] font-semibold scale-105' 
+                    : 'border-white/10 text-krudex-muted hover:border-white/30 hover:bg-white/5 hover:text-white hover:scale-102'
                 }`}
               >
                 {f}

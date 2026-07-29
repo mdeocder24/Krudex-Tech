@@ -78,7 +78,7 @@ const Navbar = () => {
                     initial={{ opacity: 0, scaleX: 0 }}
                     animate={{ opacity: 1, scaleX: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute -bottom-2 left-0 right-0 h-[2px] bg-white rounded-full origin-center"
+                    className="absolute -bottom-2 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#e65c00] to-transparent rounded-full origin-center shadow-[0_0_8px_#e65c00]"
                   />
                 )}
               </MotionLink>
@@ -92,7 +92,7 @@ const Navbar = () => {
             href="/contact"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="text-[13px] text-white border border-white/30 px-5 py-2 rounded-sm hover:bg-white hover:text-krudex-black transition-all duration-300"
+            className="text-[13px] font-medium text-white border border-white/20 bg-white/5 px-5 py-2 rounded-full hover:bg-white hover:text-krudex-black hover:border-white hover:shadow-[0_0_25px_rgba(255,255,255,0.4)] transition-all duration-300"
           >
             Contact Us
           </MotionLink>

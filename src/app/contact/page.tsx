@@ -86,7 +86,7 @@ export default function ContactPage() {
       
       // Reset success message after 5 seconds
       setTimeout(() => setIsSuccess(false), 5000);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Error submitting form: ", err);
       // Supabase throws errors if the project isn't set up or RLS blocks it
       setError('Failed to send inquiry. Please check your Supabase configuration or try again later.');

@@ -43,8 +43,7 @@ const fadeInUp = (delay: number) => ({
   animate: {
     opacity: 1,
     y: 0,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    transition: { duration: 0.7, delay, ease: "easeOut" as any },
+    transition: { duration: 0.7, delay, ease: "easeOut" as const },
   },
 });
 
@@ -63,14 +62,18 @@ const Hero = () => {
       <div className="w-full lg:w-[45%] z-10 flex flex-col justify-center items-start px-6 md:px-14 lg:px-20 pt-28 md:pt-32 lg:pt-0 pb-4 lg:pb-0">
         {/* Badge */}
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          whileHover={{ scale: 1.03 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="inline-flex items-center gap-2.5 bg-krudex-surface/80 border border-krudex-border px-3 md:px-4 py-1.5 md:py-2 rounded-full mb-6 md:mb-8"
+          className="group inline-flex items-center gap-2.5 bg-krudex-surface/90 border border-white/10 hover:border-[#e65c00]/50 px-3.5 md:px-4 py-1.5 md:py-2 rounded-full mb-6 md:mb-8 shadow-[0_0_20px_rgba(230,92,0,0.15)] transition-all duration-300 cursor-pointer"
         >
-          <span className="w-2 h-2 rounded-full bg-[#e65c00] animate-pulse" />
-          <span className="text-[11px] text-krudex-muted tracking-wide">
-            Empowering Startups
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#e65c00] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#e65c00]"></span>
+          </span>
+          <span className="text-[11px] md:text-[12px] font-mono text-krudex-muted group-hover:text-white tracking-wide transition-colors">
+            Empowering Startups &amp; Enterprise
           </span>
         </motion.div>
 
@@ -116,20 +119,21 @@ const Hero = () => {
         {/* CTA Buttons */}
         <motion.div
           {...fadeInUp(1.1)}
-          className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6"
+          className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6 w-full sm:w-auto"
         >
           <MagneticButton
             href="/work"
-            className="group inline-flex items-center gap-2 bg-white text-krudex-black px-6 md:px-8 py-3 md:py-3.5 text-[13px] md:text-[14px] font-medium tracking-wide hover:bg-gray-200 transition-colors rounded"
+            className="group relative inline-flex items-center justify-center gap-2 bg-white text-krudex-black px-7 md:px-8 py-3.5 md:py-4 text-[13px] md:text-[14px] font-semibold tracking-wide hover:bg-gray-100 transition-all rounded-full shadow-[0_0_30px_rgba(255,255,255,0.25)] hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] hover:scale-[1.02]"
           >
-            View Our Work
+            <span>View Our Work</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </MagneticButton>
           <MagneticButton
             href="/contact"
-            className="group inline-flex items-center gap-2 text-krudex-muted hover:text-white text-[13px] font-medium tracking-wide transition-colors"
+            className="group inline-flex items-center justify-center gap-2 px-7 md:px-8 py-3.5 md:py-4 rounded-full border border-white/10 hover:border-white/30 bg-white/5 hover:bg-white/10 text-white text-[13px] md:text-[14px] font-medium tracking-wide transition-all hover:scale-[1.02]"
           >
-            Book a Strategy Call
-            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            <span>Book a Strategy Call</span>
+            <ArrowRight className="w-4 h-4 text-[#e65c00] group-hover:translate-x-1 transition-transform" />
           </MagneticButton>
         </motion.div>
       </div>
