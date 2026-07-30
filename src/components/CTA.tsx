@@ -58,7 +58,7 @@ const CTA = () => {
             <ArrowRight className="w-4 h-4" />
           </MagneticButton>
           <MagneticButton
-            href="mailto:hello@krudex.com"
+            href="mailto:kushwant.work@gmail.com"
             className="inline-flex items-center gap-2 border border-white/30 text-white px-8 py-4 text-sm font-medium hover:bg-white hover:text-krudex-black transition-all duration-300"
           >
             Explore Services
