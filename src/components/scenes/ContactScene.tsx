@@ -9,22 +9,22 @@ const EnergyCore = () => {
   const coreRef = useRef<THREE.Mesh>(null);
   const ring1Ref = useRef<THREE.Mesh>(null);
   const ring2Ref = useRef<THREE.Mesh>(null);
-  
+
   useFrame(({ clock }) => {
     if (!coreRef.current || !ring1Ref.current || !ring2Ref.current) return;
     const t = clock.getElapsedTime();
-    
+
     // Smooth slow rotation
     coreRef.current.rotation.y = t * 0.1;
     coreRef.current.rotation.x = t * 0.05;
-    
+
     // Rings orbit the core
     ring1Ref.current.rotation.x = t * 0.5;
     ring1Ref.current.rotation.y = t * 0.2;
-    
+
     ring2Ref.current.rotation.x = -t * 0.3;
     ring2Ref.current.rotation.z = t * 0.4;
-    
+
     // Core pulsing effect on scale
     const pulse = 1 + Math.sin(t * 2) * 0.02;
     coreRef.current.scale.set(pulse, pulse, pulse);
@@ -36,7 +36,7 @@ const EnergyCore = () => {
         {/* The Solid Metallic Core */}
         <mesh ref={coreRef}>
           <icosahedronGeometry args={[2.5, 4]} />
-          <meshPhysicalMaterial 
+          <meshPhysicalMaterial
             color="#050505"
             metalness={1}
             roughness={0.2}
@@ -51,14 +51,14 @@ const EnergyCore = () => {
           <torusGeometry args={[3.5, 0.05, 16, 100]} />
           <meshBasicMaterial color="#3b82f6" transparent opacity={0.8} />
         </mesh>
-        
+
         {/* Orbiting Energy Ring 2 */}
         <mesh ref={ring2Ref}>
           <torusGeometry args={[4.5, 0.02, 16, 100]} />
           <meshBasicMaterial color="#60a5fa" transparent opacity={0.5} />
         </mesh>
       </Float>
-      
+
       <pointLight position={[0, 0, 0]} intensity={2} color="#3b82f6" distance={10} />
     </group>
   );
@@ -72,10 +72,10 @@ export default function ContactScene() {
   });
 
   return (
-    <>
+    <>-
       <fog attach="fog" args={['#050505', 5, 25]} />
       <ambientLight intensity={0.1} />
-      
+
       <Environment resolution={256}>
         <group rotation={[Math.PI / 3, 0, 0]}>
           <Lightformer form="circle" intensity={10} position={[0, 10, -5]} scale={5} color="#3b82f6" />
