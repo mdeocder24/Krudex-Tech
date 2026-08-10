@@ -11,8 +11,6 @@ interface ParticleFieldProps {
   colorB?: string;
 }
 
-/** Deterministic PRNG (mulberry32) — avoids Math.random's render impurity while
- *  still producing a stable, visually-random scatter per mount. */
 function createRng(seed: number) {
   let s = seed;
   return () => {
@@ -23,10 +21,6 @@ function createRng(seed: number) {
   };
 }
 
-/**
- * Ambient instanced-points starfield used as a full-bleed backdrop layer
- * behind page content. Cheap: one BufferGeometry, additive blending.
- */
 const ParticleField = ({ count = 400, radius = 22, colorA = '#7c6cff', colorB = '#f2a93b' }: ParticleFieldProps) => {
   const pointsRef = useRef<THREE.Points>(null);
 
