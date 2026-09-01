@@ -187,19 +187,6 @@ export default function OurTeamPage() {
         />
 
         <div className="max-w-7xl mx-auto relative">
-          {/* Section label */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-4 mb-16"
-          >
-            <div className="h-[1px] flex-1 bg-gradient-to-r from-krudex-blue/30 to-transparent" />
-            <span className="text-[11px] uppercase tracking-[0.3em] text-white/20 font-medium">
-              7 Engineers · 0 Account Managers
-            </span>
-            <div className="h-[1px] flex-1 bg-gradient-to-l from-krudex-blue/30 to-transparent" />
-          </motion.div>
 
           {/* Cards grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
