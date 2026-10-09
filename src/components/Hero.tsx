@@ -59,18 +59,17 @@ const Hero = () => {
       <div className="absolute inset-0 dot-grid opacity-100 pointer-events-none z-0" />
 
       {/* ── Left: Text Content ───────────────── */}
-      <div className="w-full lg:w-[45%] z-10 flex flex-col justify-center items-start px-6 md:px-14 lg:px-20 pt-28 md:pt-32 lg:pt-0 pb-4 lg:pb-0">
+      <div className="w-full lg:w-[45%] z-10 flex flex-col justify-center items-start px-6 md:px-14 lg:px-20 pt-32 md:pt-32 lg:pt-0 pb-4 lg:pb-0">
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          whileHover={{ scale: 1.03 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="group inline-flex items-center gap-2.5 bg-krudex-surface/90 border border-white/10 hover:border-[#e65c00]/50 px-3.5 md:px-4 py-1.5 md:py-2 rounded-full mb-6 md:mb-8 shadow-[0_0_20px_rgba(230,92,0,0.15)] transition-all duration-300 cursor-pointer"
+          className="group inline-flex items-center gap-2.5 bg-krudex-surface/90 border border-white/10 hover:border-white/40 px-3.5 md:px-4 py-1.5 md:py-2 rounded-full mb-6 md:mb-8 shadow-[0_0_20px_rgba(255,255,255,0.06)] transition-all duration-300"
         >
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#e65c00] opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#e65c00]"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
           </span>
           <span className="text-[11px] md:text-[12px] font-mono text-krudex-muted group-hover:text-white tracking-wide transition-colors">
             Empowering Startups &amp; Enterprise
@@ -133,7 +132,7 @@ const Hero = () => {
             className="group inline-flex items-center justify-center gap-2 px-7 md:px-8 py-3.5 md:py-4 rounded-full border border-white/10 hover:border-white/30 bg-white/5 hover:bg-white/10 text-white text-[13px] md:text-[14px] font-medium tracking-wide transition-all hover:scale-[1.02]"
           >
             <span>Book a Strategy Call</span>
-            <ArrowRight className="w-4 h-4 text-[#e65c00] group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </MagneticButton>
         </motion.div>
       </div>
@@ -149,7 +148,7 @@ const Hero = () => {
 
         {/* Ambient glow layer (pillars have their own inner glow) */}
         <div className="absolute inset-0 pointer-events-none -z-10">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#c49a3c]/5 blur-[160px] rounded-full" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#ffffff]/5 blur-[160px] rounded-full" />
         </div>
       </motion.div>
     </section>

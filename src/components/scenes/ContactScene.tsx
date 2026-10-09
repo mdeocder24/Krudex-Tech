@@ -49,17 +49,17 @@ const EnergyCore = () => {
         {/* Orbiting Energy Ring 1 (Torus) */}
         <mesh ref={ring1Ref}>
           <torusGeometry args={[3.5, 0.05, 16, 100]} />
-          <meshBasicMaterial color="#3b82f6" transparent opacity={0.8} />
+          <meshBasicMaterial color="#ffffff" transparent opacity={0.8} />
         </mesh>
 
         {/* Orbiting Energy Ring 2 */}
         <mesh ref={ring2Ref}>
           <torusGeometry args={[4.5, 0.02, 16, 100]} />
-          <meshBasicMaterial color="#60a5fa" transparent opacity={0.5} />
+          <meshBasicMaterial color="#e5e5e5" transparent opacity={0.5} />
         </mesh>
       </Float>
 
-      <pointLight position={[0, 0, 0]} intensity={2} color="#3b82f6" distance={10} />
+      <pointLight position={[0, 0, 0]} intensity={2} color="#ffffff" distance={10} />
     </group>
   );
 };
@@ -78,9 +78,9 @@ export default function ContactScene() {
 
       <Environment resolution={256}>
         <group rotation={[Math.PI / 3, 0, 0]}>
-          <Lightformer form="circle" intensity={10} position={[0, 10, -5]} scale={5} color="#3b82f6" />
-          <Lightformer form="rect" intensity={5} position={[-5, 0, -5]} scale={[2, 10, 1]} color="#bfdbfe" />
-          <Lightformer form="rect" intensity={5} position={[5, 0, -5]} scale={[2, 10, 1]} color="#1e3a8a" />
+          <Lightformer form="circle" intensity={10} position={[0, 10, -5]} scale={5} color="#ffffff" />
+          <Lightformer form="rect" intensity={5} position={[-5, 0, -5]} scale={[2, 10, 1]} color="#f5f5f5" />
+          <Lightformer form="rect" intensity={5} position={[5, 0, -5]} scale={[2, 10, 1]} color="#404040" />
         </group>
       </Environment>
 

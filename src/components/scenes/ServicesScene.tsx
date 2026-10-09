@@ -117,13 +117,13 @@ export default function ServicesScene() {
       <fog attach="fog" args={['#050505', 10, 35]} />
       <ambientLight intensity={0.1} />
       
-      <spotLight position={[15, 20, 10]} angle={0.3} penumbra={1} intensity={5} color="#3b82f6" castShadow />
-      <directionalLight position={[-10, -10, -10]} intensity={2} color="#1d4ed8" />
+      <spotLight position={[15, 20, 10]} angle={0.3} penumbra={1} intensity={5} color="#ffffff" castShadow />
+      <directionalLight position={[-10, -10, -10]} intensity={2} color="#595959" />
 
       <Environment resolution={256}>
         <group rotation={[-Math.PI / 4, 0, 0]}>
-          <Lightformer form="rect" intensity={10} position={[0, 10, -10]} scale={[20, 2, 1]} color="#60a5fa" />
-          <Lightformer form="rect" intensity={5} position={[-10, 0, -10]} scale={[2, 20, 1]} color="#1e3a8a" />
+          <Lightformer form="rect" intensity={10} position={[0, 10, -10]} scale={[20, 2, 1]} color="#e5e5e5" />
+          <Lightformer form="rect" intensity={5} position={[-10, 0, -10]} scale={[2, 20, 1]} color="#404040" />
         </group>
       </Environment>
 

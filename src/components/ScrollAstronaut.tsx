@@ -36,15 +36,15 @@ const ScrollAstronaut = () => {
           {/* Helmet / Head */}
           <circle cx="24" cy="12" r="10" fill="#333" stroke="#555" strokeWidth="1" />
           {/* Visor */}
-          <ellipse cx="24" cy="11" rx="7" ry="5.5" fill="#b87333" opacity="0.9" />
+          <ellipse cx="24" cy="11" rx="7" ry="5.5" fill="#bfbfbf" opacity="0.9" />
           {/* Visor glint */}
-          <ellipse cx="21" cy="9" rx="2" ry="1.2" fill="#e8a84c" opacity="0.6" />
+          <ellipse cx="21" cy="9" rx="2" ry="1.2" fill="#f5f5f5" opacity="0.6" />
 
           {/* Body / Torso */}
           <rect x="16" y="22" width="16" height="18" rx="4" fill="#2a2a2a" stroke="#444" strokeWidth="0.5" />
           {/* Chest detail */}
           <rect x="20" y="25" width="8" height="4" rx="1" fill="#3a3a3a" />
-          <circle cx="24" cy="27" r="1" fill="#b87333" opacity="0.6" />
+          <circle cx="24" cy="27" r="1" fill="#bfbfbf" opacity="0.6" />
 
           {/* Backpack */}
           <rect x="32" y="24" width="6" height="14" rx="2" fill="#222" stroke="#444" strokeWidth="0.5" />

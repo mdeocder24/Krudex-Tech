@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
 const timelineData = [
@@ -50,11 +51,11 @@ const principlesData = [
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-transparent selection:bg-krudex-blue selection:text-krudex-black flex flex-col">
+    <main className="min-h-screen bg-transparent selection:bg-krudex-accent selection:text-krudex-black flex flex-col">
       <Navbar />
       
       {/* 1. Hero Section */}
-      <section className="px-8 md:px-16 lg:px-24 pt-48 pb-32 bg-krudex-black/40 backdrop-blur-md relative z-10">
+      <section className="px-6 md:px-16 lg:px-24 pt-40 md:pt-48 pb-24 md:pb-32 bg-krudex-black/40 backdrop-blur-md relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <motion.div 
@@ -64,14 +65,14 @@ export default function AboutPage() {
               className="flex flex-col items-start"
             >
               <div className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-10">
-                <div className="w-1.5 h-1.5 rounded-full bg-krudex-blue"></div>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-blue font-semibold">
+                <div className="w-1.5 h-1.5 rounded-full bg-krudex-accent"></div>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-accent font-semibold">
                   ABOUT US
                 </span>
               </div>
               <h1 className="font-serif text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight">
                 <span className="text-white">Built to last.</span><br />
-                <span className="text-krudex-blue">Not just to<br />ship.</span>
+                <span className="text-white/45">Not just to<br />ship.</span>
               </h1>
             </motion.div>
             
@@ -89,7 +90,7 @@ export default function AboutPage() {
       </section>
 
       {/* 2. Our Story / Timeline Section */}
-      <section className="px-8 md:px-16 lg:px-24 py-32 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border/50 relative z-10">
+      <section className="px-6 md:px-16 lg:px-24 py-24 md:py-32 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 lg:gap-32">
             <motion.div 
@@ -100,8 +101,8 @@ export default function AboutPage() {
               className="flex flex-col"
             >
               <div className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-10 self-start">
-                <div className="w-1.5 h-1.5 rounded-full bg-krudex-blue"></div>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-blue font-semibold">
+                <div className="w-1.5 h-1.5 rounded-full bg-krudex-accent"></div>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-accent font-semibold">
                   OUR STORY
                 </span>
               </div>
@@ -137,7 +138,7 @@ export default function AboutPage() {
                   )}
                   
                   <div className="flex-shrink-0">
-                    <div className="border border-krudex-border bg-krudex-black px-4 py-2 text-krudex-blue font-mono text-sm relative z-10">
+                    <div className="border border-krudex-border bg-krudex-black px-4 py-2 text-white font-mono text-sm relative z-10">
                       {item.year}
                     </div>
                   </div>
@@ -156,7 +157,7 @@ export default function AboutPage() {
 
 
       {/* 4. Principles Section */}
-      <section className="px-8 md:px-16 lg:px-24 py-32 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border/50 relative z-10">
+      <section className="px-6 md:px-16 lg:px-24 py-24 md:py-32 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col items-center text-center mb-24">
             <motion.div 
@@ -166,8 +167,8 @@ export default function AboutPage() {
               transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-8"
             >
-              <div className="w-1.5 h-1.5 rounded-full bg-krudex-blue"></div>
-              <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-blue font-semibold">
+              <div className="w-1.5 h-1.5 rounded-full bg-krudex-accent"></div>
+              <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-accent font-semibold">
                 OUR PRINCIPLES
               </span>
             </motion.div>
@@ -201,9 +202,9 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className="bg-krudex-card/40 border border-krudex-border/30 p-10 lg:p-12"
+                className="bg-krudex-card/40 border border-krudex-border p-10 lg:p-12"
               >
-                <div className="text-krudex-blue font-mono text-sm mb-6">{principle.num}</div>
+                <div className="text-krudex-muted font-mono text-sm mb-6">{principle.num}</div>
                 <h3 className="text-white font-bold text-xl mb-4">{principle.title}</h3>
                 <p className="text-krudex-muted text-sm leading-relaxed">
                   {principle.text}
@@ -215,7 +216,7 @@ export default function AboutPage() {
       </section>
 
       {/* 5. About CTA */}
-      <section className="px-8 md:px-16 lg:px-24 py-32 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border/50 relative z-10">
+      <section className="px-6 md:px-16 lg:px-24 py-24 md:py-32 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border relative z-10">
         <div className="max-w-3xl mx-auto flex flex-col items-center text-center">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
@@ -243,10 +244,10 @@ export default function AboutPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <a href="/contact" className="group flex items-center gap-2 bg-white text-krudex-black px-8 py-4 font-semibold text-sm hover:bg-gray-200 transition-colors">
+            <Link href="/contact" className="group flex items-center gap-2 bg-white text-krudex-black px-8 py-4 rounded-full font-semibold text-sm hover:bg-gray-200 transition-colors">
               Contact Us
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
+            </Link>
           </motion.div>
         </div>
       </section>

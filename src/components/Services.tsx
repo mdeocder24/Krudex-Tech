@@ -32,7 +32,7 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="services-overview" className="px-8 md:px-14 lg:px-20 py-32 bg-krudex-black relative z-10">
+    <section id="services-overview" className="px-6 md:px-14 lg:px-20 py-24 md:py-32 bg-krudex-black relative z-10">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -47,7 +47,7 @@ const Services = () => {
           </span>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -55,7 +55,7 @@ const Services = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="lg:col-span-5"
           >
-            <h2 className="font-serif text-5xl md:text-6xl text-white font-normal mb-6 leading-[1.1] tracking-tight">
+            <h2 className="font-serif text-4xl md:text-6xl text-white font-normal mb-6 leading-[1.1] tracking-tight">
               Your Startup&apos;s <br /> Technical Partner.
             </h2>
             <p className="text-krudex-muted text-base leading-relaxed">
@@ -63,16 +63,16 @@ const Services = () => {
             </p>
           </motion.div>
 
-          <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-px bg-krudex-border/30 border border-krudex-border/30">
+          <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-px bg-krudex-border border border-krudex-border">
             {services.map((svc, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                whileHover={{ y: -5, backgroundColor: 'rgba(255,255,255,0.03)' }}
+                whileHover={{ backgroundColor: '#111111' }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="bg-krudex-black/80 backdrop-blur-md p-10 transition-colors duration-300"
+                className="bg-krudex-black p-8 md:p-10"
               >
                 <div className="text-krudex-muted font-mono text-sm mb-6">{svc.num}</div>
                 <h3 className="text-white font-medium text-lg mb-3">{svc.title}</h3>
@@ -93,7 +93,7 @@ const Services = () => {
             href="/services"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="group flex items-center gap-2 border border-white/30 text-white px-8 py-4 font-medium text-sm hover:bg-white hover:text-krudex-black transition-all duration-300"
+            className="group flex items-center gap-2 border border-white/30 text-white px-8 py-4 rounded-full font-medium text-sm hover:bg-white hover:text-krudex-black transition-all duration-300"
           >
             Explore All Services
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

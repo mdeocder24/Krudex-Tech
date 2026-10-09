@@ -54,6 +54,8 @@ const socialLabels: Record<SocialType, string> = {
 };
 
 function TeamCard({ member, index }: { member: TeamMember; index: number }) {
+  // Placeholder "#" profiles are hidden until real URLs are added
+  const socials = (member.socials ?? []).filter((s) => s.url && s.url !== "#");
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -108,7 +110,7 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
           rotateY,
           transformStyle: "preserve-3d",
         }}
-        className="relative rounded-2xl cursor-pointer"
+        className="relative rounded-2xl"
       >
         {/* === Animated holographic border === */}
         <div
@@ -123,7 +125,7 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
         />
 
         {/* === Card body === */}
-        <div className="relative rounded-2xl bg-[#0a0a0f] border border-white/[0.06] overflow-hidden z-10">
+        <div className="relative rounded-2xl bg-[#0a0a0a] border border-white/[0.06] overflow-hidden z-10">
           {/* Cursor-following glow */}
           <motion.div
             className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
@@ -170,7 +172,7 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
                   className="w-2 h-2 rounded-full"
                   style={{ background: member.accent }}
                 />
-                <span className="text-[10px] uppercase tracking-[0.25em] text-white/30 font-medium">
+                <span className="text-[10px] uppercase tracking-[0.25em] text-white/50 font-medium">
                   Active
                 </span>
               </div>
@@ -209,13 +211,10 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
               </motion.div>
 
               <div className="min-w-0 pt-1">
-                <h3 className="text-white font-bold text-base leading-tight truncate">
+                <h3 className="text-white font-bold text-base leading-tight">
                   {member.name}
                 </h3>
-                <p
-                  className="text-sm font-medium mt-1 truncate"
-                  style={{ color: member.accent }}
-                >
+                <p className="text-sm font-medium mt-1 text-krudex-muted">
                   {member.role}
                 </p>
               </div>
@@ -232,14 +231,14 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
           </div>
 
           {/* Bio */}
-          <div className="p-6 pt-4 pb-3">
-            <p className="text-white/40 text-[13px] leading-relaxed line-clamp-3">
+          <div className="p-6 pt-4 pb-4">
+            <p className="text-white/65 text-[13px] leading-relaxed">
               {member.bio}
             </p>
           </div>
 
           {/* Skills */}
-          <div className="px-6 pb-4">
+          <div className="px-6 pb-6">
             <div className="flex flex-wrap gap-1.5">
               {member.skills.map((skill, i) => (
                 <motion.span
@@ -274,10 +273,10 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
           </div>
 
           {/* ── Social Links Bar ── */}
-          {member.socials && member.socials.length > 0 && (
+          {socials.length > 0 && (
             <div className="px-6 pb-5 pt-1">
               <div className="flex items-center gap-2">
-                {member.socials.map((social, i) => (
+                {socials.map((social, i) => (
                   <motion.a
                     key={i}
                     href={social.url}
@@ -289,7 +288,7 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
                     style={{
                       background: `${member.accent}06`,
                       borderColor: `${member.accent}12`,
-                      color: `${member.accent}88`,
+                      color: `${member.accent}aa`,
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.borderColor = `${member.accent}50`;
@@ -300,10 +299,11 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
                     onMouseLeave={(e) => {
                       e.currentTarget.style.borderColor = `${member.accent}12`;
                       e.currentTarget.style.background = `${member.accent}06`;
-                      e.currentTarget.style.color = `${member.accent}88`;
+                      e.currentTarget.style.color = `${member.accent}aa`;
                       e.currentTarget.style.boxShadow = "none";
                     }}
                     title={socialLabels[social.type]}
+                    aria-label={`${member.name} on ${socialLabels[social.type]}`}
                   >
                     {socialIcons[social.type]}
                   </motion.a>
@@ -316,7 +316,7 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
                     style={{ background: member.accent }}
                   />
                   <span
-                    className="text-[9px] uppercase tracking-[0.2em] opacity-20 font-medium whitespace-nowrap"
+                    className="text-[9px] uppercase tracking-[0.2em] opacity-50 font-medium whitespace-nowrap"
                     style={{ color: member.accent }}
                   >
                     Connect

@@ -54,7 +54,7 @@ const GlassGallery = () => {
           >
             <boxGeometry args={[1, 1, 1]} />
             <meshPhysicalMaterial 
-              color="#bfdbfe"
+              color="#f5f5f5"
               transmission={1}
               opacity={1}
               metalness={0.1}
@@ -68,7 +68,7 @@ const GlassGallery = () => {
       ))}
       
       {/* Central light source inside the ring */}
-      <pointLight position={[0, 0, 0]} intensity={5} color="#3b82f6" distance={20} />
+      <pointLight position={[0, 0, 0]} intensity={5} color="#ffffff" distance={20} />
     </group>
   );
 };
@@ -87,8 +87,8 @@ export default function WorkScene() {
       
       <Environment resolution={256}>
         <group rotation={[0, 0, 0]}>
-          <Lightformer form="rect" intensity={5} position={[0, 5, -10]} scale={[20, 20, 1]} color="#60a5fa" />
-          <Lightformer form="circle" intensity={10} position={[10, 0, -10]} scale={5} color="#1d4ed8" />
+          <Lightformer form="rect" intensity={5} position={[0, 5, -10]} scale={[20, 20, 1]} color="#e5e5e5" />
+          <Lightformer form="circle" intensity={10} position={[10, 0, -10]} scale={5} color="#595959" />
         </group>
       </Environment>
 

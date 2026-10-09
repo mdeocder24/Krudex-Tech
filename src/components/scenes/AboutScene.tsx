@@ -49,7 +49,7 @@ const MetallicHelix = () => {
           <sphereGeometry args={[1, 32, 32]} />
           {s.isGlass ? (
             <meshPhysicalMaterial 
-              color="#bfdbfe"
+              color="#f5f5f5"
               transmission={1}
               opacity={1}
               metalness={0.1}
@@ -59,7 +59,7 @@ const MetallicHelix = () => {
             />
           ) : (
             <meshStandardMaterial 
-              color="#1e3a8a"
+              color="#404040"
               metalness={0.9}
               roughness={0.2}
             />
@@ -70,7 +70,7 @@ const MetallicHelix = () => {
       {/* Central connecting core/energy line */}
       <mesh>
         <cylinderGeometry args={[0.1, 0.1, 15, 16]} />
-        <meshBasicMaterial color="#3b82f6" transparent opacity={0.3} />
+        <meshBasicMaterial color="#ffffff" transparent opacity={0.3} />
       </mesh>
     </group>
   );
@@ -87,13 +87,13 @@ export default function AboutScene() {
     <>
       <fog attach="fog" args={['#050505', 8, 30]} />
       <ambientLight intensity={0.2} />
-      <directionalLight position={[10, 10, 5]} intensity={3} color="#60a5fa" />
-      <directionalLight position={[-10, 5, -5]} intensity={2} color="#3b82f6" />
+      <directionalLight position={[10, 10, 5]} intensity={3} color="#e5e5e5" />
+      <directionalLight position={[-10, 5, -5]} intensity={2} color="#ffffff" />
       
       <Environment resolution={256}>
         <group rotation={[-Math.PI / 2, 0, 0]}>
-          <Lightformer intensity={4} rotation-x={Math.PI / 2} position={[0, 5, -9]} scale={[10, 10, 1]} color="#bfdbfe" />
-          <Lightformer intensity={2} rotation-y={Math.PI / 2} position={[-5, 1, -1]} scale={[20, 2, 1]} color="#1e3a8a" />
+          <Lightformer intensity={4} rotation-x={Math.PI / 2} position={[0, 5, -9]} scale={[10, 10, 1]} color="#f5f5f5" />
+          <Lightformer intensity={2} rotation-y={Math.PI / 2} position={[-5, 1, -1]} scale={[20, 2, 1]} color="#404040" />
         </group>
       </Environment>
 

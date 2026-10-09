@@ -35,7 +35,7 @@ const tools = [
 
 const ScrollTools = () => {
   return (
-    <section className="w-full py-8 md:py-12 border-t border-krudex-border/30 bg-krudex-black relative z-10 overflow-hidden">
+    <section aria-label="Technologies we work with" className="w-full py-8 md:py-12 border-t border-krudex-border bg-krudex-black relative z-10 overflow-hidden">
       <style>{`
         @keyframes marquee {
           0% { transform: translateX(0); }
@@ -58,7 +58,7 @@ const ScrollTools = () => {
         {[...tools, ...tools].map((tool, i) => (
           <span
             key={i}
-            className={`text-krudex-muted/50 text-base md:text-xl select-none whitespace-nowrap transition-colors hover:text-white ${tool.style}`}
+            className={`text-krudex-muted/70 text-base md:text-xl select-none whitespace-nowrap transition-colors hover:text-white ${tool.style}`}
           >
             {tool.name}
           </span>

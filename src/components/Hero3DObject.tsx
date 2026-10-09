@@ -218,10 +218,10 @@ const FloatingFigure = ({ position }: { position: [number, number, number] }) =>
   // Positioned exactly where specified
   return (
     <group ref={groupRef} position={position} scale={0.25} rotation={[0, -0.5, 0]}>
-      {/* Head/Visor - metallic bronze */}
+      {/* Head/Visor - polished steel */}
       <mesh position={[0, 1.0, 0]}>
         <sphereGeometry args={[0.3, 16, 16]} />
-        <meshStandardMaterial color="#b87333" roughness={0.2} metalness={0.9} />
+        <meshStandardMaterial color="#bfbfbf" roughness={0.2} metalness={0.9} />
       </mesh>
 
       {/* Torso */}

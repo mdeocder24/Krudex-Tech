@@ -45,17 +45,17 @@ const StatItem = ({ value, suffix, label, delay }: StatItemProps) => {
       transition={{ duration: 0.5, delay }}
       className="text-center"
     >
-      <div className="text-white font-serif text-5xl md:text-6xl font-normal mb-2 tracking-tight">
+      <div className="text-white font-serif text-4xl md:text-6xl tabular-nums font-normal mb-2 tracking-tight">
         {count}{suffix}
       </div>
-      <div className="text-krudex-muted text-xs uppercase tracking-[0.2em]">{label}</div>
+      <div className="text-krudex-muted text-[11px] md:text-xs uppercase tracking-[0.15em] md:tracking-[0.2em]">{label}</div>
     </motion.div>
   );
 };
 
 const Stats = () => {
   return (
-    <section className="px-8 md:px-14 lg:px-20 py-24 bg-krudex-black border-t border-b border-krudex-border/20 relative z-10">
+    <section className="px-6 md:px-14 lg:px-20 py-20 md:py-24 bg-krudex-black border-t border-b border-krudex-border relative z-10">
       <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12">
         <StatItem value={50} suffix="+" label="Clients Served" delay={0} />
         <StatItem value={120} suffix="+" label="Projects Delivered" delay={0.1} />

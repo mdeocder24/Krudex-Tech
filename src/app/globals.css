@@ -6,12 +6,11 @@
   --color-krudex-black: #050505;
   --color-krudex-card: #0a0a0a;
   --color-krudex-surface: #111111;
-  --color-krudex-border: #1a1a1a;
+  --color-krudex-border: #262626;
   --color-krudex-text: #e5e5e5;
-  --color-krudex-muted: #666666;
-  --color-krudex-glow: #c49a3c;
-  --color-krudex-blue: #3b82f6;
-  --color-krudex-blue-hover: #2563eb;
+  --color-krudex-muted: #8f8f8f;
+  --color-krudex-accent: #ffffff;
+  --color-krudex-accent-hover: #d4d4d4;
   --font-sans: var(--font-sans-primary);
   --font-serif: var(--font-serif-primary);
 }
@@ -19,6 +18,10 @@
 :root {
   --background: var(--color-krudex-black);
   --foreground: var(--color-krudex-text);
+}
+
+html {
+  color-scheme: dark;
 }
 
 body {
@@ -53,5 +56,30 @@ body {
   }
   75% {
     background-position: 0% 100%;
+  }
+}
+
+/* Keyboard focus — visible on every interactive element */
+:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+/* Frosted pill used on the 404 page */
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

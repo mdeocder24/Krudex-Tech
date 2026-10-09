@@ -38,21 +38,21 @@ const Navbar = () => {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className={`w-full flex items-center justify-between px-8 md:px-14 lg:px-20 fixed top-0 z-50 transition-all duration-300
-        bg-krudex-black/30 backdrop-blur-2xl backdrop-saturate-150 border-b border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_4px_30px_rgba(0,0,0,0.1)]
+      className={`w-full flex items-center justify-between px-6 md:px-14 lg:px-20 fixed top-0 z-50 transition-all duration-300
+        bg-krudex-black/70 backdrop-blur-2xl border-b border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_4px_30px_rgba(0,0,0,0.1)]
         ${scrolled ? 'py-4' : 'py-6'}
       `}
     >
       {/* Left side: Brand */}
       <div className="flex-1 flex items-center justify-start">
-        <Link href="/" className="flex items-center">
+        <Link href="/" aria-label="Krudex Technologies — home" className="flex items-center">
           <Image
             src="/krudex-bg.png"
             alt="Krudex"
             width={240}
             height={80}
             className="h-16 md:h-20 w-auto object-contain scale-[2] md:scale-[2.5] origin-left"
-            priority
+            preload
           />
         </Link>
       </div>
@@ -62,13 +62,14 @@ const Navbar = () => {
         {/* Desktop Nav Links */}
         <div className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => {
-            const isActive = pathname === link.href;
+            const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href);
             return (
               <MotionLink
                 key={link.label}
                 href={link.href}
                 whileHover={{ scale: 1.05, opacity: 1 }}
                 whileTap={{ scale: 0.95 }}
+                aria-current={isActive ? 'page' : undefined}
                 className={`text-[13px] transition-colors duration-200 relative ${isActive ? 'text-white font-medium' : 'text-krudex-muted hover:text-white'
                   }`}
               >
@@ -78,7 +79,7 @@ const Navbar = () => {
                     initial={{ opacity: 0, scaleX: 0 }}
                     animate={{ opacity: 1, scaleX: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute -bottom-2 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#e65c00] to-transparent rounded-full origin-center shadow-[0_0_8px_#e65c00]"
+                    className="absolute -bottom-2 left-0 right-0 h-[2px] bg-white rounded-full origin-center"
                   />
                 )}
               </MotionLink>
@@ -102,9 +103,10 @@ const Navbar = () => {
         <div className="md:hidden flex items-center">
           <motion.button
             onClick={() => setIsMobileMenuOpen(true)}
-            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="text-white hover:text-krudex-muted transition-colors focus:outline-none"
+            aria-label="Open menu"
+            aria-expanded={isMobileMenuOpen}
+            className="text-white hover:text-krudex-muted transition-colors p-2.5 -mr-2.5"
           >
             <Menu className="w-6 h-6" />
           </motion.button>
@@ -121,7 +123,7 @@ const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60]"
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[60]"
           >
             {/* Clickable backdrop to close */}
             <div
@@ -141,14 +143,15 @@ const Navbar = () => {
               {/* Close Button */}
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="absolute top-4 right-4 text-white hover:text-krudex-muted transition-colors focus:outline-none bg-white/5 hover:bg-white/10 rounded-full p-1.5"
+                aria-label="Close menu"
+                className="absolute top-3 right-3 text-white hover:text-krudex-muted transition-colors bg-white/5 hover:bg-white/10 rounded-full p-2.5"
               >
                 <X className="w-4 h-4" />
               </button>
 
               <div className="flex flex-col gap-4 pt-2">
                 {navLinks.map((link, idx) => {
-                  const isActive = pathname === link.href;
+                  const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href);
                   return (
                     <motion.div
                       key={link.label}
@@ -158,7 +161,8 @@ const Navbar = () => {
                     >
                       <Link
                         href={link.href}
-                        className={`text-xl font-serif transition-colors flex items-center gap-3 ${isActive ? 'text-white' : 'text-krudex-muted hover:text-white'
+                        aria-current={isActive ? 'page' : undefined}
+                        className={`text-xl font-serif transition-colors flex items-center gap-3 py-1 ${isActive ? 'text-white' : 'text-krudex-muted hover:text-white'
                           }`}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
@@ -185,7 +189,7 @@ const Navbar = () => {
                   <Link
                     href="/contact"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex justify-center w-full text-krudex-black bg-white px-6 py-2.5 rounded-md text-[13px] font-medium hover:bg-gray-200 transition-all duration-300"
+                    className="flex justify-center w-full text-krudex-black bg-white px-6 py-3 rounded-full text-[13px] font-medium hover:bg-gray-200 transition-all duration-300"
                   >
                     Contact Us
                   </Link>

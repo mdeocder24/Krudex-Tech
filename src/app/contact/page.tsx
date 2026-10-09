@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Mail, Phone, MapPin, ChevronDown, CheckCircle2, Loader2 } from 'lucide-react';
+import { Mail, Phone, MapPin, ChevronDown, Check, AlertCircle, ArrowRight, Loader2 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 
 const faqs = [
@@ -38,19 +38,50 @@ const faqs = [
   }
 ];
 
+const serviceOptions = [
+  'Web platform',
+  'Mobile app',
+  'AI integration',
+  'UI/UX design',
+  'Not sure yet',
+];
+
+const budgetOptions = [
+  { value: 'under-10l', label: 'Under ₹10L' },
+  { value: '10l-25l', label: '₹10L – ₹25L' },
+  { value: '25l-50l', label: '₹25L – ₹50L' },
+  { value: '50l+', label: '₹50L+' },
+];
+
+const timelineOptions = [
+  { value: 'asap', label: 'ASAP' },
+  { value: '1-3-months', label: '1 – 3 months' },
+  { value: '3-6-months', label: '3 – 6 months' },
+  { value: 'flexible', label: 'Flexible' },
+];
+
+const emptyForm = {
+  name: '',
+  email: '',
+  company: '',
+  budget: '',
+  timeline: '',
+  details: '',
+};
+
+const inputClass =
+  'w-full bg-white/[0.03] border border-white/15 rounded-md px-4 py-3.5 text-white text-base md:text-sm placeholder:text-white/30 transition-colors hover:border-white/30 focus:outline-none focus:border-white focus:ring-1 focus:ring-white';
+const labelClass = 'text-[13px] font-medium text-white/80';
+const chipClass =
+  'inline-flex items-center gap-2 cursor-pointer select-none rounded-full border border-white/15 px-4 py-2.5 text-[13px] text-white/70 transition-colors hover:border-white/40 hover:text-white peer-checked:border-white peer-checked:bg-white peer-checked:text-krudex-black peer-checked:font-medium peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-white';
+
 export default function ContactPage() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   // Form State
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    scope: '',
-    budget: '',
-    timeline: '',
-    details: ''
-  });
+  const [formData, setFormData] = useState(emptyForm);
+  const [services, setServices] = useState<string[]>([]);
+  const [servicesError, setServicesError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -59,70 +90,87 @@ export default function ContactPage() {
     setOpenFaq(openFaq === index ? null : index);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const toggleService = (service: string) => {
+    setServicesError(false);
+    setServices(prev => (prev.includes(service) ? prev.filter(s => s !== service) : [...prev, service]));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (services.length === 0) {
+      setServicesError(true);
+      return;
+    }
     setIsSubmitting(true);
     setError('');
-    
+
     try {
       // Write data to Supabase
       const { error } = await supabase
         .from('inquiries')
         .insert([{
           ...formData,
+          scope: services.join(', '),
         }]);
-        
+
       if (error) {
         throw error;
       }
-      
+
       setIsSuccess(true);
-      setFormData({ name: '', email: '', company: '', scope: '', budget: '', timeline: '', details: '' });
-      
-      // Reset success message after 5 seconds
-      setTimeout(() => setIsSuccess(false), 5000);
+      setFormData(emptyForm);
+      setServices([]);
     } catch (err: unknown) {
       console.error("Error submitting form: ", err);
-      // Supabase throws errors if the project isn't set up or RLS blocks it
-      setError('Failed to send inquiry. Please check your Supabase configuration or try again later.');
+      setError("We couldn't send your inquiry. Please try again, or email us directly.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <main className="min-h-screen bg-transparent selection:bg-krudex-blue selection:text-krudex-black flex flex-col">
+    <main className="min-h-screen bg-transparent selection:bg-krudex-accent selection:text-krudex-black flex flex-col">
       <Navbar />
 
-      <section className="px-8 md:px-16 lg:px-24 pt-48 pb-16 bg-krudex-black/40 backdrop-blur-md relative z-10">
+      <section className="px-6 md:px-16 lg:px-24 pt-40 md:pt-48 pb-20 bg-krudex-black/40 backdrop-blur-md relative z-10">
         <div className="max-w-7xl mx-auto">
           {/* Header + Form Row */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="lg:col-span-5 flex flex-col items-start"
+              className="lg:col-span-5 flex flex-col items-start lg:sticky lg:top-32"
             >
               <div className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-10">
-                <div className="w-1.5 h-1.5 rounded-full bg-krudex-blue"></div>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-blue font-semibold">
+                <div className="w-1.5 h-1.5 rounded-full bg-krudex-accent"></div>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-accent font-semibold">
                   CONTACT
                 </span>
               </div>
-              <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight mb-8">
+              <h1 className="font-serif text-5xl md:text-7xl font-bold leading-[1.05] tracking-tight mb-8">
                 <span className="text-white">Let&apos;s build</span><br />
-                <span className="text-krudex-blue">something</span><br />
-                <span className="text-krudex-blue">serious.</span>
+                <span className="text-white/45">something</span><br />
+                <span className="text-white/45">serious.</span>
               </h1>
-              <p className="text-krudex-muted text-base leading-relaxed max-w-md">
-                Fill out the form and our team will get back to you within 24 hours.
+              <p className="text-krudex-muted text-base leading-relaxed max-w-md mb-10">
+                Tell us what you&apos;re building. It takes about two minutes, and we reply within one business day.
               </p>
+              <ol className="flex flex-col gap-4 text-sm">
+                {['You send the brief', 'We reply within 24 hours', 'Free 30-minute scoping call'].map((step, i) => (
+                  <li key={step} className="flex items-center gap-4 text-white/80">
+                    <span className="w-7 h-7 rounded-full border border-white/25 flex items-center justify-center font-mono text-[11px] text-white flex-shrink-0">
+                      {i + 1}
+                    </span>
+                    {step}
+                  </li>
+                ))}
+              </ol>
             </motion.div>
 
             {/* Form */}
@@ -132,149 +180,207 @@ export default function ContactPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="lg:col-span-7 flex flex-col"
             >
-              <h2 className="text-white text-2xl font-bold mb-8">Send an inquiry</h2>
-              <div className="bg-krudex-card/30 border border-krudex-border/30 border-t-2 border-t-krudex-blue p-8 md:p-12 relative">
-                
-                {isSuccess && (
-                  <motion.div 
-                    initial={{ opacity: 0, y: -10 }}
+              <div className="bg-krudex-card/60 border border-krudex-border border-t-2 border-t-white p-6 sm:p-8 md:p-12">
+                {isSuccess ? (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="absolute top-0 left-0 w-full p-4 bg-green-500/20 border border-green-500/50 flex items-center gap-3 text-green-400 font-medium z-10"
+                    role="status"
+                    className="flex flex-col items-start py-8"
                   >
-                    <CheckCircle2 className="w-5 h-5" />
-                    Inquiry sent successfully! We will be in touch soon.
-                  </motion.div>
-                )}
-
-                {error && (
-                  <motion.div 
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="absolute top-0 left-0 w-full p-4 bg-red-500/20 border border-red-500/50 text-red-400 font-medium text-sm z-10"
-                  >
-                    {error}
-                  </motion.div>
-                )}
-
-                <form className={`flex flex-col gap-8 ${isSuccess || error ? 'mt-8' : ''}`} onSubmit={handleSubmit}>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="flex flex-col gap-3">
-                      <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">YOUR NAME *</label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        placeholder="Vishwanath Rao"
-                        className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-blue transition-colors"
-                      />
+                    <div className="w-12 h-12 rounded-full bg-white text-krudex-black flex items-center justify-center mb-8">
+                      <Check className="w-6 h-6" strokeWidth={2.5} />
                     </div>
-                    <div className="flex flex-col gap-3">
-                      <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">EMAIL ADDRESS *</label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        placeholder="vishwa@company.in"
-                        className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-blue transition-colors"
-                      />
+                    <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">Inquiry received.</h2>
+                    <p className="text-krudex-muted text-base leading-relaxed max-w-md mb-10">
+                      Thanks for reaching out. A senior engineer will review your brief and reply within one business day.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setIsSuccess(false)}
+                      className="border border-white/30 text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-white hover:text-krudex-black transition-colors"
+                    >
+                      Send another inquiry
+                    </button>
+                  </motion.div>
+                ) : (
+                  <form className="flex flex-col gap-10" onSubmit={handleSubmit}>
+                    <div>
+                      <h2 className="text-white text-2xl font-bold mb-2">Send an inquiry</h2>
+                      <p className="text-krudex-muted text-sm">
+                        Fields marked <span className="text-white">*</span> are required.
+                      </p>
                     </div>
-                  </div>
 
-                  <div className="flex flex-col gap-3">
-                    <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">COMPANY / STARTUP</label>
-                    <input
-                      type="text"
-                      name="company"
-                      value={formData.company}
-                      onChange={handleChange}
-                      placeholder="Acme Technologies"
-                      className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-blue transition-colors"
-                    />
-                  </div>
+                    {/* About you */}
+                    <div className="flex flex-col gap-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="flex flex-col gap-2">
+                          <label htmlFor="name" className={labelClass}>Your name *</label>
+                          <input
+                            id="name"
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            required
+                            autoComplete="name"
+                            placeholder="Vishwanath Rao"
+                            className={inputClass}
+                          />
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <label htmlFor="email" className={labelClass}>Work email *</label>
+                          <input
+                            id="email"
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                            autoComplete="email"
+                            inputMode="email"
+                            placeholder="vishwa@company.in"
+                            className={inputClass}
+                          />
+                        </div>
+                      </div>
 
-                  <div className="flex flex-col gap-3">
-                    <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">PROJECT SCOPE *</label>
-                    <input
-                      type="text"
-                      name="scope"
-                      value={formData.scope}
-                      onChange={handleChange}
-                      required
-                      placeholder="Full-stack SaaS with an AI-powered recommendation engine"
-                      className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-blue transition-colors"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="flex flex-col gap-3">
-                      <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">BUDGET RANGE</label>
-                      <div className="relative">
-                        <select 
-                          name="budget"
-                          value={formData.budget}
+                      <div className="flex flex-col gap-2">
+                        <label htmlFor="company" className={labelClass}>
+                          Company <span className="text-krudex-muted font-normal">(optional)</span>
+                        </label>
+                        <input
+                          id="company"
+                          type="text"
+                          name="company"
+                          value={formData.company}
                           onChange={handleChange}
-                          className="w-full bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm appearance-none focus:outline-none focus:border-krudex-blue transition-colors"
-                        >
-                          <option value="" disabled hidden>Select</option>
-                          <option value="under-10l" className="bg-krudex-card text-white">Under ₹10 Lakhs</option>
-                          <option value="10l-25l" className="bg-krudex-card text-white">₹10 Lakhs - ₹25 Lakhs</option>
-                          <option value="25l-50l" className="bg-krudex-card text-white">₹25 Lakhs - ₹50 Lakhs</option>
-                          <option value="50l+" className="bg-krudex-card text-white">₹50 Lakhs+</option>
-                        </select>
-                        <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-krudex-muted pointer-events-none" />
+                          autoComplete="organization"
+                          placeholder="Acme Technologies"
+                          className={inputClass}
+                        />
                       </div>
                     </div>
-                    <div className="flex flex-col gap-3">
-                      <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">TIMELINE</label>
-                      <div className="relative">
-                        <select 
-                          name="timeline"
-                          value={formData.timeline}
-                          onChange={handleChange}
-                          className="w-full bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm appearance-none focus:outline-none focus:border-krudex-blue transition-colors"
-                        >
-                          <option value="" disabled hidden>Select</option>
-                          <option value="asap" className="bg-krudex-card text-white">ASAP</option>
-                          <option value="1-3-months" className="bg-krudex-card text-white">1 - 3 Months</option>
-                          <option value="3-6-months" className="bg-krudex-card text-white">3 - 6 Months</option>
-                          <option value="flexible" className="bg-krudex-card text-white">Flexible</option>
-                        </select>
-                        <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-krudex-muted pointer-events-none" />
+
+                    {/* Project */}
+                    <fieldset className="flex flex-col gap-3" aria-describedby={servicesError ? 'services-error' : undefined}>
+                      <legend className={`${labelClass} mb-3`}>What do you need? *</legend>
+                      <div className="flex flex-wrap gap-2.5">
+                        {serviceOptions.map((service) => (
+                          <label key={service} className="relative">
+                            <input
+                              type="checkbox"
+                              className="peer sr-only"
+                              checked={services.includes(service)}
+                              onChange={() => toggleService(service)}
+                            />
+                            <span className={chipClass}>{service}</span>
+                          </label>
+                        ))}
                       </div>
+                      {servicesError && (
+                        <p id="services-error" role="alert" className="flex items-center gap-2 text-sm text-white">
+                          <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                          Pick at least one so we know who should reply.
+                        </p>
+                      )}
+                    </fieldset>
+
+                    <div className="grid grid-cols-1 gap-8">
+                      <fieldset>
+                        <legend className={`${labelClass} mb-3`}>
+                          Budget range <span className="text-krudex-muted font-normal">(optional)</span>
+                        </legend>
+                        <div className="flex flex-wrap gap-2.5">
+                          {budgetOptions.map((option) => (
+                            <label key={option.value} className="relative">
+                              <input
+                                type="radio"
+                                name="budget"
+                                value={option.value}
+                                className="peer sr-only"
+                                checked={formData.budget === option.value}
+                                onChange={handleChange}
+                              />
+                              <span className={chipClass}>{option.label}</span>
+                            </label>
+                          ))}
+                        </div>
+                      </fieldset>
+
+                      <fieldset>
+                        <legend className={`${labelClass} mb-3`}>
+                          Timeline <span className="text-krudex-muted font-normal">(optional)</span>
+                        </legend>
+                        <div className="flex flex-wrap gap-2.5">
+                          {timelineOptions.map((option) => (
+                            <label key={option.value} className="relative">
+                              <input
+                                type="radio"
+                                name="timeline"
+                                value={option.value}
+                                className="peer sr-only"
+                                checked={formData.timeline === option.value}
+                                onChange={handleChange}
+                              />
+                              <span className={chipClass}>{option.label}</span>
+                            </label>
+                          ))}
+                        </div>
+                      </fieldset>
                     </div>
-                  </div>
 
-                  <div className="flex flex-col gap-3">
-                    <label className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono">ADDITIONAL DETAILS</label>
-                    <textarea
-                      name="details"
-                      value={formData.details}
-                      onChange={handleChange}
-                      placeholder="Existing stack, compliance requirements, integration constraints, deadline pressure..."
-                      rows={4}
-                      className="bg-transparent border border-krudex-border/50 px-4 py-3 text-white text-sm focus:outline-none focus:border-krudex-blue transition-colors resize-none"
-                    ></textarea>
-                  </div>
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="details" className={labelClass}>
+                        Project details <span className="text-krudex-muted font-normal">(optional)</span>
+                      </label>
+                      <textarea
+                        id="details"
+                        name="details"
+                        value={formData.details}
+                        onChange={handleChange}
+                        placeholder="What are you building, who is it for, and what does success look like?"
+                        rows={5}
+                        className={`${inputClass} resize-y min-h-32`}
+                      ></textarea>
+                    </div>
 
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-krudex-blue text-krudex-black font-bold py-4 hover:bg-krudex-blue-hover transition-colors mt-4 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                        Sending...
-                      </>
-                    ) : (
-                      'Send Inquiry'
-                    )}
-                  </button>
-                </form>
+                    <div className="flex flex-col gap-4">
+                      {error && (
+                        <div role="alert" className="flex items-start gap-3 border border-white/40 bg-white/[0.04] rounded-md p-4 text-sm text-white">
+                          <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                          <p>
+                            {error}{' '}
+                            <a href="mailto:krudextechnologies@gmail.com" className="underline underline-offset-4">
+                              krudextechnologies@gmail.com
+                            </a>
+                          </p>
+                        </div>
+                      )}
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="group w-full bg-white text-krudex-black font-semibold py-4 rounded-full hover:bg-krudex-accent-hover transition-colors flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="w-5 h-5 animate-spin" />
+                            Sending...
+                          </>
+                        ) : (
+                          <>
+                            Send inquiry
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                          </>
+                        )}
+                      </button>
+                      <p className="text-krudex-muted text-xs text-center">
+                        We only use your details to reply to this inquiry.
+                      </p>
+                    </div>
+                  </form>
+                )}
               </div>
             </motion.div>
           </div>
@@ -282,7 +388,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Info + FAQ Section */}
-      <section className="px-8 md:px-16 lg:px-24 py-24 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border/50 relative z-10">
+      <section className="px-6 md:px-16 lg:px-24 py-24 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
 
@@ -298,30 +404,33 @@ export default function ContactPage() {
 
               {/* Email */}
               <div className="flex items-center gap-6">
-                <div className="w-12 h-12 border border-krudex-border/50 flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-5 h-5 text-krudex-blue" />
+                <div className="w-12 h-12 border border-krudex-border flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-5 h-5 text-white" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">EMAIL</span>
-                  <a href="mailto:krudextechnologies@gmail.com" className="text-white font-medium text-sm hover:text-krudex-blue transition-colors">krudextechnologies@gmail.com</a>
+                  <a href="mailto:krudextechnologies@gmail.com" className="text-white font-medium text-sm underline-offset-4 hover:underline break-all">krudextechnologies@gmail.com</a>
                 </div>
               </div>
 
               {/* Phone */}
               <div className="flex items-center gap-6">
-                <div className="w-12 h-12 border border-krudex-border/50 flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-5 h-5 text-krudex-blue" />
+                <div className="w-12 h-12 border border-krudex-border flex items-center justify-center flex-shrink-0">
+                  <Phone className="w-5 h-5 text-white" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">PHONE</span>
-                  <a href="tel:+918978261053" className="text-white font-medium text-sm hover:text-krudex-blue transition-colors">+91 89782 61053, +91 94902 48160</a>
+                  <div className="flex flex-wrap gap-x-4 gap-y-1">
+                    <a href="tel:+918978261053" className="text-white font-medium text-sm underline-offset-4 hover:underline">+91 89782 61053</a>
+                    <a href="tel:+919490248160" className="text-white font-medium text-sm underline-offset-4 hover:underline">+91 94902 48160</a>
+                  </div>
                 </div>
               </div>
 
               {/* Office */}
               <div className="flex items-center gap-6">
-                <div className="w-12 h-12 border border-krudex-border/50 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-5 h-5 text-krudex-blue" />
+                <div className="w-12 h-12 border border-krudex-border flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-5 h-5 text-white" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">OFFICE</span>
@@ -330,8 +439,8 @@ export default function ContactPage() {
               </div>
 
               {/* SLA Block */}
-              <div className="bg-krudex-card/30 border border-krudex-border/30 p-8 mt-4">
-                <div className="text-[10px] uppercase tracking-[0.2em] text-krudex-blue font-mono mb-4">
+              <div className="bg-krudex-card/30 border border-krudex-border p-8 mt-4">
+                <div className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono mb-4">
                   RESPONSE SLA
                 </div>
                 <h3 className="text-white font-bold text-lg mb-3">Within 24 hours</h3>
@@ -352,13 +461,14 @@ export default function ContactPage() {
               <h2 className="text-white text-2xl font-bold mb-8">Frequently asked</h2>
               <div className="flex flex-col gap-3">
                 {faqs.map((faq, idx) => (
-                  <div key={idx} className="bg-krudex-card/30 border border-krudex-border/30 overflow-hidden transition-colors hover:border-krudex-border/60">
+                  <div key={idx} className="bg-krudex-card/30 border border-krudex-border overflow-hidden transition-colors hover:border-white/25">
                     <button
                       onClick={() => toggleFaq(idx)}
-                      className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
+                      aria-expanded={openFaq === idx}
+                      className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/[0.03] transition-colors"
                     >
                       <span className="text-white text-sm font-medium pr-8">{faq.question}</span>
-                      <ChevronDown className={`w-4 h-4 text-krudex-muted flex-shrink-0 transition-transform duration-300 ${openFaq === idx ? 'rotate-180 text-krudex-blue' : ''}`} />
+                      <ChevronDown className={`w-4 h-4 text-krudex-muted flex-shrink-0 transition-transform duration-300 ${openFaq === idx ? 'rotate-180 text-white' : ''}`} />
                     </button>
                     <AnimatePresence>
                       {openFaq === idx && (
@@ -368,7 +478,7 @@ export default function ContactPage() {
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: 0.3 }}
                         >
-                          <div className="px-6 pb-6 text-krudex-muted text-sm leading-relaxed border-t border-krudex-border/30 pt-4">
+                          <div className="px-6 pb-6 text-white/65 text-sm leading-relaxed border-t border-krudex-border pt-4">
                             {faq.answer}
                           </div>
                         </motion.div>

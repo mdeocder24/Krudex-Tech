@@ -13,8 +13,8 @@ const footerLinks = [
     title: 'Company',
     links: [
       { label: 'About', href: '/about' },
-      { label: 'Careers', href: '#' },
       { label: 'Our Team', href: '/our-team' },
+      { label: 'Work', href: '/work' },
     ],
   },
   {
@@ -26,30 +26,29 @@ const footerLinks = [
     ],
   },
   {
-    title: 'Resources',
+    title: 'Contact',
     links: [
-      { label: 'Blog', href: '#' },
-      { label: 'Case Studies', href: '/work' },
-      { label: 'Documentation', href: '#' },
+      { label: 'Start a project', href: '/contact' },
+      { label: 'krudextechnologies@gmail.com', href: 'mailto:krudextechnologies@gmail.com' },
+      { label: '+91 89782 61053', href: 'tel:+918978261053' },
     ],
   },
 ];
 
 const Footer = () => {
   return (
-    <footer className="px-8 md:px-14 lg:px-20 pt-20 pb-8 bg-krudex-black border-t border-krudex-border/30 relative z-10">
+    <footer className="px-6 md:px-14 lg:px-20 pt-20 pb-8 bg-krudex-black border-t border-krudex-border relative z-10">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1 flex flex-col items-start">
-            <Link href="/" className="mb-6 block">
+            <Link href="/" aria-label="Krudex Technologies — home" className="mb-6 block">
               <Image 
                 src="/krudex-bg.png" 
                 alt="Krudex" 
                 width={240} 
                 height={80} 
                 className="h-16 w-auto object-contain scale-[2] md:scale-[2.5] origin-left"
-                priority
               />
             </Link>
             <p className="text-krudex-muted text-sm leading-relaxed max-w-xs">
@@ -60,14 +59,14 @@ const Footer = () => {
           {/* Link Columns */}
           {footerLinks.map((col) => (
             <div key={col.title}>
-              <h4 className="text-white/60 text-xs uppercase tracking-[0.15em] mb-5">{col.title}</h4>
+              <h2 className="text-white/60 text-xs uppercase tracking-[0.15em] mb-5">{col.title}</h2>
               <ul className="space-y-3">
                 {col.links.map((link) => (
                   <li key={link.label}>
                     <MotionLink
                       href={link.href}
                       whileHover={{ x: 4 }}
-                      className="text-krudex-muted text-sm hover:text-white transition-colors inline-flex items-center gap-1 group"
+                      className="text-krudex-muted text-sm hover:text-white transition-colors inline-flex items-center gap-1 group py-0.5 break-all sm:break-normal"
                     >
                       {link.label}
                       <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -80,14 +79,11 @@ const Footer = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-krudex-border/20 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-krudex-muted/60 text-xs">
+        <div className="border-t border-krudex-border pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-krudex-muted text-xs">
             © {new Date().getFullYear()} Krudex Technologies. All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
-            <a href="#" className="text-krudex-muted/60 text-xs hover:text-white transition-colors">Privacy</a>
-            <a href="#" className="text-krudex-muted/60 text-xs hover:text-white transition-colors">Terms</a>
-          </div>
+          <p className="text-krudex-muted text-xs">Hyderabad, Telangana, India</p>
         </div>
       </div>
     </footer>

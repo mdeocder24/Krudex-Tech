@@ -7,7 +7,7 @@ import MagneticButton from './MagneticButton';
 
 const ServicesCTA = () => {
   return (
-    <section className="px-8 md:px-16 lg:px-24 py-32 bg-krudex-black">
+    <section className="px-6 md:px-16 lg:px-24 py-24 md:py-32 bg-krudex-black border-t border-krudex-border">
       <div className="max-w-3xl mx-auto flex flex-col items-center text-center">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
@@ -37,7 +37,7 @@ const ServicesCTA = () => {
         >
           <MagneticButton 
             href="/contact" 
-            className="group flex items-center gap-2 bg-white text-krudex-black px-8 py-4 font-semibold text-sm hover:bg-gray-200 transition-colors"
+            className="group flex items-center gap-2 bg-white text-krudex-black px-8 py-4 rounded-full font-semibold text-sm hover:bg-gray-200 transition-colors"
           >
             Contact Us
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

@@ -7,7 +7,7 @@ import MagneticButton from './MagneticButton';
 
 const CTA = () => {
   return (
-    <section className="px-8 md:px-14 lg:px-20 py-32 bg-krudex-black relative z-10">
+    <section className="px-6 md:px-14 lg:px-20 py-24 md:py-32 bg-krudex-black relative z-10">
       <div className="max-w-4xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -16,7 +16,7 @@ const CTA = () => {
           transition={{ duration: 0.5 }}
           className="inline-flex items-center gap-2.5 bg-krudex-surface/50 border border-krudex-border px-4 py-2 rounded-full mb-8"
         >
-          <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
           <span className="text-[11px] text-krudex-muted tracking-wide">
             READY TO START
           </span>
@@ -52,14 +52,14 @@ const CTA = () => {
         >
           <MagneticButton
             href="/contact"
-            className="inline-flex items-center gap-2 bg-white text-krudex-black px-8 py-4 font-medium text-sm hover:bg-krudex-text transition-colors duration-300"
+            className="inline-flex items-center gap-2 bg-white text-krudex-black px-8 py-4 rounded-full font-medium text-sm hover:bg-krudex-text transition-colors duration-300"
           >
             Contact Us
             <ArrowRight className="w-4 h-4" />
           </MagneticButton>
           <MagneticButton
-            href="mailto:kushwant.work@gmail.com"
-            className="inline-flex items-center gap-2 border border-white/30 text-white px-8 py-4 text-sm font-medium hover:bg-white hover:text-krudex-black transition-all duration-300"
+            href="/services"
+            className="inline-flex items-center gap-2 border border-white/30 text-white px-8 py-4 rounded-full text-sm font-medium hover:bg-white hover:text-krudex-black transition-all duration-300"
           >
             Explore Services
           </MagneticButton>
