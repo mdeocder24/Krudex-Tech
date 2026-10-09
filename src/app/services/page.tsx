@@ -10,7 +10,7 @@ import Footer from '@/components/Footer';
 const servicesData = [
   {
     num: "01",
-    title: "Full-Stack Web Platforms",
+    title: "SaaS & Web Platforms",
     subtitle: "From zero to production-grade — engineered to last.",
     desc: "We design and build high-throughput web applications with clean architecture. Our process begins with a technical audit of your requirements, moves through system design, and ends with a fully deployed, monitored, and documented product. We don't deliver code — we deliver working systems.",
     outcome: "Sub-1s Largest Contentful Paint guaranteed on every project.",

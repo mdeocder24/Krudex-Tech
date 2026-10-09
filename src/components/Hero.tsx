@@ -72,7 +72,7 @@ const Hero = () => {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
           </span>
           <span className="text-[11px] md:text-[12px] font-mono text-krudex-muted group-hover:text-white tracking-wide transition-colors">
-            Empowering Startups &amp; Enterprise
+            SaaS Product Engineering Studio
           </span>
         </motion.div>
 
@@ -84,7 +84,7 @@ const Hero = () => {
           className="font-serif text-[2.25rem] md:text-[3.5rem] lg:text-[3.75rem] xl:text-[4.25rem] font-normal leading-[1.08] tracking-tight text-white mb-5 md:mb-7"
         >
           <span className="block overflow-hidden">
-            {['Building', 'Web,', 'App,'].map((word, i) => (
+            {['We', 'build', 'SaaS'].map((word, i) => (
               <motion.span
                 key={i}
                 variants={wordVariants}
@@ -95,7 +95,7 @@ const Hero = () => {
             ))}
           </span>
           <span className="block overflow-hidden">
-            {['&', 'AI', 'Products.'].map((word, i) => (
+            {['products', 'that', 'scale.'].map((word, i) => (
               <motion.span
                 key={i}
                 variants={wordVariants}
@@ -112,7 +112,7 @@ const Hero = () => {
           {...fadeInUp(0.9)}
           className="text-krudex-muted text-[14px] md:text-[15px] leading-relaxed max-w-md mb-8 md:mb-10"
         >
-          We build high-performance websites, scalable mobile apps, and custom AI integrations so you can focus entirely on scaling your business.
+          Krudex takes SaaS products from idea to production — web platforms, mobile apps and AI features — with senior engineers on every build and full IP ownership for you.
         </motion.p>
 
         {/* CTA Buttons */}

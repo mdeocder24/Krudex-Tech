@@ -16,8 +16,17 @@ const dmSerifDisplay = DM_Serif_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Krudex Technologies | We Build Digital Products That Perform",
-  description: "Krudex Technologies delivers full-stack engineering, AI integration, and precision design for startups and enterprises that need results, not promises.",
+  title: {
+    default: "Krudex Technologies | SaaS Product Engineering",
+    template: "%s | Krudex Technologies",
+  },
+  description: "Krudex Technologies designs, builds, and scales SaaS products — web platforms, mobile apps, and AI features — with senior engineers on every build.",
+  openGraph: {
+    title: "Krudex Technologies | SaaS Product Engineering",
+    description: "We design, build, and scale SaaS products — web platforms, mobile apps, and AI features.",
+    siteName: "Krudex Technologies",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

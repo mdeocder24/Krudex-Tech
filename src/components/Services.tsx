@@ -10,8 +10,8 @@ const MotionLink = motion.create ? motion.create(Link) : motion(Link);
 const services = [
   {
     num: "01",
-    title: "Full-Stack Web Platforms",
-    desc: "High-performance marketing sites, SaaS portals, and web apps built to scale with your user base."
+    title: "SaaS & Web Platforms",
+    desc: "SaaS products, customer portals, and web apps built to scale with your user base."
   },
   {
     num: "02",
@@ -56,7 +56,7 @@ const Services = () => {
             className="lg:col-span-5"
           >
             <h2 className="font-serif text-4xl md:text-6xl text-white font-normal mb-6 leading-[1.1] tracking-tight">
-              Your Startup&apos;s <br /> Technical Partner.
+              Your SaaS <br /> Technical Partner.
             </h2>
             <p className="text-krudex-muted text-base leading-relaxed">
               We handle the end-to-end technical heavy lifting—from MVP to scalable product—so you can focus on your users.

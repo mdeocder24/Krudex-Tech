@@ -13,6 +13,7 @@ const projects = [
     type: "Website",
     category: "Website",
     title: "Kemplast Inc.",
+    featured: true,
     desc: "Rebuilt a legacy React 16 platform on Next.js 16 + React 19 with a Tailwind v4 design system. Lighthouse score moved from 71 to 99. LCP dropped from 2.8s to 0.9s.",
     tags: ["99 Lighthouse", "0.9s LCP", "-47% JS"],
     demoLink: "https://www.kemplast.in/"
@@ -21,6 +22,7 @@ const projects = [
     type: "Website",
     category: "Website",
     title: "Sign Language Recognition Platform",
+    featured: true,
     desc: "Real-time ASL gesture classification using MediaPipe Hands + TensorFlow.js \u2014 running entirely in-browser. 26 gestures recognized at 94.7% accuracy with 18ms inference.",
     tags: ["94.7% accuracy", "18ms latency", "0 server calls"],
     demoLink: "https://sign-language-recognitio-a7e2a.web.app/"
@@ -29,6 +31,7 @@ const projects = [
     type: "Website",
     category: "Website",
     title: "Knowvation Learnings",
+    featured: true,
     desc: "Built a comprehensive ed-tech platform focused on 'Ignite, Innovate, Implement' for modern learners. Features interactive courses and real-time collaboration.",
     tags: ["EdTech", "E-Learning", "Interactive"],
     demoLink: "https://www.knowvationlearnings.in/"
@@ -69,18 +72,22 @@ const projects = [
     type: "Website",
     category: "Website",
     title: "AI Career Coach",
+    featured: true,
     desc: "Developed an AI-powered career coach providing personalized resume reviews, interview preparation, and career path guidance using advanced LLM integrations.",
     tags: ["Generative AI", "LLM", "Next.js"],
     demoLink: "https://ai-career-coach-mu.vercel.app/"
   }
 ];
 
-const SelectedWork = () => {
+/** `featured` renders the short home-page version: four projects, no filters, link to /work. */
+const SelectedWork = ({ featured = false }: { featured?: boolean }) => {
   const [filter, setFilter] = useState<'All' | 'Website' | 'App'>('All');
-  const filteredProjects = projects.filter(p => filter === 'All' || p.type === filter);
+  const filteredProjects = featured
+    ? projects.filter(p => p.featured)
+    : projects.filter(p => filter === 'All' || p.type === filter);
 
   return (
-    <section id="our-work" className="px-6 md:px-16 lg:px-24 py-24 md:py-32 bg-krudex-black">
+    <section id="our-work" className="px-6 md:px-14 lg:px-20 py-24 md:py-32 bg-krudex-black border-t border-krudex-border relative z-10">
       <div className="max-w-6xl mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -106,11 +113,13 @@ const SelectedWork = () => {
               What we&apos;ve shipped
             </TextReveal>
             <p className="text-krudex-muted text-lg">
-              A selection of our most technically demanding engagements.
+              {featured
+                ? 'Real products in production, with the numbers to prove it.'
+                : 'A selection of our most technically demanding engagements.'}
             </p>
           </motion.div>
 
-          <motion.div 
+          {!featured && <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -131,10 +140,10 @@ const SelectedWork = () => {
                 {f}
               </button>
             ))}
-          </motion.div>
+          </motion.div>}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 ${featured ? 'mb-16' : ''}`}>
           {filteredProjects.map((project, index) => (
             <motion.div 
               key={project.title}
@@ -173,7 +182,7 @@ const SelectedWork = () => {
           ))}
         </div>
 
-        <motion.div 
+        {featured && <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -182,12 +191,12 @@ const SelectedWork = () => {
         >
           <MagneticButton 
             href="/work" 
-            className="group flex items-center gap-2 bg-krudex-accent text-krudex-black px-8 py-4 font-semibold text-sm hover:bg-krudex-accent-hover transition-colors"
+            className="group flex items-center gap-2 border border-white/30 text-white px-8 py-4 rounded-full font-medium text-sm hover:bg-white hover:text-krudex-black transition-colors duration-300"
           >
             See All Projects
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </MagneticButton>
-        </motion.div>
+        </motion.div>}
       </div>
     </section>
   );

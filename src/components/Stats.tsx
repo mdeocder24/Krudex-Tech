@@ -57,10 +57,10 @@ const Stats = () => {
   return (
     <section className="px-6 md:px-14 lg:px-20 py-20 md:py-24 bg-krudex-black border-t border-b border-krudex-border relative z-10">
       <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12">
-        <StatItem value={50} suffix="+" label="Clients Served" delay={0} />
-        <StatItem value={120} suffix="+" label="Projects Delivered" delay={0.1} />
-        <StatItem value={99} suffix="%" label="Client Retention" delay={0.2} />
-        <StatItem value={15} suffix="+" label="Team Members" delay={0.3} />
+        <StatItem value={20} suffix="+" label="Client Engagements" delay={0} />
+        <StatItem value={99} suffix="" label="Peak Lighthouse Score" delay={0.1} />
+        <StatItem value={24} suffix="h" label="Response Time" delay={0.2} />
+        <StatItem value={100} suffix="%" label="IP Transferred to You" delay={0.3} />
       </div>
     </section>
   );
