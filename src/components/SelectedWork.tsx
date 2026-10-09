@@ -37,14 +37,6 @@ const projects = [
     demoLink: "https://www.knowvationlearnings.in/"
   },
   {
-    type: "Website",
-    category: "Website",
-    title: "GDG Hyderabad",
-    desc: "Designed and developed the community portal for Google Developer Group (GDG) Hyderabad. Handled event registrations and served as a central hub for thousands of developers.",
-    tags: ["Community", "Event Portal", "Google Tech"],
-    demoLink: "https://gdghyd.in/"
-  },
-  {
     type: "App",
     category: "App",
     title: "Pepperstone Trading App",
