@@ -45,13 +45,6 @@ const serviceOptions = [
   'Not sure yet',
 ];
 
-const budgetOptions = [
-  { value: 'under-10l', label: 'Under ₹10L' },
-  { value: '10l-25l', label: '₹10L – ₹25L' },
-  { value: '25l-50l', label: '₹25L – ₹50L' },
-  { value: '50l+', label: '₹50L+' },
-];
-
 const timelineOptions = [
   { value: 'asap', label: 'ASAP' },
   { value: '1-3-months', label: '1 – 3 months' },
@@ -63,7 +56,6 @@ const emptyForm = {
   name: '',
   email: '',
   company: '',
-  budget: '',
   timeline: '',
   details: '',
 };
@@ -291,49 +283,26 @@ export default function ContactPage() {
                       )}
                     </fieldset>
 
-                    <div className="grid grid-cols-1 gap-8">
-                      <fieldset>
-                        <legend className={`${labelClass} mb-3`}>
-                          Budget range <span className="text-krudex-muted font-normal">(optional)</span>
-                        </legend>
-                        <div className="flex flex-wrap gap-2.5">
-                          {budgetOptions.map((option) => (
-                            <label key={option.value} className="relative">
-                              <input
-                                type="radio"
-                                name="budget"
-                                value={option.value}
-                                className="peer sr-only"
-                                checked={formData.budget === option.value}
-                                onChange={handleChange}
-                              />
-                              <span className={chipClass}>{option.label}</span>
-                            </label>
-                          ))}
-                        </div>
-                      </fieldset>
-
-                      <fieldset>
-                        <legend className={`${labelClass} mb-3`}>
-                          Timeline <span className="text-krudex-muted font-normal">(optional)</span>
-                        </legend>
-                        <div className="flex flex-wrap gap-2.5">
-                          {timelineOptions.map((option) => (
-                            <label key={option.value} className="relative">
-                              <input
-                                type="radio"
-                                name="timeline"
-                                value={option.value}
-                                className="peer sr-only"
-                                checked={formData.timeline === option.value}
-                                onChange={handleChange}
-                              />
-                              <span className={chipClass}>{option.label}</span>
-                            </label>
-                          ))}
-                        </div>
-                      </fieldset>
-                    </div>
+                    <fieldset>
+                      <legend className={`${labelClass} mb-3`}>
+                        Timeline <span className="text-krudex-muted font-normal">(optional)</span>
+                      </legend>
+                      <div className="flex flex-wrap gap-2.5">
+                        {timelineOptions.map((option) => (
+                          <label key={option.value} className="relative">
+                            <input
+                              type="radio"
+                              name="timeline"
+                              value={option.value}
+                              className="peer sr-only"
+                              checked={formData.timeline === option.value}
+                              onChange={handleChange}
+                            />
+                            <span className={chipClass}>{option.label}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </fieldset>
 
                     <div className="flex flex-col gap-2">
                       <label htmlFor="details" className={labelClass}>
