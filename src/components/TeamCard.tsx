@@ -172,12 +172,12 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
                   className="w-2 h-2 rounded-full"
                   style={{ background: member.accent }}
                 />
-                <span className="text-[10px] uppercase tracking-[0.25em] text-white/50 font-medium">
+                <span className="text-xs uppercase tracking-[0.25em] text-white/50 font-medium">
                   Active
                 </span>
               </div>
               <span
-                className="text-[10px] font-mono opacity-30"
+                className="text-xs font-mono opacity-30"
                 style={{ color: member.accent }}
               >
                 {String(index + 1).padStart(2, "0")}
@@ -247,7 +247,7 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
                     scale: 1.05,
                     y: -1,
                   }}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium border transition-colors duration-200 cursor-default"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium border transition-colors duration-200 cursor-default"
                   style={{
                     background: `${member.accent}08`,
                     borderColor: `${member.accent}15`,
@@ -316,7 +316,7 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
                     style={{ background: member.accent }}
                   />
                   <span
-                    className="text-[9px] uppercase tracking-[0.2em] opacity-50 font-medium whitespace-nowrap"
+                    className="text-xs uppercase tracking-[0.2em] opacity-50 font-medium whitespace-nowrap"
                     style={{ color: member.accent }}
                   >
                     Connect

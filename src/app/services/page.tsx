@@ -84,7 +84,7 @@ export default function ServicesPage() {
               className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-10"
             >
               <div className="w-1.5 h-1.5 rounded-full bg-krudex-accent"></div>
-              <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-accent font-semibold">
+              <span className="text-xs uppercase tracking-[0.2em] text-krudex-accent font-semibold">
                 SERVICES
               </span>
             </motion.div>
@@ -124,7 +124,7 @@ export default function ServicesPage() {
                     {service.desc}
                   </p>
                   <div className="border-l-2 border-krudex-accent pl-6 py-3 bg-gradient-to-r from-white/5 to-transparent">
-                    <div className="text-[10px] text-krudex-muted font-mono uppercase tracking-[0.15em] mb-2">
+                    <div className="text-xs text-krudex-muted font-mono uppercase tracking-[0.15em] mb-2">
                       OUTCOME
                     </div>
                     <p className="text-white font-medium text-sm">
@@ -141,7 +141,7 @@ export default function ServicesPage() {
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="flex flex-col lg:pt-12"
                 >
-                  <div className="text-[10px] text-krudex-muted font-mono uppercase tracking-[0.2em] mb-6">
+                  <div className="text-xs text-krudex-muted font-mono uppercase tracking-[0.2em] mb-6">
                     CAPABILITIES
                   </div>
                   <div className="flex flex-col gap-2">

@@ -71,7 +71,7 @@ const Hero = () => {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-krudex-accent opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-krudex-accent"></span>
           </span>
-          <span className="text-[11px] md:text-[12px] font-mono text-krudex-muted group-hover:text-white tracking-wide transition-colors">
+          <span className="text-xs font-mono text-krudex-muted group-hover:text-white tracking-wide transition-colors">
             SaaS Product Engineering Studio
           </span>
         </motion.div>

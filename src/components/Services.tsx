@@ -42,7 +42,7 @@ const Services = () => {
           className="inline-flex items-center gap-2.5 bg-krudex-surface/50 border border-krudex-border px-4 py-2 rounded-full mb-8"
         >
           <div className="w-1.5 h-1.5 rounded-full bg-white/60"></div>
-          <span className="text-[11px] text-krudex-muted tracking-wide">
+          <span className="text-xs text-krudex-muted tracking-wide">
             WHAT WE DO
           </span>
         </motion.div>

@@ -73,7 +73,7 @@ const inputClass =
   'w-full bg-white/[0.03] border border-white/15 rounded-md px-4 py-3.5 text-white text-base md:text-sm placeholder:text-white/30 transition-colors hover:border-white/30 focus:outline-none focus:border-krudex-accent focus:ring-1 focus:ring-krudex-accent';
 const labelClass = 'text-[13px] font-medium text-white/80';
 const chipClass =
-  'inline-flex items-center gap-2 cursor-pointer select-none rounded-full border border-white/15 px-4 py-2.5 text-[13px] text-white/70 transition-colors hover:border-white/40 hover:text-white peer-checked:border-krudex-accent peer-checked:bg-krudex-accent peer-checked:text-krudex-black peer-checked:font-medium peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-krudex-accent';
+  'inline-flex items-center gap-2 min-h-11 cursor-pointer select-none rounded-full border border-white/15 px-4 text-[14px] text-white/70 transition-colors hover:border-white/40 hover:text-white peer-checked:border-krudex-accent peer-checked:bg-krudex-accent peer-checked:text-krudex-black peer-checked:font-medium peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-krudex-accent';
 
 export default function ContactPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -140,7 +140,7 @@ export default function ContactPage() {
       <section className="px-6 md:px-16 lg:px-24 pt-40 md:pt-48 pb-20 bg-krudex-black/40 backdrop-blur-md relative z-10">
         <div className="max-w-7xl mx-auto">
           {/* Header + Form Row */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 xl:gap-24 items-start">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -149,7 +149,7 @@ export default function ContactPage() {
             >
               <div className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-10">
                 <div className="w-1.5 h-1.5 rounded-full bg-krudex-accent"></div>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-accent font-semibold">
+                <span className="text-xs uppercase tracking-[0.2em] text-krudex-accent font-semibold">
                   CONTACT
                 </span>
               </div>
@@ -164,7 +164,7 @@ export default function ContactPage() {
               <ol className="flex flex-col gap-4 text-sm">
                 {['You send the brief', 'We reply within 24 hours', 'Free 30-minute scoping call'].map((step, i) => (
                   <li key={step} className="flex items-center gap-4 text-white/80">
-                    <span className="w-7 h-7 rounded-full border border-white/25 flex items-center justify-center font-mono text-[11px] text-white flex-shrink-0">
+                    <span className="w-7 h-7 rounded-full border border-white/25 flex items-center justify-center font-mono text-xs text-white flex-shrink-0">
                       {i + 1}
                     </span>
                     {step}
@@ -390,7 +390,7 @@ export default function ContactPage() {
       {/* Contact Info + FAQ Section */}
       <section className="px-6 md:px-16 lg:px-24 py-24 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border relative z-10">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 xl:gap-24">
 
             {/* Left: Contact Details */}
             <motion.div
@@ -408,8 +408,8 @@ export default function ContactPage() {
                   <Mail className="w-5 h-5 text-white" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">EMAIL</span>
-                  <a href="mailto:krudextechnologies@gmail.com" className="text-white font-medium text-sm underline-offset-4 hover:underline break-all">krudextechnologies@gmail.com</a>
+                  <span className="text-xs uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">EMAIL</span>
+                  <a href="mailto:krudextechnologies@gmail.com" className="inline-flex items-center min-h-11 text-white font-medium text-sm underline-offset-4 hover:underline [overflow-wrap:anywhere]">krudextechnologies@gmail.com</a>
                 </div>
               </div>
 
@@ -419,10 +419,10 @@ export default function ContactPage() {
                   <Phone className="w-5 h-5 text-white" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">PHONE</span>
+                  <span className="text-xs uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">PHONE</span>
                   <div className="flex flex-wrap gap-x-4 gap-y-1">
-                    <a href="tel:+918978261053" className="text-white font-medium text-sm underline-offset-4 hover:underline">+91 89782 61053</a>
-                    <a href="tel:+919490248160" className="text-white font-medium text-sm underline-offset-4 hover:underline">+91 94902 48160</a>
+                    <a href="tel:+918978261053" className="inline-flex items-center min-h-11 text-white font-medium text-sm underline-offset-4 hover:underline">+91 89782 61053</a>
+                    <a href="tel:+919490248160" className="inline-flex items-center min-h-11 text-white font-medium text-sm underline-offset-4 hover:underline">+91 94902 48160</a>
                   </div>
                 </div>
               </div>
@@ -433,14 +433,14 @@ export default function ContactPage() {
                   <MapPin className="w-5 h-5 text-white" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">OFFICE</span>
+                  <span className="text-xs uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">OFFICE</span>
                   <span className="text-white font-medium text-sm">Hyderabad, Telangana, India</span>
                 </div>
               </div>
 
               {/* SLA Block */}
               <div className="bg-krudex-card/30 border border-krudex-border p-8 mt-4">
-                <div className="text-[10px] uppercase tracking-[0.2em] text-krudex-muted font-mono mb-4">
+                <div className="text-xs uppercase tracking-[0.2em] text-krudex-muted font-mono mb-4">
                   RESPONSE SLA
                 </div>
                 <h3 className="text-white font-bold text-lg mb-3">Within 24 hours</h3>
