@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Mail, Phone, MapPin, ChevronDown, Check, AlertCircle, ArrowRight, Loader2 } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
 
 const faqs = [
   {
@@ -110,16 +109,21 @@ export default function ContactPage() {
     setError('');
 
     try {
-      // Write data to Supabase
-      const { error } = await supabase
-        .from('inquiries')
-        .insert([{
+      // Send inquiry to our backend API connected to Cloudflare D1
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
           ...formData,
           scope: services.join(', '),
-        }]);
+        }),
+      });
 
-      if (error) {
-        throw error;
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => null);
+        throw new Error(errorData?.error || 'Failed to submit inquiry');
       }
 
       setIsSuccess(true);
