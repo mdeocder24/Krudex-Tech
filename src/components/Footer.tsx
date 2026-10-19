@@ -65,7 +65,7 @@ const Footer = () => {
                     <MotionLink
                       href={link.href}
                       whileHover={{ x: 4 }}
-                      className="text-krudex-muted text-sm hover:text-white transition-colors inline-flex items-center gap-1 group min-h-11 lg:min-h-8 max-w-full [overflow-wrap:anywhere]"
+                      className="text-krudex-muted text-sm hover:text-white transition-colors inline-flex items-center gap-1 group min-h-11 max-w-full [overflow-wrap:anywhere]"
                     >
                       {link.label}
                       <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />

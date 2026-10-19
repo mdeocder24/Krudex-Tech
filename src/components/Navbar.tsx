@@ -74,7 +74,7 @@ const Navbar = () => {
                 whileHover={{ scale: 1.05, opacity: 1 }}
                 whileTap={{ scale: 0.95 }}
                 aria-current={isActive ? 'page' : undefined}
-                className={`whitespace-nowrap py-3 text-[14px] transition-colors duration-200 relative ${isActive ? 'text-white font-medium' : 'text-krudex-muted hover:text-white'
+                className={`whitespace-nowrap py-3 px-1 text-[14px] transition-colors duration-200 relative ${isActive ? 'text-white font-medium' : 'text-krudex-muted hover:text-white'
                   }`}
               >
                 {link.label}
