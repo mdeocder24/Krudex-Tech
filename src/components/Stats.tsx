@@ -48,7 +48,7 @@ const StatItem = ({ value, suffix, label, delay }: StatItemProps) => {
       <div className="text-white font-serif text-4xl md:text-6xl tabular-nums font-normal mb-2 tracking-tight">
         {count}{suffix}
       </div>
-      <div className="text-krudex-muted text-[11px] md:text-xs uppercase tracking-[0.15em] md:tracking-[0.2em]">{label}</div>
+      <div className="text-krudex-muted text-xs uppercase tracking-[0.15em] md:tracking-[0.2em]">{label}</div>
     </motion.div>
   );
 };

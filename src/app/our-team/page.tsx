@@ -146,7 +146,7 @@ export default function OurTeamPage() {
               className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-10"
             >
               <div className="w-1.5 h-1.5 rounded-full bg-krudex-accent"></div>
-              <span className="text-[10px] uppercase tracking-[0.2em] text-krudex-accent font-semibold">
+              <span className="text-xs uppercase tracking-[0.2em] text-krudex-accent font-semibold">
                 OUR TEAM
               </span>
             </motion.div>

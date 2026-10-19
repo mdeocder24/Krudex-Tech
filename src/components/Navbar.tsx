@@ -29,7 +29,12 @@ const Navbar = () => {
 
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? 'hidden' : 'unset';
-    return () => { document.body.style.overflow = 'unset'; };
+    const onKeyDown = (e: KeyboardEvent) => { if (e.key === 'Escape') setIsMobileMenuOpen(false); };
+    if (isMobileMenuOpen) document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.style.overflow = 'unset';
+      document.removeEventListener('keydown', onKeyDown);
+    };
   }, [isMobileMenuOpen]);
 
   return (
@@ -39,7 +44,7 @@ const Navbar = () => {
       transition={{ duration: 0.6 }}
       className={`w-full flex items-center justify-between px-6 md:px-14 lg:px-20 fixed top-0 z-50 transition-all duration-300
         bg-krudex-black/70 backdrop-blur-2xl border-b border-white/10 shadow-[inset_0_1px_1px_rgba(212,180,131,0.1),0_4px_30px_rgba(0,0,0,0.1)]
-        ${scrolled ? 'py-4' : 'py-6'}
+        ${scrolled ? 'py-2 lg:py-4' : 'py-3 lg:py-6'}
       `}
     >
       {/* Left side: Brand */}
@@ -50,16 +55,16 @@ const Navbar = () => {
             alt="Krudex"
             width={240}
             height={80}
-            className="h-16 md:h-20 w-auto object-contain scale-[2] md:scale-[2.5] origin-left"
+            className="h-14 lg:h-20 w-auto object-contain scale-[2] lg:scale-[2.5] origin-left"
             preload
           />
         </Link>
       </div>
 
       {/* Right side: Nav Links & CTA */}
-      <div className="flex-1 flex justify-end items-center gap-6 md:gap-10">
+      <div className="flex-1 flex justify-end items-center gap-6 lg:gap-8 xl:gap-10">
         {/* Desktop Nav Links */}
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden lg:flex items-center gap-8 xl:gap-10">
           {navLinks.map((link) => {
             const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href);
             return (
@@ -69,7 +74,7 @@ const Navbar = () => {
                 whileHover={{ scale: 1.05, opacity: 1 }}
                 whileTap={{ scale: 0.95 }}
                 aria-current={isActive ? 'page' : undefined}
-                className={`text-[13px] transition-colors duration-200 relative ${isActive ? 'text-white font-medium' : 'text-krudex-muted hover:text-white'
+                className={`whitespace-nowrap py-3 px-1 text-[14px] transition-colors duration-200 relative ${isActive ? 'text-white font-medium' : 'text-krudex-muted hover:text-white'
                   }`}
               >
                 {link.label}
@@ -78,7 +83,7 @@ const Navbar = () => {
                     initial={{ opacity: 0, scaleX: 0 }}
                     animate={{ opacity: 1, scaleX: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute -bottom-2 left-0 right-0 h-[2px] bg-krudex-accent rounded-full origin-center"
+                    className="absolute bottom-1 left-0 right-0 h-[2px] bg-krudex-accent rounded-full origin-center"
                   />
                 )}
               </MotionLink>
@@ -87,25 +92,25 @@ const Navbar = () => {
         </div>
 
         {/* Desktop CTA */}
-        <div className="hidden md:flex items-center">
+        <div className="hidden lg:flex items-center">
           <MotionLink
             href="/contact"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="text-[13px] font-medium text-white border border-white/20 bg-white/5 px-5 py-2 rounded-full hover:bg-krudex-accent hover:text-krudex-black hover:border-krudex-accent hover:shadow-[0_0_25px_rgba(212,180,131,0.4)] transition-all duration-300"
+            className="whitespace-nowrap inline-flex items-center min-h-11 text-[14px] font-medium text-white border border-white/20 bg-white/5 px-5 rounded-full hover:bg-krudex-accent hover:text-krudex-black hover:border-krudex-accent hover:shadow-[0_0_25px_rgba(212,180,131,0.4)] transition-all duration-300"
           >
             Contact Us
           </MotionLink>
         </div>
 
         {/* Mobile Menu Toggle */}
-        <div className="md:hidden flex items-center">
+        <div className="lg:hidden flex items-center">
           <motion.button
             onClick={() => setIsMobileMenuOpen(true)}
             whileTap={{ scale: 0.9 }}
             aria-label="Open menu"
             aria-expanded={isMobileMenuOpen}
-            className="text-white hover:text-krudex-muted transition-colors p-2.5 -mr-2.5"
+            className="text-white hover:text-krudex-muted transition-colors w-11 h-11 -mr-2.5 flex items-center justify-center"
           >
             <Menu className="w-6 h-6" />
           </motion.button>
@@ -136,19 +141,19 @@ const Navbar = () => {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: -10 }}
               transition={{ duration: 0.2, ease: 'easeOut' }}
-              className="absolute top-24 right-6 w-64 bg-krudex-black border border-white/10 rounded-2xl p-6 flex flex-col shadow-2xl"
+              className="absolute top-4 right-4 left-4 sm:left-auto sm:w-72 max-h-[calc(100dvh-2rem)] overflow-y-auto bg-krudex-black border border-white/10 rounded-2xl p-6 flex flex-col shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
                 aria-label="Close menu"
-                className="absolute top-3 right-3 text-white hover:text-krudex-muted transition-colors bg-white/5 hover:bg-white/10 rounded-full p-2.5"
+                className="absolute top-3 right-3 text-white hover:text-krudex-muted transition-colors bg-white/5 hover:bg-white/10 rounded-full w-11 h-11 flex items-center justify-center"
               >
                 <X className="w-4 h-4" />
               </button>
 
-              <div className="flex flex-col gap-4 pt-2">
+              <div className="flex flex-col gap-1 pt-12">
                 {navLinks.map((link, idx) => {
                   const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href);
                   return (
@@ -161,7 +166,7 @@ const Navbar = () => {
                       <Link
                         href={link.href}
                         aria-current={isActive ? 'page' : undefined}
-                        className={`text-xl font-serif transition-colors flex items-center gap-3 py-1 ${isActive ? 'text-white' : 'text-krudex-muted hover:text-white'
+                        className={`text-xl font-serif transition-colors flex items-center gap-3 min-h-12 ${isActive ? 'text-white' : 'text-krudex-muted hover:text-white'
                           }`}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
@@ -188,7 +193,7 @@ const Navbar = () => {
                   <Link
                     href="/contact"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex justify-center w-full text-krudex-black bg-krudex-accent px-6 py-3 rounded-full text-[13px] font-medium hover:bg-krudex-accent-hover transition-all duration-300"
+                    className="flex items-center justify-center w-full min-h-12 text-krudex-black bg-krudex-accent px-6 rounded-full text-[15px] font-semibold hover:bg-krudex-accent-hover transition-all duration-300"
                   >
                     Contact Us
                   </Link>

@@ -17,7 +17,7 @@ const CTA = () => {
           className="inline-flex items-center gap-2.5 bg-krudex-surface/50 border border-krudex-border px-4 py-2 rounded-full mb-8"
         >
           <span className="w-2 h-2 rounded-full bg-krudex-accent animate-pulse" />
-          <span className="text-[11px] text-krudex-muted tracking-wide">
+          <span className="text-xs text-krudex-muted tracking-wide">
             READY TO START
           </span>
         </motion.div>
