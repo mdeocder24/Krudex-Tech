@@ -37,9 +37,9 @@ export default function GlobeObject() {
       diffuse: 1.4,
       mapSamples: 8000,
       mapBrightness: 2.8,
-      baseColor: [0.05, 0.05, 0.05],
-      markerColor: [1, 1, 1],
-      glowColor: [0.12, 0.12, 0.12],
+      baseColor: [0.07, 0.06, 0.05],
+      markerColor: [0.83, 0.71, 0.51], // champagne gold
+      glowColor: [0.2, 0.17, 0.12],
       markers: MARKERS,
     });
 
@@ -72,7 +72,7 @@ export default function GlobeObject() {
     <div className="relative w-full h-full flex items-center justify-center">
       {/* Ambient glow behind the globe */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[65%] aspect-square rounded-full bg-[#ffffff]/6 blur-[100px]" />
+        <div className="w-[65%] aspect-square rounded-full bg-krudex-accent/6 blur-[100px]" />
       </div>
       <canvas
         ref={canvasRef}

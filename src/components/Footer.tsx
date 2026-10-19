@@ -14,7 +14,6 @@ const footerLinks = [
     links: [
       { label: 'About', href: '/about' },
       { label: 'Our Team', href: '/our-team' },
-      { label: 'Work', href: '/work' },
     ],
   },
   {
@@ -44,7 +43,7 @@ const Footer = () => {
           <div className="col-span-2 md:col-span-1 flex flex-col items-start">
             <Link href="/" aria-label="Krudex Technologies — home" className="mb-6 block">
               <Image 
-                src="/krudex-bg.png" 
+                src="/krudex-bg-gold.png" 
                 alt="Krudex" 
                 width={240} 
                 height={80} 

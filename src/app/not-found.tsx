@@ -28,7 +28,7 @@ export default function NotFound() {
 
           <Link
             href="/"
-            className="liquid-glass text-white text-xs sm:text-sm tracking-[0.15em] sm:tracking-[0.2em] font-medium px-6 sm:px-8 py-3.5 rounded-full uppercase hover:bg-white hover:text-krudex-black transition-colors duration-300"
+            className="liquid-glass text-white text-xs sm:text-sm tracking-[0.15em] sm:tracking-[0.2em] font-medium px-6 sm:px-8 py-3.5 rounded-full uppercase hover:bg-krudex-accent hover:text-krudex-black transition-colors duration-300"
           >
             Return to Main Page
           </Link>

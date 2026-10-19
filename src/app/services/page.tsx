@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import ServicesCTA from '@/components/ServicesCTA';
 import Footer from '@/components/Footer';
@@ -14,7 +13,6 @@ const servicesData = [
     subtitle: "From zero to production-grade — engineered to last.",
     desc: "We design and build high-throughput web applications with clean architecture. Our process begins with a technical audit of your requirements, moves through system design, and ends with a fully deployed, monitored, and documented product. We don't deliver code — we deliver working systems.",
     outcome: "Sub-1s Largest Contentful Paint guaranteed on every project.",
-    buttonLabel: "View Our Web Work",
     capabilities: [
       "Next.js 16 App Router with production-grade monitoring gates",
       "FastAPI / Node.js backends with strongly-typed API contracts",
@@ -30,7 +28,6 @@ const servicesData = [
     subtitle: "One codebase. Native performance on both platforms.",
     desc: "We build cross-platform mobile applications that behave like native apps — not compromises. React Native with Expo lets us ship to iOS and Android from a single, maintainable codebase while preserving access to native device APIs, smooth 60fps animations, and offline capability.",
     outcome: "Single codebase delivering native experience across iOS and Android.",
-    buttonLabel: "View Our App Work",
     capabilities: [
       "React Native with Expo managed and bare workflows",
       "Native module integration (camera, biometrics, GPS)",
@@ -46,7 +43,6 @@ const servicesData = [
     subtitle: "Intelligent features that work in production — not just demos.",
     desc: "We embed AI and machine learning into real products. That means building inference pipelines optimized for latency, training custom models on your domain data, and integrating LLM-powered features that behave predictably under load. We've shipped computer vision, NLP, and recommendation systems into production.",
     outcome: "18ms average inference latency. 94.7% accuracy on our vision projects.",
-    buttonLabel: "View Our AI Work",
     capabilities: [
       "Custom model training with TensorFlow and PyTorch",
       "Real-time computer vision with MediaPipe",
@@ -62,7 +58,6 @@ const servicesData = [
     subtitle: "Design systems that scale. Identities that command credibility.",
     desc: "We build design systems from component primitives up — not templates down. Every interface we design is grounded in user research and business goals, then executed in Figma with full specification and handed off to engineering with working prototypes. Our branding work covers identity, collateral, and digital campaigns.",
     outcome: "40+ brand identities delivered across startups, enterprises, and events.",
-    buttonLabel: "View Our UI Work",
     capabilities: [
       "User research, flows, and wireframes",
       "High-fidelity Figma prototypes",
@@ -128,7 +123,7 @@ export default function ServicesPage() {
                   <p className="text-krudex-muted text-base leading-loose mb-10">
                     {service.desc}
                   </p>
-                  <div className="border-l-2 border-white pl-6 py-3 bg-gradient-to-r from-white/5 to-transparent">
+                  <div className="border-l-2 border-krudex-accent pl-6 py-3 bg-gradient-to-r from-white/5 to-transparent">
                     <div className="text-[10px] text-krudex-muted font-mono uppercase tracking-[0.15em] mb-2">
                       OUTCOME
                     </div>
@@ -136,15 +131,6 @@ export default function ServicesPage() {
                       {service.outcome}
                     </p>
                   </div>
-                  <Link
-                    href="/work"
-                    className="inline-flex items-center gap-2 mt-8 px-6 py-3 border border-krudex-border text-sm text-white font-medium tracking-wide hover:bg-white hover:text-krudex-black hover:border-white transition-colors duration-300 group w-fit"
-                  >
-                    {service.buttonLabel}
-                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </Link>
                 </motion.div>
 
                 {/* Right Column: Capabilities */}

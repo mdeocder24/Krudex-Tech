@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async redirects() {
+    return [
+      // The Work page was removed; send old links and search results home.
+      { source: "/work", destination: "/", permanent: false },
+    ];
+  },
 };
 
 export default nextConfig;

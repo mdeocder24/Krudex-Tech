@@ -12,8 +12,8 @@ const teamMembers = [
     name: "Kushwant Kumar Reddy",
     role: "Founder & Principal Engineer",
     initials: "KK",
-    accent: "#ffffff",
-    accentRgb: "255, 255, 255",
+    accent: "#D4B483",
+    accentRgb: "212, 180, 131",
     bio: "Founding engineer leading every client engagement end-to-end — from technical scoping through production deployment. Specializes in full-stack web engineering, computer vision, and ML systems.",
     skills: ["Next.js", "FastAPI", "TensorFlow", "Computer Vision", "System Design"],
     socials: [
@@ -26,8 +26,8 @@ const teamMembers = [
     name: "Sri Likhin Prasad",
     role: "Co-Founder",
     initials: "SL",
-    accent: "#ffffff",
-    accentRgb: "255, 255, 255",
+    accent: "#D4B483",
+    accentRgb: "212, 180, 131",
     bio: "Architects scalable solutions and ensures every digital product meets rigorous standards for performance and reliability. Champion of the 'Architecture first' principle.",
     skills: ["Architecture", "Systems Integration", "React", "DevOps", "Scaling"],
     socials: [
@@ -39,8 +39,8 @@ const teamMembers = [
     name: "Aarav Mehta",
     role: "Lead AI/ML Engineer",
     initials: "AM",
-    accent: "#ffffff",
-    accentRgb: "255, 255, 255",
+    accent: "#D4B483",
+    accentRgb: "212, 180, 131",
     bio: "Builds production-grade machine learning pipelines and intelligent systems. Deep expertise in NLP, recommendation engines, and real-time inference at scale.",
     skills: ["PyTorch", "MLOps", "NLP", "LLMs", "Data Engineering"],
     socials: [
@@ -53,8 +53,8 @@ const teamMembers = [
     name: "Priya Venkatesh",
     role: "Senior Frontend Engineer",
     initials: "PV",
-    accent: "#ffffff",
-    accentRgb: "255, 255, 255",
+    accent: "#D4B483",
+    accentRgb: "212, 180, 131",
     bio: "Crafts pixel-perfect, high-performance interfaces with meticulous attention to animation, accessibility, and cross-browser consistency. Design-engineering hybrid.",
     skills: ["React", "TypeScript", "Framer Motion", "WebGL", "CSS Architecture"],
     socials: [
@@ -67,8 +67,8 @@ const teamMembers = [
     name: "Rohan Iyer",
     role: "Backend & Infrastructure",
     initials: "RI",
-    accent: "#ffffff",
-    accentRgb: "255, 255, 255",
+    accent: "#D4B483",
+    accentRgb: "212, 180, 131",
     bio: "Designs resilient backend architectures and cloud infrastructure. Obsessed with zero-downtime deployments, observability, and sub-100ms API responses.",
     skills: ["Node.js", "PostgreSQL", "AWS", "Docker", "Kubernetes"],
     socials: [
@@ -80,8 +80,8 @@ const teamMembers = [
     name: "Sneha Reddy",
     role: "UI/UX Design Lead",
     initials: "SR",
-    accent: "#ffffff",
-    accentRgb: "255, 255, 255",
+    accent: "#D4B483",
+    accentRgb: "212, 180, 131",
     bio: "Translates complex product requirements into intuitive, beautiful interfaces. Bridges the gap between design vision and engineering reality with systematic design systems.",
     skills: ["Figma", "Design Systems", "Prototyping", "User Research", "Brand"],
     socials: [
@@ -94,8 +94,8 @@ const teamMembers = [
     name: "Vikram Nair",
     role: "Mobile & Cross-Platform",
     initials: "VN",
-    accent: "#ffffff",
-    accentRgb: "255, 255, 255",
+    accent: "#D4B483",
+    accentRgb: "212, 180, 131",
     bio: "Ships cross-platform mobile experiences that feel truly native. Expert in performance optimization, offline-first architectures, and smooth 60fps animations.",
     skills: ["React Native", "Swift", "Kotlin", "Firebase", "App Performance"],
     socials: [
@@ -123,7 +123,7 @@ export default function OurTeamPage() {
             }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
             className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-[128px] opacity-[0.07]"
-            style={{ background: "#ffffff" }}
+            style={{ background: "#D4B483" }}
           />
           <motion.div
             animate={{
@@ -133,7 +133,7 @@ export default function OurTeamPage() {
             }}
             transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
             className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full blur-[128px] opacity-[0.05]"
-            style={{ background: "#ffffff" }}
+            style={{ background: "#D4B483" }}
           />
         </div>
 
@@ -182,7 +182,7 @@ export default function OurTeamPage() {
           className="absolute inset-0 opacity-[0.02] pointer-events-none"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
+              "linear-gradient(rgba(212,180,131,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(212,180,131,0.1) 1px, transparent 1px)",
             backgroundSize: "60px 60px",
           }}
         />

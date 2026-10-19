@@ -59,7 +59,7 @@ const CustomCursor = () => {
       transition={{ duration: 0.2 }}
     >
       <motion.div
-        className="rounded-full bg-white"
+        className="rounded-full bg-krudex-accent"
         animate={{
           width: isHovering ? 44 : 10,
           height: isHovering ? 44 : 10,

@@ -10,8 +10,8 @@ import * as THREE from 'three';
    ───────────────────────────────────────────── */
 const pillarMaterial = new THREE.ShaderMaterial({
   uniforms: {
-    colorTop: { value: new THREE.Color("#1a1a1a") }, // medium-dark gray
-    colorBottom: { value: new THREE.Color("#000000") }, // solid black
+    colorTop: { value: new THREE.Color("#1F1B15") }, // warm charcoal
+    colorBottom: { value: new THREE.Color("#0A0908") }, // page black
     height: { value: 30.0 }, // default depth
   },
   vertexShader: `
@@ -131,24 +131,24 @@ const Platform = ({ position, size, label, sideLabel }: PlatformProps) => {
       <group rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, 0]}>
         {/* Core solid bright white frame */}
         <mesh geometry={frameGeometry}>
-          <meshBasicMaterial color="#ffffff" />
+          <meshBasicMaterial color="#D4B483" />
         </mesh>
 
         {/* Soft Bloom layers (transparent, additive blending) */}
         <mesh geometry={bloomGeometry} position={[0, 0, -0.01]}>
-          <meshBasicMaterial color="#ffffff" transparent opacity={0.25} blending={THREE.AdditiveBlending} depthWrite={false} />
+          <meshBasicMaterial color="#D4B483" transparent opacity={0.25} blending={THREE.AdditiveBlending} depthWrite={false} />
         </mesh>
 
         {/* Outer large diffuse glow */}
         <mesh geometry={outerGlowGeometry} position={[0, 0, -0.02]}>
-          <meshBasicMaterial color="#ffffff" transparent opacity={0.08} blending={THREE.AdditiveBlending} depthWrite={false} />
+          <meshBasicMaterial color="#D4B483" transparent opacity={0.08} blending={THREE.AdditiveBlending} depthWrite={false} />
         </mesh>
       </group>
 
       {/* 2. Top Dark Surface (inside the neon frame) */}
       <mesh position={[0, -0.01, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[w, d]} />
-        <meshBasicMaterial color="#1a1a1a" />
+        <meshBasicMaterial color="#1A1712" />
       </mesh>
 
       {/* Label Text on top of the platform */}
@@ -157,7 +157,7 @@ const Platform = ({ position, size, label, sideLabel }: PlatformProps) => {
           position={[0, 0.05, 0]}
           rotation={[-Math.PI / 2, 0, -Math.PI / 4]}
           fontSize={w * 0.20}
-          color="#ffffff"
+          color="#F5EFE4"
           anchorX="center"
           anchorY="middle"
           fillOpacity={0.9}
@@ -173,7 +173,7 @@ const Platform = ({ position, size, label, sideLabel }: PlatformProps) => {
         {/* Custom shader for smooth vertical gradient fading into darkness */}
         <primitive object={pillarMaterial} attach="material" />
         {/* Subtle structural edge highlights to enhance the 3D volume */}
-        <Edges scale={1.001} threshold={15} color="#ffffff" transparent opacity={0.1} />
+        <Edges scale={1.001} threshold={15} color="#D4B483" transparent opacity={0.15} />
       </mesh>
 
       {/* 4. Side Label Text on the pillar face */}
@@ -182,7 +182,7 @@ const Platform = ({ position, size, label, sideLabel }: PlatformProps) => {
           position={[0, -1.2, d / 2 + 0.05]} // Positioned cleanly on the top part of the side face
           rotation={[0, 0, 0]} // Horizontal across the face
           fontSize={w * 0.11}
-          color="#ffffff"
+          color="#D4B483"
           anchorX="center"
           anchorY="middle"
           fillOpacity={0.6}
@@ -194,65 +194,6 @@ const Platform = ({ position, size, label, sideLabel }: PlatformProps) => {
           {sideLabel}
         </Text>
       )}
-    </group>
-  );
-};
-
-/* ─────────────────────────────────────────────
-   Floating Figure (The Astronaut)
-   ───────────────────────────────────────────── */
-const FloatingFigure = ({ position }: { position: [number, number, number] }) => {
-  const groupRef = useRef<THREE.Group>(null);
-
-  useFrame(({ clock }) => {
-    if (groupRef.current) {
-      const t = clock.getElapsedTime();
-      // Gentle floating bob around its initial position
-      groupRef.current.position.y = position[1] + Math.sin(t * 1.5) * 0.15;
-      // Slight rotation bobbing
-      groupRef.current.rotation.x = Math.sin(t * 0.5) * 0.1;
-      groupRef.current.rotation.z = Math.sin(t * 0.8) * 0.1;
-    }
-  });
-
-  // Positioned exactly where specified
-  return (
-    <group ref={groupRef} position={position} scale={0.25} rotation={[0, -0.5, 0]}>
-      {/* Head/Visor - polished steel */}
-      <mesh position={[0, 1.0, 0]}>
-        <sphereGeometry args={[0.3, 16, 16]} />
-        <meshStandardMaterial color="#bfbfbf" roughness={0.2} metalness={0.9} />
-      </mesh>
-
-      {/* Torso */}
-      <mesh position={[0, 0, 0]}>
-        <capsuleGeometry args={[0.3, 0.8, 4, 8]} />
-        <meshStandardMaterial color="#333333" roughness={0.7} metalness={0.3} />
-      </mesh>
-
-      {/* Left Arm */}
-      <mesh position={[-0.4, 0.1, 0]} rotation={[0, 0, 0.6]}>
-        <capsuleGeometry args={[0.1, 0.6, 4, 8]} />
-        <meshStandardMaterial color="#222222" />
-      </mesh>
-
-      {/* Right Arm (raised) */}
-      <mesh position={[0.4, 0.3, 0]} rotation={[0, 0, -2.5]}>
-        <capsuleGeometry args={[0.1, 0.6, 4, 8]} />
-        <meshStandardMaterial color="#222222" />
-      </mesh>
-
-      {/* Left Leg */}
-      <mesh position={[-0.15, -0.8, 0]} rotation={[0, 0, 0.1]}>
-        <capsuleGeometry args={[0.12, 0.6, 4, 8]} />
-        <meshStandardMaterial color="#222222" />
-      </mesh>
-
-      {/* Right Leg */}
-      <mesh position={[0.15, -0.7, -0.2]} rotation={[0.4, 0, -0.1]}>
-        <capsuleGeometry args={[0.12, 0.6, 4, 8]} />
-        <meshStandardMaterial color="#222222" />
-      </mesh>
     </group>
   );
 };
@@ -280,13 +221,13 @@ const DataArchitectureScene = () => {
       <ambientLight intensity={0.1} />
 
       {/* Main light from left to illuminate the left-facing walls of the pillars */}
-      <directionalLight position={[-15, 10, 5]} intensity={1.5} color="#ffffff" />
+      <directionalLight position={[-15, 10, 5]} intensity={1.5} color="#FFF3DE" />
 
       {/* Subtle fill light from right */}
-      <directionalLight position={[15, 5, -5]} intensity={0.2} color="#ffffff" />
+      <directionalLight position={[15, 5, -5]} intensity={0.2} color="#FFF3DE" />
 
       {/* Deep fog to blend the pillars seamlessly into the pitch-black background */}
-      <fog attach="fog" args={['#050505', 15, 45]} />
+      <fog attach="fog" args={['#0A0908', 15, 45]} />
 
       {/* ── Platforms Stepping Up ── */}
       {/* 1. Lowest, largest, front-left */}
@@ -298,8 +239,6 @@ const DataArchitectureScene = () => {
       {/* 3. Highest, smallest, back-right */}
       <Platform position={[2.5, 1.5, -2.5]} size={[2.2, 2.2]} label="AI" sideLabel="MACHINE LEARNING" />
 
-      {/* Tiny astronaut floating high between middle and top platform */}
-      <FloatingFigure position={[1.25, 2.2, -1.25]} />
     </group>
   );
 };
