@@ -93,7 +93,7 @@ const Services = () => {
             href="/services"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="group flex items-center gap-2 border border-white/30 text-white px-8 py-4 rounded-full font-medium text-sm hover:bg-white hover:text-krudex-black transition-all duration-300"
+            className="group flex items-center gap-2 border border-white/30 text-white px-8 py-4 rounded-full font-medium text-sm hover:bg-krudex-accent hover:text-krudex-black transition-all duration-300"
           >
             Explore All Services
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

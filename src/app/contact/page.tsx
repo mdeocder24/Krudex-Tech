@@ -70,10 +70,10 @@ const emptyForm = {
 };
 
 const inputClass =
-  'w-full bg-white/[0.03] border border-white/15 rounded-md px-4 py-3.5 text-white text-base md:text-sm placeholder:text-white/30 transition-colors hover:border-white/30 focus:outline-none focus:border-white focus:ring-1 focus:ring-white';
+  'w-full bg-white/[0.03] border border-white/15 rounded-md px-4 py-3.5 text-white text-base md:text-sm placeholder:text-white/30 transition-colors hover:border-white/30 focus:outline-none focus:border-krudex-accent focus:ring-1 focus:ring-krudex-accent';
 const labelClass = 'text-[13px] font-medium text-white/80';
 const chipClass =
-  'inline-flex items-center gap-2 cursor-pointer select-none rounded-full border border-white/15 px-4 py-2.5 text-[13px] text-white/70 transition-colors hover:border-white/40 hover:text-white peer-checked:border-white peer-checked:bg-white peer-checked:text-krudex-black peer-checked:font-medium peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-white';
+  'inline-flex items-center gap-2 cursor-pointer select-none rounded-full border border-white/15 px-4 py-2.5 text-[13px] text-white/70 transition-colors hover:border-white/40 hover:text-white peer-checked:border-krudex-accent peer-checked:bg-krudex-accent peer-checked:text-krudex-black peer-checked:font-medium peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-krudex-accent';
 
 export default function ContactPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -180,7 +180,7 @@ export default function ContactPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="lg:col-span-7 flex flex-col"
             >
-              <div className="bg-krudex-card/60 border border-krudex-border border-t-2 border-t-white p-6 sm:p-8 md:p-12">
+              <div className="bg-krudex-card/60 border border-krudex-border border-t-2 border-t-krudex-accent p-6 sm:p-8 md:p-12">
                 {isSuccess ? (
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
@@ -188,7 +188,7 @@ export default function ContactPage() {
                     role="status"
                     className="flex flex-col items-start py-8"
                   >
-                    <div className="w-12 h-12 rounded-full bg-white text-krudex-black flex items-center justify-center mb-8">
+                    <div className="w-12 h-12 rounded-full bg-krudex-accent text-krudex-black flex items-center justify-center mb-8">
                       <Check className="w-6 h-6" strokeWidth={2.5} />
                     </div>
                     <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">Inquiry received.</h2>
@@ -198,7 +198,7 @@ export default function ContactPage() {
                     <button
                       type="button"
                       onClick={() => setIsSuccess(false)}
-                      className="border border-white/30 text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-white hover:text-krudex-black transition-colors"
+                      className="border border-white/30 text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-krudex-accent hover:text-krudex-black transition-colors"
                     >
                       Send another inquiry
                     </button>
@@ -361,7 +361,7 @@ export default function ContactPage() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="group w-full bg-white text-krudex-black font-semibold py-4 rounded-full hover:bg-krudex-accent-hover transition-colors flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                        className="group w-full bg-krudex-accent text-krudex-black font-semibold py-4 rounded-full hover:bg-krudex-accent-hover transition-colors flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                       >
                         {isSubmitting ? (
                           <>

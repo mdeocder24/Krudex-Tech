@@ -65,11 +65,11 @@ const Hero = () => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="group inline-flex items-center gap-2.5 bg-krudex-surface/90 border border-white/10 hover:border-white/40 px-3.5 md:px-4 py-1.5 md:py-2 rounded-full mb-6 md:mb-8 shadow-[0_0_20px_rgba(255,255,255,0.06)] transition-all duration-300"
+          className="group inline-flex items-center gap-2.5 bg-krudex-surface/90 border border-white/10 hover:border-white/40 px-3.5 md:px-4 py-1.5 md:py-2 rounded-full mb-6 md:mb-8 shadow-[0_0_20px_rgba(212,180,131,0.06)] transition-all duration-300"
         >
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-krudex-accent opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-krudex-accent"></span>
           </span>
           <span className="text-[11px] md:text-[12px] font-mono text-krudex-muted group-hover:text-white tracking-wide transition-colors">
             SaaS Product Engineering Studio
@@ -99,7 +99,7 @@ const Hero = () => {
               <motion.span
                 key={i}
                 variants={wordVariants}
-                className="inline-block mr-[0.22em]"
+                className={`inline-block mr-[0.22em] ${word === 'scale.' ? 'text-krudex-accent' : ''}`}
               >
                 {word}
               </motion.span>
@@ -121,15 +121,8 @@ const Hero = () => {
           className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6 w-full sm:w-auto"
         >
           <MagneticButton
-            href="/work"
-            className="group relative inline-flex items-center justify-center gap-2 bg-white text-krudex-black px-7 md:px-8 py-3.5 md:py-4 text-[13px] md:text-[14px] font-semibold tracking-wide hover:bg-gray-100 transition-all rounded-full shadow-[0_0_30px_rgba(255,255,255,0.25)] hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] hover:scale-[1.02]"
-          >
-            <span>View Our Work</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </MagneticButton>
-          <MagneticButton
             href="/contact"
-            className="group inline-flex items-center justify-center gap-2 px-7 md:px-8 py-3.5 md:py-4 rounded-full border border-white/10 hover:border-white/30 bg-white/5 hover:bg-white/10 text-white text-[13px] md:text-[14px] font-medium tracking-wide transition-all hover:scale-[1.02]"
+            className="group relative inline-flex items-center justify-center gap-2 bg-krudex-accent text-krudex-black px-7 md:px-8 py-3.5 md:py-4 text-[13px] md:text-[14px] font-semibold tracking-wide hover:bg-krudex-accent-hover transition-all rounded-full shadow-[0_0_30px_rgba(212,180,131,0.25)] hover:shadow-[0_0_40px_rgba(212,180,131,0.4)] hover:scale-[1.02]"
           >
             <span>Book a Strategy Call</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -148,7 +141,7 @@ const Hero = () => {
 
         {/* Ambient glow layer (pillars have their own inner glow) */}
         <div className="absolute inset-0 pointer-events-none -z-10">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#ffffff]/5 blur-[160px] rounded-full" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-krudex-accent/5 blur-[160px] rounded-full" />
         </div>
       </motion.div>
     </section>

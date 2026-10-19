@@ -85,7 +85,7 @@ const Process = () => {
         <ul className="flex flex-wrap gap-x-8 gap-y-3">
           {assurances.map((item) => (
             <li key={item} className="flex items-center gap-3 text-sm text-white/80">
-              <span className="w-1.5 h-1.5 rounded-full bg-white flex-shrink-0" />
+              <span className="w-1.5 h-1.5 rounded-full bg-krudex-accent flex-shrink-0" />
               {item}
             </li>
           ))}

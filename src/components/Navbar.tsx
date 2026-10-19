@@ -10,7 +10,6 @@ import { Menu, X } from 'lucide-react';
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/services' },
-  { label: 'Work', href: '/work' },
   { label: 'About', href: '/about' },
   { label: 'Our Team', href: '/our-team' },
 ];
@@ -39,7 +38,7 @@ const Navbar = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
       className={`w-full flex items-center justify-between px-6 md:px-14 lg:px-20 fixed top-0 z-50 transition-all duration-300
-        bg-krudex-black/70 backdrop-blur-2xl border-b border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_4px_30px_rgba(0,0,0,0.1)]
+        bg-krudex-black/70 backdrop-blur-2xl border-b border-white/10 shadow-[inset_0_1px_1px_rgba(212,180,131,0.1),0_4px_30px_rgba(0,0,0,0.1)]
         ${scrolled ? 'py-4' : 'py-6'}
       `}
     >
@@ -47,7 +46,7 @@ const Navbar = () => {
       <div className="flex-1 flex items-center justify-start">
         <Link href="/" aria-label="Krudex Technologies — home" className="flex items-center">
           <Image
-            src="/krudex-bg.png"
+            src="/krudex-bg-gold.png"
             alt="Krudex"
             width={240}
             height={80}
@@ -79,7 +78,7 @@ const Navbar = () => {
                     initial={{ opacity: 0, scaleX: 0 }}
                     animate={{ opacity: 1, scaleX: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute -bottom-2 left-0 right-0 h-[2px] bg-white rounded-full origin-center"
+                    className="absolute -bottom-2 left-0 right-0 h-[2px] bg-krudex-accent rounded-full origin-center"
                   />
                 )}
               </MotionLink>
@@ -93,7 +92,7 @@ const Navbar = () => {
             href="/contact"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="text-[13px] font-medium text-white border border-white/20 bg-white/5 px-5 py-2 rounded-full hover:bg-white hover:text-krudex-black hover:border-white hover:shadow-[0_0_25px_rgba(255,255,255,0.4)] transition-all duration-300"
+            className="text-[13px] font-medium text-white border border-white/20 bg-white/5 px-5 py-2 rounded-full hover:bg-krudex-accent hover:text-krudex-black hover:border-krudex-accent hover:shadow-[0_0_25px_rgba(212,180,131,0.4)] transition-all duration-300"
           >
             Contact Us
           </MotionLink>
@@ -171,7 +170,7 @@ const Navbar = () => {
                             initial={{ opacity: 0, scale: 0 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.3 }}
-                            className="w-1.5 h-1.5 rounded-full bg-white origin-center"
+                            className="w-1.5 h-1.5 rounded-full bg-krudex-accent origin-center"
                           />
                         )}
                         {link.label}
@@ -189,7 +188,7 @@ const Navbar = () => {
                   <Link
                     href="/contact"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex justify-center w-full text-krudex-black bg-white px-6 py-3 rounded-full text-[13px] font-medium hover:bg-gray-200 transition-all duration-300"
+                    className="flex justify-center w-full text-krudex-black bg-krudex-accent px-6 py-3 rounded-full text-[13px] font-medium hover:bg-krudex-accent-hover transition-all duration-300"
                   >
                     Contact Us
                   </Link>
