@@ -22,6 +22,7 @@ const footerLinks = [
       { label: 'SaaS & Web Platforms', href: '/services' },
       { label: 'Mobile Apps', href: '/services' },
       { label: 'AI Integration', href: '/services' },
+      { label: 'Digital Marketing', href: '/services' },
     ],
   },
   {
@@ -51,7 +52,7 @@ const Footer = () => {
               />
             </Link>
             <p className="text-krudex-muted text-sm leading-relaxed max-w-xs">
-              SaaS product engineering. Web, mobile, AI, and design under one roof.
+              SaaS product engineering. Web, mobile, AI, design, and digital marketing under one roof.
             </p>
           </div>
 

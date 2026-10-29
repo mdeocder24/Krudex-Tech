@@ -39,7 +39,7 @@ const CTA = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-krudex-muted text-base leading-relaxed max-w-xl mx-auto mb-10"
         >
-          From concept to production — we bring the engineering, AI, and design expertise
+          From concept to production — we bring the engineering, AI, design, and marketing expertise
           to transform your vision into reality.
         </motion.p>
 
