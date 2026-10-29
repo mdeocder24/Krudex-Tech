@@ -42,6 +42,7 @@ const serviceOptions = [
   'Mobile app',
   'AI integration',
   'UI/UX design',
+  'Digital marketing',
   'Not sure yet',
 ];
 

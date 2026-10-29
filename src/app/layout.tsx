@@ -20,10 +20,10 @@ export const metadata: Metadata = {
     default: "Krudex Technologies | SaaS Product Engineering",
     template: "%s | Krudex Technologies",
   },
-  description: "Krudex Technologies designs, builds, and scales SaaS products — web platforms, mobile apps, and AI features — with senior engineers on every build.",
+  description: "Krudex Technologies designs, builds, and scales SaaS products — web platforms, mobile apps, AI features, and digital marketing — with senior engineers on every build.",
   openGraph: {
     title: "Krudex Technologies | SaaS Product Engineering",
-    description: "We design, build, and scale SaaS products — web platforms, mobile apps, and AI features.",
+    description: "We design, build, and scale SaaS products — web platforms, mobile apps, AI features, and digital marketing.",
     siteName: "Krudex Technologies",
     type: "website",
   },

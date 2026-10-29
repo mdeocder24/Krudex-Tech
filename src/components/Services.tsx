@@ -27,6 +27,11 @@ const services = [
     num: "04",
     title: "UI/UX & MVP Design",
     desc: "Fast-moving design sprints to get your Minimum Viable Product (MVP) looking premium from day one."
+  },
+  {
+    num: "05",
+    title: "Digital Marketing",
+    desc: "SEO, performance ads, social, and content that bring the right users to your product and turn them into customers."
   }
 ];
 
@@ -59,7 +64,7 @@ const Services = () => {
               Your SaaS <br /> Technical Partner.
             </h2>
             <p className="text-krudex-muted text-base leading-relaxed">
-              We handle the end-to-end technical heavy lifting—from MVP to scalable product—so you can focus on your users.
+              We handle the end-to-end heavy lifting—from MVP to scalable product to growth—so you can focus on your users.
             </p>
           </motion.div>
 
@@ -72,7 +77,7 @@ const Services = () => {
                 whileHover={{ backgroundColor: '#111111' }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="bg-krudex-black p-8 md:p-10"
+                className={`bg-krudex-black p-8 md:p-10 ${index === services.length - 1 && services.length % 2 === 1 ? 'md:col-span-2' : ''}`}
               >
                 <div className="text-krudex-muted font-mono text-sm mb-6">{svc.num}</div>
                 <h3 className="text-white font-medium text-lg mb-3">{svc.title}</h3>

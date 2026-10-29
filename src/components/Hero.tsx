@@ -112,7 +112,7 @@ const Hero = () => {
           {...fadeInUp(0.9)}
           className="text-krudex-muted text-[14px] md:text-[15px] leading-relaxed max-w-md mb-8 md:mb-10"
         >
-          Krudex takes SaaS products from idea to production — web platforms, mobile apps and AI features — with senior engineers on every build and full IP ownership for you.
+          Krudex takes SaaS products from idea to production — web platforms, mobile apps, AI features and digital marketing — with senior engineers on every build and full IP ownership for you.
         </motion.p>
 
         {/* CTA Buttons */}

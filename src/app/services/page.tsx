@@ -66,6 +66,21 @@ const servicesData = [
       "Event campaign design (TEDx, conferences)",
       "Investor-ready pitch deck design"
     ]
+  },
+  {
+    num: "05",
+    title: "Digital Marketing",
+    subtitle: "Growth that compounds. Every rupee tracked to revenue.",
+    desc: "We take the product we build to market. Our marketing work starts with analytics and positioning, then runs search, paid, social, and content channels as one system — measured against pipeline and revenue, not vanity metrics. Because we build the product too, landing pages, tracking, and experiments ship without a handoff.",
+    outcome: "One team from product build to customer acquisition, with full-funnel reporting.",
+    capabilities: [
+      "Technical and content SEO with keyword strategy",
+      "Google Ads and Meta performance campaigns",
+      "Social media strategy and content production",
+      "Conversion-optimized landing pages and A/B testing",
+      "Email marketing and lifecycle automation",
+      "GA4 analytics, conversion tracking, and reporting dashboards"
+    ]
   }
 ];
 
