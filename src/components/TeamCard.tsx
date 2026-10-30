@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useState } from "react";
+import Image from "next/image";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 type SocialType = "linkedin" | "github" | "twitter" | "dribbble" | "behance";
@@ -9,6 +10,7 @@ interface TeamMember {
   name: string;
   role: string;
   initials: string;
+  avatar?: string;
   accent: string;
   accentRgb: string;
   bio: string;
@@ -54,21 +56,19 @@ const socialLabels: Record<SocialType, string> = {
 };
 
 function TeamCard({ member, index }: { member: TeamMember; index: number }) {
-  // Placeholder "#" profiles are hidden until real URLs are added
   const socials = (member.socials ?? []).filter((s) => s.url && s.url !== "#");
   const cardRef = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
 
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
 
-  const rotateX = useSpring(useTransform(mouseY, [0, 1], [12, -12]), {
-    stiffness: 200,
-    damping: 30,
+  const rotateX = useSpring(useTransform(mouseY, [0, 1], [6, -6]), {
+    stiffness: 220,
+    damping: 35,
   });
-  const rotateY = useSpring(useTransform(mouseX, [0, 1], [-12, 12]), {
-    stiffness: 200,
-    damping: 30,
+  const rotateY = useSpring(useTransform(mouseX, [0, 1], [-6, 6]), {
+    stiffness: 220,
+    damping: 35,
   });
 
   const glowX = useTransform(mouseX, [0, 1], [0, 100]);
@@ -84,17 +84,16 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
   function handleMouseLeave() {
     mouseX.set(0.5);
     mouseY.set(0.5);
-    setIsHovered(false);
   }
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 60, rotateX: -8 }}
-      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{
-        duration: 0.7,
-        delay: index * 0.1,
+        duration: 0.6,
+        delay: index * 0.08,
         ease: [0.16, 1, 0.3, 1],
       }}
       style={{ perspective: 1000 }}
@@ -103,242 +102,124 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
       <motion.div
         ref={cardRef}
         onMouseMove={handleMouseMove}
-        onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={handleMouseLeave}
         style={{
           rotateX,
           rotateY,
           transformStyle: "preserve-3d",
         }}
-        className="relative rounded-2xl"
+        className="relative rounded-2xl bg-[#0E0C0F]/85 backdrop-blur-md border border-white/[0.08] hover:border-white/[0.18] transition-colors duration-300 overflow-hidden shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06),0_10px_30px_-10px_rgba(0,0,0,0.5)]"
       >
-        {/* === Animated holographic border === */}
-        <div
-          className="absolute -inset-[1px] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"
+        {/* Subtle, soft cursor ambient glow */}
+        <motion.div
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
           style={{
-            background: `linear-gradient(135deg, ${member.accent}, transparent 40%, ${member.accent}66 60%, transparent 80%, ${member.accent})`,
-            backgroundSize: "300% 300%",
-            animation: isHovered
-              ? "holoShift 3s ease-in-out infinite"
-              : "none",
+            background: useTransform(
+              [glowX, glowY],
+              ([x, y]) =>
+                `radial-gradient(circle at ${x}% ${y}%, rgba(229, 43, 59, 0.08) 0%, transparent 60%)`
+            ),
           }}
         />
 
-        {/* === Card body === */}
-        <div className="relative rounded-2xl bg-[#0a0a0a] border border-white/[0.06] overflow-hidden z-10">
-          {/* Cursor-following glow */}
-          <motion.div
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-            style={{
-              background: useTransform(
-                [glowX, glowY],
-                ([x, y]) =>
-                  `radial-gradient(circle at ${x}% ${y}%, ${member.accent}18 0%, transparent 60%)`
-              ),
-            }}
-          />
+        {/* Top subtle hairline highlight */}
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.12] to-transparent" />
 
-          {/* Noise texture overlay */}
-          <div
-            className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-            }}
-          />
-
-          {/* Top section — avatar + identity */}
-          <div className="relative p-6 pb-4">
-            {/* Decorative corner accent */}
-            <div className="absolute top-0 right-0 w-24 h-24 pointer-events-none overflow-hidden">
-              <div
-                className="absolute top-3 right-3 w-12 h-[1px] opacity-20"
-                style={{ background: member.accent }}
-              />
-              <div
-                className="absolute top-3 right-3 w-[1px] h-12 opacity-20"
-                style={{ background: member.accent }}
-              />
-            </div>
-
-            {/* Status indicator + index */}
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-2">
-                <motion.div
-                  animate={{
-                    scale: [1, 1.3, 1],
-                    opacity: [0.6, 1, 0.6],
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="w-2 h-2 rounded-full"
-                  style={{ background: member.accent }}
-                />
-                <span className="text-xs uppercase tracking-[0.25em] text-white/50 font-medium">
-                  Active
-                </span>
-              </div>
-              <span
-                className="text-xs font-mono opacity-30"
-                style={{ color: member.accent }}
-              >
-                {String(index + 1).padStart(2, "0")}
+        {/* Top section — avatar + identity */}
+        <div className="relative p-6 pb-4">
+          {/* Index & Active Status */}
+          <div className="flex items-center justify-between mb-5">
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-krudex-accent shadow-[0_0_6px_#E52B3B]" />
+              <span className="text-[11px] uppercase tracking-[0.2em] text-white/50 font-mono">
+                Team
               </span>
             </div>
+            <span className="text-xs font-mono text-white/40">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+          </div>
 
-            {/* Avatar */}
-            <div className="flex items-start gap-5">
-              <motion.div
-                whileHover={{ scale: 1.08, rotate: 3 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="relative flex-shrink-0"
-              >
-                {/* Outer ring glow */}
-                <div
-                  className="absolute -inset-1 rounded-xl opacity-40 blur-sm"
-                  style={{
-                    background: `linear-gradient(135deg, ${member.accent}, transparent)`,
-                  }}
-                />
-                <div
-                  className="relative w-16 h-16 rounded-xl flex items-center justify-center font-serif text-xl font-bold border"
-                  style={{
-                    background: `linear-gradient(135deg, ${member.accent}15, ${member.accent}05)`,
-                    borderColor: `${member.accent}30`,
-                    color: member.accent,
-                  }}
-                >
+          {/* Avatar & Name */}
+          <div className="flex items-start gap-4">
+            <div className="relative flex-shrink-0">
+              {member.avatar ? (
+                <div className="relative w-16 h-16 rounded-2xl overflow-hidden border border-white/[0.12] group-hover:border-krudex-accent/50 shadow-md transition-colors">
+                  <Image
+                    src={member.avatar}
+                    alt={member.name}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              ) : (
+                <div className="relative w-16 h-16 rounded-2xl flex items-center justify-center font-bold text-lg border border-white/[0.12] bg-white/[0.04] text-white shadow-md">
                   {member.initials}
                 </div>
-              </motion.div>
+              )}
+            </div>
 
-              <div className="min-w-0 pt-1">
-                <h3 className="text-white font-bold text-base leading-tight">
-                  {member.name}
-                </h3>
-                <p className="text-sm font-medium mt-1 text-krudex-muted">
-                  {member.role}
-                </p>
-              </div>
+            <div className="min-w-0 pt-0.5">
+              <h3 className="text-white font-semibold text-lg leading-tight group-hover:text-white transition-colors">
+                {member.name}
+              </h3>
+              <p className="text-xs font-medium mt-1 text-krudex-accent font-mono tracking-wide">
+                {member.role}
+              </p>
             </div>
           </div>
-
-          {/* Divider with accent glow */}
-          <div className="relative px-6">
-            <div className="h-[1px] bg-white/[0.06]" />
-            <div
-              className="absolute left-6 top-0 w-12 h-[1px] opacity-50"
-              style={{ background: member.accent }}
-            />
-          </div>
-
-          {/* Bio */}
-          <div className="p-6 pt-4 pb-4">
-            <p className="text-white/65 text-[13px] leading-relaxed">
-              {member.bio}
-            </p>
-          </div>
-
-          {/* Skills */}
-          <div className="px-6 pb-6">
-            <div className="flex flex-wrap gap-1.5">
-              {member.skills.map((skill, i) => (
-                <motion.span
-                  key={i}
-                  whileHover={{
-                    scale: 1.05,
-                    y: -1,
-                  }}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium border transition-colors duration-200 cursor-default"
-                  style={{
-                    background: `${member.accent}08`,
-                    borderColor: `${member.accent}15`,
-                    color: `${member.accent}cc`,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = `${member.accent}40`;
-                    e.currentTarget.style.background = `${member.accent}15`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = `${member.accent}15`;
-                    e.currentTarget.style.background = `${member.accent}08`;
-                  }}
-                >
-                  <span
-                    className="w-1 h-1 rounded-full"
-                    style={{ background: member.accent }}
-                  />
-                  {skill}
-                </motion.span>
-              ))}
-            </div>
-          </div>
-
-          {/* ── Social Links Bar ── */}
-          {socials.length > 0 && (
-            <div className="px-6 pb-5 pt-1">
-              <div className="flex items-center gap-2">
-                {socials.map((social, i) => (
-                  <motion.a
-                    key={i}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.15, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="relative flex items-center justify-center w-9 h-9 rounded-lg border transition-all duration-300 group/social"
-                    style={{
-                      background: `${member.accent}06`,
-                      borderColor: `${member.accent}12`,
-                      color: `${member.accent}aa`,
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = `${member.accent}50`;
-                      e.currentTarget.style.background = `${member.accent}18`;
-                      e.currentTarget.style.color = member.accent;
-                      e.currentTarget.style.boxShadow = `0 0 16px ${member.accent}20`;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = `${member.accent}12`;
-                      e.currentTarget.style.background = `${member.accent}06`;
-                      e.currentTarget.style.color = `${member.accent}aa`;
-                      e.currentTarget.style.boxShadow = "none";
-                    }}
-                    title={socialLabels[social.type]}
-                    aria-label={`${member.name} on ${socialLabels[social.type]}`}
-                  >
-                    {socialIcons[social.type]}
-                  </motion.a>
-                ))}
-
-                {/* Subtle separator + connect label */}
-                <div className="flex-1 flex items-center gap-3 ml-1">
-                  <div
-                    className="flex-1 h-[1px] opacity-10"
-                    style={{ background: member.accent }}
-                  />
-                  <span
-                    className="text-xs uppercase tracking-[0.2em] opacity-50 font-medium whitespace-nowrap"
-                    style={{ color: member.accent }}
-                  >
-                    Connect
-                  </span>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Scanline effect on hover */}
-          {isHovered && (
-            <motion.div
-              initial={{ top: "-10%" }}
-              animate={{ top: "110%" }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-              className="absolute left-0 right-0 h-[2px] pointer-events-none z-30"
-              style={{
-                background: `linear-gradient(90deg, transparent, ${member.accent}20, transparent)`,
-              }}
-            />
-          )}
         </div>
+
+        {/* Divider */}
+        <div className="relative px-6">
+          <div className="h-[1px] bg-white/[0.06]" />
+        </div>
+
+        {/* Bio */}
+        <div className="p-6 pt-4 pb-4">
+          <p className="text-white/70 text-[13px] leading-relaxed">
+            {member.bio}
+          </p>
+        </div>
+
+        {/* Skills */}
+        <div className="px-6 pb-5">
+          <div className="flex flex-wrap gap-1.5">
+            {member.skills.map((skill, i) => (
+              <span
+                key={i}
+                className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium border border-white/[0.08] bg-white/[0.02] text-white/75 transition-colors cursor-default"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Social Links Bar ── */}
+        {socials.length > 0 && (
+          <div className="px-6 pb-5 pt-2 border-t border-white/[0.04]">
+            <div className="flex items-center gap-2">
+              {socials.map((social, i) => (
+                <a
+                  key={i}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-8 h-8 rounded-lg border border-white/[0.08] bg-white/[0.02] text-white/60 hover:text-white hover:border-krudex-accent/40 hover:bg-white/[0.06] transition-all duration-200"
+                  title={socialLabels[social.type]}
+                  aria-label={`${member.name} on ${socialLabels[social.type]}`}
+                >
+                  {socialIcons[social.type]}
+                </a>
+              ))}
+              <div className="flex-1" />
+              <span className="text-[11px] uppercase tracking-[0.2em] text-white/30 font-mono">
+                Profile
+              </span>
+            </div>
+          </div>
+        )}
       </motion.div>
     </motion.div>
   );

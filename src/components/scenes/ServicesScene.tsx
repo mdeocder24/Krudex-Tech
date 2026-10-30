@@ -114,7 +114,7 @@ export default function ServicesScene() {
 
   return (
     <>
-      <fog attach="fog" args={['#050505', 10, 35]} />
+      <fog attach="fog" args={['#080607', 10, 35]} />
       <ambientLight intensity={0.1} />
       
       <spotLight position={[15, 20, 10]} angle={0.3} penumbra={1} intensity={5} color="#ffffff" castShadow />

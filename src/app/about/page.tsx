@@ -10,19 +10,19 @@ import { ArrowRight } from 'lucide-react';
 const timelineData = [
   {
     year: "2022",
-    text: "Initial freelance practice established — delivering full-stack React and Python solutions."
+    text: "Initial engineering practice established — delivering full-stack React and Python solutions."
   },
   {
     year: "2023",
-    text: "Expanded into UI/UX and brand design. Delivered first AI/ML integration projects."
+    text: "Expanded into UI/UX and brand design systems. Delivered first production AI/ML integration projects."
   },
   {
     year: "2024",
-    text: "TEDx MLRIT platform ships. Kemplast modernization completed. Client base exceeds 20 engagements."
+    text: "TEDx MLRIT platform ships. Kemplast modernization completed. Client base exceeds 20 major engagements."
   },
   {
     year: "2026",
-    text: "Krudex Technologies incorporated as an entity in Telangana, India."
+    text: "Krudex Technologies incorporated as a high-performance software engineering firm in Telangana, India."
   }
 ];
 
@@ -30,12 +30,12 @@ const principlesData = [
   {
     num: "01",
     title: "Architecture first",
-    text: "We design systems before writing code. Every project begins with a technical specification that both parties agree on — so scope is clear before a single sprint starts."
+    text: "We design systems before writing code. Every project begins with an unambiguous technical specification that both parties agree on — so scope is clear before a single sprint starts."
   },
   {
     num: "02",
     title: "Senior-led delivery",
-    text: "No bait-and-switch. The engineers who scope your project are the engineers who build it. We don't delegate client work to junior staff."
+    text: "No bait-and-switch. The engineers who scope your project are the engineers who build it. We don't delegate client work to junior proxies."
   },
   {
     num: "03",
@@ -45,13 +45,13 @@ const principlesData = [
   {
     num: "04",
     title: "Production quality",
-    text: "We build as if we're maintaining the system ourselves for three years. Typed codebases, documented APIs, test coverage, and monitoring from day one."
+    text: "We build as if we're maintaining the system ourselves for three years. Strongly typed codebases, documented APIs, comprehensive test gates, and monitoring from day one."
   }
 ];
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-transparent selection:bg-krudex-accent selection:text-krudex-black flex flex-col">
+    <main className="min-h-screen bg-transparent selection:bg-krudex-accent selection:text-white flex flex-col">
       <Navbar />
       
       {/* 1. Hero Section */}
@@ -64,15 +64,17 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
               className="flex flex-col items-start"
             >
-              <div className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-10">
-                <div className="w-1.5 h-1.5 rounded-full bg-krudex-accent"></div>
-                <span className="text-xs uppercase tracking-[0.2em] text-krudex-accent font-semibold">
+              <div className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-10 rounded-full bg-krudex-surface/60">
+                <div className="w-1.5 h-1.5 rounded-full bg-krudex-accent shadow-[0_0_8px_#E52B3B]" />
+                <span className="text-xs uppercase tracking-[0.2em] text-krudex-accent font-semibold font-mono">
                   ABOUT US
                 </span>
               </div>
-              <h1 className="font-serif text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight">
+              <h1 className="font-serif text-5xl md:text-7xl font-bold leading-[1.08] tracking-tight">
                 <span className="text-white">Built to last.</span><br />
-                <span className="text-white/45">Not just to<br />ship.</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-krudex-muted">
+                  Not just to ship.
+                </span>
               </h1>
             </motion.div>
             
@@ -100,28 +102,29 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
               className="flex flex-col"
             >
-              <div className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-10 self-start">
-                <div className="w-1.5 h-1.5 rounded-full bg-krudex-accent"></div>
-                <span className="text-xs uppercase tracking-[0.2em] text-krudex-accent font-semibold">
+              <div className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-10 self-start rounded-full bg-krudex-surface/60">
+                <div className="w-1.5 h-1.5 rounded-full bg-krudex-accent shadow-[0_0_8px_#E52B3B]" />
+                <span className="text-xs uppercase tracking-[0.2em] text-krudex-accent font-semibold font-mono">
                   OUR STORY
                 </span>
               </div>
-              <h2 className="font-serif text-4xl md:text-5xl text-white font-bold mb-10">
-                From freelancer to firm.
+              <h2 className="font-serif text-4xl md:text-5xl text-white font-bold mb-10 leading-[1.1]">
+                From independent craft to established firm.
               </h2>
               <div className="flex flex-col gap-8 text-krudex-muted text-base leading-relaxed">
                 <p>
-                  Krudex began as an independent engineering practice, taking on complex projects in full-stack React and Python. Driven by a commitment to quality and technical excellence, the work spoke for itself. Clients returned, and the scope of our engagements naturally evolved.
+                  Krudex began as an independent engineering practice, taking on complex challenges in full-stack React and Python. Driven by a commitment to quality and technical excellence, the work spoke for itself. Clients returned, and the scope of our engagements naturally evolved.
                 </p>
                 <p>
-                  Over three years, the practice expanded: first into AI and machine learning, then into UI/UX design and brand identity. We realized that each discipline reinforces the others. A product that performs at scale requires robust engineering and intuitive design in equal measure.
+                  Over three years, the practice expanded: first into AI and machine learning, then into UI/UX design and brand systems. We realized that each discipline reinforces the others. A product that performs at scale requires robust engineering and intuitive design in equal measure.
                 </p>
                 <p>
-                  In 2026, Krudex Technologies was incorporated in Telangana — formalizing what had already become a serious, multidisciplinary operation. The incorporation wasn&apos;t just a legal milestone. It was a clear signal: we are here to build enduring companies and scalable systems, not just websites.
+                  In 2026, Krudex Technologies was incorporated in Telangana — formalizing what had already become a serious, multidisciplinary operation. The incorporation was a clear signal: we are here to build enduring companies and scalable systems.
                 </p>
               </div>
             </motion.div>
 
+            {/* Timeline */}
             <div className="flex flex-col">
               {timelineData.map((item, idx) => (
                 <motion.div 
@@ -134,11 +137,11 @@ export default function AboutPage() {
                 >
                   {/* Vertical Line */}
                   {idx !== timelineData.length - 1 && (
-                    <div className="absolute left-6 top-8 bottom-0 w-px bg-krudex-border/50 hidden md:block"></div>
+                    <div className="absolute left-6 top-8 bottom-0 w-px bg-krudex-border/50 hidden md:block" />
                   )}
                   
                   <div className="flex-shrink-0">
-                    <div className="border border-krudex-border bg-krudex-black px-4 py-2 text-white font-mono text-sm relative z-10">
+                    <div className="border border-krudex-border bg-krudex-surface px-4 py-2 text-krudex-accent font-mono text-sm relative z-10 rounded-lg shadow-[0_0_15px_rgba(229,43,59,0.08)]">
                       {item.year}
                     </div>
                   </div>
@@ -153,22 +156,19 @@ export default function AboutPage() {
         </div>
       </section>
 
-
-
-
-      {/* 4. Principles Section */}
+      {/* 3. Principles Section */}
       <section className="px-6 md:px-16 lg:px-24 py-24 md:py-32 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border relative z-10">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col items-center text-center mb-24">
+          <div className="flex flex-col items-center text-center mb-20">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-8"
+              className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-8 rounded-full bg-krudex-surface/60"
             >
-              <div className="w-1.5 h-1.5 rounded-full bg-krudex-accent"></div>
-              <span className="text-xs uppercase tracking-[0.2em] text-krudex-accent font-semibold">
+              <div className="w-1.5 h-1.5 rounded-full bg-krudex-accent shadow-[0_0_8px_#E52B3B]" />
+              <span className="text-xs uppercase tracking-[0.2em] text-krudex-accent font-semibold font-mono">
                 OUR PRINCIPLES
               </span>
             </motion.div>
@@ -178,7 +178,7 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="font-serif text-5xl md:text-6xl text-white font-bold mb-6"
+              className="font-serif text-4xl sm:text-5xl md:text-6xl text-white font-bold mb-6"
             >
               How we operate.
             </motion.h2>
@@ -188,24 +188,28 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-krudex-muted text-lg max-w-2xl"
+              className="text-krudex-muted text-base md:text-lg max-w-2xl"
             >
               Four commitments that govern every client relationship and every line of code.
             </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {principlesData.map((principle, idx) => (
               <motion.div 
                 key={idx}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className="bg-krudex-card/40 border border-krudex-border p-10 lg:p-12"
+                className="group rounded-2xl bg-krudex-card/80 border border-krudex-border hover:border-krudex-accent/50 p-8 sm:p-10 transition-all duration-300 hover:shadow-[0_10px_30px_rgba(229,43,59,0.08)]"
               >
-                <div className="text-krudex-muted font-mono text-sm mb-6">{principle.num}</div>
-                <h3 className="text-white font-bold text-xl mb-4">{principle.title}</h3>
+                <div className="text-krudex-accent font-mono text-xs font-semibold px-2.5 py-1 rounded bg-krudex-accent/10 border border-krudex-accent/20 w-max mb-6">
+                  {principle.num}
+                </div>
+                <h3 className="text-white font-bold text-xl mb-4 group-hover:text-krudex-white transition-colors">
+                  {principle.title}
+                </h3>
                 <p className="text-krudex-muted text-sm leading-relaxed">
                   {principle.text}
                 </p>
@@ -215,7 +219,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 5. About CTA */}
+      {/* 4. About CTA */}
       <section className="px-6 md:px-16 lg:px-24 py-24 md:py-32 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border relative z-10">
         <div className="max-w-3xl mx-auto flex flex-col items-center text-center">
           <motion.h2 
@@ -225,7 +229,7 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight mb-6"
           >
-            Want to work together?
+            Want to build together?
           </motion.h2>
 
           <motion.p 
@@ -235,7 +239,7 @@ export default function AboutPage() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-krudex-muted text-lg max-w-xl mb-12 leading-relaxed"
           >
-            We take on a limited number of new client engagements each quarter. If your project is the right fit, we&apos;d like to hear from you.
+            We take on a limited number of high-impact engagements each quarter. If your project is ready to scale, let&apos;s talk.
           </motion.p>
 
           <motion.div
@@ -244,8 +248,11 @@ export default function AboutPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Link href="/contact" className="group flex items-center gap-2 bg-krudex-accent text-krudex-black px-8 py-4 rounded-full font-semibold text-sm hover:bg-krudex-accent-hover transition-colors">
-              Contact Us
+            <Link
+              href="/contact"
+              className="group flex items-center gap-2.5 bg-krudex-accent text-white px-8 py-4 rounded-full font-semibold text-sm hover:bg-krudex-accent-hover shadow-[0_0_30px_rgba(229,43,59,0.35)] hover:shadow-[0_0_45px_rgba(229,43,59,0.55)] transition-all duration-300"
+            >
+              <span>Book Strategy Call</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>

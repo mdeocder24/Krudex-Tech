@@ -10,8 +10,8 @@ import * as THREE from 'three';
    ───────────────────────────────────────────── */
 const pillarMaterial = new THREE.ShaderMaterial({
   uniforms: {
-    colorTop: { value: new THREE.Color("#1F1B15") }, // warm charcoal
-    colorBottom: { value: new THREE.Color("#0A0908") }, // page black
+    colorTop: { value: new THREE.Color("#241318") }, // luxury deep obsidian ruby
+    colorBottom: { value: new THREE.Color("#080607") }, // pure dark page obsidian
     height: { value: 30.0 }, // default depth
   },
   vertexShader: `
@@ -127,28 +127,28 @@ const Platform = ({ position, size, label, sideLabel }: PlatformProps) => {
     // Rotated 45 degrees to create the isometric diamond shape from the camera's perspective
     <group ref={groupRef} position={position} rotation={[0, Math.PI / 4, 0]}>
 
-      {/* 1. Neon Glowing Edge Frame (Seamless) */}
+      {/* 1. Neon Glowing Edge Frame (Seamless Crimson Glow) */}
       <group rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, 0]}>
-        {/* Core solid bright white frame */}
+        {/* Core solid bright crimson frame */}
         <mesh geometry={frameGeometry}>
-          <meshBasicMaterial color="#D4B483" />
+          <meshBasicMaterial color="#FF3D4E" />
         </mesh>
 
         {/* Soft Bloom layers (transparent, additive blending) */}
         <mesh geometry={bloomGeometry} position={[0, 0, -0.01]}>
-          <meshBasicMaterial color="#D4B483" transparent opacity={0.25} blending={THREE.AdditiveBlending} depthWrite={false} />
+          <meshBasicMaterial color="#E52B3B" transparent opacity={0.35} blending={THREE.AdditiveBlending} depthWrite={false} />
         </mesh>
 
         {/* Outer large diffuse glow */}
         <mesh geometry={outerGlowGeometry} position={[0, 0, -0.02]}>
-          <meshBasicMaterial color="#D4B483" transparent opacity={0.08} blending={THREE.AdditiveBlending} depthWrite={false} />
+          <meshBasicMaterial color="#C41E3A" transparent opacity={0.15} blending={THREE.AdditiveBlending} depthWrite={false} />
         </mesh>
       </group>
 
       {/* 2. Top Dark Surface (inside the neon frame) */}
       <mesh position={[0, -0.01, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[w, d]} />
-        <meshBasicMaterial color="#1A1712" />
+        <meshBasicMaterial color="#140C0E" />
       </mesh>
 
       {/* Label Text on top of the platform */}
@@ -157,11 +157,11 @@ const Platform = ({ position, size, label, sideLabel }: PlatformProps) => {
           position={[0, 0.05, 0]}
           rotation={[-Math.PI / 2, 0, -Math.PI / 4]}
           fontSize={w * 0.20}
-          color="#F5EFE4"
+          color="#FAF7F8"
           anchorX="center"
           anchorY="middle"
-          fillOpacity={0.9}
-          letterSpacing={0.1}
+          fillOpacity={0.95}
+          letterSpacing={0.12}
         >
           {label}
         </Text>
@@ -173,7 +173,7 @@ const Platform = ({ position, size, label, sideLabel }: PlatformProps) => {
         {/* Custom shader for smooth vertical gradient fading into darkness */}
         <primitive object={pillarMaterial} attach="material" />
         {/* Subtle structural edge highlights to enhance the 3D volume */}
-        <Edges scale={1.001} threshold={15} color="#D4B483" transparent opacity={0.15} />
+        <Edges scale={1.001} threshold={15} color="#E52B3B" transparent opacity={0.2} />
       </mesh>
 
       {/* 4. Side Label Text on the pillar face */}
@@ -182,10 +182,10 @@ const Platform = ({ position, size, label, sideLabel }: PlatformProps) => {
           position={[0, -1.2, d / 2 + 0.05]} // Positioned cleanly on the top part of the side face
           rotation={[0, 0, 0]} // Horizontal across the face
           fontSize={w * 0.11}
-          color="#D4B483"
+          color="#FF4D5E"
           anchorX="center"
           anchorY="middle"
-          fillOpacity={0.6}
+          fillOpacity={0.7}
           letterSpacing={0.1}
           maxWidth={w * 0.85} // Constrain text inside the pillar width
           lineHeight={1.2}
@@ -218,16 +218,16 @@ const DataArchitectureScene = () => {
 
   return (
     <group ref={groupRef} position={[1.5, 1.5, 0]}>
-      <ambientLight intensity={0.1} />
+      <ambientLight intensity={0.15} />
 
       {/* Main light from left to illuminate the left-facing walls of the pillars */}
-      <directionalLight position={[-15, 10, 5]} intensity={1.5} color="#FFF3DE" />
+      <directionalLight position={[-15, 10, 5]} intensity={1.5} color="#FFF0F2" />
 
       {/* Subtle fill light from right */}
-      <directionalLight position={[15, 5, -5]} intensity={0.2} color="#FFF3DE" />
+      <directionalLight position={[15, 5, -5]} intensity={0.25} color="#FFD5DB" />
 
       {/* Deep fog to blend the pillars seamlessly into the pitch-black background */}
-      <fog attach="fog" args={['#0A0908', 15, 45]} />
+      <fog attach="fog" args={['#080607', 15, 45]} />
 
       {/* ── Platforms Stepping Up ── */}
       {/* 1. Lowest, largest, front-left */}

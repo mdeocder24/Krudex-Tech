@@ -12,7 +12,8 @@ const MARKERS = [
   { location: [48.8566, 2.3522] as [number, number], size: 0.05 },   // Paris
   { location: [-33.8688, 151.2093] as [number, number], size: 0.05 },// Sydney
   { location: [25.2048, 55.2708] as [number, number], size: 0.05 },  // Dubai
-  { location: [19.0760, 72.8777] as [number, number], size: 0.04 },  // Mumbai
+  { location: [19.0760, 72.8777] as [number, number], size: 0.06 },  // Mumbai
+  { location: [17.3850, 78.4867] as [number, number], size: 0.07 },  // Hyderabad (HQ)
   { location: [-23.5505, -46.6333] as [number, number], size: 0.05 },// São Paulo
 ];
 
@@ -35,11 +36,11 @@ export default function GlobeObject() {
       theta: 0.3,
       dark: 1,
       diffuse: 1.4,
-      mapSamples: 8000,
+      mapSamples: 8500,
       mapBrightness: 2.8,
-      baseColor: [0.07, 0.06, 0.05],
-      markerColor: [0.83, 0.71, 0.51], // champagne gold
-      glowColor: [0.2, 0.17, 0.12],
+      baseColor: [0.08, 0.05, 0.06],
+      markerColor: [0.92, 0.17, 0.24], // luxury crimson ruby
+      glowColor: [0.35, 0.06, 0.10], // ambient ruby glow
       markers: MARKERS,
     });
 
@@ -72,7 +73,7 @@ export default function GlobeObject() {
     <div className="relative w-full h-full flex items-center justify-center">
       {/* Ambient glow behind the globe */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[65%] aspect-square rounded-full bg-krudex-accent/6 blur-[100px]" />
+        <div className="w-[65%] aspect-square rounded-full bg-krudex-accent/10 blur-[120px]" />
       </div>
       <canvas
         ref={canvasRef}

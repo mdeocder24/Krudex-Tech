@@ -37,29 +37,29 @@ const EnergyCore = () => {
         <mesh ref={coreRef}>
           <icosahedronGeometry args={[2.5, 4]} />
           <meshPhysicalMaterial
-            color="#050505"
+            color="#080607"
             metalness={1}
-            roughness={0.2}
+            roughness={0.15}
             clearcoat={1}
             clearcoatRoughness={0.1}
             envMapIntensity={3}
           />
         </mesh>
 
-        {/* Orbiting Energy Ring 1 (Torus) */}
+        {/* Orbiting Energy Ring 1 (Torus) - Crimson Glow */}
         <mesh ref={ring1Ref}>
           <torusGeometry args={[3.5, 0.05, 16, 100]} />
-          <meshBasicMaterial color="#ffffff" transparent opacity={0.8} />
+          <meshBasicMaterial color="#E52B3B" transparent opacity={0.85} blending={THREE.AdditiveBlending} />
         </mesh>
 
-        {/* Orbiting Energy Ring 2 */}
+        {/* Orbiting Energy Ring 2 - Ruby Glow */}
         <mesh ref={ring2Ref}>
           <torusGeometry args={[4.5, 0.02, 16, 100]} />
-          <meshBasicMaterial color="#e5e5e5" transparent opacity={0.5} />
+          <meshBasicMaterial color="#FF4D5E" transparent opacity={0.6} blending={THREE.AdditiveBlending} />
         </mesh>
       </Float>
 
-      <pointLight position={[0, 0, 0]} intensity={2} color="#ffffff" distance={10} />
+      <pointLight position={[0, 0, 0]} intensity={3} color="#E52B3B" distance={12} />
     </group>
   );
 };
@@ -72,15 +72,14 @@ export default function ContactScene() {
   });
 
   return (
-    <>-
-      <fog attach="fog" args={['#050505', 5, 25]} />
-      <ambientLight intensity={0.1} />
+    <>
+      <fog attach="fog" args={['#080607', 5, 25]} />
+      <ambientLight intensity={0.15} />
 
       <Environment resolution={256}>
         <group rotation={[Math.PI / 3, 0, 0]}>
-          <Lightformer form="circle" intensity={10} position={[0, 10, -5]} scale={5} color="#ffffff" />
-          <Lightformer form="rect" intensity={5} position={[-5, 0, -5]} scale={[2, 10, 1]} color="#f5f5f5" />
-          <Lightformer form="rect" intensity={5} position={[5, 0, -5]} scale={[2, 10, 1]} color="#404040" />
+          <Lightformer intensity={4} rotation-x={Math.PI / 2} position={[0, 5, -9]} scale={[10, 10, 1]} color="#FAF7F8" />
+          <Lightformer intensity={2} rotation-y={Math.PI / 2} position={[-5, 1, -1]} scale={[20, 2, 1]} color="#E52B3B" />
         </group>
       </Environment>
 

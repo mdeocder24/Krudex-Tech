@@ -1,26 +1,29 @@
 @import "tailwindcss";
 
-/* Black + Champagne Gold theme. Neutrals are warm-tinted so the gold reads as
-   champagne rather than yellow; gold is reserved for actions and highlights. */
+/* Luxury Obsidian + Subtle Crimson Ruby Theme.
+   Surfaces are deep graphite/obsidian; crimson is reserved for surgical highlights,
+   active indicators, and primary CTAs. */
 @theme {
-  --color-white: #F5EFE4; /* warm ivory — every text-white / border-white/* follows */
-  --color-krudex-white: #F5EFE4;
-  --color-krudex-white-dim: #CFC6B6;
-  --color-krudex-black: #0A0908;
-  --color-krudex-card: #11100E;
-  --color-krudex-surface: #191714;
-  --color-krudex-border: #2B2721;
-  --color-krudex-text: #ECE5D8;
-  --color-krudex-muted: #9A9184; /* 6.4:1 on krudex-black */
-  --color-krudex-accent: #D4B483; /* champagne gold, 10:1 with black text */
-  --color-krudex-accent-hover: #E6CFA3;
+  --color-white: #FAF9FA; /* clean crisp white */
+  --color-krudex-white: #FAF9FA;
+  --color-krudex-white-dim: #C5BFCE;
+  --color-krudex-black: #080608; /* deep luxury obsidian */
+  --color-krudex-card: #0D0A0C; /* structured card surface */
+  --color-krudex-surface: #141013; /* elevated surface */
+  --color-krudex-border: #23181C; /* crisp subtle border */
+  --color-krudex-text: #F1EDF2;
+  --color-krudex-muted: #8E8690;
+  --color-krudex-accent: #E52B3B; /* refined crimson ruby */
+  --color-krudex-accent-hover: #F23B4B;
   --font-sans: var(--font-sans-primary);
-  --font-serif: var(--font-serif-primary);
+  --font-serif: var(--font-heading-primary);
+  --font-heading: var(--font-heading-primary);
 }
 
 :root {
   --background: var(--color-krudex-black);
   --foreground: var(--color-krudex-text);
+  --accent: var(--color-krudex-accent);
 }
 
 html {
@@ -36,44 +39,49 @@ body {
 }
 
 ::selection {
-  background: rgba(212, 180, 131, 0.3);
-  color: var(--color-krudex-white);
+  background: rgba(229, 43, 59, 0.25);
+  color: #FFFFFF;
 }
 
-/* Dot grid pattern */
-.dot-grid {
-  background-image: radial-gradient(circle, rgba(212, 180, 131, 0.06) 1px, transparent 1px);
-  background-size: 24px 24px;
+/* Custom sleek scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #080608;
+}
+::-webkit-scrollbar-thumb {
+  background: #23181C;
+  border-radius: 9999px;
+  border: 1px solid #080608;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E52B3B;
 }
 
-/* Holographic border animation for team cards */
-@keyframes holoShift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  25% {
-    background-position: 100% 0%;
-  }
-  50% {
-    background-position: 100% 100%;
-  }
-  75% {
-    background-position: 0% 100%;
-  }
+/* Precision studio card styling */
+.studio-card {
+  background: rgba(13, 10, 12, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+}
+
+.studio-card:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 12px 30px -10px rgba(0, 0, 0, 0.6);
+}
+
+/* Subtle Crimson Precision Highlights */
+.crimson-subtle-glow {
+  box-shadow: 0 0 25px -5px rgba(229, 43, 59, 0.18);
 }
 
 /* Keyboard focus — visible on every interactive element */
 :focus-visible {
   outline: 2px solid var(--color-krudex-accent);
   outline-offset: 3px;
-}
-
-/* Frosted pill used on the 404 page */
-.liquid-glass {
-  background: rgba(212, 180, 131, 0.06);
-  border: 1px solid rgba(212, 180, 131, 0.25);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 
 @media (prefers-reduced-motion: reduce) {

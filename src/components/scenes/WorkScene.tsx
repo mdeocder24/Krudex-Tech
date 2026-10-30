@@ -82,7 +82,7 @@ export default function WorkScene() {
 
   return (
     <>
-      <fog attach="fog" args={['#050505', 5, 25]} />
+      <fog attach="fog" args={['#080607', 5, 25]} />
       <ambientLight intensity={0.2} />
       
       <Environment resolution={256}>

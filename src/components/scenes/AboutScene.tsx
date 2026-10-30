@@ -49,7 +49,7 @@ const MetallicHelix = () => {
           <sphereGeometry args={[1, 32, 32]} />
           {s.isGlass ? (
             <meshPhysicalMaterial 
-              color="#f5f5f5"
+              color="#FAF7F8"
               transmission={1}
               opacity={1}
               metalness={0.1}
@@ -59,7 +59,7 @@ const MetallicHelix = () => {
             />
           ) : (
             <meshStandardMaterial 
-              color="#404040"
+              color="#201316"
               metalness={0.9}
               roughness={0.2}
             />
@@ -67,10 +67,10 @@ const MetallicHelix = () => {
         </mesh>
       ))}
       
-      {/* Central connecting core/energy line */}
+      {/* Central connecting core/energy line with crimson glow */}
       <mesh>
         <cylinderGeometry args={[0.1, 0.1, 15, 16]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={0.3} />
+        <meshBasicMaterial color="#E52B3B" transparent opacity={0.6} blending={THREE.AdditiveBlending} />
       </mesh>
     </group>
   );
@@ -85,15 +85,15 @@ export default function AboutScene() {
 
   return (
     <>
-      <fog attach="fog" args={['#050505', 8, 30]} />
+      <fog attach="fog" args={['#080607', 8, 30]} />
       <ambientLight intensity={0.2} />
-      <directionalLight position={[10, 10, 5]} intensity={3} color="#e5e5e5" />
-      <directionalLight position={[-10, 5, -5]} intensity={2} color="#ffffff" />
+      <directionalLight position={[10, 10, 5]} intensity={3} color="#FFF0F2" />
+      <directionalLight position={[-10, 5, -5]} intensity={2} color="#FAF7F8" />
       
       <Environment resolution={256}>
         <group rotation={[-Math.PI / 2, 0, 0]}>
-          <Lightformer intensity={4} rotation-x={Math.PI / 2} position={[0, 5, -9]} scale={[10, 10, 1]} color="#f5f5f5" />
-          <Lightformer intensity={2} rotation-y={Math.PI / 2} position={[-5, 1, -1]} scale={[20, 2, 1]} color="#404040" />
+          <Lightformer intensity={4} rotation-x={Math.PI / 2} position={[0, 5, -9]} scale={[10, 10, 1]} color="#FAF7F8" />
+          <Lightformer intensity={2} rotation-y={Math.PI / 2} position={[-5, 1, -1]} scale={[20, 2, 1]} color="#E52B3B" />
         </group>
       </Environment>
 

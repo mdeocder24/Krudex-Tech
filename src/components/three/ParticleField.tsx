@@ -21,7 +21,7 @@ function createRng(seed: number) {
   };
 }
 
-const ParticleField = ({ count = 400, radius = 22, colorA = '#ffffff', colorB = '#6b6b6b' }: ParticleFieldProps) => {
+const ParticleField = ({ count = 400, radius = 22, colorA = '#FAF7F8', colorB = '#E52B3B' }: ParticleFieldProps) => {
   const pointsRef = useRef<THREE.Points>(null);
 
   const { positions, colors } = useMemo(() => {
@@ -65,7 +65,7 @@ const ParticleField = ({ count = 400, radius = 22, colorA = '#ffffff', colorB = 
         size={0.05}
         vertexColors
         transparent
-        opacity={0.5}
+        opacity={0.55}
         sizeAttenuation
         blending={THREE.AdditiveBlending}
         depthWrite={false}

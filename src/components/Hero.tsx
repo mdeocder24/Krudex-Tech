@@ -2,17 +2,16 @@
 
 import React from 'react';
 import { motion, Variants } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Zap, Users } from 'lucide-react';
 import MagneticButton from './MagneticButton';
-
 import dynamic from 'next/dynamic';
 
-// Dynamically import 3D components with SSR disabled to optimize initial load
+// Dynamically import 3D components with SSR disabled
 const Hero3DObject = dynamic(() => import('./Hero3DObject'), {
   ssr: false,
   loading: () => (
     <div className="w-full h-full flex items-center justify-center">
-      <div className="w-10 h-10 border border-krudex-border/40 border-t-white/40 rounded-full animate-spin" />
+      <div className="w-8 h-8 border border-white/10 border-t-krudex-accent rounded-full animate-spin" />
     </div>
   )
 });
@@ -25,54 +24,48 @@ const titleVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.4 },
+    transition: { staggerChildren: 0.1, delayChildren: 0.3 },
   },
 };
 
 const wordVariants: Variants = {
-  hidden: { opacity: 0, y: 60 },
+  hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { type: 'spring', damping: 20, stiffness: 90 },
+    transition: { type: 'spring', damping: 24, stiffness: 100 },
   },
 };
 
 const fadeInUp = (delay: number) => ({
-  initial: { opacity: 0, y: 25 },
+  initial: { opacity: 0, y: 20 },
   animate: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, delay, ease: "easeOut" as const },
+    transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] as const },
   },
 });
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen w-full flex flex-col lg:flex-row items-center overflow-hidden bg-krudex-black">
-      {/* Translucent Globe overlay — bottom left */}
-      <div className="absolute bottom-0 left-0 w-[120vw] h-[120vw] lg:w-[50vw] lg:h-[50vw] translate-y-[40%] -translate-x-[20%] opacity-40 pointer-events-none z-0">
+    <section className="relative min-h-[92vh] lg:min-h-screen w-full flex flex-col lg:flex-row items-center overflow-hidden">
+      {/* Translucent Globe overlay — bottom left background */}
+      <div className="absolute bottom-0 left-0 w-[120vw] h-[120vw] lg:w-[48vw] lg:h-[48vw] translate-y-[45%] -translate-x-[22%] opacity-30 pointer-events-none z-0">
         <GlobeObject />
       </div>
 
-      {/* Dot grid pattern overlay */}
-      <div className="absolute inset-0 dot-grid opacity-100 pointer-events-none z-0" />
-
-      {/* ── Left: Text Content ───────────────── */}
-      <div className="w-full lg:w-[45%] z-10 flex flex-col justify-center items-start px-6 md:px-14 lg:px-20 pt-32 md:pt-32 lg:pt-0 pb-4 lg:pb-0">
-        {/* Badge */}
+      {/* ── Left: Executive Text Content ───────────────── */}
+      <div className="w-full lg:w-[50%] z-10 flex flex-col justify-center items-start px-6 md:px-14 lg:px-20 pt-32 md:pt-36 lg:pt-0 pb-12 lg:pb-0">
+        {/* Subtle Category Pill */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="group inline-flex items-center gap-2.5 bg-krudex-surface/90 border border-white/10 hover:border-white/40 px-3.5 md:px-4 py-1.5 md:py-2 rounded-full mb-6 md:mb-8 shadow-[0_0_20px_rgba(212,180,131,0.06)] transition-all duration-300"
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="group inline-flex items-center gap-2.5 bg-white/[0.03] border border-white/[0.08] hover:border-white/[0.18] px-3.5 py-1.5 rounded-full mb-6 transition-all duration-300"
         >
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-krudex-accent opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-krudex-accent"></span>
-          </span>
-          <span className="text-[10.5px] sm:text-xs font-mono text-krudex-muted group-hover:text-white sm:tracking-wide whitespace-nowrap transition-colors">
-            SaaS · Digital Marketing · Student Training
+          <span className="w-1.5 h-1.5 rounded-full bg-krudex-accent shadow-[0_0_8px_#E52B3B]" />
+          <span className="text-[11px] sm:text-xs font-mono text-white/70 group-hover:text-white tracking-wide transition-colors">
+            SaaS Engineering · Performance Marketing · Training
           </span>
         </motion.div>
 
@@ -81,7 +74,7 @@ const Hero = () => {
           variants={titleVariants}
           initial="hidden"
           animate="visible"
-          className="font-serif text-[2.25rem] md:text-[3.5rem] lg:text-[3.75rem] xl:text-[4.25rem] font-normal leading-[1.08] tracking-tight text-white mb-5 md:mb-7"
+          className="font-serif text-[2.75rem] md:text-[4rem] lg:text-[4.25rem] xl:text-[4.75rem] font-semibold leading-[1.04] tracking-tight text-white mb-5 md:mb-6"
         >
           <span className="block overflow-hidden">
             {['We', 'build', 'SaaS'].map((word, i) => (
@@ -99,7 +92,11 @@ const Hero = () => {
               <motion.span
                 key={i}
                 variants={wordVariants}
-                className={`inline-block mr-[0.22em] ${word === 'scale.' ? 'text-krudex-accent' : ''}`}
+                className={`inline-block mr-[0.22em] ${
+                  word === 'scale.'
+                    ? 'text-krudex-accent font-semibold drop-shadow-[0_0_25px_rgba(229,43,59,0.3)]'
+                    : ''
+                }`}
               >
                 {word}
               </motion.span>
@@ -107,48 +104,62 @@ const Hero = () => {
           </span>
         </motion.h1>
 
-        {/* Subtitle */}
+        {/* Executive Subtitle */}
         <motion.p
-          {...fadeInUp(0.9)}
-          className="text-krudex-muted text-[14px] md:text-[15px] leading-relaxed max-w-md mb-8 md:mb-10"
+          {...fadeInUp(0.7)}
+          className="text-krudex-muted text-[15px] md:text-[16px] leading-relaxed max-w-lg mb-8 md:mb-10 font-normal"
         >
-          Krudex builds SaaS products, grows businesses with Google Ads and digital marketing, and trains students with industry experts in collaboration with NovaSkill Hub.
+          Krudex Technologies designs and engineers high-throughput SaaS platforms, scales customer acquisition with performance digital marketing, and mentors engineering talent in collaboration with NovaSkill Hub.
         </motion.p>
 
         {/* CTA Buttons */}
         <motion.div
-          {...fadeInUp(1.1)}
-          className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-4 w-full sm:w-auto"
+          {...fadeInUp(0.85)}
+          className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3.5 w-full sm:w-auto mb-10"
         >
           <MagneticButton
             href="/contact"
-            className="group relative inline-flex items-center justify-center gap-2 whitespace-nowrap bg-krudex-accent text-krudex-black px-7 md:px-6 py-3.5 md:py-4 text-[13px] md:text-[14px] font-semibold tracking-wide hover:bg-krudex-accent-hover transition-all rounded-full shadow-[0_0_30px_rgba(212,180,131,0.25)] hover:shadow-[0_0_40px_rgba(212,180,131,0.4)] hover:scale-[1.02]"
+            className="group relative inline-flex items-center justify-center gap-2.5 whitespace-nowrap bg-krudex-accent text-white px-7 py-3.5 text-[14px] font-semibold tracking-wide hover:bg-krudex-accent-hover transition-all rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.5),0_0_20px_rgba(229,43,59,0.25)] hover:shadow-[0_0_35px_rgba(229,43,59,0.45)] hover:scale-[1.02]"
           >
-            <span>Book a Strategy Call</span>
+            <span>Start a Project</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </MagneticButton>
           <MagneticButton
             href="/training"
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap border border-white/30 text-white px-7 md:px-6 py-3.5 md:py-4 text-[13px] md:text-[14px] font-medium tracking-wide hover:bg-white/10 transition-colors rounded-full"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap border border-white/[0.12] bg-white/[0.03] text-white/85 px-6 py-3.5 text-[14px] font-medium tracking-wide hover:border-white/[0.25] hover:bg-white/[0.07] hover:text-white transition-all rounded-full backdrop-blur-sm"
           >
             Student Training
           </MagneticButton>
         </motion.div>
+
+        {/* Executive Credibility Bar */}
+        <motion.div
+          {...fadeInUp(1.0)}
+          className="flex flex-wrap items-center gap-6 pt-6 border-t border-white/[0.06] text-xs text-white/50"
+        >
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-krudex-accent" />
+            <span>Enterprise SLA & Clean IP</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Zap className="w-4 h-4 text-krudex-accent" />
+            <span>Full-Stack & Cloud Architecture</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Users className="w-4 h-4 text-krudex-accent" />
+            <span>NovaSkill Hub Certified</span>
+          </div>
+        </motion.div>
       </div>
 
-      {/* ── Right: 3D Visualization ──────────── */}
+      {/* ── Right: 3D Isometric Architecture ──────────── */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1.5, delay: 0.6 }}
-        className="w-full lg:w-[55%] h-[45vh] sm:h-[55vh] lg:h-screen relative z-10"
+        transition={{ duration: 1.2, delay: 0.4 }}
+        className="w-full lg:w-[50%] h-[45vh] sm:h-[55vh] lg:h-screen relative z-10"
       >
         <Hero3DObject />
-
-        {/* Ambient glow layer (pillars have their own inner glow) */}
-        <div className="absolute inset-0 pointer-events-none -z-10">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-krudex-accent/5 blur-[160px] rounded-full" />
-        </div>
       </motion.div>
     </section>
   );
