@@ -115,7 +115,7 @@ export default function ServicesPage() {
                 <span className="text-white/45">builds for you.</span>
               </h1>
               <p className="text-krudex-muted text-lg leading-relaxed max-w-2xl text-center">
-                Four core disciplines. Senior engineers on every project. <br className="hidden md:block" />
+                Five core disciplines. Senior engineers on every project. <br className="hidden md:block" />
                 Measurable outcomes as the only deliverable that counts.
               </p>
             </motion.div>
