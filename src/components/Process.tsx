@@ -61,7 +61,7 @@ const Process = () => {
             From first call to production.
           </h2>
           <p className="text-krudex-muted text-base leading-relaxed">
-            One predictable process for every engagement, so scope, cost and ownership are clear before we start.
+            One predictable process for every product build, so scope, cost and ownership are clear before we start.
           </p>
         </motion.div>
 

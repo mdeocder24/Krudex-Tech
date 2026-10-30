@@ -71,8 +71,8 @@ const Hero = () => {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-krudex-accent opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-krudex-accent"></span>
           </span>
-          <span className="text-xs font-mono text-krudex-muted group-hover:text-white tracking-wide transition-colors">
-            SaaS Product Engineering Studio
+          <span className="text-[10.5px] sm:text-xs font-mono text-krudex-muted group-hover:text-white sm:tracking-wide whitespace-nowrap transition-colors">
+            SaaS · Digital Marketing · Student Training
           </span>
         </motion.div>
 
@@ -112,20 +112,26 @@ const Hero = () => {
           {...fadeInUp(0.9)}
           className="text-krudex-muted text-[14px] md:text-[15px] leading-relaxed max-w-md mb-8 md:mb-10"
         >
-          Krudex takes SaaS products from idea to production — web platforms, mobile apps, AI features and digital marketing — with senior engineers on every build and full IP ownership for you.
+          Krudex builds SaaS products, grows businesses with Google Ads and digital marketing, and trains students with industry experts in collaboration with NovaSkill Hub.
         </motion.p>
 
         {/* CTA Buttons */}
         <motion.div
           {...fadeInUp(1.1)}
-          className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6 w-full sm:w-auto"
+          className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-4 w-full sm:w-auto"
         >
           <MagneticButton
             href="/contact"
-            className="group relative inline-flex items-center justify-center gap-2 bg-krudex-accent text-krudex-black px-7 md:px-8 py-3.5 md:py-4 text-[13px] md:text-[14px] font-semibold tracking-wide hover:bg-krudex-accent-hover transition-all rounded-full shadow-[0_0_30px_rgba(212,180,131,0.25)] hover:shadow-[0_0_40px_rgba(212,180,131,0.4)] hover:scale-[1.02]"
+            className="group relative inline-flex items-center justify-center gap-2 whitespace-nowrap bg-krudex-accent text-krudex-black px-7 md:px-6 py-3.5 md:py-4 text-[13px] md:text-[14px] font-semibold tracking-wide hover:bg-krudex-accent-hover transition-all rounded-full shadow-[0_0_30px_rgba(212,180,131,0.25)] hover:shadow-[0_0_40px_rgba(212,180,131,0.4)] hover:scale-[1.02]"
           >
             <span>Book a Strategy Call</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </MagneticButton>
+          <MagneticButton
+            href="/training"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap border border-white/30 text-white px-7 md:px-6 py-3.5 md:py-4 text-[13px] md:text-[14px] font-medium tracking-wide hover:bg-white/10 transition-colors rounded-full"
+          >
+            Student Training
           </MagneticButton>
         </motion.div>
       </div>

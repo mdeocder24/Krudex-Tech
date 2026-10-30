@@ -30,8 +30,8 @@ const services = [
   },
   {
     num: "05",
-    title: "Digital Marketing",
-    desc: "SEO, performance ads, social, and content that bring the right users to your product and turn them into customers."
+    title: "Google Ads & Digital Marketing",
+    desc: "Google Ads, SEO, social, and content that bring the right users to your product and turn them into customers."
   }
 ];
 
@@ -61,7 +61,7 @@ const Services = () => {
             className="lg:col-span-5"
           >
             <h2 className="font-serif text-4xl md:text-6xl text-white font-normal mb-6 leading-[1.1] tracking-tight">
-              Your SaaS <br /> Technical Partner.
+              Your SaaS <br /> and Growth Partner.
             </h2>
             <p className="text-krudex-muted text-base leading-relaxed">
               We handle the end-to-end heavy lifting—from MVP to scalable product to growth—so you can focus on your users.

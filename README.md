@@ -1,6 +1,6 @@
 # Krudex Technologies — Official Website & Platform
 
-A high-performance, modern web application and corporate portfolio for **Krudex Technologies** — a specialized software engineering studio building high-impact web platforms, interactive 3D WebGL experiences, enterprise AI integrations, and digital marketing.
+A high-performance, modern web application and corporate portfolio for **Krudex Technologies** — a specialized software engineering studio building high-impact web platforms, interactive 3D WebGL experiences, enterprise AI integrations, Google Ads and digital marketing, and student training with industry experts in collaboration with NovaSkill Hub.
 
 Built with **Next.js 16 (App Router)**, **React 19**, **Three.js / React Three Fiber**, **Tailwind CSS v4**, and backed by **Cloudflare D1** (Serverless Edge SQLite).
 
@@ -167,6 +167,7 @@ npm run lint
 |---|---|
 | `/` | Landing page featuring 3D Hero, interactive globe, metrics, services overview, and engineering process. |
 | `/services` | Comprehensive breakdown of engineering capabilities (AI, Web, Cloud, Product Design, Digital Marketing). |
+| `/training` | Student training led by industry experts, in collaboration with NovaSkill Hub. |
 | `/about` | Company background, engineering timeline (2022–2026), and foundational principles. |
 | `/our-team` | Profiles and technical specializations of Krudex engineers and designers. |
 | `/contact` | Project scoping inquiry form connected to Cloudflare D1 database. |

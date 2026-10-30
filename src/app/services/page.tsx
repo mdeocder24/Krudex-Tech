@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import ServicesCTA from '@/components/ServicesCTA';
 import Footer from '@/components/Footer';
@@ -69,13 +71,14 @@ const servicesData = [
   },
   {
     num: "05",
-    title: "Digital Marketing",
+    id: "digital-marketing",
+    title: "Google Ads & Digital Marketing",
     subtitle: "Growth that compounds. Every rupee tracked to revenue.",
     desc: "We take the product we build to market. Our marketing work starts with analytics and positioning, then runs search, paid, social, and content channels as one system — measured against pipeline and revenue, not vanity metrics. Because we build the product too, landing pages, tracking, and experiments ship without a handoff.",
     outcome: "One team from product build to customer acquisition, with full-funnel reporting.",
     capabilities: [
-      "Technical and content SEO with keyword strategy",
       "Google Ads and Meta performance campaigns",
+      "Technical and content SEO with keyword strategy",
       "Social media strategy and content production",
       "Conversion-optimized landing pages and A/B testing",
       "Email marketing and lifecycle automation",
@@ -112,7 +115,7 @@ export default function ServicesPage() {
             >
               <h1 className="font-serif text-5xl md:text-7xl text-white font-bold mb-8 leading-[1.1] tracking-tight">
                 What Krudex <br />
-                <span className="text-white/45">builds for you.</span>
+                <span className="text-white/45">builds and grows for you.</span>
               </h1>
               <p className="text-krudex-muted text-lg leading-relaxed max-w-2xl text-center">
                 Five core disciplines. Senior engineers on every project. <br className="hidden md:block" />
@@ -123,7 +126,7 @@ export default function ServicesPage() {
 
           <div className="flex flex-col gap-24 md:gap-32">
             {servicesData.map((service, idx) => (
-              <div key={idx} className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+              <div key={idx} id={service.id} className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 scroll-mt-32">
                 {/* Left Column: Description */}
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
@@ -175,6 +178,22 @@ export default function ServicesPage() {
                 </motion.div>
               </div>
             ))}
+          </div>
+
+          <div className="mt-24 md:mt-32 border border-krudex-border bg-krudex-card/40 p-8 md:p-12 flex flex-col md:flex-row md:items-center justify-between gap-8">
+            <div>
+              <h2 className="text-white font-bold text-xl mb-3">Are you a student?</h2>
+              <p className="text-krudex-muted text-sm leading-relaxed max-w-xl">
+                We also train students with industry experts, in collaboration with NovaSkill Hub.
+              </p>
+            </div>
+            <Link
+              href="/training"
+              className="group inline-flex items-center gap-2 self-start md:self-auto whitespace-nowrap border border-white/30 text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-krudex-accent hover:text-krudex-black active:scale-[0.97] transition-[background-color,color,transform] duration-200"
+            >
+              See Student Training
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
         </div>
       </section>

@@ -17,13 +17,13 @@ const dmSerifDisplay = DM_Serif_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "Krudex Technologies | SaaS Product Engineering",
+    default: "Krudex Technologies | SaaS Products, Digital Marketing & Student Training",
     template: "%s | Krudex Technologies",
   },
-  description: "Krudex Technologies designs, builds, and scales SaaS products — web platforms, mobile apps, AI features, and digital marketing — with senior engineers on every build.",
+  description: "Krudex Technologies builds SaaS products, runs Google Ads and digital marketing, and trains students with industry experts in collaboration with NovaSkill Hub.",
   openGraph: {
-    title: "Krudex Technologies | SaaS Product Engineering",
-    description: "We design, build, and scale SaaS products — web platforms, mobile apps, AI features, and digital marketing.",
+    title: "Krudex Technologies | SaaS Products, Digital Marketing & Student Training",
+    description: "We build SaaS products, run Google Ads and digital marketing, and train students with industry experts in collaboration with NovaSkill Hub.",
     siteName: "Krudex Technologies",
     type: "website",
   },

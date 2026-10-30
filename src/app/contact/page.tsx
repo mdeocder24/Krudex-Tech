@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -12,8 +13,16 @@ const faqs = [
     answer: "Yes, we work with clients globally. We overlap our working hours to ensure synchronous communication and use async tools heavily to maintain momentum."
   },
   {
+    question: "Do you run Google Ads and digital marketing?",
+    answer: "Yes. We plan and run Google Ads alongside SEO, social, and content, and report results through GA4 conversion tracking."
+  },
+  {
+    question: "Do you offer training for students?",
+    answer: "Yes. We train students with industry experts, in collaboration with NovaSkill Hub. Choose Student training in the form and we'll share the current format, dates, and fees."
+  },
+  {
     question: "How does the engagement process work?",
-    answer: "It starts with a 30-minute scoping call, followed by a technical audit. We then present a detailed architecture document and statement of work before any code is written."
+    answer: "For product builds, it starts with a 30-minute scoping call, followed by a technical audit. We then present a detailed architecture document and statement of work before any code is written."
   },
   {
     question: "Do you offer ongoing maintenance after launch?",
@@ -25,7 +34,7 @@ const faqs = [
   },
   {
     question: "What's the minimum project size you take on?",
-    answer: "We typically engage on projects starting from 4-6 weeks in duration. Our focus is on complex, high-impact systems rather than simple brochure websites."
+    answer: "We typically engage on product builds starting from 4-6 weeks in duration. Our focus is on complex, high-impact systems rather than simple brochure websites."
   },
   {
     question: "What if our internal data is messy or incomplete for AI integration?",
@@ -42,9 +51,13 @@ const serviceOptions = [
   'Mobile app',
   'AI integration',
   'UI/UX design',
+  'Google Ads',
   'Digital marketing',
+  'Student training',
   'Not sure yet',
 ];
+
+const TRAINING_SERVICE = 'Student training';
 
 const timelineOptions = [
   { value: 'asap', label: 'ASAP' },
@@ -67,6 +80,18 @@ const labelClass = 'text-[13px] font-medium text-white/80';
 const chipClass =
   'inline-flex items-center gap-2 min-h-11 cursor-pointer select-none rounded-full border border-white/15 px-4 text-[14px] text-white/70 transition-colors hover:border-white/40 hover:text-white peer-checked:border-krudex-accent peer-checked:bg-krudex-accent peer-checked:text-krudex-black peer-checked:font-medium peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-krudex-accent';
 
+// Preselects the training option for visitors arriving from /training.
+// Kept in its own Suspense boundary so the rest of the page still prerenders.
+function TrainingInterest({ onMatch }: { onMatch: () => void }) {
+  const isTraining = useSearchParams().get('interest') === 'training';
+
+  useEffect(() => {
+    if (isTraining) onMatch();
+  }, [isTraining, onMatch]);
+
+  return null;
+}
+
 export default function ContactPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
@@ -77,6 +102,12 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
+
+  const isTrainingEnquiry = services.includes(TRAINING_SERVICE);
+
+  const selectTraining = React.useCallback(() => {
+    setServices(prev => (prev.includes(TRAINING_SERVICE) ? prev : [...prev, TRAINING_SERVICE]));
+  }, []);
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -132,6 +163,9 @@ export default function ContactPage() {
 
   return (
     <main className="min-h-screen bg-transparent selection:bg-krudex-accent selection:text-krudex-black flex flex-col">
+      <Suspense fallback={null}>
+        <TrainingInterest onMatch={selectTraining} />
+      </Suspense>
       <Navbar />
 
       <section className="px-6 md:px-16 lg:px-24 pt-40 md:pt-48 pb-20 bg-krudex-black/40 backdrop-blur-md relative z-10">
@@ -156,10 +190,13 @@ export default function ContactPage() {
                 <span className="text-white/45">serious.</span>
               </h1>
               <p className="text-krudex-muted text-base leading-relaxed max-w-md mb-10">
-                Tell us what you&apos;re building. It takes about two minutes, and we reply within one business day.
+                Tell us what you need, whether that&apos;s a product, marketing, or student training. It takes about two minutes, and we reply within one business day.
               </p>
               <ol className="flex flex-col gap-4 text-sm">
-                {['You send the brief', 'We reply within 24 hours', 'Free 30-minute scoping call'].map((step, i) => (
+                {(isTrainingEnquiry
+                  ? ['You send your enquiry', 'We reply within 24 hours', 'We share format, dates, and fees']
+                  : ['You send the brief', 'We reply within 24 hours', 'Free 30-minute scoping call']
+                ).map((step, i) => (
                   <li key={step} className="flex items-center gap-4 text-white/80">
                     <span className="w-7 h-7 rounded-full border border-white/25 flex items-center justify-center font-mono text-xs text-white flex-shrink-0">
                       {i + 1}
@@ -190,7 +227,7 @@ export default function ContactPage() {
                     </div>
                     <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">Inquiry received.</h2>
                     <p className="text-krudex-muted text-base leading-relaxed max-w-md mb-10">
-                      Thanks for reaching out. A senior engineer will review your brief and reply within one business day.
+                      Thanks for reaching out. The right person on our team will review your message and reply within one business day.
                     </p>
                     <button
                       type="button"
@@ -227,7 +264,7 @@ export default function ContactPage() {
                           />
                         </div>
                         <div className="flex flex-col gap-2">
-                          <label htmlFor="email" className={labelClass}>Work email *</label>
+                          <label htmlFor="email" className={labelClass}>Email *</label>
                           <input
                             id="email"
                             type="email"
@@ -245,7 +282,7 @@ export default function ContactPage() {
 
                       <div className="flex flex-col gap-2">
                         <label htmlFor="company" className={labelClass}>
-                          Company <span className="text-krudex-muted font-normal">(optional)</span>
+                          Company or college <span className="text-krudex-muted font-normal">(optional)</span>
                         </label>
                         <input
                           id="company"
@@ -307,14 +344,16 @@ export default function ContactPage() {
 
                     <div className="flex flex-col gap-2">
                       <label htmlFor="details" className={labelClass}>
-                        Project details <span className="text-krudex-muted font-normal">(optional)</span>
+                        Details <span className="text-krudex-muted font-normal">(optional)</span>
                       </label>
                       <textarea
                         id="details"
                         name="details"
                         value={formData.details}
                         onChange={handleChange}
-                        placeholder="What are you building, who is it for, and what does success look like?"
+                        placeholder={isTrainingEnquiry
+                          ? 'What do you want to learn, and what are you studying now?'
+                          : 'What are you building, who is it for, and what does success look like?'}
                         rows={5}
                         className={`${inputClass} resize-y min-h-32`}
                       ></textarea>

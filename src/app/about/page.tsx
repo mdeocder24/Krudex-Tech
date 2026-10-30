@@ -82,7 +82,7 @@ export default function AboutPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <p className="text-krudex-muted text-lg leading-relaxed pt-8 lg:pt-0">
-                Krudex Technologies is an incorporated engineering firm registered in Hyderabad, Telangana. We exist at the intersection of software engineering, artificial intelligence, digital design, and digital marketing — and we treat those disciplines as a unified craft, not separate silos.
+                Krudex Technologies is an incorporated engineering firm registered in Hyderabad, Telangana. We exist at the intersection of software engineering, artificial intelligence, digital design, and digital marketing — and we treat those disciplines as a unified craft, not separate silos. We build SaaS products, run Google Ads and digital marketing, and train students with industry experts in collaboration with NovaSkill Hub.
               </p>
             </motion.div>
           </div>

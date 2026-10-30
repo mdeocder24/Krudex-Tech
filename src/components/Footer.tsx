@@ -22,7 +22,8 @@ const footerLinks = [
       { label: 'SaaS & Web Platforms', href: '/services' },
       { label: 'Mobile Apps', href: '/services' },
       { label: 'AI Integration', href: '/services' },
-      { label: 'Digital Marketing', href: '/services' },
+      { label: 'Google Ads & Digital Marketing', href: '/services#digital-marketing' },
+      { label: 'Student Training', href: '/training' },
     ],
   },
   {
@@ -52,7 +53,7 @@ const Footer = () => {
               />
             </Link>
             <p className="text-krudex-muted text-sm leading-relaxed max-w-xs">
-              SaaS product engineering. Web, mobile, AI, design, and digital marketing under one roof.
+              SaaS products, Google Ads and digital marketing, and student training with industry experts, in collaboration with NovaSkill Hub.
             </p>
           </div>
 
