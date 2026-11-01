@@ -51,10 +51,12 @@ export default function ClickUpWidgetGrid() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7B68EE]/10 border border-[#7B68EE]/30 text-xs font-semibold text-[#A78BFA] uppercase tracking-wider mb-6 backdrop-blur-md"
+            className="clickup-animated-gradient-border mb-6"
           >
-            <Sparkles className="w-3.5 h-3.5 text-[#F472B6]" />
-            <span>Krudex Architecture Engine</span>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0E0B19]/90 text-xs font-semibold text-[#A78BFA] uppercase tracking-wider backdrop-blur-md">
+              <Sparkles className="w-3.5 h-3.5 text-[#F472B6] animate-pulse" />
+              <span>Krudex Architecture Engine</span>
+            </div>
           </motion.div>
 
           <motion.h2
@@ -295,8 +297,8 @@ export default function ClickUpWidgetGrid() {
                 <div className="w-36 h-36 rounded-full border border-dashed border-[#7B68EE] animate-spin" style={{ animationDuration: '20s' }} />
               </div>
 
-              {/* Central Glowing Sparkle Node */}
-              <div className="relative z-10 w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#7B68EE] via-[#E01E5A] to-[#00D2FF] p-[2px] shadow-[0_0_25px_rgba(123,104,238,0.6)] mb-3 group-hover:scale-110 transition-transform">
+              {/* Central Glowing Sparkle Node with ClickUp Glow Breathe */}
+              <div className="relative z-10 w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#7B68EE] via-[#E01E5A] to-[#00D2FF] p-[2px] shadow-[0_0_25px_rgba(123,104,238,0.6)] mb-3 group-hover:scale-110 transition-transform clickup-glow-breathe">
                 <div className="w-full h-full bg-[#0E0B19] rounded-[14px] flex items-center justify-center">
                   <Sparkles className="w-5 h-5 text-white animate-pulse" />
                 </div>
@@ -335,7 +337,9 @@ export default function ClickUpWidgetGrid() {
             </div>
 
             {/* Interactive Ambient Floating Suggestions matching Video Frame 30 */}
-            <div className="bg-[#09070F] rounded-xl p-3.5 border border-white/10 space-y-2.5">
+            <div className="relative bg-[#09070F] rounded-xl p-3.5 border border-white/10 space-y-2.5 overflow-hidden">
+              {/* ClickUp Ambient Drift Glow */}
+              <div className="absolute -top-10 -right-10 w-28 h-28 bg-gradient-to-br from-[#7B68EE]/20 via-[#FF0BE5]/15 to-[#45C4F9]/20 rounded-full blur-2xl pointer-events-none clickup-glow-drift" />
               <div className="py-1 px-2.5 rounded-lg bg-gradient-to-r from-[#7B68EE]/20 via-[#E01E5A]/20 to-transparent border border-white/10 flex items-center justify-between text-xs">
                 <span className="text-[11px] font-mono text-white/80 flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-[#00D2FF] animate-spin" style={{ animationDuration: '4s' }} />

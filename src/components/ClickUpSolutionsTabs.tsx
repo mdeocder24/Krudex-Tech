@@ -207,13 +207,20 @@ export default function ClickUpSolutionsTabs() {
                     <div className={`w-10 h-10 rounded-xl bg-gradient-to-tr ${agent.avatarColor} flex items-center justify-center text-white font-bold text-xs shrink-0 shadow-md group-hover:scale-110 transition-transform`}>
                       ✦
                     </div>
-                    <div>
+                    <div className="flex-1">
                       <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-[#A78BFA] transition-colors">
                         {agent.name}
                       </h4>
                       <p className="text-[11px] text-krudex-muted leading-tight mt-0.5">
                         {agent.action}
                       </p>
+                    </div>
+
+                    {/* Agent Voice/Status Equalizer Bars matching ClickUp Super Agents */}
+                    <div className="flex items-end gap-1 h-4 px-2 opacity-40 group-hover:opacity-100 transition-opacity">
+                      <div className="w-1 bg-[#7B68EE] rounded-full clickup-voice-bar h-2.5" style={{ animationDelay: '0s' }} />
+                      <div className="w-1 bg-[#E01E5A] rounded-full clickup-voice-bar h-4" style={{ animationDelay: '0.2s' }} />
+                      <div className="w-1 bg-[#00D2FF] rounded-full clickup-voice-bar h-3" style={{ animationDelay: '0.4s' }} />
                     </div>
                   </motion.div>
                 ))}

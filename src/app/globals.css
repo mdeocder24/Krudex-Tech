@@ -228,6 +228,103 @@ body {
   transform: scale(1.04);
 }
 
+/* ==========================================================================
+   AUTHENTIC CLICKUP ANIMATIONS (EXTRACTED VIA REA REVERSE-ENGINEERING)
+   ========================================================================== */
+
+/* 1. Ambient Intelligence Glow Drift */
+@keyframes clickupGlowDrift {
+  0% {
+    opacity: 0.45;
+    transform: rotate(15deg) scaleY(-1) skewX(-0.16deg) scale(1);
+  }
+  40% {
+    opacity: 0.9;
+    transform: rotate(15deg) scaleY(-1) skewX(-0.16deg) scale(1.18) translateX(6px);
+  }
+  100% {
+    opacity: 0.7;
+    transform: rotate(15deg) scaleY(-1) skewX(-0.16deg) scale(1.1) translateX(3px);
+  }
+}
+
+.clickup-glow-drift {
+  animation: clickupGlowDrift 6s ease-in-out infinite alternate;
+}
+
+/* 2. Brain Copilot Glow Breathe */
+@keyframes clickupGlowBreathe {
+  0%, 100% {
+    opacity: 0.65;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
+.clickup-glow-breathe {
+  animation: clickupGlowBreathe 4.5s ease-in-out infinite;
+}
+
+/* 3. Voice & Agent Equalizer Bars */
+@keyframes clickupVoiceBar {
+  0%, 100% {
+    opacity: 0.9;
+    transform: scaleY(1);
+  }
+  35% {
+    opacity: 0.5;
+    transform: scaleY(0.35);
+  }
+  70% {
+    opacity: 1;
+    transform: scaleY(1.35);
+  }
+}
+
+.clickup-voice-bar {
+  transform-origin: bottom center;
+  animation: clickupVoiceBar 1.2s ease-in-out infinite;
+}
+
+/* 4. ClickUp Signature Rotating Conic Gradient Border */
+@keyframes clickupRotateBorder {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.clickup-animated-gradient-border {
+  position: relative;
+  border-radius: 9999px;
+  overflow: hidden;
+  padding: 1px;
+}
+
+.clickup-animated-gradient-border::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, #45C4F9, #7D09FF 35%, #FF0BE5 70%, #45C4F9);
+  animation: clickupRotateBorder 3s linear infinite;
+  z-index: 0;
+}
+
+.clickup-animated-gradient-border > * {
+  position: relative;
+  z-index: 1;
+}
+
+
+
 /* Keyboard focus — visible on every interactive element */
 :focus-visible {
   outline: 2px solid #7B68EE;
