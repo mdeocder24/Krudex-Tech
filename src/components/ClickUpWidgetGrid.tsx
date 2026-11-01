@@ -4,13 +4,17 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Sparkles, 
-  Check, 
+  ChevronLeft, 
+  ChevronRight, 
   CheckCircle2
 } from 'lucide-react';
 
 export default function ClickUpWidgetGrid() {
-  // Box 2: Interactive Model Switcher State
-  const [selectedModel, setSelectedModel] = useState<'brain' | 'gpt' | 'claude' | 'gemini'>('brain');
+  // Box 2: Interactive Model Carousel Index
+  const [activeModelIndex, setActiveModelIndex] = useState(0);
+
+  // Box 3: Interactive Persona Stack State
+  const [activePersona, setActivePersona] = useState<'eng' | 'mktg' | 'academy'>('eng');
 
   // Box 4: MCP Connection State
   const [mcpStatus, setMcpStatus] = useState<'online' | 'syncing'>('online');
@@ -27,24 +31,70 @@ export default function ClickUpWidgetGrid() {
   };
 
   const models = [
-    { id: 'brain', name: 'Krudex Brain', tag: 'Native', latency: '12ms' },
-    { id: 'gpt', name: 'OpenAI GPT-4o', tag: 'Fast', latency: '28ms' },
-    { id: 'claude', name: 'Claude 3.5 Sonnet', tag: 'Code', latency: '35ms' },
-    { id: 'gemini', name: 'Gemini 2.0 Flash', tag: 'Edge', latency: '18ms' },
+    { id: 'brain', name: 'Krudex Brain', tag: 'Native', latency: '12ms', color: 'from-[#7B68EE] to-[#00D2FF]' },
+    { id: 'gpt', name: 'OpenAI GPT-4o', tag: 'Fast', latency: '28ms', color: 'from-[#10B981] to-[#3B82F6]' },
+    { id: 'claude', name: 'Claude 3.5 Sonnet', tag: 'Code', latency: '35ms', color: 'from-[#F59E0B] to-[#EF4444]' },
+    { id: 'gemini', name: 'Gemini 2.0 Flash', tag: 'Edge', latency: '18ms', color: 'from-[#00D2FF] to-[#7B68EE]' },
   ];
+
+  const personas = [
+    {
+      id: 'eng' as const,
+      name: 'Lead Systems Engineer',
+      avatar: 'K',
+      avatarBg: 'bg-gradient-to-tr from-[#7B68EE] to-[#00D2FF]',
+      role: 'Full-Stack & Edge Architect',
+      tone: '"direct, zero fluff, typed contracts"',
+      sprint: '"story points, CI/CD gates"',
+      prefers: '"typed OpenAPI & zero bloat"',
+      reports: '"weekly founder demo call"'
+    },
+    {
+      id: 'mktg' as const,
+      name: 'Growth & Ads Strategist',
+      avatar: 'P',
+      avatarBg: 'bg-gradient-to-tr from-[#E01E5A] to-[#F472B6]',
+      role: 'Google Ads & Attribution Lead',
+      tone: '"data-backed, ROAS-focused, high intent"',
+      sprint: '"daily bid pacing & search terms"',
+      prefers: '"verified GA4 backend telemetry"',
+      reports: '"real-time conversion dashboards"'
+    },
+    {
+      id: 'academy' as const,
+      name: 'NovaSkill Practicing Mentor',
+      avatar: 'S',
+      avatarBg: 'bg-gradient-to-tr from-[#10B981] to-[#00D2FF]',
+      role: 'Student Training Practitioner',
+      tone: '"rigorous, constructive, production-grade"',
+      sprint: '"weekly cohort lab reviews"',
+      prefers: '"shipping real code to production"',
+      reports: '"placement hiring partner status"'
+    }
+  ];
+
+  const handlePrevModel = () => {
+    setActiveModelIndex((prev) => (prev - 1 + models.length) % models.length);
+  };
+
+  const handleNextModel = () => {
+    setActiveModelIndex((prev) => (prev + 1) % models.length);
+  };
 
   const handleMcpClick = () => {
     setMcpStatus('syncing');
     setTimeout(() => setMcpStatus('online'), 800);
   };
 
+  const currentPersona = personas.find(p => p.id === activePersona) || personas[0];
+
   return (
-    <section className="py-24 md:py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-[#07050D]">
+    <section className="py-24 md:py-36 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-[#07050D]">
       {/* Dynamic Ambient Background Light */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-full max-w-5xl h-96 bg-gradient-to-tr from-[#7B68EE]/15 via-[#E01E5A]/10 to-[#00D2FF]/15 blur-[120px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto relative z-10">
-        {/* Section Header matching Video Frame 15 */}
+        {/* Section Header matching Video Frame 06 & 15 */}
         <div className="text-center flex flex-col items-center mb-16 sm:mb-20">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
@@ -99,60 +149,66 @@ export default function ClickUpWidgetGrid() {
         </div>
 
         {/* =========================================================================
-            ROW 1: Context, Intelligence (Model Selector), Personality (JSON Editor)
-            (Matching Video Frame 15 & 20)
+            ROW 1: Box 1 (Memory Updated), Box 2 (EveryModelCard Carousel), Box 3 (Personality Stack)
+            (Exact Match to Video Frames 06, 08, 11)
             ========================================================================= */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          {/* BOX 1: CONTEXT */}
+          
+          {/* BOX 1: MEMORY UPDATED (Matching Video Frame 08 & REA Brain2MemoryVisual) */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="clickup-card p-6 sm:p-7 flex flex-col justify-between hover:border-[#7B68EE]/50 group"
+            className="clickup-card p-6 sm:p-7 flex flex-col justify-between hover:border-[#7B68EE]/50 group relative overflow-hidden"
           >
             <div>
               <span className="text-[10px] font-mono uppercase tracking-widest text-[#00D2FF] font-bold block mb-3">
-                CONTEXT
+                PERSISTENT CONTEXT
               </span>
               <h3 className="font-heading font-bold text-xl text-white mb-2.5">
                 Full-Repo Awareness
               </h3>
               <p className="text-krudex-muted text-xs sm:text-sm leading-relaxed mb-6">
-                Brain sees your tasks, schema, and API contracts. It doesn&apos;t need a brief because it knows what&apos;s shipping in real-time.
+                Brain remembers architectural decisions and coding preferences across every sprint.
               </p>
             </div>
 
-            {/* Interactive Cascading Layered Windows */}
-            <div className="relative h-44 w-full bg-[#09070F] rounded-xl p-3 border border-white/10 overflow-hidden group-hover:border-[#7B68EE]/40 transition-colors">
-              <div className="absolute top-2 left-2 right-2 flex items-center justify-between pb-2 border-b border-white/5">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+            {/* Authentic ClickUp Memory Visualizer (REA Brain2MemoryVisual) */}
+            <div className="relative h-44 w-full bg-[#09070F] rounded-2xl p-4 border border-white/10 flex flex-col justify-between overflow-hidden shadow-inner group-hover:border-[#7B68EE]/50 transition-colors">
+              {/* Conic Ambient Halo Glow behind card */}
+              <div className="absolute inset-x-8 bottom-2 h-16 clickup-memory-glow pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity" />
+
+              {/* Memory Card with Rainbow Edge */}
+              <div className="relative z-10 w-full bg-[#120E22]/90 border border-white/15 rounded-xl p-3.5 backdrop-blur-md">
+                <div className="flex items-center justify-between pb-2 border-b border-white/5">
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 rounded-md bg-gradient-to-tr from-[#7B68EE] via-[#E01E5A] to-[#00D2FF] flex items-center justify-center text-[10px] text-white font-bold">
+                      ✦
+                    </div>
+                    <span className="text-xs font-semibold text-white/95">Memory Updated</span>
+                  </div>
+                  <span className="w-2 h-2 rounded-full bg-[#10B981] animate-ping" />
                 </div>
-                <span className="text-[9px] font-mono text-white/40">app/api/sprints/route.ts</span>
+
+                <div className="pt-2.5 space-y-1">
+                  <span className="text-[9px] font-mono uppercase tracking-wider text-white/40 block">
+                    USER PREFERENCE:
+                  </span>
+                  <div className="text-sm font-semibold text-white flex items-center gap-1.5">
+                    <span>Values clarity &amp; zero bloat</span>
+                  </div>
+                </div>
               </div>
 
-              {/* Layered Cards Stack */}
-              <div className="mt-8 space-y-2">
-                <div className="p-2 rounded-lg bg-white/[0.04] border border-white/5 text-[10px] font-mono text-white/70 flex items-center justify-between group-hover:translate-x-1 transition-transform">
-                  <span className="text-[#A78BFA]">export const dynamic = &apos;force-dynamic&apos;;</span>
-                  <span className="text-[#10B981]">200 OK</span>
-                </div>
-                <div className="p-2 rounded-lg bg-white/[0.02] border border-white/5 text-[10px] font-mono text-white/50 flex items-center justify-between translate-x-2 group-hover:translate-x-3 transition-transform">
-                  <span>POST /api/v1/telemetry</span>
-                  <span className="text-[#00D2FF]">14ms</span>
-                </div>
-                <div className="p-2 rounded-lg bg-white/[0.01] border border-white/5 text-[10px] font-mono text-white/30 flex items-center justify-between translate-x-4">
-                  <span>SELECT * FROM contracts</span>
-                  <span>pg_pool</span>
-                </div>
+              <div className="relative z-10 flex items-center justify-between text-[10px] font-mono text-white/40 pt-1">
+                <span>INDEXED REPO KERNEL</span>
+                <span className="text-[#00D2FF]">100% IN-SYNC</span>
               </div>
             </div>
           </motion.div>
 
-          {/* BOX 2: INTELLIGENCE (Direct Video Match: Clickable Model Selector) */}
+          {/* BOX 2: EVERY MODEL CARD CAROUSEL (Matching Video Frame 08 & 11) */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -162,54 +218,76 @@ export default function ClickUpWidgetGrid() {
           >
             <div>
               <span className="text-[10px] font-mono uppercase tracking-widest text-[#F472B6] font-bold block mb-3">
-                INTELLIGENCE
+                INTELLIGENCE &amp; ROUTING
               </span>
               <h3 className="font-heading font-bold text-xl text-white mb-2.5">
-                Dynamic Frontier Routing
+                Frontier Model Carousel
               </h3>
               <p className="text-krudex-muted text-xs sm:text-sm leading-relaxed mb-6">
                 Brain picks the best model for each task. One studio contract. Every frontier model running with full context.
               </p>
             </div>
 
-            {/* Interactive Model Selector Widget matching Video Frame 20 */}
-            <div className="bg-[#09070F] rounded-xl p-3 border border-white/10 space-y-1.5">
-              <div className="text-[10px] font-mono uppercase tracking-wider text-white/40 pb-1.5 border-b border-white/5 flex items-center justify-between">
-                <span>Select model</span>
-                <span className="text-[#A78BFA] font-bold">CLICK TO TEST</span>
+            {/* Authentic ClickUp Model Carousel Widget (REA EveryModelCardVisual) */}
+            <div className="relative h-44 w-full bg-[#09070F] rounded-2xl p-3 border border-white/10 flex items-center justify-between overflow-hidden shadow-inner">
+              {/* Left Carousel Arrow */}
+              <button
+                type="button"
+                aria-label="Previous Model"
+                onClick={handlePrevModel}
+                className="w-7 h-7 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all cursor-pointer z-20 shrink-0 hover:scale-110 active:scale-95"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+
+              {/* Vertical Stack with Fade Mask */}
+              <div className="flex-1 flex flex-col items-center justify-center relative clickup-model-fade-mask h-full px-2">
+                {models.map((m, idx) => {
+                  const isActive = idx === activeModelIndex;
+                  const isPrev = idx === (activeModelIndex - 1 + models.length) % models.length;
+                  const isNext = idx === (activeModelIndex + 1) % models.length;
+
+                  if (!isActive && !isPrev && !isNext) return null;
+
+                  return (
+                    <motion.div
+                      key={m.id}
+                      onClick={() => setActiveModelIndex(idx)}
+                      layout
+                      transition={{ duration: 0.3 }}
+                      className={`cursor-pointer transition-all duration-300 ${
+                        isActive
+                          ? 'w-full py-2.5 px-3.5 rounded-full clickup-active-model-glow flex items-center justify-between my-1 z-10 scale-105'
+                          : 'w-4/5 py-1 px-3 rounded-full bg-white/[0.03] border border-white/5 opacity-40 text-white/40 flex items-center justify-between my-0.5 scale-90'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <div className={`w-2.5 h-2.5 rounded-full bg-gradient-to-tr ${m.color}`} />
+                        <span className={`text-xs font-semibold ${isActive ? 'text-white' : 'text-white/60'}`}>
+                          {m.name}
+                        </span>
+                      </div>
+                      <span className="text-[10px] font-mono text-white/40">
+                        {m.latency}
+                      </span>
+                    </motion.div>
+                  );
+                })}
               </div>
 
-              {models.map((m) => {
-                const isSelected = selectedModel === m.id;
-                return (
-                  <button
-                    key={m.id}
-                    type="button"
-                    onClick={() => setSelectedModel(m.id as 'brain' | 'gpt' | 'claude' | 'gemini')}
-                    className={`w-full p-2 rounded-lg flex items-center justify-between text-xs transition-all cursor-pointer ${
-                      isSelected
-                        ? 'bg-gradient-to-r from-[#7B68EE]/20 to-[#00D2FF]/10 border border-[#7B68EE]/50 text-white shadow-sm'
-                        : 'bg-transparent text-white/60 hover:text-white hover:bg-white/5 border border-transparent'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-gradient-to-tr from-[#7B68EE] to-[#00D2FF]" />
-                      <span className="font-medium">{m.name}</span>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono text-white/40">{m.latency}</span>
-                      {isSelected && (
-                        <Check className="w-3.5 h-3.5 text-[#00D2FF]" />
-                      )}
-                    </div>
-                  </button>
-                );
-              })}
+              {/* Right Carousel Arrow */}
+              <button
+                type="button"
+                aria-label="Next Model"
+                onClick={handleNextModel}
+                className="w-7 h-7 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all cursor-pointer z-20 shrink-0 hover:scale-110 active:scale-95"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
             </div>
           </motion.div>
 
-          {/* BOX 3: PERSONALITY (Direct Video Match: Team Config Inspector) */}
+          {/* BOX 3: PERSONALITY CARD STACK (Matching Video Frame 08 & 11) */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -219,55 +297,74 @@ export default function ClickUpWidgetGrid() {
           >
             <div>
               <span className="text-[10px] font-mono uppercase tracking-widest text-[#A78BFA] font-bold block mb-3">
-                PERSONALITY &amp; CONFIG
+                TEAM PERSONA &amp; CONFIG
               </span>
               <h3 className="font-heading font-bold text-xl text-white mb-2.5">
                 Tailored Team Shorthand
               </h3>
               <p className="text-krudex-muted text-xs sm:text-sm leading-relaxed mb-6">
-                Brain learns how your team talks: your tone, your sprint methods, your deployment guidelines.
+                Hover or click to switch active studio persona and inspect tailored prompt guidelines.
               </p>
             </div>
 
-            {/* Interactive Code/JSON Widget matching Video Frame 20 */}
-            <div className="bg-[#09070F] rounded-xl p-3.5 border border-white/10 font-mono text-[11px] space-y-2 overflow-hidden shadow-inner">
-              <div className="flex items-center justify-between text-[9px] text-white/30 border-b border-white/5 pb-1">
-                <span>krudex_team_profile.json</span>
-                <span className="text-[#10B981]">ACTIVE</span>
+            {/* Authentic ClickUp Stacked Persona Visualizer (REA PersonalityCardVisual) */}
+            <div className="relative h-44 w-full bg-[#09070F] rounded-2xl p-3 border border-white/10 flex flex-col justify-between overflow-hidden shadow-inner">
+              <div className="space-y-1.5">
+                {personas.map((persona) => {
+                  const isSelected = activePersona === persona.id;
+
+                  return (
+                    <motion.div
+                      key={persona.id}
+                      onClick={() => setActivePersona(persona.id)}
+                      onMouseEnter={() => setActivePersona(persona.id)}
+                      className={`p-1.5 rounded-xl flex items-center justify-between cursor-pointer transition-all duration-200 ${
+                        isSelected
+                          ? 'bg-white/[0.08] border border-[#7B68EE]/60 shadow-lg translate-x-1'
+                          : 'bg-white/[0.02] border border-white/5 opacity-50 hover:opacity-80'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <div className={`w-6 h-6 rounded-lg ${persona.avatarBg} text-white font-bold text-xs flex items-center justify-center shrink-0`}>
+                          {persona.avatar}
+                        </div>
+                        <div>
+                          <div className={`text-xs font-bold leading-tight ${isSelected ? 'text-white' : 'text-white/70'}`}>
+                            {persona.name}
+                          </div>
+                          <div className="text-[10px] text-white/40 font-mono">
+                            {persona.role}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Green Radio Button Indicator (Exact ClickUp style #00c07a) */}
+                      <div className="flex items-center gap-1.5">
+                        {isSelected && (
+                          <div className="w-2.5 h-2.5 rounded-full clickup-persona-active-radio" />
+                        )}
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </div>
 
-              <div className="space-y-1.5 text-xs">
-                <div className="flex items-start gap-2 hover:bg-white/5 p-1 rounded transition-colors cursor-pointer">
-                  <span className="text-[#F472B6]">tone</span>
-                  <span className="text-white/40">:</span>
-                  <span className="text-[#38BDF8] truncate">&quot;direct, zero fluff, production&quot;</span>
-                </div>
-                <div className="flex items-start gap-2 hover:bg-white/5 p-1 rounded transition-colors cursor-pointer">
-                  <span className="text-[#F472B6]">sprint</span>
-                  <span className="text-white/40">:</span>
-                  <span className="text-[#38BDF8] truncate">&quot;story points, CI/CD gates&quot;</span>
-                </div>
-                <div className="flex items-start gap-2 hover:bg-white/5 p-1 rounded transition-colors cursor-pointer">
-                  <span className="text-[#F472B6]">prefers</span>
-                  <span className="text-white/40">:</span>
-                  <span className="text-[#38BDF8] truncate">&quot;typed OpenAPI contracts&quot;</span>
-                </div>
-                <div className="flex items-start gap-2 hover:bg-white/5 p-1 rounded transition-colors cursor-pointer">
-                  <span className="text-[#F472B6]">reports</span>
-                  <span className="text-white/40">:</span>
-                  <span className="text-[#38BDF8] truncate">&quot;weekly founder demo call&quot;</span>
-                </div>
+              {/* Active persona preference readout matching video frame 08 */}
+              <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-white/50">
+                <span className="text-[#A78BFA] font-semibold">{currentPersona.name.split(' ')[0]} Prefers:</span>
+                <span className="text-[#6EE7B7] truncate max-w-[140px]">{currentPersona.prefers}</span>
               </div>
             </div>
           </motion.div>
         </div>
 
         {/* =========================================================================
-            ROW 2: Connected Apps (MCP), Ambient Intelligence, Deep Search
-            (Matching Video Frame 30)
+            ROW 2: Box 4 (Connected Apps & MCP), Box 5 (Ambient Intelligence), Box 6 (Deep Search)
+            (Matching Video Frame 08 & 11)
             ========================================================================= */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* BOX 4: CONNECTED APPS & MCP */}
+          
+          {/* BOX 4: CONNECTED APPS & MCP HUB */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -287,17 +384,17 @@ export default function ClickUpWidgetGrid() {
               </p>
             </div>
 
-            {/* Interactive MCP Hub Visualizer matching Video Frame 30 */}
+            {/* Interactive MCP Hub Visualizer matching Video Frame 08 */}
             <div 
               onClick={handleMcpClick}
-              className="relative h-44 w-full bg-[#09070F] rounded-xl p-4 border border-white/10 flex flex-col items-center justify-center cursor-pointer overflow-hidden group-hover:border-[#00D2FF]/40 transition-colors"
+              className="relative h-44 w-full bg-[#09070F] rounded-2xl p-4 border border-white/10 flex flex-col items-center justify-center cursor-pointer overflow-hidden group-hover:border-[#00D2FF]/40 transition-colors"
             >
-              {/* Background Connecting Lines */}
+              {/* Circuit Rings */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-30">
-                <div className="w-36 h-36 rounded-full border border-dashed border-[#7B68EE] animate-spin" style={{ animationDuration: '20s' }} />
+                <div className="w-36 h-36 rounded-full border border-dashed border-[#7B68EE] animate-spin" style={{ animationDuration: '24s' }} />
               </div>
 
-              {/* Central Glowing Sparkle Node with ClickUp Glow Breathe */}
+              {/* Central Glowing Flower Node */}
               <div className="relative z-10 w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#7B68EE] via-[#E01E5A] to-[#00D2FF] p-[2px] shadow-[0_0_25px_rgba(123,104,238,0.6)] mb-3 group-hover:scale-110 transition-transform clickup-glow-breathe">
                 <div className="w-full h-full bg-[#0E0B19] rounded-[14px] flex items-center justify-center">
                   <Sparkles className="w-5 h-5 text-white animate-pulse" />
@@ -336,10 +433,11 @@ export default function ClickUpWidgetGrid() {
               </p>
             </div>
 
-            {/* Interactive Ambient Floating Suggestions matching Video Frame 30 */}
-            <div className="relative bg-[#09070F] rounded-xl p-3.5 border border-white/10 space-y-2.5 overflow-hidden">
-              {/* ClickUp Ambient Drift Glow */}
+            {/* Interactive Ambient Floating Suggestions matching Video Frame 08 & 11 */}
+            <div className="relative h-44 w-full bg-[#09070F] rounded-2xl p-3.5 border border-white/10 flex flex-col justify-between overflow-hidden">
               <div className="absolute -top-10 -right-10 w-28 h-28 bg-gradient-to-br from-[#7B68EE]/20 via-[#FF0BE5]/15 to-[#45C4F9]/20 rounded-full blur-2xl pointer-events-none clickup-glow-drift" />
+
+              {/* Gathering Data status pill */}
               <div className="py-1 px-2.5 rounded-lg bg-gradient-to-r from-[#7B68EE]/20 via-[#E01E5A]/20 to-transparent border border-white/10 flex items-center justify-between text-xs">
                 <span className="text-[11px] font-mono text-white/80 flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-[#00D2FF] animate-spin" style={{ animationDuration: '4s' }} />
@@ -348,29 +446,31 @@ export default function ClickUpWidgetGrid() {
                 <span className="text-[9px] font-bold text-[#A78BFA]">LIVE</span>
               </div>
 
-              {/* Clickable suggestion chips */}
-              <div
-                onClick={() => toggleSuggestion('billing')}
-                className={`p-2 rounded-lg text-[11px] font-medium flex items-center justify-between cursor-pointer transition-all ${
-                  activeSuggestions.includes('billing')
-                    ? 'bg-blue-500/15 border border-blue-500/30 text-blue-300'
-                    : 'bg-white/[0.03] border border-white/5 text-white/50 hover:text-white'
-                }`}
-              >
-                <span>■ Improve Billing Error Handling</span>
-                <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
-              </div>
+              {/* Actionable Suggestions */}
+              <div className="space-y-1.5">
+                <div
+                  onClick={() => toggleSuggestion('billing')}
+                  className={`p-2 rounded-lg text-[11px] font-medium flex items-center justify-between cursor-pointer transition-all ${
+                    activeSuggestions.includes('billing')
+                      ? 'bg-blue-500/15 border border-blue-500/30 text-blue-300'
+                      : 'bg-white/[0.03] border border-white/5 text-white/50 hover:text-white'
+                  }`}
+                >
+                  <span>■ Improve Billing Error Handling</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
+                </div>
 
-              <div
-                onClick={() => toggleSuggestion('perf')}
-                className={`p-2 rounded-lg text-[11px] font-medium flex items-center justify-between cursor-pointer transition-all ${
-                  activeSuggestions.includes('perf')
-                    ? 'bg-emerald-500/15 border border-emerald-500/30 text-emerald-300'
-                    : 'bg-white/[0.03] border border-white/5 text-white/50 hover:text-white'
-                }`}
-              >
-                <span>■ Optimize Dashboard Load Time</span>
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                <div
+                  onClick={() => toggleSuggestion('perf')}
+                  className={`p-2 rounded-lg text-[11px] font-medium flex items-center justify-between cursor-pointer transition-all ${
+                    activeSuggestions.includes('perf')
+                      ? 'bg-emerald-500/15 border border-emerald-500/30 text-emerald-300'
+                      : 'bg-white/[0.03] border border-white/5 text-white/50 hover:text-white'
+                  }`}
+                >
+                  <span>■ Optimize Dashboard Load Time</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                </div>
               </div>
             </div>
           </motion.div>
@@ -395,16 +495,19 @@ export default function ClickUpWidgetGrid() {
               </p>
             </div>
 
-            {/* Deep Search Progress Widget matching Video Frame 30 */}
-            <div className="bg-[#09070F] rounded-xl p-3.5 border border-white/10 space-y-3">
+            {/* Deep Search Progress Widget matching Video Frame 08 & 11 */}
+            <div className="relative h-44 w-full bg-[#09070F] rounded-2xl p-3.5 border border-white/10 flex flex-col justify-between overflow-hidden">
               <div className="text-[11px] text-white/80 leading-relaxed font-mono">
                 <span className="text-[#00D2FF]">Growth &amp; Acquisition: </span>
                 Paid ROAS holding at 4.2x across search, up from 3.1x.
               </div>
 
-              <div className="p-3 rounded-lg bg-gradient-to-r from-[#7B68EE]/10 to-[#00D2FF]/10 border border-white/10 space-y-2">
+              <div className="p-3 rounded-xl bg-gradient-to-r from-[#7B68EE]/10 to-[#00D2FF]/10 border border-white/10 space-y-2">
                 <div className="flex items-center justify-between text-[10px] font-mono">
-                  <span className="text-white/70">Reports build in progress...</span>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
+                    <span className="text-white/70">Reports build in progress...</span>
+                  </div>
                   <span className="text-[#10B981] font-bold">100%</span>
                 </div>
                 <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden p-0.5">

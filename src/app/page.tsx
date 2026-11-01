@@ -3,6 +3,7 @@ import Hero from '@/components/Hero';
 import ScrollTools from '@/components/scrolltools';
 import ClickUpContextStats from '@/components/ClickUpContextStats';
 import ReplaceThemAll from '@/components/ReplaceThemAll';
+import ClickUpSuperAgent from '@/components/ClickUpSuperAgent';
 import ClickUpWidgetGrid from '@/components/ClickUpWidgetGrid';
 import ClickUpSolutionsTabs from '@/components/ClickUpSolutionsTabs';
 import Pillars from '@/components/Pillars';
@@ -21,6 +22,7 @@ export default function Home() {
       <ScrollTools />
       <ClickUpContextStats />
       <ReplaceThemAll />
+      <ClickUpSuperAgent />
       <ClickUpWidgetGrid />
       <ClickUpSolutionsTabs />
       <Pillars />
