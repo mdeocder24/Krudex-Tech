@@ -100,15 +100,15 @@ export default function ClickUpMockup() {
     {
       id: 2,
       sender: 'Brain',
-      role: 'Krudex AI Agent',
+      role: 'Studio Intelligence',
       time: '9:15 am',
       text: 'Created "Fix the last two bugs" for Jake, due Nov 5.',
       isAi: true,
     },
     {
       id: 3,
-      sender: 'PM Agent',
-      role: 'Automated Sprints',
+      sender: 'Sarah (PM)',
+      role: 'Sprint Lead',
       time: '9:16 am',
       text: 'Board is current. Three tasks moved forward.',
       isAi: false,
@@ -124,7 +124,7 @@ export default function ClickUpMockup() {
     {
       id: 5,
       sender: 'Brain',
-      role: 'Krudex AI Agent',
+      role: 'Studio Intelligence',
       time: '9:17 am',
       text: 'The launch plan is ready. All 3 verticals synced.',
       isAi: true,
@@ -189,7 +189,7 @@ export default function ClickUpMockup() {
       const aiReply: Message = {
         id: aiReplyId,
         sender: 'Brain',
-        role: 'Krudex AI Agent',
+        role: 'Studio Intelligence',
         time: 'Just now',
         text: replyText,
         isAi: true,
@@ -456,7 +456,7 @@ export default function ClickUpMockup() {
                 <div className="w-4 h-4 rounded-full bg-pink-500/30 text-pink-300 flex items-center justify-center text-[9px] font-bold shrink-0">
                   P
                 </div>
-                <span><strong className="text-white">Priya:</strong> PM Agent owns announcement, Sarah reviews.</span>
+                <span><strong className="text-white">Priya:</strong> Sarah owns announcement, team reviews.</span>
               </div>
               <div className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-white/5 transition-colors">
                 <div className="w-4 h-4 rounded-full bg-blue-500/30 text-blue-300 flex items-center justify-center text-[9px] font-bold shrink-0">

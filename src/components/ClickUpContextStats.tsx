@@ -26,7 +26,7 @@ export default function ClickUpContextStats() {
   ];
 
   const toolsList = [
-    'Tasks & Sprints', 'Architecture Wikis', 'AI Agents', 'Google Ads Funnels', 
+    'Tasks & Sprints', 'Architecture Wikis', 'Edge Analytics', 'Google Ads Funnels', 
     'GA4 Telemetry', 'PostgreSQL Models', 'FastAPI Endpoints', 'Next.js 16 Edge', 
     'CI/CD Gates', 'NovaSkill Academy', 'Figma Tokens', 'Lighthouse 99'
   ];
@@ -66,7 +66,7 @@ export default function ClickUpContextStats() {
           ))}
         </div>
 
-        {/* Center Headline: All apps, AI Agents, and humans in Krudex */}
+        {/* Center Headline: Unified Krudex Studio */}
         <div className="pt-16 sm:pt-20 text-center flex flex-col items-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -75,8 +75,8 @@ export default function ClickUpContextStats() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-heading font-black text-3xl sm:text-5xl md:text-6xl text-white tracking-tight max-w-4xl mb-4 leading-[1.08]"
           >
-            All apps, AI Agents, <br />
-            <span className="clickup-gradient-text">and humans in Krudex.</span>
+            All apps, engineering, <br />
+            <span className="clickup-gradient-text">and growth unified in Krudex.</span>
           </motion.h2>
 
           <motion.p

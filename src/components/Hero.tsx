@@ -13,11 +13,12 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
 
-  // Dynamic 3D perspective scroll animations matching ClickUp
-  const rotateX = useTransform(scrollYProgress, [0, 0.5], [14, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [0.94, 1.02]);
-  const translateY = useTransform(scrollYProgress, [0, 0.5], [0, -20]);
-  const bgParallax = useTransform(scrollYProgress, [0, 1], [0, 140]);
+  // Apple-style deep 3D perspective scroll animations
+  const rotateX = useTransform(scrollYProgress, [0, 0.6], [18, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.6], [0.90, 1.03]);
+  const translateY = useTransform(scrollYProgress, [0, 0.6], [40, -15]);
+  const opacity = useTransform(scrollYProgress, [0, 0.25], [0.85, 1]);
+  const bgParallax = useTransform(scrollYProgress, [0, 1], [0, 160]);
 
   return (
     <section ref={heroRef} className="relative pt-32 sm:pt-40 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -112,16 +113,17 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        {/* The Full Hero Product Preview Mockup with 3D Perspective Scroll Tilt */}
-        <div style={{ perspective: 1200 }} className="w-full">
+        {/* The Full Hero Product Preview Mockup with Apple-Style 3D Perspective Scroll Tilt */}
+        <div style={{ perspective: 1400 }} className="w-full">
           <motion.div
             style={{
               rotateX,
               scale,
               y: translateY,
+              opacity,
               transformStyle: "preserve-3d",
             }}
-            transition={{ type: "spring", stiffness: 100, damping: 30 }}
+            transition={{ type: "spring", stiffness: 90, damping: 28 }}
             className="w-full"
           >
             <ClickUpMockup />

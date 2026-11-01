@@ -268,7 +268,7 @@ body {
   animation: clickupGlowBreathe 4.5s ease-in-out infinite;
 }
 
-/* 3. Voice & Agent Equalizer Bars */
+/* 3. Audio & Telemetry Equalizer Bars */
 @keyframes clickupVoiceBar {
   0%, 100% {
     opacity: 0.9;

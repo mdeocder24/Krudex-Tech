@@ -29,7 +29,7 @@ const servicesList = [
     badge: 'INTELLIGENCE',
     badgeColor: 'status-pill-pink',
     title: 'AI & ML Integrations',
-    desc: 'Pragmatic machine learning embedded into production. Custom LLM agents, LangChain RAG pipelines, computer vision, and real-time inference.',
+    desc: 'Pragmatic machine learning embedded into production. Custom LLM pipelines, LangChain RAG architectures, computer vision, and real-time inference.',
     metric: '18ms Inference Latency',
     href: '/services',
   },

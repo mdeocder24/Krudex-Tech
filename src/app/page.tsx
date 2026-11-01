@@ -1,12 +1,12 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import ScrollTools from '@/components/scrolltools';
+import AppleScrollScrubText from '@/components/AppleScrollScrubText';
 import ClickUpContextStats from '@/components/ClickUpContextStats';
+import AppleStickyStack from '@/components/AppleStickyStack';
 import ReplaceThemAll from '@/components/ReplaceThemAll';
-import ClickUpSuperAgent from '@/components/ClickUpSuperAgent';
 import ClickUpWidgetGrid from '@/components/ClickUpWidgetGrid';
 import ClickUpSolutionsTabs from '@/components/ClickUpSolutionsTabs';
-import Pillars from '@/components/Pillars';
 import Stats from '@/components/Stats';
 import Services from '@/components/Services';
 import Process from '@/components/Process';
@@ -20,12 +20,12 @@ export default function Home() {
       <Navbar />
       <Hero />
       <ScrollTools />
+      <AppleScrollScrubText />
       <ClickUpContextStats />
+      <AppleStickyStack />
       <ReplaceThemAll />
-      <ClickUpSuperAgent />
       <ClickUpWidgetGrid />
       <ClickUpSolutionsTabs />
-      <Pillars />
       <Stats />
       <Services />
       <Process />

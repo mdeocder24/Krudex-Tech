@@ -14,7 +14,7 @@ interface SolutionTab {
   checklist: string[];
   ctaLink: string;
   ctaText: string;
-  agents: {
+  workflows: {
     name: string;
     action: string;
     avatarColor: string;
@@ -31,15 +31,15 @@ const solutions: SolutionTab[] = [
     checklist: [
       'Plan + execute technical roadmap with senior engineers',
       'Identify + resolve critical bugs within 24h SLA',
-      'Integrate with AI coders, CI/CD, and 99 Lighthouse gates',
+      'Integrate with CI/CD and 99 Lighthouse performance gates',
     ],
     ctaLink: '/services',
     ctaText: 'Explore Engineering Solutions',
-    agents: [
-      { name: 'PRD Agent', action: 'Creates specs from scoping calls', avatarColor: 'from-[#7B68EE] to-[#E01E5A]' },
-      { name: 'Triage Agent', action: 'Prioritizes bugs and edge latency regressions', avatarColor: 'from-[#00D2FF] to-[#3B82F6]' },
-      { name: 'Live Answers Agent', action: 'Keeps stakeholders informed with daily changelogs', avatarColor: 'from-[#F59E0B] to-[#EF4444]' },
-      { name: 'Codegen Agent', action: 'Produces audited TypeScript and Next.js code', avatarColor: 'from-[#10B981] to-[#34D399]' },
+    workflows: [
+      { name: 'Technical PRD & Specs', action: 'Creates unambiguous architecture contracts from scoping', avatarColor: 'from-[#7B68EE] to-[#E01E5A]' },
+      { name: '24h Bug SLA & Triage', action: 'Prioritizes bugs and edge latency regressions with strict SLA', avatarColor: 'from-[#00D2FF] to-[#3B82F6]' },
+      { name: 'CI/CD & Lighthouse Gates', action: 'Enforces 99 Lighthouse performance and zero security flaws', avatarColor: 'from-[#F59E0B] to-[#EF4444]' },
+      { name: 'Production Full-Stack Dev', action: 'Produces audited TypeScript, Next.js, and Prisma code', avatarColor: 'from-[#10B981] to-[#34D399]' },
     ],
   },
   {
@@ -55,11 +55,11 @@ const solutions: SolutionTab[] = [
     ],
     ctaLink: '/services#digital-marketing',
     ctaText: 'Explore Growth Solutions',
-    agents: [
-      { name: 'ROAS Agent', action: 'Monitors real-time ad spend efficiency & bids', avatarColor: 'from-[#E01E5A] to-[#F472B6]' },
-      { name: 'Funnel Agent', action: 'A/B tests landing page variants for maximum conversion', avatarColor: 'from-[#7B68EE] to-[#00D2FF]' },
-      { name: 'Attribution Agent', action: 'Syncs GA4 conversion events to backend database', avatarColor: 'from-[#10B981] to-[#3B82F6]' },
-      { name: 'SEO Agent', action: 'Generates programmatic SEO pages with schema markup', avatarColor: 'from-[#F59E0B] to-[#E01E5A]' },
+    workflows: [
+      { name: 'ROAS & Bid Optimizer', action: 'Monitors real-time ad spend efficiency across search', avatarColor: 'from-[#E01E5A] to-[#F472B6]' },
+      { name: 'High-Converting Funnels', action: 'A/B tests landing page variants for maximum conversion', avatarColor: 'from-[#7B68EE] to-[#00D2FF]' },
+      { name: 'GA4 Attribution Telemetry', action: 'Syncs conversion events directly to backend databases', avatarColor: 'from-[#10B981] to-[#3B82F6]' },
+      { name: 'Programmatic SEO Engine', action: 'Generates fast programmatic pages with schema markup', avatarColor: 'from-[#F59E0B] to-[#E01E5A]' },
     ],
   },
   {
@@ -75,11 +75,11 @@ const solutions: SolutionTab[] = [
     ],
     ctaLink: '/training',
     ctaText: 'Explore Student Academy',
-    agents: [
-      { name: 'Curriculum Agent', action: 'Adapts labs to latest industry frameworks', avatarColor: 'from-[#00D2FF] to-[#10B981]' },
-      { name: 'Code Review Agent', action: 'Provides automated style & performance feedback on PRs', avatarColor: 'from-[#7B68EE] to-[#F472B6]' },
-      { name: 'DSA Mentor Agent', action: 'Simulates technical system design interviews', avatarColor: 'from-[#F59E0B] to-[#00D2FF]' },
-      { name: 'Placement Agent', action: 'Connects top graduates with hiring tech partners', avatarColor: 'from-[#10B981] to-[#7B68EE]' },
+    workflows: [
+      { name: 'Production Framework Labs', action: 'Next.js 16, TypeScript, and edge cloud development', avatarColor: 'from-[#00D2FF] to-[#10B981]' },
+      { name: 'Senior Engineer PR Reviews', action: 'Real code reviews on active repositories by practitioners', avatarColor: 'from-[#7B68EE] to-[#F472B6]' },
+      { name: 'System Design & DSA Prep', action: 'Simulates technical systems design and algorithmic interviews', avatarColor: 'from-[#F59E0B] to-[#00D2FF]' },
+      { name: 'Accredited Placement Network', action: 'Direct pipeline to hiring tech partners via NovaSkill Hub', avatarColor: 'from-[#10B981] to-[#7B68EE]' },
     ],
   },
 ];
@@ -110,7 +110,7 @@ export default function ClickUpSolutionsTabs() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-krudex-muted text-base sm:text-lg max-w-xl mb-8"
           >
-            Your key workflows, powered by Krudex Specialists &amp; Autonomous Agents.
+            Your key workflows, powered by senior practitioners and disciplined studio standards.
           </motion.p>
 
           {/* Interactive Filter Pills matching Video Frame 35 */}
@@ -194,29 +194,29 @@ export default function ClickUpSolutionsTabs() {
                 </div>
               </div>
 
-              {/* Right Column: 4 Interactive Agent Cards matching Video Frame 35 */}
+              {/* Right Column: 4 Interactive Workflow Cards */}
               <div className="lg:col-span-5 space-y-3">
-                {current.agents.map((agent, idx) => (
+                {current.workflows.map((wf, idx) => (
                   <motion.div
-                    key={agent.name}
+                    key={wf.name}
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: idx * 0.08 }}
                     className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-[#7B68EE]/60 hover:bg-white/[0.08] hover:translate-x-1 transition-all duration-200 flex items-center gap-3.5 cursor-pointer group shadow-sm"
                   >
-                    <div className={`w-10 h-10 rounded-xl bg-gradient-to-tr ${agent.avatarColor} flex items-center justify-center text-white font-bold text-xs shrink-0 shadow-md group-hover:scale-110 transition-transform`}>
+                    <div className={`w-10 h-10 rounded-xl bg-gradient-to-tr ${wf.avatarColor} flex items-center justify-center text-white font-bold text-xs shrink-0 shadow-md group-hover:scale-110 transition-transform`}>
                       ✦
                     </div>
                     <div className="flex-1">
                       <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-[#A78BFA] transition-colors">
-                        {agent.name}
+                        {wf.name}
                       </h4>
                       <p className="text-[11px] text-krudex-muted leading-tight mt-0.5">
-                        {agent.action}
+                        {wf.action}
                       </p>
                     </div>
 
-                    {/* Agent Voice/Status Equalizer Bars matching ClickUp Super Agents */}
+                    {/* Active Voice/Status Equalizer Bars */}
                     <div className="flex items-end gap-1 h-4 px-2 opacity-40 group-hover:opacity-100 transition-opacity">
                       <div className="w-1 bg-[#7B68EE] rounded-full clickup-voice-bar h-2.5" style={{ animationDelay: '0s' }} />
                       <div className="w-1 bg-[#E01E5A] rounded-full clickup-voice-bar h-4" style={{ animationDelay: '0.2s' }} />
