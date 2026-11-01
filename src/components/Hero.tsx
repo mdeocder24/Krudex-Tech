@@ -1,15 +1,33 @@
 "use client";
 
-import React from 'react';
+import React, { useRef } from 'react';
 import Link from 'next/link';
 import ClickUpMockup from './ClickUpMockup';
 import { ArrowRight, Sparkles, CheckCircle2, ShieldCheck, Zap } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function Hero() {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Dynamic 3D perspective scroll animations matching ClickUp 4.0
+  const rotateX = useTransform(scrollYProgress, [0, 0.5], [14, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [0.94, 1.02]);
+  const translateY = useTransform(scrollYProgress, [0, 0.5], [0, -20]);
+  const bgParallax = useTransform(scrollYProgress, [0, 1], [0, 140]);
+
   return (
-    <section className="relative pt-32 sm:pt-40 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <div className="max-w-6xl mx-auto flex flex-col items-center text-center">
+    <section ref={heroRef} className="relative pt-32 sm:pt-40 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Background Parallax Light Beam */}
+      <motion.div 
+        style={{ y: bgParallax }}
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-3/4 max-w-4xl h-96 bg-gradient-to-tr from-[#7B68EE]/20 via-[#E01E5A]/15 to-[#00D2FF]/20 blur-[130px] pointer-events-none" 
+      />
+
+      <div className="max-w-6xl mx-auto flex flex-col items-center text-center relative z-10">
         {/* Top ClickUp-Style Announcement Pill */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
@@ -94,15 +112,21 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        {/* The Full Hero Product Preview Mockup (ClickUp Interface) */}
-        <motion.div
-          initial={{ opacity: 0, y: 35 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.45 }}
-          className="w-full"
-        >
-          <ClickUpMockup />
-        </motion.div>
+        {/* The Full Hero Product Preview Mockup with 3D Perspective Scroll Tilt */}
+        <div style={{ perspective: 1200 }} className="w-full">
+          <motion.div
+            style={{
+              rotateX,
+              scale,
+              y: translateY,
+              transformStyle: "preserve-3d",
+            }}
+            transition={{ type: "spring", stiffness: 100, damping: 30 }}
+            className="w-full"
+          >
+            <ClickUpMockup />
+          </motion.div>
+        </div>
 
         {/* Social Proof Client Logos Bar (Exact tribute to ClickUp) */}
         <div className="mt-16 sm:mt-20 pt-8 border-t border-white/5 w-full">

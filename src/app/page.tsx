@@ -1,7 +1,10 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import ScrollTools from '@/components/scrolltools';
+import ClickUpContextStats from '@/components/ClickUpContextStats';
 import ReplaceThemAll from '@/components/ReplaceThemAll';
+import ClickUpWidgetGrid from '@/components/ClickUpWidgetGrid';
+import ClickUpSolutionsTabs from '@/components/ClickUpSolutionsTabs';
 import Pillars from '@/components/Pillars';
 import Stats from '@/components/Stats';
 import Services from '@/components/Services';
@@ -16,7 +19,10 @@ export default function Home() {
       <Navbar />
       <Hero />
       <ScrollTools />
+      <ClickUpContextStats />
       <ReplaceThemAll />
+      <ClickUpWidgetGrid />
+      <ClickUpSolutionsTabs />
       <Pillars />
       <Stats />
       <Services />
