@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Play } from 'lucide-react';
 
 export default function ClickUpContextStats() {
   const stats = [
@@ -69,17 +68,6 @@ export default function ClickUpContextStats() {
 
         {/* Center Headline: All apps, AI Agents, and humans in Krudex */}
         <div className="pt-16 sm:pt-20 text-center flex flex-col items-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.05] border border-white/10 mb-6 text-xs text-white/80 font-semibold cursor-pointer hover:bg-white/[0.08] transition-colors"
-          >
-            <Play className="w-3.5 h-3.5 fill-white text-white" />
-            <span>Interactive Platform Demo</span>
-          </motion.div>
-
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
