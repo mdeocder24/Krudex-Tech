@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import ScrollTools from '@/components/scrolltools';
+import ReplaceThemAll from '@/components/ReplaceThemAll';
 import Pillars from '@/components/Pillars';
 import Stats from '@/components/Stats';
 import Services from '@/components/Services';
@@ -15,6 +16,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <ScrollTools />
+      <ReplaceThemAll />
       <Pillars />
       <Stats />
       <Services />

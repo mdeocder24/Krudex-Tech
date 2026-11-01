@@ -1,83 +1,65 @@
 "use client";
 
 import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import MagneticButton from './MagneticButton';
+import Link from 'next/link';
+import { ArrowRight, Sparkles, CheckCircle2 } from 'lucide-react';
 
-const CTA = () => {
+export default function CTA() {
   return (
-    <section className="px-6 md:px-14 lg:px-20 py-28 md:py-36 relative z-10 overflow-hidden border-t border-white/[0.06]">
-      {/* Studio ambient glow behind callout */}
-      <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] opacity-25 blur-[140px] pointer-events-none -z-10"
-        style={{
-          background: 'radial-gradient(circle, rgba(229, 43, 59, 0.25) 0%, transparent 70%)',
-        }}
-      />
+    <section className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <div className="max-w-5xl mx-auto">
+        <div className="clickup-card p-8 sm:p-14 border border-[#7B68EE]/40 relative overflow-hidden text-center flex flex-col items-center shadow-[0_0_80px_rgba(123,104,238,0.2)]">
+          {/* Luminous Multi-Color Gradient Mesh Background */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-[#7B68EE]/15 via-[#E01E5A]/10 to-[#00D2FF]/15 pointer-events-none" />
+          <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-gradient-to-b from-[#7B68EE]/30 to-transparent rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-4xl mx-auto text-center relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2.5 bg-white/[0.03] border border-white/[0.08] px-3.5 py-1.5 rounded-full mb-8"
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-krudex-accent shadow-[0_0_6px_#E52B3B]" />
-          <span className="text-xs text-white/60 font-mono tracking-wider uppercase">
-            Start Your Engagement
-          </span>
-        </motion.div>
+          <div className="relative z-10 max-w-3xl flex flex-col items-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-xs font-semibold text-white uppercase tracking-wider mb-6 backdrop-blur-md">
+              <Sparkles className="w-3.5 h-3.5 text-[#F472B6]" />
+              <span>Start Your Project Today</span>
+            </div>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white font-normal mb-6 leading-[1.06] tracking-tight"
-        >
-          Let&apos;s build your next <br />
-          <span className="text-white/60">
-            production system.
-          </span>
-        </motion.h2>
+            <h2 className="font-heading font-black text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-[1.08] mb-6">
+              Ready to build something <span className="clickup-gradient-text">extraordinary?</span>
+            </h2>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-krudex-muted text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-10 font-normal"
-        >
-          From initial system architecture to production deployment and customer acquisition—we engineer your vision into a scalable, enterprise-ready reality.
-        </motion.p>
+            <p className="text-krudex-muted text-base sm:text-lg leading-relaxed max-w-xl mb-10">
+              Whether you need a high-scale production SaaS product, a high-ROAS marketing engine, or practitioner-led talent training — let&apos;s talk.
+            </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-wrap items-center justify-center gap-4"
-        >
-          <MagneticButton
-            href="/contact"
-            className="group relative inline-flex items-center justify-center gap-2.5 whitespace-nowrap bg-krudex-accent text-white px-8 py-4 text-[14px] font-semibold tracking-wide hover:bg-krudex-accent-hover transition-all rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.5),0_0_20px_rgba(229,43,59,0.25)] hover:shadow-[0_0_35px_rgba(229,43,59,0.45)] hover:scale-[1.02]"
-          >
-            <span>Schedule Strategy Call</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </MagneticButton>
+            <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mb-8">
+              <Link
+                href="/contact"
+                className="clickup-btn-primary w-full sm:w-auto px-9 py-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2"
+              >
+                <span>Book a Strategy Call</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/services"
+                className="clickup-btn-secondary w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2"
+              >
+                <span>View All Services</span>
+              </Link>
+            </div>
 
-          <MagneticButton
-            href="/services"
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap border border-white/[0.12] bg-white/[0.03] text-white/85 px-7 py-4 text-[14px] font-medium tracking-wide hover:border-white/[0.25] hover:bg-white/[0.07] hover:text-white transition-all rounded-full backdrop-blur-sm"
-          >
-            Explore Services
-          </MagneticButton>
-        </motion.div>
+            <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-white/60">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
+                <span>Free 30-min scoping consultation</span>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
+                <span>No commitment required</span>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
+                <span>100% IP transfer guaranteed</span>
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
-};
-
-export default CTA;
+}

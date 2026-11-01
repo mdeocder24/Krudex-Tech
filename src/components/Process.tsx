@@ -1,142 +1,181 @@
 "use client";
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { CheckCircle2 } from 'lucide-react';
+import Link from 'next/link';
+import { CheckCircle2, ArrowRight, Clock, FileCode2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const steps = [
   {
-    num: "01",
-    title: "Discovery & Strategy",
-    desc: "A focused technical session to analyze your architecture requirements, user workloads, and core product constraints.",
+    phase: '01',
+    name: 'Discovery & Scoping',
+    timing: 'Day 1 – 3',
+    headline: 'Technical Audit & Feasibility Review',
+    desc: 'We map your exact business goals, user flows, database constraints, and latency targets. We establish hard milestones and deliver a fixed-scope Statement of Work (SOW) before any code is written.',
+    deliverable: 'Technical Specification Document & Fixed Quote',
   },
   {
-    num: "02",
-    title: "System Architecture & SOW",
-    desc: "Comprehensive engineering blueprints, API contracts, and an unambiguous milestone schedule locked in before writing code.",
+    phase: '02',
+    name: 'System Architecture',
+    timing: 'Week 1',
+    headline: 'Schema Modeling & API Contracts',
+    desc: 'Database schema modeling, component tree design in Figma, OpenAPI contract definitions, and CI/CD deployment pipelines. Both parties align on architectural blueprints upfront.',
+    deliverable: 'System Architecture Blueprint & Sprint Schedule',
   },
   {
-    num: "03",
-    title: "Senior-Led Build Sprints",
-    desc: "The exact architects who designed your system build it in rapid, test-covered milestones against measurable production criteria.",
+    phase: '03',
+    name: 'Senior-Led Build',
+    timing: 'Weeks 2 – 5',
+    headline: 'Agile Sprints with Continuous Staging',
+    desc: 'Focused bi-weekly sprints with automated testing, live preview deployments, and direct stakeholder Slack/demo check-ins. Built directly by senior engineers with zero junior proxy delegation.',
+    deliverable: 'Live Staging Builds & Automated Test Suites',
   },
   {
-    num: "04",
-    title: "Deployment & Scale",
-    desc: "Zero-downtime release pipelines, monitoring alerts, full IP handover, a 30-day warranty, and ongoing scale retainer.",
+    phase: '04',
+    name: 'Launch & Warranty',
+    timing: 'Week 6+',
+    headline: 'Production Rollout & 30-Day SLA',
+    desc: 'Zero-downtime DNS cutover, cloud monitoring, telemetry dashboards, analytics tracking, and full source code handover with 30 days of included post-launch warranty support.',
+    deliverable: '100% IP Handover, Admin Credentials & 30-Day Warranty',
   },
 ];
 
-const assurances = [
-  "100% IP & Full Source Code Transfer",
-  "Guaranteed Response within 1 Business Day",
-  "30-Day Comprehensive Code Warranty",
-  "Zero Lock-in to Proprietary Frameworks",
-];
-
-const Process = () => {
-  const [activeStep, setActiveStep] = useState<number | null>(null);
+export default function Process() {
+  const [activeStep, setActiveStep] = useState(0);
 
   return (
-    <section id="process" className="px-6 md:px-14 lg:px-20 py-24 md:py-32 border-t border-white/[0.06] relative z-10">
+    <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 border-t border-white/5 relative overflow-hidden">
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2.5 bg-white/[0.03] border border-white/[0.08] px-3.5 py-1.5 rounded-full mb-8"
-        >
-          <div className="w-1.5 h-1.5 rounded-full bg-krudex-accent shadow-[0_0_6px_#E52B3B]" />
-          <span className="text-xs text-white/60 font-mono tracking-wider uppercase">
-            Delivery Methodology
-          </span>
-        </motion.div>
+        <div className="flex flex-col items-center text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#10B981]/10 border border-[#10B981]/30 text-xs font-semibold text-[#10B981] uppercase tracking-wider mb-4"
+          >
+            <Clock className="w-3.5 h-3.5" />
+            <span>Disciplined Delivery Cadence</span>
+          </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="max-w-2xl mb-16"
-        >
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white font-normal mb-6 leading-[1.08] tracking-tight">
-            From technical blueprint <br />
-            <span className="text-white/60">
-              to production launch.
-            </span>
-          </h2>
-          <p className="text-krudex-muted text-base leading-relaxed font-normal">
-            A rigorous engineering process for every engagement. Scope, timeline, and ownership are 100% transparent from day one.
-          </p>
-        </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="font-heading font-black text-3xl sm:text-5xl text-white tracking-tight max-w-3xl mb-4"
+          >
+            How we take you from concept to{' '}
+            <span className="clickup-gradient-text">production in 4 sprints.</span>
+          </motion.h2>
 
-        {/* Step Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-14">
-          {steps.map((step, index) => {
-            const isHovered = activeStep === index;
-            return (
-              <motion.div
-                key={step.num}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                onMouseEnter={() => setActiveStep(index)}
-                onMouseLeave={() => setActiveStep(null)}
-                className={`group relative rounded-2xl bg-[#0D0A0C]/80 backdrop-blur-md border p-7 flex flex-col justify-between transition-all duration-300 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] ${
-                  isHovered
-                    ? 'border-white/[0.22] shadow-[0_12px_30px_-10px_rgba(0,0,0,0.6)] -translate-y-1'
-                    : 'border-white/[0.08] hover:border-white/[0.18]'
-                }`}
-              >
-                {/* Step Pill */}
-                <div className="flex items-center justify-between mb-8">
-                  <span
-                    className={`font-mono text-xs font-semibold px-2.5 py-0.5 rounded-full transition-colors ${
-                      isHovered
-                        ? 'bg-krudex-accent text-white'
-                        : 'bg-white/[0.04] text-krudex-accent border border-krudex-accent/20'
-                    }`}
-                  >
-                    PHASE {step.num}
-                  </span>
-                  <div
-                    className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                      isHovered ? 'bg-krudex-accent shadow-[0_0_8px_#E52B3B]' : 'bg-white/20'
-                    }`}
-                  />
-                </div>
-
-                <div>
-                  <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-white transition-colors">
-                    {step.title}
-                  </h3>
-                  <p className="text-krudex-muted text-sm leading-relaxed font-normal">
-                    {step.desc}
-                  </p>
-                </div>
-              </motion.div>
-            );
-          })}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-krudex-muted text-base sm:text-lg max-w-2xl leading-relaxed"
+          >
+            A battle-tested engineering process refined across dozens of successful production launches.
+          </motion.p>
         </div>
 
-        {/* Assurances Pill Ribbon */}
-        <div className="rounded-2xl bg-[#0D0A0C]/60 border border-white/[0.08] p-6 md:p-8 backdrop-blur-md">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {assurances.map((item, idx) => (
-              <div key={idx} className="flex items-center gap-3">
-                <div className="w-6 h-6 rounded-full bg-krudex-accent/10 border border-krudex-accent/25 flex items-center justify-center shrink-0">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-krudex-accent" />
-                </div>
-                <span className="text-xs sm:text-sm text-white/80 font-medium">{item}</span>
+        {/* Step Navigation Bar */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+          {steps.map((step, idx) => (
+            <button
+              key={step.phase}
+              type="button"
+              onClick={() => setActiveStep(idx)}
+              className={`p-4 rounded-xl text-left border transition-all cursor-pointer ${
+                activeStep === idx
+                  ? 'bg-[#151124] border-[#7B68EE]/60 shadow-[0_0_20px_rgba(123,104,238,0.25)] -translate-y-1'
+                  : 'bg-white/[0.02] border-white/5 hover:border-white/15 hover:-translate-y-0.5'
+              }`}
+            >
+              <div className="flex items-center justify-between mb-2">
+                <span className={`text-xs font-mono font-bold ${activeStep === idx ? 'text-[#00D2FF]' : 'text-white/40'}`}>
+                  PHASE {step.phase}
+                </span>
+                <span className="text-[10px] font-mono text-white/50">{step.timing}</span>
               </div>
-            ))}
-          </div>
+              <h4 className="font-heading font-bold text-sm text-white truncate">
+                {step.name}
+              </h4>
+            </button>
+          ))}
+        </div>
+
+        {/* Active Step Showcase Card with AnimatePresence */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeStep}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.3 }}
+            className="clickup-card p-6 sm:p-10 border border-white/10 mb-12 hover:border-[#7B68EE]/40 transition-colors"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-8 space-y-4">
+                <span className="text-[11px] font-mono uppercase tracking-widest text-[#A78BFA] font-bold">
+                  PHASE {steps[activeStep].phase} {"//"} {steps[activeStep].timing}
+                </span>
+                <h3 className="font-heading font-black text-2xl sm:text-3xl text-white tracking-tight">
+                  {steps[activeStep].headline}
+                </h3>
+                <p className="text-krudex-muted text-sm sm:text-base leading-relaxed">
+                  {steps[activeStep].desc}
+                </p>
+                <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 flex items-center gap-3">
+                  <FileCode2 className="w-5 h-5 text-[#00D2FF] shrink-0" />
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-white/50 block">MILESTONE ARTIFACT:</span>
+                    <span className="text-xs sm:text-sm font-semibold text-white">
+                      {steps[activeStep].deliverable}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="lg:col-span-4 flex flex-col justify-center items-center lg:items-end">
+                <Link
+                  href="/contact"
+                  className="clickup-btn-primary px-8 py-3.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2 group/btn"
+                >
+                  <span>Initiate Phase 01</span>
+                  <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* 4 Core Assurances */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {[
+            { title: '100% IP Transfer', desc: 'You own all code, designs, and cloud credentials.' },
+            { title: '1 Business Day SLA', desc: 'Direct Slack, WhatsApp, and email response.' },
+            { title: '30-Day Post-Launch Warranty', desc: 'Performance calibration & bug fixes included.' },
+            { title: 'Zero Vendor Lock-In', desc: 'Standard open technologies, fully documented.' },
+          ].map((item, idx) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.08 }}
+              className="p-4 rounded-xl bg-white/[0.02] border border-white/5 flex items-start gap-3 hover:border-white/15 transition-colors"
+            >
+              <CheckCircle2 className="w-4 h-4 text-[#10B981] shrink-0 mt-0.5" />
+              <div>
+                <h5 className="text-xs font-bold text-white">{item.title}</h5>
+                <p className="text-[11px] text-krudex-muted mt-0.5">{item.desc}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default Process;
+}

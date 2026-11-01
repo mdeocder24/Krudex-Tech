@@ -1,85 +1,117 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
-
-interface StatItemProps {
-  value: number;
-  suffix: string;
-  label: string;
-  sublabel?: string;
-  delay: number;
-}
-
-const StatItem = ({ value, suffix, label, sublabel, delay }: StatItemProps) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!isInView) return;
-    const timeout = setTimeout(() => {
-      let start = 0;
-      const duration = 1600;
-      const startTime = performance.now();
-
-      const step = (now: number) => {
-        const elapsed = now - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        start = Math.floor(eased * value);
-        setCount(start);
-        if (progress < 1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-    }, delay * 1000);
-
-    return () => clearTimeout(timeout);
-  }, [isInView, value, delay]);
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay }}
-      className="group relative rounded-2xl bg-[#0D0A0C]/80 backdrop-blur-md border border-white/[0.08] hover:border-white/[0.18] p-6 sm:p-8 text-center transition-all duration-300 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06),0_10px_30px_-10px_rgba(0,0,0,0.5)]"
-    >
-      {/* Top subtle micro dot */}
-      <div className="w-1.5 h-1.5 rounded-full bg-krudex-accent/60 group-hover:bg-krudex-accent group-hover:shadow-[0_0_6px_#E52B3B] transition-all mx-auto mb-3" />
-
-      <div className="text-white font-serif text-4xl sm:text-5xl md:text-6xl tabular-nums font-normal mb-2 tracking-tight">
-        <span>{count}</span>
-        <span className="text-krudex-accent font-semibold">{suffix}</span>
-      </div>
-      <div className="text-white/85 text-xs sm:text-sm font-medium tracking-wide mb-1">{label}</div>
-      {sublabel && (
-        <div className="text-white/40 text-[11px] font-mono uppercase tracking-wider">{sublabel}</div>
-      )}
-    </motion.div>
-  );
-};
+import React, { useEffect, useRef, useState } from 'react';
+import { useMotionValue, useTransform, animate, motion } from 'framer-motion';
+import { Sparkles, Activity, ShieldCheck, Zap } from 'lucide-react';
 
 const stats = [
-  { value: 50, suffix: "+", label: "Production Platforms Built", sublabel: "SaaS & Mobile Systems", delay: 0.1 },
-  { value: 120, suffix: "+", label: "Campaigns Optimized", sublabel: "Performance Google Ads", delay: 0.2 },
-  { value: 300, suffix: "+", label: "Engineers Mentored", sublabel: "NovaSkill Hub Collaboration", delay: 0.3 },
-  { value: 99, suffix: ".9%", label: "System Availability SLA", sublabel: "Cloud Architecture", delay: 0.4 },
+  { 
+    value: 50, 
+    suffix: '+', 
+    label: 'Projects Delivered', 
+    desc: 'Production SaaS & Web Systems',
+    icon: Sparkles,
+    color: 'from-[#7B68EE] to-[#A78BFA]'
+  },
+  { 
+    value: 99, 
+    suffix: '', 
+    label: 'Lighthouse Score', 
+    desc: 'Sub-Second Web Performance',
+    icon: Zap,
+    color: 'from-[#00D2FF] to-[#38BDF8]'
+  },
+  { 
+    value: 24, 
+    suffix: 'h', 
+    label: 'SLA Response Time', 
+    desc: 'Guaranteed Direct Resolution',
+    icon: Activity,
+    color: 'from-[#E01E5A] to-[#F472B6]'
+  },
+  { 
+    value: 100, 
+    suffix: '%', 
+    label: 'IP Transferred', 
+    desc: 'Zero Vendor Lock-In Ever',
+    icon: ShieldCheck,
+    color: 'from-[#10B981] to-[#34D399]'
+  },
 ];
 
-const Stats = () => {
+function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [inView, setInView] = useState(false);
+  const motionVal = useMotionValue(0);
+  const rounded = useTransform(motionVal, (v) => Math.round(v));
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) setInView(true);
+      },
+      { threshold: 0.3 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!inView) return;
+    const ctrl = animate(motionVal, value, { duration: 1.4, ease: 'easeOut' });
+    return ctrl.stop;
+  }, [inView, motionVal, value]);
+
+  useEffect(() => {
+    const unsub = rounded.on('change', (v) => {
+      if (ref.current) ref.current.textContent = `${v}${suffix}`;
+    });
+    return unsub;
+  }, [rounded, suffix]);
+
   return (
-    <section className="px-6 md:px-14 lg:px-20 py-16 md:py-20 relative z-10">
-      <div className="max-w-6xl mx-auto">
+    <span ref={ref} className="font-heading font-black text-4xl sm:text-5xl md:text-6xl text-white clickup-gradient-text tracking-tight">
+      0{suffix}
+    </span>
+  );
+}
+
+export default function Stats() {
+  return (
+    <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-y border-white/5 bg-[#09070F]/80 relative overflow-hidden">
+      {/* Background Ambient Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-32 bg-gradient-to-r from-[#7B68EE]/10 via-[#E01E5A]/10 to-[#00D2FF]/10 blur-3xl pointer-events-none" />
+
+      <div className="max-w-6xl mx-auto relative z-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {stats.map((stat, i) => (
-            <StatItem key={i} {...stat} />
-          ))}
+          {stats.map((stat, idx) => {
+            const Icon = stat.icon;
+            return (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="clickup-card p-6 sm:p-7 text-center flex flex-col items-center justify-center group cursor-pointer hover:border-[#7B68EE]/50 hover:shadow-[0_20px_40px_-10px_rgba(123,104,238,0.25)] transition-all duration-300"
+              >
+                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:border-[#7B68EE]/40 transition-all">
+                  <Icon className="w-5 h-5 text-white/80 group-hover:text-[#A78BFA] transition-colors" />
+                </div>
+                <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                <h3 className="font-heading font-bold text-sm sm:text-base text-white mt-2 mb-1 group-hover:text-[#A78BFA] transition-colors">
+                  {stat.label}
+                </h3>
+                <p className="text-xs text-krudex-muted font-medium">
+                  {stat.desc}
+                </p>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
   );
-};
-
-export default Stats;
+}

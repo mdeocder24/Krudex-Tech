@@ -4,7 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles, Zap } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import ServicesCTA from '@/components/ServicesCTA';
 import Footer from '@/components/Footer';
@@ -12,6 +12,9 @@ import Footer from '@/components/Footer';
 const servicesData = [
   {
     num: "01",
+    id: "saas-platforms",
+    badge: "CORE ENGINE",
+    badgeColor: "status-pill-blue",
     title: "SaaS & Web Platforms",
     subtitle: "From zero to production-grade — engineered to last.",
     image: "/images/saas-platform.webp",
@@ -28,6 +31,9 @@ const servicesData = [
   },
   {
     num: "02",
+    id: "mobile-apps",
+    badge: "MOBILE DEV",
+    badgeColor: "status-pill-purple",
     title: "Mobile Applications",
     subtitle: "One codebase. Native performance on both platforms.",
     image: "/images/mobile-app.webp",
@@ -44,6 +50,9 @@ const servicesData = [
   },
   {
     num: "03",
+    id: "ai-ml",
+    badge: "INTELLIGENCE",
+    badgeColor: "status-pill-pink",
     title: "AI & ML Integration",
     subtitle: "Intelligent features that work in production — not just demos.",
     image: "/images/ai-architecture.webp",
@@ -60,6 +69,9 @@ const servicesData = [
   },
   {
     num: "04",
+    id: "design-systems",
+    badge: "DESIGN CRAFT",
+    badgeColor: "status-pill-orange",
     title: "UI/UX & Brand Design",
     subtitle: "Design systems that scale. Identities that command credibility.",
     image: "/images/dark-texture.webp",
@@ -77,6 +89,8 @@ const servicesData = [
   {
     num: "05",
     id: "digital-marketing",
+    badge: "GROWTH FUNNELS",
+    badgeColor: "status-pill-green",
     title: "Google Ads & Digital Marketing",
     subtitle: "Growth that compounds. Every rupee tracked to revenue.",
     image: "/images/growth-marketing.webp",
@@ -95,21 +109,24 @@ const servicesData = [
 
 export default function ServicesPage() {
   return (
-    <main className="min-h-screen bg-transparent selection:bg-krudex-accent selection:text-white flex flex-col">
+    <main className="min-h-screen bg-transparent selection:bg-[#7B68EE]/30 selection:text-white flex flex-col">
       <Navbar />
 
-      <section className="px-6 md:px-16 lg:px-24 pt-40 md:pt-48 pb-24 md:pb-32 bg-krudex-black/40 backdrop-blur-md relative z-10">
-        <div className="max-w-7xl mx-auto">
+      <section className="px-6 md:px-16 lg:px-24 pt-40 md:pt-48 pb-20 md:pb-28 relative z-10 overflow-hidden">
+        {/* Ambient Top Glow */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-gradient-to-tr from-[#7B68EE]/20 via-[#00D2FF]/15 to-[#E01E5A]/20 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="flex flex-col items-center text-center w-full">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 border border-krudex-border px-3.5 py-1.5 mb-10 rounded-full bg-krudex-surface/60"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 mb-8 rounded-full bg-[#00D2FF]/10 border border-[#00D2FF]/30 backdrop-blur-md"
             >
-              <div className="w-1.5 h-1.5 rounded-full bg-krudex-accent shadow-[0_0_8px_#E52B3B]"></div>
-              <span className="text-xs uppercase tracking-[0.2em] text-krudex-accent font-semibold font-mono">
-                OUR SERVICES
+              <Sparkles className="w-3.5 h-3.5 text-[#00D2FF]" />
+              <span className="text-xs uppercase tracking-wider text-[#00D2FF] font-semibold font-mono">
+                COMPREHENSIVE CAPABILITIES
               </span>
             </motion.div>
 
@@ -117,24 +134,24 @@ export default function ServicesPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="mb-20 md:mb-28 flex flex-col items-center"
+              className="mb-16 md:mb-24 flex flex-col items-center"
             >
-              <h1 className="font-serif text-5xl md:text-7xl text-white font-bold mb-8 leading-[1.08] tracking-tight">
+              <h1 className="font-heading font-black text-4xl sm:text-6xl md:text-7xl text-white mb-6 leading-[1.08] tracking-tight">
                 What Krudex <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-krudex-muted">
+                <span className="clickup-gradient-text">
                   builds and grows for you.
                 </span>
               </h1>
-              <p className="text-krudex-muted text-lg leading-relaxed max-w-2xl text-center">
+              <p className="text-krudex-muted text-base sm:text-lg leading-relaxed max-w-2xl text-center">
                 Five core disciplines. Senior engineers on every project. <br className="hidden md:block" />
                 Measurable business outcomes as the primary deliverable that counts.
               </p>
             </motion.div>
           </div>
 
-          <div className="flex flex-col gap-24 md:gap-32">
+          <div className="flex flex-col gap-20 md:gap-28">
             {servicesData.map((service, idx) => (
-              <div key={idx} id={service.id} className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 scroll-mt-32 items-start">
+              <div key={idx} id={service.id} className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 scroll-mt-32 items-start">
                 {/* Left Column: Description */}
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
@@ -143,18 +160,27 @@ export default function ServicesPage() {
                   transition={{ duration: 0.6 }}
                   className="flex flex-col"
                 >
-                  <div className="text-krudex-accent font-mono text-sm font-semibold mb-6 border-b border-krudex-border pb-4 flex items-center justify-between">
-                    <span>{service.num} // VERTICAL</span>
-                    <span className="w-2 h-2 rounded-full bg-krudex-accent shadow-[0_0_8px_#E52B3B]" />
+                  <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-6">
+                    <span className="text-xs font-mono font-bold text-[#A78BFA] uppercase tracking-wider">
+                      PHASE {service.num} {"//"} MODULE
+                    </span>
+                    <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-full border ${service.badgeColor}`}>
+                      {service.badge}
+                    </span>
                   </div>
-                  <h2 className="font-serif text-3xl sm:text-4xl text-white font-bold mb-4">{service.title}</h2>
-                  <h3 className="text-white/80 font-medium text-lg mb-6">{service.subtitle}</h3>
-                  <p className="text-krudex-muted text-base leading-relaxed mb-10">
+
+                  <h2 className="font-heading font-black text-2xl sm:text-4xl text-white mb-3 tracking-tight">
+                    {service.title}
+                  </h2>
+                  <h3 className="text-white/80 font-medium text-base mb-6">{service.subtitle}</h3>
+                  <p className="text-krudex-muted text-sm sm:text-base leading-relaxed mb-8">
                     {service.desc}
                   </p>
-                  <div className="border-l-2 border-krudex-accent pl-6 py-4 bg-krudex-accent/5 rounded-r-xl border border-r-0 border-t-0 border-b-0">
-                    <div className="text-xs text-krudex-accent font-mono uppercase tracking-[0.15em] mb-2 font-semibold">
-                      PERFORMANCE GUARANTEE
+
+                  <div className="p-4 rounded-xl bg-gradient-to-r from-[#7B68EE]/10 via-[#00D2FF]/5 to-transparent border border-[#7B68EE]/30">
+                    <div className="text-[10px] text-[#A78BFA] font-mono uppercase tracking-widest mb-1.5 font-bold flex items-center gap-1.5">
+                      <Zap className="w-3.5 h-3.5 text-[#00D2FF]" />
+                      <span>PERFORMANCE GUARANTEE</span>
                     </div>
                     <p className="text-white font-medium text-sm">
                       {service.outcome}
@@ -171,29 +197,29 @@ export default function ServicesPage() {
                   className="flex flex-col"
                 >
                   {/* Visual Header Banner */}
-                  <div className="relative h-48 sm:h-52 w-full rounded-2xl overflow-hidden mb-6 border border-krudex-border/80 group">
+                  <div className="relative h-48 sm:h-52 w-full rounded-2xl overflow-hidden mb-6 border border-white/10 group">
                     <Image
                       src={service.image}
                       alt={service.title}
                       fill
                       className="object-cover brightness-85 group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-krudex-black via-krudex-black/30 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#09070F] via-transparent to-transparent" />
                   </div>
 
-                  <div className="text-xs text-krudex-muted font-mono uppercase tracking-[0.2em] mb-4 font-semibold">
-                    CAPABILITIES & STACK
+                  <div className="text-xs text-white/50 font-mono uppercase tracking-wider mb-3 font-semibold">
+                    CAPABILITIES &amp; STACK
                   </div>
                   <div className="flex flex-col gap-2.5">
                     {service.capabilities.map((cap, capIdx) => (
                       <div
                         key={capIdx}
-                        className="group bg-krudex-card/70 border border-krudex-border rounded-xl p-4 sm:p-5 flex items-center gap-4 hover:border-krudex-accent/50 hover:bg-krudex-card transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.15)]"
+                        className="clickup-card p-3.5 sm:p-4 flex items-center gap-3.5 hover:border-[#7B68EE]/40 transition-all duration-200 group"
                       >
-                        <span className="text-krudex-accent font-mono text-xs font-semibold px-2 py-0.5 rounded bg-krudex-accent/10 border border-krudex-accent/20">
+                        <span className="text-[#A78BFA] font-mono text-xs font-bold px-2 py-0.5 rounded bg-[#7B68EE]/15 border border-[#7B68EE]/30 shrink-0">
                           {String(capIdx + 1).padStart(2, '0')}
                         </span>
-                        <span className="text-white/90 text-sm group-hover:text-white transition-colors">{cap}</span>
+                        <span className="text-white/90 text-xs sm:text-sm group-hover:text-white transition-colors">{cap}</span>
                       </div>
                     ))}
                   </div>
@@ -203,23 +229,25 @@ export default function ServicesPage() {
           </div>
 
           {/* Student Banner */}
-          <div className="mt-24 md:mt-32 rounded-2xl border border-krudex-border/80 bg-krudex-card/70 p-8 md:p-12 flex flex-col md:flex-row md:items-center justify-between gap-8 shadow-xl">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-krudex-accent/10 border border-krudex-accent/20 text-krudex-accent text-xs font-mono uppercase mb-3">
+          <div className="mt-20 md:mt-28 clickup-card p-8 md:p-12 border border-[#7B68EE]/30 flex flex-col md:flex-row md:items-center justify-between gap-8 shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-[#E01E5A]/15 to-transparent rounded-full blur-3xl pointer-events-none" />
+
+            <div className="relative z-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E01E5A]/10 border border-[#E01E5A]/30 text-[#F472B6] text-xs font-mono uppercase mb-3 font-semibold">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>NovaSkill Hub Collaboration</span>
               </div>
-              <h2 className="text-white font-bold text-2xl mb-2">Are you an engineering student?</h2>
+              <h2 className="text-white font-heading font-black text-2xl sm:text-3xl mb-2 tracking-tight">Are you an engineering student?</h2>
               <p className="text-krudex-muted text-sm leading-relaxed max-w-xl">
                 We train students with industry practitioners. Get real project experience in modern web platforms and marketing.
               </p>
             </div>
             <Link
               href="/training"
-              className="group inline-flex items-center gap-2.5 self-start md:self-auto whitespace-nowrap bg-krudex-accent text-white px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-krudex-accent-hover shadow-[0_0_25px_rgba(229,43,59,0.35)] transition-all duration-300"
+              className="clickup-btn-primary px-7 py-3.5 rounded-xl text-sm font-semibold flex items-center gap-2 self-start md:self-auto shrink-0 relative z-10 group/btn"
             >
               <span>See Student Training</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
             </Link>
           </div>
         </div>

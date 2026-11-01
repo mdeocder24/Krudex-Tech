@@ -1,86 +1,236 @@
 @import "tailwindcss";
 
-/* Luxury Obsidian + Subtle Crimson Ruby Theme.
-   Surfaces are deep graphite/obsidian; crimson is reserved for surgical highlights,
-   active indicators, and primary CTAs. */
+/* ==========================================================================
+   CLICKUP-INSPIRED MODERN SAAS DESIGN SYSTEM
+   Vibrant Multi-Color Gradients · Luminous Dark Surfaces · Status Badges
+   ========================================================================== */
+
 @theme {
-  --color-white: #FAF9FA; /* clean crisp white */
-  --color-krudex-white: #FAF9FA;
-  --color-krudex-white-dim: #C5BFCE;
-  --color-krudex-black: #080608; /* deep luxury obsidian */
-  --color-krudex-card: #0D0A0C; /* structured card surface */
-  --color-krudex-surface: #141013; /* elevated surface */
-  --color-krudex-border: #23181C; /* crisp subtle border */
-  --color-krudex-text: #F1EDF2;
-  --color-krudex-muted: #8E8690;
-  --color-krudex-accent: #E52B3B; /* refined crimson ruby */
-  --color-krudex-accent-hover: #F23B4B;
-  --font-sans: var(--font-sans-primary);
-  --font-serif: var(--font-heading-primary);
-  --font-heading: var(--font-heading-primary);
+  --color-white: #FFFFFF;
+  --color-krudex-white: #FFFFFF;
+  --color-krudex-white-dim: #D5D0E5;
+  --color-krudex-black: #09070F; /* Deep ClickUp midnight canvas */
+  --color-krudex-card: #0F0C1B;  /* ClickUp card surface */
+  --color-krudex-surface: #151124; /* Elevated workspace surface */
+  --color-krudex-border: rgba(255, 255, 255, 0.08);
+  --color-krudex-text: #F1EDFC;
+  --color-krudex-muted: #9E97B4;
+  
+  /* ClickUp Vibrant Signature Accents */
+  --color-clickup-purple: #7B68EE; /* Vibrant Violet */
+  --color-clickup-magenta: #E01E5A; /* Electric Pink / Berry */
+  --color-clickup-cyan: #00D2FF; /* Bright Cyan */
+  --color-clickup-blue: #3B82F6; /* Royal Blue */
+  --color-clickup-green: #10B981; /* Emerald Green */
+  --color-clickup-amber: #F59E0B; /* Amber Orange */
+  
+  --color-krudex-accent: #7B68EE;
+  --color-krudex-accent-hover: #9080F8;
+
+  --font-sans: var(--font-sans-primary), system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-heading-primary), var(--font-sans-primary), sans-serif;
 }
 
 :root {
-  --background: var(--color-krudex-black);
-  --foreground: var(--color-krudex-text);
-  --accent: var(--color-krudex-accent);
+  --background: #09070F;
+  --foreground: #F1EDFC;
+  --accent: #7B68EE;
 }
 
 html {
   color-scheme: dark;
+  background-color: #09070F;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: #09070F;
+  color: #F1EDFC;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: rgba(229, 43, 59, 0.25);
+  background: rgba(123, 104, 238, 0.35);
   color: #FFFFFF;
 }
 
 /* Custom sleek scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #080608;
+  background: #09070F;
 }
 ::-webkit-scrollbar-thumb {
-  background: #23181C;
+  background: #201A33;
   border-radius: 9999px;
-  border: 1px solid #080608;
+  border: 2px solid #09070F;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #E52B3B;
+  background: #7B68EE;
 }
 
-/* Precision studio card styling */
-.studio-card {
-  background: rgba(13, 10, 12, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+/* ==========================================================================
+   CLICKUP UI UTILITY CLASSES
+   ========================================================================== */
+
+/* Signature Multi-Color Gradient Text */
+.clickup-gradient-text {
+  background: linear-gradient(135deg, #A78BFA 0%, #F472B6 45%, #38BDF8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.studio-card:hover {
-  border-color: rgba(255, 255, 255, 0.16);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 12px 30px -10px rgba(0, 0, 0, 0.6);
+.clickup-gradient-brand {
+  background: linear-gradient(135deg, #7B68EE 0%, #E01E5A 50%, #00D2FF 100%);
 }
 
-/* Subtle Crimson Precision Highlights */
-.crimson-subtle-glow {
-  box-shadow: 0 0 25px -5px rgba(229, 43, 59, 0.18);
+/* Signature ClickUp Primary Gradient Button with Hover Shimmer & Glow */
+.clickup-btn-primary {
+  background: linear-gradient(135deg, #7B68EE 0%, #C026D3 50%, #00D2FF 100%);
+  background-size: 200% auto;
+  color: #FFFFFF;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 25px -4px rgba(123, 104, 238, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.clickup-btn-primary:hover {
+  background-position: right center;
+  box-shadow: 0 0 35px -2px rgba(123, 104, 238, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px) scale(1.01);
+}
+
+.clickup-btn-primary:active {
+  transform: translateY(0px) scale(0.99);
+}
+
+/* Sleek ClickUp Glass Button */
+.clickup-btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.clickup-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.5);
+}
+
+.clickup-btn-secondary:active {
+  transform: translateY(0px);
+}
+
+/* Luminous ClickUp Card Surface */
+.clickup-card {
+  background: rgba(15, 12, 27, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.clickup-card:hover {
+  border-color: rgba(123, 104, 238, 0.4);
+  box-shadow: 0 25px 50px -12px rgba(123, 104, 238, 0.2), inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+  transform: translateY(-3px);
+}
+
+/* Mockup Container with Multi-Layer Glow */
+.clickup-mockup-frame {
+  background: #0E0B19;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  box-shadow: 
+    0 0 0 1px rgba(123, 104, 238, 0.15),
+    0 30px 80px -20px rgba(0, 0, 0, 0.9),
+    0 0 60px -15px rgba(123, 104, 238, 0.25);
+  transition: box-shadow 0.4s ease;
+}
+
+.clickup-mockup-frame:hover {
+  box-shadow: 
+    0 0 0 1px rgba(123, 104, 238, 0.3),
+    0 35px 90px -20px rgba(0, 0, 0, 0.95),
+    0 0 80px -15px rgba(123, 104, 238, 0.35);
+}
+
+/* ClickUp Status Pills with Micro Hover Transitions */
+.status-pill-blue {
+  background: rgba(0, 210, 255, 0.12);
+  color: #00D2FF;
+  border: 1px solid rgba(0, 210, 255, 0.3);
+  transition: all 0.2s ease;
+}
+.status-pill-blue:hover {
+  background: rgba(0, 210, 255, 0.22);
+  border-color: rgba(0, 210, 255, 0.6);
+  transform: scale(1.04);
+}
+
+.status-pill-green {
+  background: rgba(16, 185, 129, 0.12);
+  color: #10B981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  transition: all 0.2s ease;
+}
+.status-pill-green:hover {
+  background: rgba(16, 185, 129, 0.22);
+  border-color: rgba(16, 185, 129, 0.6);
+  transform: scale(1.04);
+}
+
+.status-pill-purple {
+  background: rgba(123, 104, 238, 0.14);
+  color: #A78BFA;
+  border: 1px solid rgba(123, 104, 238, 0.35);
+  transition: all 0.2s ease;
+}
+.status-pill-purple:hover {
+  background: rgba(123, 104, 238, 0.25);
+  border-color: rgba(123, 104, 238, 0.6);
+  transform: scale(1.04);
+}
+
+.status-pill-orange {
+  background: rgba(245, 158, 11, 0.12);
+  color: #FBBF24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  transition: all 0.2s ease;
+}
+.status-pill-orange:hover {
+  background: rgba(245, 158, 11, 0.22);
+  border-color: rgba(245, 158, 11, 0.6);
+  transform: scale(1.04);
+}
+
+.status-pill-pink {
+  background: rgba(224, 30, 90, 0.14);
+  color: #F472B6;
+  border: 1px solid rgba(224, 30, 90, 0.35);
+  transition: all 0.2s ease;
+}
+.status-pill-pink:hover {
+  background: rgba(224, 30, 90, 0.25);
+  border-color: rgba(224, 30, 90, 0.6);
+  transform: scale(1.04);
 }
 
 /* Keyboard focus — visible on every interactive element */
 :focus-visible {
-  outline: 2px solid var(--color-krudex-accent);
+  outline: 2px solid #7B68EE;
   outline-offset: 3px;
 }
 

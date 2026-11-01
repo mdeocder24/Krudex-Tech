@@ -1,221 +1,172 @@
 "use client";
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { ArrowRight, Code2, Smartphone, Cpu, Palette, TrendingUp, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-const MotionLink = motion.create ? motion.create(Link) : motion(Link);
-
-const services = [
+const servicesList = [
   {
-    num: "01",
-    title: "SaaS & Web Platforms",
-    image: "/images/saas-platform.webp",
-    desc: "Enterprise web platforms, multi-tenant SaaS architecture, and customer portals built for high availability and low latency.",
-    tags: ["Next.js 16", "PostgreSQL", "FastAPI / Node", "Docker"]
+    icon: Code2,
+    badge: 'CORE PLATFORMS',
+    badgeColor: 'status-pill-blue',
+    title: 'SaaS & Web Platforms',
+    desc: 'From technical specification to cloud production. Next.js 16, PostgreSQL, Redis caching, and CI/CD pipelines engineered to run at scale.',
+    metric: 'Sub-1s LCP Guaranteed',
+    href: '/services',
   },
   {
-    num: "02",
-    title: "Mobile Applications",
-    image: "/images/mobile-app.webp",
-    desc: "Fluid iOS & Android applications engineered with native capabilities, offline sync, and production release pipelines.",
-    tags: ["React Native", "Expo EAS", "Native Bridges", "Offline Sync"]
+    icon: Smartphone,
+    badge: 'MOBILE DEV',
+    badgeColor: 'status-pill-purple',
+    title: 'Mobile Applications',
+    desc: 'Cross-platform iOS and Android applications with React Native and Expo. Native device APIs, 60fps performance, and offline-first data sync.',
+    metric: 'Native 60fps Fluidity',
+    href: '/services',
   },
   {
-    num: "03",
-    title: "AI & ML Integrations",
-    image: "/images/ai-architecture.webp",
-    desc: "Production LLM applications, enterprise RAG vector stores, and automated inference agents built for privacy and speed.",
-    tags: ["LangChain", "PyTorch", "RAG Pipelines", "Claude / OpenAI"]
+    icon: Cpu,
+    badge: 'INTELLIGENCE',
+    badgeColor: 'status-pill-pink',
+    title: 'AI & ML Integrations',
+    desc: 'Pragmatic machine learning embedded into production. Custom LLM agents, LangChain RAG pipelines, computer vision, and real-time inference.',
+    metric: '18ms Inference Latency',
+    href: '/services',
   },
   {
-    num: "04",
-    title: "UI/UX & Design Systems",
-    image: "/images/dark-texture.webp",
-    desc: "High-fidelity design tokens, interactive prototypes, and modular component architectures that scale with your team.",
-    tags: ["Figma Systems", "Interactive Prototyping", "Design Tokens", "MVP Scoping"]
+    icon: Palette,
+    badge: 'DESIGN SYSTEMS',
+    badgeColor: 'status-pill-orange',
+    title: 'UI/UX & Brand Design',
+    desc: 'Component primitives, design systems in Figma and Tailwind CSS v4, accessible WCAG flows, and investor-ready presentation decks.',
+    metric: '40+ Brand Systems Shipped',
+    href: '/services',
   },
   {
-    num: "05",
-    title: "Google Ads & Performance Growth",
-    image: "/images/growth-marketing.webp",
-    desc: "Search intent acquisition, performance advertising, and technical conversion rate optimization measured directly by revenue.",
-    tags: ["Google Ads", "Meta Ads", "GA4 Conversion Tracking", "SEO Strategy"]
-  }
+    icon: TrendingUp,
+    badge: 'ACQUISITION',
+    badgeColor: 'status-pill-green',
+    title: 'Google Ads & Digital Marketing',
+    desc: 'Performance marketing treated as a software problem. Search, Performance Max, funnel CRO, and transparent GA4 conversion attribution.',
+    metric: '4.2x Average ROAS',
+    href: '/services#digital-marketing',
+  },
 ];
 
-const Services = () => {
-  const [, setHoveredIdx] = useState<number | null>(null);
-
+export default function Services() {
   return (
-    <section id="services-overview" className="px-6 md:px-14 lg:px-20 py-24 md:py-32 relative z-10">
+    <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2.5 bg-white/[0.03] border border-white/[0.08] px-3.5 py-1.5 rounded-full mb-8"
-        >
-          <div className="w-1.5 h-1.5 rounded-full bg-krudex-accent shadow-[0_0_6px_#E52B3B]" />
-          <span className="text-xs text-white/60 font-mono tracking-wider uppercase">
-            Service Capabilities
-          </span>
-        </motion.div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00D2FF]/10 border border-[#00D2FF]/25 text-xs font-semibold text-[#00D2FF] uppercase tracking-wider mb-4">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Modular Engineering Disciplines</span>
+            </div>
+            <h2 className="font-heading font-black text-3xl sm:text-5xl text-white tracking-tight">
+              Built for production. <span className="clickup-gradient-text">Engineered to win.</span>
+            </h2>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="lg:col-span-5 flex flex-col justify-between"
+          >
+            <Link
+              href="/services"
+              className="clickup-btn-secondary px-6 py-3 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2 self-start md:self-auto shrink-0 group"
+            >
+              <span>View Full Service Catalog</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </motion.div>
+        </div>
+
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {servicesList.map((service, idx) => {
+            const Icon = service.icon;
+            return (
+              <motion.div
+                key={service.title}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.08 }}
+                className="clickup-card p-6 sm:p-7 flex flex-col justify-between group hover:border-[#7B68EE]/50 hover:shadow-[0_20px_40px_-10px_rgba(123,104,238,0.2)] transition-all duration-300"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white group-hover:scale-110 group-hover:border-[#7B68EE]/40 transition-all">
+                      <Icon className="w-5 h-5 text-[#A78BFA] group-hover:text-white transition-colors" />
+                    </div>
+                    <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-full border ${service.badgeColor}`}>
+                      {service.badge}
+                    </span>
+                  </div>
+
+                  <h3 className="font-heading font-bold text-xl text-white mb-2.5 group-hover:text-[#A78BFA] transition-colors">
+                    {service.title}
+                  </h3>
+
+                  <p className="text-krudex-muted text-xs sm:text-sm leading-relaxed mb-6">
+                    {service.desc}
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t border-white/5 flex items-center justify-between text-xs">
+                  <span className="font-mono text-[#00D2FF] font-semibold">
+                    {service.metric}
+                  </span>
+                  <Link
+                    href={service.href}
+                    className="text-white/70 hover:text-white flex items-center gap-1 font-medium transition-colors group/link"
+                  >
+                    <span>Details</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+              </motion.div>
+            );
+          })}
+
+          {/* 6th Card: Custom Solution Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="clickup-card p-6 sm:p-7 bg-gradient-to-br from-[#7B68EE]/10 via-[#0F0C1B] to-[#E01E5A]/10 border border-[#7B68EE]/30 flex flex-col justify-between group hover:border-[#7B68EE]/60 hover:shadow-[0_20px_40px_-10px_rgba(123,104,238,0.25)] transition-all duration-300"
           >
             <div>
-              <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white font-normal mb-6 leading-[1.08] tracking-tight">
-                Architected for scale. <br />
-                <span className="text-white/60">
-                  Engineered for impact.
-                </span>
-              </h2>
-              <p className="text-krudex-muted text-base leading-relaxed mb-8 font-normal">
-                We handle the end-to-end technical execution—from distributed cloud infrastructure and bespoke frontend interfaces to intelligent automation and performance customer acquisition.
+              <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full status-pill-pink mb-5 inline-block">
+                BESPOKE SPRINT
+              </span>
+              <h3 className="font-heading font-black text-xl text-white mb-2.5">
+                Have a unique system architecture?
+              </h3>
+              <p className="text-krudex-muted text-xs sm:text-sm leading-relaxed mb-6">
+                We embed senior Krudex engineers directly into your sprints for focused delivery milestones, technical audits, and infrastructure scaling.
               </p>
             </div>
 
-            <div className="hidden lg:block pt-8 border-t border-white/[0.06]">
-              <MotionLink
-                href="/services"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="group inline-flex items-center gap-3 bg-white/[0.04] border border-white/[0.1] hover:border-krudex-accent/50 text-white px-7 py-3.5 rounded-full text-sm font-medium transition-all duration-300 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] hover:shadow-[0_0_25px_rgba(229,43,59,0.15)]"
-              >
-                <span>View Full Service Catalog</span>
-                <ArrowRight className="w-4 h-4 text-krudex-accent group-hover:translate-x-1 transition-transform" />
-              </MotionLink>
-            </div>
+            <Link
+              href="/contact"
+              className="clickup-btn-primary px-5 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 text-center group/btn"
+            >
+              <span>Schedule Architecture Audit</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
+            </Link>
           </motion.div>
-
-          <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
-            {services.map((svc, index) => {
-              const isFullWidth = index === services.length - 1 && services.length % 2 === 1;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.4, delay: index * 0.08 }}
-                  onMouseEnter={() => setHoveredIdx(index)}
-                  onMouseLeave={() => setHoveredIdx(null)}
-                  className={`group relative rounded-2xl bg-[#0D0A0C]/80 backdrop-blur-md border border-white/[0.08] p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:border-white/[0.18] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06),0_10px_30px_-10px_rgba(0,0,0,0.5)] overflow-hidden ${
-                    isFullWidth ? 'md:col-span-2' : ''
-                  }`}
-                >
-                  {/* Subtle top indicator bar on hover */}
-                  <div className="absolute top-0 left-6 right-6 h-[1px] bg-gradient-to-r from-transparent via-krudex-accent/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                  {isFullWidth ? (
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                      <div className="md:col-span-7">
-                        <div className="flex items-center justify-between mb-4">
-                          <span className="text-krudex-accent font-mono text-xs font-semibold px-2.5 py-0.5 rounded-full bg-krudex-accent/10 border border-krudex-accent/20">
-                            {svc.num} // PERFORMANCE GROWTH
-                          </span>
-                          <ArrowUpRight className="w-4 h-4 text-white/40 group-hover:text-krudex-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                        </div>
-                        <h3 className="text-white font-semibold text-xl mb-2 group-hover:text-white transition-colors">
-                          {svc.title}
-                        </h3>
-                        <p className="text-krudex-muted text-sm leading-relaxed mb-5">
-                          {svc.desc}
-                        </p>
-                        <div className="flex flex-wrap gap-1.5">
-                          {svc.tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="text-[11px] font-mono text-white/60 bg-white/[0.03] border border-white/[0.06] px-2 py-0.5 rounded"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="md:col-span-5 relative h-36 w-full rounded-xl overflow-hidden border border-white/[0.08] bg-[#070507]">
-                        <Image
-                          src={svc.image}
-                          alt={svc.title}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-700 brightness-[0.92] group-hover:brightness-100"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0D0A0C] via-transparent to-transparent opacity-70" />
-                      </div>
-                    </div>
-                  ) : (
-                    <>
-                      <div>
-                        {/* Image Preview Header */}
-                        <div className="relative h-28 w-full rounded-xl overflow-hidden mb-5 border border-white/[0.08] bg-[#070507]">
-                          <Image
-                            src={svc.image}
-                            alt={svc.title}
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-700 brightness-[0.92] group-hover:brightness-100"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#0D0A0C] via-[#0D0A0C]/30 to-transparent" />
-                          <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between z-10">
-                            <span className="text-krudex-accent font-mono text-[11px] font-semibold px-2 py-0.5 rounded bg-black/75 backdrop-blur-md border border-white/[0.08]">
-                              {svc.num}
-                            </span>
-                            <div className="w-6 h-6 rounded-full bg-black/75 backdrop-blur-md border border-white/[0.08] flex items-center justify-center">
-                              <ArrowUpRight className="w-3.5 h-3.5 text-white/60 group-hover:text-krudex-accent transition-colors" />
-                            </div>
-                          </div>
-                        </div>
-
-                        <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-white transition-colors">
-                          {svc.title}
-                        </h3>
-                        <p className="text-krudex-muted text-sm leading-relaxed mb-5">
-                          {svc.desc}
-                        </p>
-                      </div>
-
-                      {/* Micro tags */}
-                      <div className="flex flex-wrap gap-1.5 pt-4 border-t border-white/[0.05]">
-                        {svc.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-[11px] font-mono text-white/60 bg-white/[0.03] border border-white/[0.06] px-2 py-0.5 rounded"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </>
-                  )}
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="lg:hidden flex justify-center">
-          <MotionLink
-            href="/services"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 border border-white/[0.1] bg-white/[0.03] hover:border-krudex-accent text-white px-7 py-3.5 rounded-full text-sm font-medium transition-colors"
-          >
-            <span>View Full Service Catalog</span>
-            <ArrowRight className="w-4 h-4 text-krudex-accent" />
-          </MotionLink>
         </div>
       </div>
     </section>
   );
-};
-
-export default Services;
+}

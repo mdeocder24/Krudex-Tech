@@ -1,210 +1,198 @@
 "use client";
 
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { ArrowRight, Layers, TrendingUp, GraduationCap } from 'lucide-react';
+import { Code2, Megaphone, GraduationCap, ArrowRight, CheckCircle, Sparkles } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const pillars = [
+const pillarsData = [
   {
-    icon: Layers,
-    label: "Engineering",
-    domain: "platform.krudex.io",
-    audience: "For Founders & Enterprise",
-    title: "SaaS & Web Platforms",
-    image: "/images/saas-platform.webp",
-    desc: "We architect and engineer production SaaS applications, client portals, and cloud backends designed for sub-second response times and high availability.",
-    features: ["Next.js 16 & Microservices", "High-throughput APIs & PostgreSQL", "Production AI/LLM Integration"],
-    cta: "Explore Engineering Services",
-    href: "/services",
+    id: 'saas',
+    icon: Code2,
+    badge: 'CORE ENGINE',
+    title: 'SaaS Engineering',
+    headline: 'Architected for scale. Built to run without refactoring.',
+    desc: 'We design and build production-grade web platforms with typed end-to-end architectures, automated CI/CD pipelines, and audited sub-second load times. We deliver working production software, not prototypes.',
+    metrics: [
+      { label: 'Lighthouse Score', value: '99/100', sub: 'Audited Performance' },
+      { label: 'Latency Budget', value: '< 200ms', sub: 'Global Edge Delivery' },
+      { label: 'IP Ownership', value: '100%', sub: 'Source Code Handover' },
+    ],
+    highlights: [
+      'Next.js 16 App Router & Server Components architecture',
+      'FastAPI & Node.js backends with typed OpenAPI contracts',
+      'PostgreSQL database design with pooling and caching',
+      'Zero vendor lock-in with standard Docker containers',
+    ],
+    ctaText: 'Explore Engineering Solutions',
+    href: '/services',
   },
   {
-    icon: TrendingUp,
-    label: "Growth",
-    domain: "growth.krudex.io",
-    audience: "For Scaling Companies",
-    title: "Google Ads & Marketing",
-    image: "/images/growth-marketing.webp",
-    desc: "Google Ads, search intent capture, and conversion funnels unified into one transparent performance engine measured strictly by ROI and pipeline revenue.",
-    features: ["Full-funnel Google Search & Display", "Technical SEO & Schema Architecture", "Server-side GA4 & Event Analytics"],
-    cta: "Explore Marketing Services",
-    href: "/services#digital-marketing",
+    id: 'marketing',
+    icon: Megaphone,
+    badge: 'ACQUISITION',
+    title: 'Digital Marketing & Ads',
+    headline: 'Data-driven growth. Every rupee tracked to customer revenue.',
+    desc: 'We treat marketing spend as an engineering discipline. Performance Google Ads, SEO content architecture, conversion rate optimization (CRO), and GA4 event attribution built directly into your platform.',
+    metrics: [
+      { label: 'Average ROAS', value: '4.2x', sub: 'Targeted Campaigns' },
+      { label: 'Setup Time', value: '7 Days', sub: 'Fast Ramp-Up' },
+      { label: 'Attribution', value: 'GA4 Verified', sub: 'Full Funnel Clarity' },
+    ],
+    highlights: [
+      'Search & Performance Max campaign architecture',
+      'Conversion-optimized landing pages with A/B testing',
+      'Technical and programmatic SEO for organic pipeline',
+      'Custom conversion event telemetry and dashboards',
+    ],
+    ctaText: 'Explore Growth Marketing',
+    href: '/services#digital-marketing',
   },
   {
+    id: 'training',
     icon: GraduationCap,
-    label: "Academy",
-    domain: "academy.krudex.io",
-    audience: "For Ambitious Engineers",
-    title: "Student Training Hub",
-    image: "/images/student-training.webp",
-    desc: "Intensive software engineering and digital marketing training from active industry practitioners, delivered in strategic collaboration with NovaSkill Hub.",
-    features: ["Mentorship by practicing engineers", "Live commercial repository projects", "NovaSkill Hub industry accreditation"],
-    cta: "Explore Student Training",
-    href: "/training",
+    badge: 'ACADEMY',
+    title: 'Student Training',
+    headline: 'Practitioner-led education alongside NovaSkill Hub.',
+    desc: 'Students learn from engineers who ship production code daily, not from textbook instructors. Intensive project-based tracks covering full-stack web development, cloud fundamentals, DSA, and capstone mentoring.',
+    metrics: [
+      { label: 'Students Mentored', value: '500+', sub: 'High Placement Rate' },
+      { label: 'Mentor Ratio', value: '1:15', sub: 'Intensive Mentorship' },
+      { label: 'Partnership', value: 'NovaSkill Hub', sub: 'Accredited Curriculum' },
+    ],
+    highlights: [
+      'Production repository workflows with real git PR reviews',
+      'Full-stack Next.js, Node.js, and Cloud deployment labs',
+      'DSA & System design interview preparation',
+      'Capstone portfolio projects deployed to live domains',
+    ],
+    ctaText: 'Explore Student Academy',
+    href: '/training',
   },
 ];
 
-function PillarCard({ pillar, index }: { pillar: typeof pillars[0]; index: number }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
+export default function Pillars() {
+  const [activeTab, setActiveTab] = useState('saas');
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    setMousePos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
-
-  const Icon = pillar.icon;
+  const activePillar = pillarsData.find((p) => p.id === activeTab) || pillarsData[0];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 25 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.55, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      className="h-full"
-    >
-      <div
-        ref={cardRef}
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        className="group relative h-full rounded-2xl bg-[#0D0A0C]/80 backdrop-blur-md border border-white/[0.08] hover:border-white/[0.18] p-6 sm:p-7 flex flex-col transition-all duration-300 overflow-hidden shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06),0_12px_35px_-10px_rgba(0,0,0,0.6)]"
-      >
-        {/* Subtle, soft cursor ambient glow */}
-        <div
-          className="pointer-events-none absolute -inset-px transition-opacity duration-300"
-          style={{
-            opacity: isHovered ? 1 : 0,
-            background: `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(229, 43, 59, 0.08), transparent 60%)`,
-          }}
-        />
-
-        {/* Top subtle hairline glow */}
-        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-krudex-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-        {/* Engineered Product Window Chrome + Visual Preview */}
-        <div className="relative rounded-xl overflow-hidden mb-6 border border-white/[0.08] bg-[#070507]">
-          {/* Window Chrome Header Bar */}
-          <div className="flex items-center justify-between px-3.5 py-2.5 bg-white/[0.03] border-b border-white/[0.06]">
-            <div className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-white/20" />
-              <span className="w-2 h-2 rounded-full bg-white/20" />
-              <span className="w-2 h-2 rounded-full bg-white/20" />
-            </div>
-            <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/40 border border-white/[0.06] text-[10px] font-mono text-white/50">
-              <span className="w-1 h-1 rounded-full bg-krudex-accent" />
-              <span>{pillar.domain}</span>
-            </div>
-            <div className="w-6" />
-          </div>
-
-          {/* Visual Preview Image */}
-          <div className="relative h-44 sm:h-48 w-full">
-            <Image
-              src={pillar.image}
-              alt={pillar.title}
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-700 brightness-[0.92] group-hover:brightness-100"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0D0A0C] via-transparent to-transparent opacity-80" />
-          </div>
-        </div>
-
-        {/* Card Header & Identity */}
-        <div className="relative z-10 mb-3">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-[11px] font-mono uppercase tracking-[0.15em] text-white/50">
-              {pillar.audience}
-            </span>
-            <span className="inline-flex items-center gap-1 text-[11px] font-mono text-krudex-accent bg-krudex-accent/10 border border-krudex-accent/20 px-2.5 py-0.5 rounded-full font-medium">
-              <Icon className="w-3 h-3" />
-              <span>{pillar.label}</span>
-            </span>
-          </div>
-
-          <h3 className="text-white font-semibold text-xl sm:text-2xl tracking-tight group-hover:text-white transition-colors">
-            {pillar.title}
-          </h3>
-        </div>
-
-        {/* Description */}
-        <p className="text-krudex-muted text-sm leading-relaxed mb-6 relative z-10 font-normal">
-          {pillar.desc}
-        </p>
-
-        {/* Features Checklist */}
-        <ul className="space-y-2 mb-8 relative z-10">
-          {pillar.features.map((feat, i) => (
-            <li key={i} className="flex items-center gap-2.5 text-xs text-white/75">
-              <span className="w-1.5 h-1.5 rounded-full bg-krudex-accent shrink-0 shadow-[0_0_6px_#E52B3B]" />
-              <span>{feat}</span>
-            </li>
-          ))}
-        </ul>
-
-        {/* Action Link */}
-        <Link
-          href={pillar.href}
-          className="mt-auto inline-flex items-center justify-between w-full pt-4 border-t border-white/[0.06] text-sm font-medium text-white/90 group-hover:text-white transition-colors relative z-10"
-        >
-          <span className="group-hover:text-krudex-accent transition-colors font-medium">
-            {pillar.cta}
-          </span>
-          <span className="w-7 h-7 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center group-hover:border-krudex-accent group-hover:bg-krudex-accent group-hover:text-white transition-all duration-200">
-            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-          </span>
-        </Link>
-      </div>
-    </motion.div>
-  );
-}
-
-const Pillars = () => {
-  return (
-    <section id="what-krudex-does" className="px-6 md:px-14 lg:px-20 py-24 md:py-32 relative z-10">
+    <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       <div className="max-w-6xl mx-auto">
-        <div className="max-w-2xl mb-16">
+        {/* Section Header */}
+        <div className="flex flex-col items-center text-center mb-14">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#7B68EE]/10 border border-[#7B68EE]/25 text-xs font-semibold text-[#A78BFA] uppercase tracking-wider mb-4">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Three Verticals · One Unified Studio</span>
+          </div>
+
+          <h2 className="font-heading font-black text-3xl sm:text-5xl text-white tracking-tight max-w-3xl mb-4">
+            Everything your product needs to <span className="clickup-gradient-text">launch, scale, &amp; educate.</span>
+          </h2>
+
+          <p className="text-krudex-muted text-base sm:text-lg max-w-2xl leading-relaxed">
+            Switch views to explore how our three core pillars work together seamlessly.
+          </p>
+        </div>
+
+        {/* ClickUp-Style Horizontal View Switcher Tabs */}
+        <div className="flex justify-center mb-10">
+          <div className="inline-flex p-1.5 rounded-2xl bg-[#0F0C1B] border border-white/10 shadow-xl overflow-x-auto max-w-full">
+            {pillarsData.map((pillar) => {
+              const Icon = pillar.icon;
+              const isActive = pillar.id === activeTab;
+              return (
+                <button
+                  key={pillar.id}
+                  type="button"
+                  onClick={() => setActiveTab(pillar.id)}
+                  className={`flex items-center gap-2 px-4 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap cursor-pointer ${
+                    isActive
+                      ? 'bg-gradient-to-r from-[#7B68EE] via-[#C026D3] to-[#00D2FF] text-white shadow-lg shadow-[#7B68EE]/30'
+                      : 'text-krudex-muted hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  <Icon className="w-4 h-4" />
+                  <span>{pillar.title}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Dynamic Interactive Card Display */}
+        <AnimatePresence mode="wait">
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-6"
+            key={activePillar.id}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.3 }}
+            className="clickup-card p-6 sm:p-10 border border-white/10 relative overflow-hidden"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-krudex-accent shadow-[0_0_6px_#E52B3B]" />
-            <span className="text-xs uppercase tracking-[0.2em] text-white/60 font-mono">
-              Core Verticals
-            </span>
+            {/* Ambient Background Accent Glow */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#7B68EE]/10 to-[#00D2FF]/10 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
+              {/* Left Column: Narrative & Highlights */}
+              <div className="lg:col-span-7 space-y-6">
+                <div>
+                  <span className="text-[10px] font-mono font-bold tracking-widest uppercase px-2.5 py-1 rounded-full bg-[#7B68EE]/15 text-[#A78BFA] border border-[#7B68EE]/30 mb-3 inline-block">
+                    {activePillar.badge}
+                  </span>
+                  <h3 className="font-heading font-black text-2xl sm:text-3xl text-white tracking-tight mb-3">
+                    {activePillar.headline}
+                  </h3>
+                  <p className="text-krudex-muted text-sm sm:text-base leading-relaxed">
+                    {activePillar.desc}
+                  </p>
+                </div>
+
+                {/* Highlights Checklist */}
+                <div className="space-y-2.5 pt-2">
+                  {activePillar.highlights.map((item) => (
+                    <div key={item} className="flex items-start gap-2.5 text-xs sm:text-sm text-white/90">
+                      <CheckCircle className="w-4 h-4 text-[#10B981] shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTA Button */}
+                <div className="pt-4">
+                  <Link
+                    href={activePillar.href}
+                    className="clickup-btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs sm:text-sm font-semibold"
+                  >
+                    <span>{activePillar.ctaText}</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Right Column: Interactive Metric Tiles */}
+              <div className="lg:col-span-5 flex flex-col gap-3">
+                {activePillar.metrics.map((metric) => (
+                  <div
+                    key={metric.label}
+                    className="p-5 rounded-2xl bg-[#09070F]/80 border border-white/10 hover:border-[#7B68EE]/40 transition-colors"
+                  >
+                    <span className="text-xs font-mono text-krudex-muted uppercase tracking-wider block mb-1">
+                      {metric.label}
+                    </span>
+                    <div className="font-heading font-black text-3xl sm:text-4xl text-white tracking-tight clickup-gradient-text">
+                      {metric.value}
+                    </div>
+                    <span className="text-xs text-white/60 mt-1 block font-medium">
+                      {metric.sub}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="font-serif text-4xl md:text-5xl lg:text-6xl text-white font-normal leading-[1.08] tracking-tight"
-          >
-            One engineering firm. <br />
-            <span className="text-white/60">
-              Three unified practices.
-            </span>
-          </motion.h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {pillars.map((pillar, index) => (
-            <PillarCard key={pillar.label} pillar={pillar} index={index} />
-          ))}
-        </div>
+        </AnimatePresence>
       </div>
     </section>
   );
-};
-
-export default Pillars;
+}

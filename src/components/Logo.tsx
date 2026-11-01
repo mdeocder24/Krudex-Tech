@@ -1,99 +1,47 @@
 import React from 'react';
 
-interface LogoProps {
-  className?: string;
-  width?: number;
-  height?: number;
-  variant?: 'mark' | 'full';
-}
-
-export const Logo: React.FC<LogoProps> = ({ className = '', width = 180, height = 60, variant = 'full' }) => {
+export default function Logo({ className = '' }: { className?: string }) {
   return (
-    <div className={`flex items-center gap-3 ${className}`}>
-      {/* 3D Orbit & K Icon */}
-      <svg
-        width={height}
-        height={height}
-        viewBox="0 0 120 100"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="drop-shadow-[0_0_12px_rgba(229,43,59,0.35)] shrink-0"
-      >
-        <defs>
-          <linearGradient id="crimsonSwoosh" x1="10%" y1="90%" x2="90%" y2="10%">
-            <stop offset="0%" stopColor="#C41E3A" />
-            <stop offset="50%" stopColor="#E52B3B" />
-            <stop offset="100%" stopColor="#FF4D5E" />
-          </linearGradient>
-          <filter id="crimsonGlow">
-            <feGaussianBlur stdDeviation="1.5" result="coloredBlur" />
-            <feMerge>
-              <feMergeNode in="coloredBlur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-
-        {/* Thin Crimson Orbit (Back) */}
-        <path
-          d="M 20 80 Q 5 50 40 25 T 100 20"
-          stroke="#FF4D5E"
-          strokeWidth="1.5"
-          fill="none"
-          opacity="0.8"
-          filter="url(#crimsonGlow)"
-        />
-        <path
-          d="M 100 20 Q 115 50 80 75 T 20 80"
-          stroke="#FF4D5E"
-          strokeWidth="1.5"
-          fill="none"
-          opacity="0.8"
-          filter="url(#crimsonGlow)"
-        />
-
-        {/* Thick Crimson Swoosh (Front/Bottom) */}
-        <path
-          d="M 25 70 C 10 50, 40 40, 50 45 C 55 47, 85 70, 75 80 C 60 95, 30 85, 25 70 Z"
-          fill="url(#crimsonSwoosh)"
-          opacity="0.95"
-        />
-
-        {/* Thick Crimson Swoosh (Top) */}
-        <path
-          d="M 95 30 C 110 50, 80 60, 70 55 C 65 53, 35 30, 45 20 C 60 5, 90 15, 95 30 Z"
-          fill="url(#crimsonSwoosh)"
-          opacity="0.95"
-        />
-
-        {/* Crisp White 'K' */}
-        <text
-          x="50"
-          y="72"
-          fontSize="60"
-          fontFamily="system-ui, -apple-system, sans-serif"
-          fontWeight="800"
-          fill="#FAF7F8"
-          textAnchor="middle"
-          style={{ letterSpacing: '-2px' }}
-        >
-          K
-        </text>
-      </svg>
-
-      {/* Text Wordmark */}
-      {variant === 'full' && (
-        <div className="flex flex-col select-none">
-          <span className="text-white text-xl font-bold tracking-[0.2em] leading-none font-sans">
-            KRUDEX
-          </span>
-          <span className="text-krudex-accent text-[0.62rem] font-bold tracking-[0.35em] uppercase mt-1">
-            Technologies
-          </span>
+    <div className={`inline-flex items-center gap-2.5 select-none ${className}`}>
+      {/* ClickUp-style Vibrant Gradient Logo Mark */}
+      <div className="relative w-7 h-7 rounded-lg p-[1px] bg-gradient-to-tr from-[#7B68EE] via-[#E01E5A] to-[#00D2FF] shadow-[0_0_15px_rgba(123,104,238,0.5)] flex items-center justify-center shrink-0">
+        <div className="w-full h-full bg-[#0D0A18] rounded-[7px] flex items-center justify-center">
+          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M4 16L12 8L20 16"
+              stroke="url(#clickup-logo-grad)"
+              strokeWidth="3.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M7 19L12 14L17 19"
+              stroke="#00D2FF"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              opacity="0.85"
+            />
+            <defs>
+              <linearGradient id="clickup-logo-grad" x1="4" y1="8" x2="20" y2="16" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#7B68EE" />
+                <stop offset="0.5" stopColor="#E01E5A" />
+                <stop offset="1" stopColor="#00D2FF" />
+              </linearGradient>
+            </defs>
+          </svg>
         </div>
-      )}
+      </div>
+
+      {/* Brand Wordmark */}
+      <div className="flex items-center gap-2">
+        <span className="font-heading font-black text-xl tracking-tight text-white">
+          KRUDEX
+        </span>
+        <span className="text-[10px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded-full bg-gradient-to-r from-[#7B68EE]/20 via-[#E01E5A]/20 to-[#00D2FF]/20 text-[#A78BFA] border border-[#7B68EE]/30">
+          STUDIO
+        </span>
+      </div>
     </div>
   );
-};
-
-export default Logo;
+}

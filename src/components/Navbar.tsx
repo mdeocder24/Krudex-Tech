@@ -2,191 +2,230 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import Logo from './Logo';
+import { ChevronDown, Menu, X, Sparkles, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowRight } from 'lucide-react';
 
-const navLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'Services', href: '/services' },
-  { label: 'Training', href: '/training' },
-  { label: 'About', href: '/about' },
-  { label: 'Our Team', href: '/our-team' },
+const solutionsDropdown = [
+  {
+    title: 'SaaS Engineering',
+    desc: 'High-throughput production platforms from architecture to scale.',
+    href: '/services',
+    tag: 'PRODUCTION',
+    tagColor: 'text-[#00D2FF] bg-[#00D2FF]/10 border-[#00D2FF]/30',
+  },
+  {
+    title: 'Performance Marketing',
+    desc: 'Conversion-engineered Google Ads and full-funnel tracking.',
+    href: '/services#digital-marketing',
+    tag: 'GROWTH',
+    tagColor: 'text-[#F472B6] bg-[#E01E5A]/10 border-[#E01E5A]/30',
+  },
+  {
+    title: 'Student Training Academy',
+    desc: 'Practitioner-led tracks in direct partnership with NovaSkill Hub.',
+    href: '/training',
+    tag: 'NOVASKILL',
+    tagColor: 'text-[#10B981] bg-[#10B981]/10 border-[#10B981]/30',
+  },
 ];
 
-const Navbar = () => {
+export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 25);
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : 'unset';
-    const onKeyDown = (e: KeyboardEvent) => { if (e.key === 'Escape') setIsMobileMenuOpen(false); };
-    if (isMobileMenuOpen) document.addEventListener('keydown', onKeyDown);
-    return () => {
-      document.body.style.overflow = 'unset';
-      document.removeEventListener('keydown', onKeyDown);
-    };
-  }, [isMobileMenuOpen]);
-
   return (
-    <nav
-      className={`w-full flex items-center justify-between px-6 md:px-14 lg:px-20 fixed top-0 z-50 transition-all duration-300
-        bg-[#080608]/85 backdrop-blur-2xl border-b border-white/[0.06] shadow-[0_4px_30px_rgba(0,0,0,0.5)]
-        ${scrolled ? 'py-2.5 lg:py-3.5' : 'py-3.5 lg:py-5'}
-      `}
-    >
-      {/* Left side: Brand */}
-      <div className="flex-1 flex items-center justify-start">
-        <Link href="/" aria-label="Krudex Technologies — home" className="flex items-center group">
-          <Image
-            src="/krudex-bg-red.png"
-            alt="Krudex Technologies"
-            width={240}
-            height={80}
-            className="h-12 lg:h-14 w-auto object-contain scale-[1.7] lg:scale-[1.9] origin-left group-hover:brightness-110 transition-all duration-300"
-            priority
-          />
+    <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pt-3 pb-2 transition-all duration-300">
+      <nav
+        aria-label="Main Navigation"
+        className={`max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3 rounded-2xl transition-all duration-300 ${
+          isScrolled
+            ? 'bg-[#0E0B19]/85 backdrop-blur-xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6),0_0_30px_rgba(123,104,238,0.1)]'
+            : 'bg-[#0E0B19]/50 backdrop-blur-md border border-white/5'
+        }`}
+      >
+        {/* Left: Brand Logo */}
+        <Link href="/" className="flex items-center gap-2" aria-label="Krudex Technologies">
+          <Logo />
         </Link>
-      </div>
 
-      {/* Right side: Nav Links & CTA */}
-      <div className="flex-1 flex justify-end items-center gap-6 lg:gap-8 xl:gap-10">
-        {/* Desktop Nav Links */}
-        <div className="hidden lg:flex items-center gap-7 xl:gap-9">
-          {navLinks.map((link) => {
-            const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href);
-            return (
-              <Link
-                key={link.label}
-                href={link.href}
-                aria-current={isActive ? 'page' : undefined}
-                className={`whitespace-nowrap py-1.5 px-0.5 text-[13.5px] transition-all duration-200 hover:-translate-y-0.5 relative ${
-                  isActive ? 'text-white font-medium' : 'text-white/60 hover:text-white'
-                }`}
-              >
-                {link.label}
-                {isActive && (
-                  <motion.div
-                    layoutId="activeNavIndicator"
-                    className="absolute -bottom-1 left-0 right-0 h-[2px] bg-krudex-accent rounded-full shadow-[0_0_8px_rgba(229,43,59,0.8)]"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-              </Link>
-            );
-          })}
-        </div>
-
-        {/* Desktop CTA */}
-        <div className="hidden lg:flex items-center">
-          <Link
-            href="/contact"
-            className="group whitespace-nowrap inline-flex items-center gap-2 min-h-10 text-[13px] font-semibold text-white bg-krudex-accent hover:bg-krudex-accent-hover px-5 rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.5),0_0_15px_rgba(229,43,59,0.25)] hover:shadow-[0_0_25px_rgba(229,43,59,0.45)] hover:-translate-y-0.5 active:scale-95 transition-all duration-200"
+        {/* Center: Desktop Nav Items with Dropdowns */}
+        <div className="hidden lg:flex items-center gap-1 xl:gap-2">
+          {/* Solutions Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => setActiveDropdown('solutions')}
+            onMouseLeave={() => setActiveDropdown(null)}
           >
-            <span>Start a Project</span>
-            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+            <button
+              type="button"
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-medium transition-colors ${
+                activeDropdown === 'solutions' ? 'text-white bg-white/5' : 'text-krudex-muted hover:text-white'
+              }`}
+            >
+              <span>Solutions</span>
+              <ChevronDown className="w-3.5 h-3.5 opacity-70" />
+            </button>
+
+            {/* Dropdown Menu */}
+            <AnimatePresence>
+              {activeDropdown === 'solutions' && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                  transition={{ duration: 0.18 }}
+                  className="absolute top-full left-0 mt-2 w-80 p-2 rounded-2xl bg-[#0F0C1B] border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.8),0_0_30px_rgba(123,104,238,0.2)]"
+                >
+                  <div className="space-y-1">
+                    {solutionsDropdown.map((item) => (
+                      <Link
+                        key={item.title}
+                        href={item.href}
+                        onClick={() => setActiveDropdown(null)}
+                        className="p-2.5 rounded-xl block hover:bg-white/5 transition-colors group"
+                      >
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-white text-xs font-semibold group-hover:text-[#A78BFA] transition-colors">
+                            {item.title}
+                          </span>
+                          <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border ${item.tagColor}`}>
+                            {item.tag}
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-krudex-muted leading-relaxed line-clamp-2">
+                          {item.desc}
+                        </p>
+                      </Link>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Regular Links */}
+          <Link
+            href="/services"
+            className={`px-3 py-2 rounded-lg text-[13px] font-medium transition-colors ${
+              pathname === '/services' ? 'text-white font-semibold' : 'text-krudex-muted hover:text-white'
+            }`}
+          >
+            Services
+          </Link>
+
+          <Link
+            href="/training"
+            className={`px-3 py-2 rounded-lg text-[13px] font-medium transition-colors flex items-center gap-1.5 ${
+              pathname === '/training' ? 'text-white font-semibold' : 'text-krudex-muted hover:text-white'
+            }`}
+          >
+            <Sparkles className="w-3.5 h-3.5 text-[#F472B6]" />
+            <span>Academy</span>
+          </Link>
+
+          <Link
+            href="/about"
+            className={`px-3 py-2 rounded-lg text-[13px] font-medium transition-colors ${
+              pathname === '/about' ? 'text-white font-semibold' : 'text-krudex-muted hover:text-white'
+            }`}
+          >
+            About
+          </Link>
+
+          <Link
+            href="/our-team"
+            className={`px-3 py-2 rounded-lg text-[13px] font-medium transition-colors ${
+              pathname === '/our-team' ? 'text-white font-semibold' : 'text-krudex-muted hover:text-white'
+            }`}
+          >
+            Team
           </Link>
         </div>
 
-        {/* Mobile Menu Toggle */}
+        {/* Right: Actions */}
+        <div className="hidden lg:flex items-center gap-4">
+          <Link
+            href="/contact"
+            className="text-xs font-medium text-white/80 hover:text-white transition-colors"
+          >
+            Contact Desk
+          </Link>
+
+          <Link
+            href="/contact"
+            className="clickup-btn-primary px-5 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2"
+          >
+            <span>Book a Strategy Call</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+
+        {/* Mobile Toggle Button */}
         <div className="lg:hidden flex items-center">
           <button
-            onClick={() => setIsMobileMenuOpen(true)}
-            aria-label="Open menu"
-            aria-expanded={isMobileMenuOpen}
-            className="text-white hover:text-krudex-accent transition-colors w-10 h-10 -mr-2 flex items-center justify-center rounded-full hover:bg-white/5 active:scale-95"
+            type="button"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? 'Close navigation' : 'Open navigation'}
+            className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white"
           >
-            <Menu className="w-5 h-5" />
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Drawer Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 bg-black/85 backdrop-blur-xl z-[60]"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="lg:hidden mt-2 max-w-7xl mx-auto rounded-2xl bg-[#0E0B19]/95 backdrop-blur-2xl border border-white/10 p-5 shadow-2xl space-y-4"
           >
-            <div
-              className="absolute inset-0"
-              onClick={() => setIsMobileMenuOpen(false)}
-            />
+            <div className="space-y-1">
+              {[
+                { label: 'Home', href: '/' },
+                { label: 'Services & Modules', href: '/services' },
+                { label: 'Student Training Academy', href: '/training' },
+                { label: 'About Studio', href: '/about' },
+                { label: 'Our Engineering Team', href: '/our-team' },
+              ].map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`block px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                    pathname === link.href ? 'bg-white/10 text-white font-semibold' : 'text-krudex-muted hover:text-white'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
 
-            <motion.div
-              initial={{ scale: 0.96, opacity: 0, y: -10 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.96, opacity: 0, y: -10 }}
-              transition={{ duration: 0.2, ease: 'easeOut' }}
-              className="absolute top-4 right-4 left-4 sm:left-auto sm:w-80 max-h-[calc(100dvh-2rem)] overflow-y-auto bg-[#0D0A0C] border border-white/[0.1] rounded-2xl p-6 flex flex-col shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
+            <div className="pt-3 border-t border-white/10 flex flex-col gap-2">
+              <Link
+                href="/contact"
                 onClick={() => setIsMobileMenuOpen(false)}
-                aria-label="Close menu"
-                className="absolute top-4 right-4 text-white/60 hover:text-white transition-colors bg-white/5 hover:bg-white/10 rounded-full w-9 h-9 flex items-center justify-center border border-white/10"
+                className="clickup-btn-primary w-full py-3 rounded-xl text-xs font-semibold text-center flex items-center justify-center gap-2"
               >
-                <X className="w-4 h-4" />
-              </button>
-
-              <div className="flex flex-col gap-2 pt-8">
-                {navLinks.map((link, idx) => {
-                  const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href);
-                  return (
-                    <motion.div
-                      key={link.label}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.05 + idx * 0.04 }}
-                    >
-                      <Link
-                        href={link.href}
-                        aria-current={isActive ? 'page' : undefined}
-                        className={`text-base font-medium transition-colors flex items-center justify-between p-3 rounded-lg hover:bg-white/5 ${
-                          isActive ? 'text-white bg-white/[0.04] border-l-2 border-krudex-accent' : 'text-white/60 hover:text-white'
-                        }`}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        <span className="flex items-center gap-2.5">
-                          {isActive && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-krudex-accent shadow-[0_0_6px_#E52B3B]" />
-                          )}
-                          {link.label}
-                        </span>
-                        <ArrowRight className="w-3.5 h-3.5 opacity-40" />
-                      </Link>
-                    </motion.div>
-                  );
-                })}
-
-                <div className="mt-4 pt-4 border-t border-white/[0.06]">
-                  <Link
-                    href="/contact"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center justify-center gap-2 w-full py-3.5 text-white bg-krudex-accent px-6 rounded-full text-sm font-semibold hover:bg-krudex-accent-hover shadow-[0_0_20px_rgba(229,43,59,0.3)] transition-all"
-                  >
-                    <span>Start a Project</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
+                <span>Book a Strategy Call</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </header>
   );
-};
-
-export default Navbar;
+}

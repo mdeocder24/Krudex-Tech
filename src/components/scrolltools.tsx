@@ -2,62 +2,42 @@
 
 import React from 'react';
 
-const tools = [
-  { name: 'React', category: 'Frontend' },
-  { name: 'Next.js 16', category: 'Fullstack' },
-  { name: 'TypeScript', category: 'Language' },
-  { name: 'Node.js', category: 'Runtime' },
-  { name: 'Python', category: 'Backend' },
-  { name: 'TensorFlow', category: 'AI/ML' },
-  { name: 'PyTorch', category: 'AI/ML' },
-  { name: 'OpenAI API', category: 'AI' },
-  { name: 'LangChain', category: 'AI Agents' },
-  { name: 'React Native', category: 'Mobile' },
-  { name: 'Flutter', category: 'Mobile' },
-  { name: 'Tailwind CSS v4', category: 'Design' },
-  { name: 'PostgreSQL', category: 'Database' },
-  { name: 'Redis', category: 'Cache' },
-  { name: 'Docker', category: 'DevOps' },
-  { name: 'AWS & Cloudflare', category: 'Cloud' },
-  { name: 'Google Ads & GA4', category: 'Marketing' },
-  { name: 'Figma', category: 'UI/UX' },
+const technologies = [
+  { name: 'Next.js 16', cat: 'Frontend' },
+  { name: 'React 19', cat: 'UI Library' },
+  { name: 'TypeScript', cat: 'Type Safety' },
+  { name: 'Google Ads', cat: 'Acquisition' },
+  { name: 'FastAPI / Python', cat: 'Backend' },
+  { name: 'PostgreSQL', cat: 'Database' },
+  { name: 'Docker / K8s', cat: 'DevOps' },
+  { name: 'TensorFlow / PyTorch', cat: 'AI/ML' },
+  { name: 'NovaSkill Hub', cat: 'Academy' },
+  { name: 'Cloudflare D1', cat: 'Edge DB' },
+  { name: 'Tailwind CSS v4', cat: 'Styling' },
+  { name: 'AWS Cloud', cat: 'Infrastructure' },
 ];
 
-const ScrollTools = () => {
+export default function ScrollTools() {
   return (
-    <section aria-label="Technologies we work with" className="w-full py-6 md:py-8 border-t border-b border-white/[0.06] bg-black/40 backdrop-blur-md relative z-10 overflow-hidden">
-      <style>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee-smooth {
-          animation: marquee 45s linear infinite;
-        }
-      `}</style>
+    <section className="py-8 border-y border-white/5 bg-[#09070F]/50 overflow-hidden select-none">
+      <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center gap-4">
+        <div className="shrink-0 text-xs font-mono uppercase tracking-wider text-[#A78BFA] px-3 py-1 rounded-full bg-[#7B68EE]/10 border border-[#7B68EE]/20 flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#00D2FF] animate-pulse" />
+          <span>PRODUCTION STACK</span>
+        </div>
 
-      {/* Left/Right subtle fade masks */}
-      <div className="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-[#080608] to-transparent z-10 pointer-events-none" />
-      <div className="absolute top-0 bottom-0 right-0 w-24 bg-gradient-to-l from-[#080608] to-transparent z-10 pointer-events-none" />
-
-      <div className="flex w-max animate-marquee-smooth items-center gap-4 md:gap-6 pr-6 hover:[animation-play-state:paused]">
-        {[...tools, ...tools, ...tools].map((tool, i) => (
-          <div
-            key={i}
-            className="group flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.06] hover:border-white/[0.18] transition-all duration-200 cursor-default select-none"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-krudex-accent/60 group-hover:bg-krudex-accent transition-colors" />
-            <span className="text-white/80 text-xs md:text-sm font-medium tracking-wide group-hover:text-white transition-colors">
-              {tool.name}
-            </span>
-            <span className="text-[10px] font-mono uppercase text-white/35 tracking-wider">
-              {tool.category}
-            </span>
-          </div>
-        ))}
+        <div className="flex-1 overflow-x-auto no-scrollbar flex items-center gap-2 py-1">
+          {technologies.map((tech) => (
+            <div
+              key={tech.name}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/[0.03] border border-white/10 hover:border-[#7B68EE]/40 hover:bg-white/[0.06] transition-all shrink-0 cursor-default"
+            >
+              <span className="text-xs font-semibold text-white">{tech.name}</span>
+              <span className="text-[10px] text-white/40 font-mono">[{tech.cat}]</span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
-};
-
-export default ScrollTools;
+}

@@ -2,100 +2,89 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { ArrowUpRight } from 'lucide-react';
+import Logo from './Logo';
 
-const footerLinks = [
-  {
-    title: 'Company',
-    links: [
-      { label: 'About Krudex', href: '/about' },
-      { label: 'Engineering Team', href: '/our-team' },
-    ],
-  },
-  {
-    title: 'Practices',
-    links: [
-      { label: 'SaaS & Web Architecture', href: '/services' },
-      { label: 'Mobile Engineering', href: '/services' },
-      { label: 'AI & Inference Systems', href: '/services' },
-      { label: 'Performance Digital Marketing', href: '/services#digital-marketing' },
-      { label: 'NovaSkill Student Hub', href: '/training' },
-    ],
-  },
-  {
-    title: 'Direct Contact',
-    links: [
-      { label: 'Start a Project', href: '/contact' },
-      { label: 'krudextechnologies@gmail.com', href: 'mailto:krudextechnologies@gmail.com' },
-      { label: '+91 89782 61053', href: 'tel:+918978261053' },
-    ],
-  },
-];
+const footerNav = {
+  Solutions: [
+    { label: 'SaaS & Web Platforms', href: '/services' },
+    { label: 'Mobile Applications', href: '/services' },
+    { label: 'AI & ML Integrations', href: '/services' },
+    { label: 'UI/UX & Brand Systems', href: '/services' },
+    { label: 'Google Ads & CRO', href: '/services#digital-marketing' },
+  ],
+  Academy: [
+    { label: 'Student Training Tracks', href: '/training' },
+    { label: 'NovaSkill Hub Partnership', href: '/training' },
+    { label: 'Full-Stack Web Dev (12 Wks)', href: '/training' },
+    { label: 'Cloud & DevOps Labs (8 Wks)', href: '/training' },
+  ],
+  Company: [
+    { label: 'About Studio', href: '/about' },
+    { label: 'Our Engineering Team', href: '/our-team' },
+    { label: 'Contact Us', href: '/contact' },
+    { label: 'Careers & Hiring', href: '/contact' },
+  ],
+  Connect: [
+    { label: 'Email: krudextechnologies@gmail.com', href: 'mailto:krudextechnologies@gmail.com' },
+    { label: 'Phone: +91 89782 61053', href: 'tel:+918978261053' },
+    { label: 'Phone: +91 94902 48160', href: 'tel:+919490248160' },
+    { label: 'Location: Hyderabad, India', href: '/contact' },
+  ],
+};
 
-const Footer = () => {
+export default function Footer() {
   return (
-    <footer className="px-6 md:px-14 lg:px-20 pt-20 pb-12 border-t border-white/[0.06] relative z-10 overflow-hidden">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 lg:gap-12 mb-16">
-          {/* Brand */}
-          <div className="sm:col-span-2 lg:col-span-1 flex flex-col items-start">
-            <Link href="/" aria-label="Krudex Technologies — home" className="mb-6 block group">
-              <Image 
-                src="/krudex-bg-red.png" 
-                alt="Krudex" 
-                width={240} 
-                height={80} 
-                className="h-12 w-auto object-contain scale-[1.7] md:scale-[1.9] origin-left group-hover:brightness-110 transition-all duration-300"
-              />
-            </Link>
-            <p className="text-krudex-muted text-sm leading-relaxed max-w-xs mb-6 font-normal">
-              High-scale SaaS platforms, performance Google Ads acquisition, and hands-on student engineering training in collaboration with NovaSkill Hub.
+    <footer className="border-t border-white/5 bg-[#07050C] pt-16 pb-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 lg:gap-8 mb-16">
+          {/* Brand Info (Cols 1 to 2) */}
+          <div className="lg:col-span-2 space-y-4">
+            <Logo />
+            <p className="text-krudex-muted text-xs sm:text-sm leading-relaxed max-w-sm">
+              The unified engineering studio. Production SaaS platforms, performance-driven digital marketing, and practitioner-led talent training alongside NovaSkill Hub.
             </p>
-            <div className="inline-flex items-center gap-2 text-xs text-white/60 font-mono bg-white/[0.03] border border-white/[0.08] px-3 py-1.5 rounded-full">
-              <span className="w-1.5 h-1.5 rounded-full bg-krudex-accent shadow-[0_0_6px_#E52B3B]" />
-              <span>Accepting New Engagements</span>
+            <div className="flex items-center gap-2 pt-2">
+              <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
+              <span className="text-xs text-white/70 font-mono">
+                All Systems Operational · 99.98% Uptime
+              </span>
             </div>
           </div>
 
-          {/* Link Columns */}
-          {footerLinks.map((col) => (
-            <div key={col.title}>
-              <h2 className="text-white/60 text-xs uppercase tracking-[0.18em] font-semibold mb-5 flex items-center gap-2 font-mono">
-                <span className="w-1 h-1 rounded-full bg-krudex-accent" />
-                {col.title}
-              </h2>
-              <ul className="space-y-2">
-                {col.links.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-krudex-muted text-sm hover:text-white hover:translate-x-1 transition-all inline-flex items-center gap-1 group py-0.5"
-                    >
-                      <span>{link.label}</span>
-                      <ArrowUpRight className="w-3.5 h-3.5 text-krudex-accent opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Categorized Links (Cols 3 to 6) */}
+          <div className="lg:col-span-4 grid grid-cols-2 sm:grid-cols-4 gap-8">
+            {Object.entries(footerNav).map(([category, links]) => (
+              <div key={category} className="space-y-3">
+                <h4 className="text-xs font-mono font-bold tracking-wider uppercase text-white/80">
+                  {category}
+                </h4>
+                <ul className="space-y-2 text-xs text-krudex-muted">
+                  {links.map((link) => (
+                    <li key={link.label}>
+                      <Link
+                        href={link.href}
+                        className="hover:text-white transition-colors block line-clamp-1"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-white/[0.06] pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p suppressHydrationWarning className="text-white/40 text-xs font-mono">
-            © {new Date().getFullYear()} Krudex Technologies. All rights reserved.
-          </p>
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-krudex-muted font-medium">
+          <p>© {new Date().getFullYear()} Krudex Technologies. All rights reserved.</p>
           <div className="flex items-center gap-6">
-            <span className="text-white/40 text-xs">Hyderabad, Telangana, India</span>
-            <span className="w-1 h-1 rounded-full bg-white/20" />
-            <span className="text-white/40 text-xs font-mono">Enterprise Software Architecture</span>
+            <span>Incorporated in Telangana, India</span>
+            <span>·</span>
+            <span>Engineered with discipline</span>
           </div>
         </div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

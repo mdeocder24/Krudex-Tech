@@ -1,57 +1,51 @@
 "use client";
 
 import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import MagneticButton from './MagneticButton';
+import Link from 'next/link';
+import { ArrowRight, Sparkles, CheckCircle2 } from 'lucide-react';
 
-const ServicesCTA = () => {
+export default function ServicesCTA() {
   return (
-    <section className="px-6 md:px-16 lg:px-24 py-24 md:py-32 bg-krudex-black border-t border-krudex-border/80 relative overflow-hidden">
-      {/* Background ambient crimson glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-krudex-accent/10 blur-[160px] pointer-events-none -z-10" />
+    <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <div className="max-w-5xl mx-auto">
+        <div className="clickup-card p-8 sm:p-14 border border-[#7B68EE]/40 relative overflow-hidden text-center flex flex-col items-center shadow-[0_0_80px_rgba(123,104,238,0.2)]">
+          <div className="absolute inset-0 bg-gradient-to-tr from-[#7B68EE]/15 via-[#E01E5A]/10 to-[#00D2FF]/15 pointer-events-none" />
 
-      <div className="max-w-3xl mx-auto flex flex-col items-center text-center">
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-6"
-        >
-          Ready to scope your <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-krudex-muted">
-            next product?
-          </span>
-        </motion.h2>
+          <div className="relative z-10 max-w-2xl flex flex-col items-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-xs font-semibold text-white uppercase tracking-wider mb-6">
+              <Sparkles className="w-3.5 h-3.5 text-[#00D2FF]" />
+              <span>Complimentary Technical Audit</span>
+            </div>
 
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-krudex-muted text-base sm:text-lg max-w-xl mb-12 leading-relaxed"
-        >
-          We offer a free 30-minute technical consultation. Bring your constraints &mdash; we&apos;ll bring architecture clarity.
-        </motion.p>
+            <h2 className="font-heading font-black text-3xl sm:text-5xl text-white tracking-tight leading-tight mb-4">
+              Have a project in mind? <span className="clickup-gradient-text">Let&apos;s scope it.</span>
+            </h2>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <MagneticButton 
-            href="/contact" 
-            className="group flex items-center gap-2.5 bg-krudex-accent text-white px-8 py-4 rounded-full font-semibold text-sm hover:bg-krudex-accent-hover shadow-[0_0_30px_rgba(229,43,59,0.35)] hover:shadow-[0_0_45px_rgba(229,43,59,0.55)] border border-krudex-accent/60 transition-all duration-300"
-          >
-            <span>Book Strategy Call</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </MagneticButton>
-        </motion.div>
+            <p className="text-krudex-muted text-sm sm:text-base leading-relaxed mb-8">
+              We offer a free 30-minute scoping call with a principal engineer. We&apos;ll review architecture feasibility, budget parameters, and sprint timelines.
+            </p>
+
+            <Link
+              href="/contact"
+              className="clickup-btn-primary px-9 py-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 mb-6"
+            >
+              <span>Schedule Scoping Call</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+
+            <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-white/60">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
+                <span>Zero obligations</span>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
+                <span>Direct senior engineer conversation</span>
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
-};
-
-export default ServicesCTA;
+}

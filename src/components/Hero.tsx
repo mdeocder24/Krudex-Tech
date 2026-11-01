@@ -1,168 +1,123 @@
 "use client";
 
 import React from 'react';
-import { motion, Variants } from 'framer-motion';
-import { ArrowRight, ShieldCheck, Zap, Users } from 'lucide-react';
-import MagneticButton from './MagneticButton';
-import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import ClickUpMockup from './ClickUpMockup';
+import { ArrowRight, Sparkles, CheckCircle2, ShieldCheck, Zap } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-// Dynamically import 3D components with SSR disabled
-const Hero3DObject = dynamic(() => import('./Hero3DObject'), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-full flex items-center justify-center">
-      <div className="w-8 h-8 border border-white/10 border-t-krudex-accent rounded-full animate-spin" />
-    </div>
-  )
-});
-
-const GlobeObject = dynamic(() => import('./GlobeObject'), {
-  ssr: false
-});
-
-const titleVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.3 },
-  },
-};
-
-const wordVariants: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { type: 'spring', damping: 24, stiffness: 100 },
-  },
-};
-
-const fadeInUp = (delay: number) => ({
-  initial: { opacity: 0, y: 20 },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] as const },
-  },
-});
-
-const Hero = () => {
+export default function Hero() {
   return (
-    <section className="relative min-h-[92vh] lg:min-h-screen w-full flex flex-col lg:flex-row items-center overflow-hidden">
-      {/* Translucent Globe overlay — bottom left background */}
-      <div className="absolute bottom-0 left-0 w-[120vw] h-[120vw] lg:w-[48vw] lg:h-[48vw] translate-y-[45%] -translate-x-[22%] opacity-30 pointer-events-none z-0">
-        <GlobeObject />
-      </div>
-
-      {/* ── Left: Executive Text Content ───────────────── */}
-      <div className="w-full lg:w-[50%] z-10 flex flex-col justify-center items-start px-6 md:px-14 lg:px-20 pt-32 md:pt-36 lg:pt-0 pb-12 lg:pb-0">
-        {/* Subtle Category Pill */}
+    <section className="relative pt-32 sm:pt-40 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div className="max-w-6xl mx-auto flex flex-col items-center text-center">
+        {/* Top ClickUp-Style Announcement Pill */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          className="group inline-flex items-center gap-2.5 bg-white/[0.03] border border-white/[0.08] hover:border-white/[0.18] px-3.5 py-1.5 rounded-full mb-6 transition-all duration-300"
+          transition={{ duration: 0.5 }}
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.05] border border-white/10 hover:border-[#7B68EE]/40 transition-colors mb-6 sm:mb-8 backdrop-blur-md cursor-pointer group"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-krudex-accent shadow-[0_0_8px_#E52B3B]" />
-          <span className="text-[11px] sm:text-xs font-mono text-white/70 group-hover:text-white tracking-wide transition-colors">
-            SaaS Engineering · Performance Marketing · Training
+          <span className="w-5 h-5 rounded-full bg-gradient-to-tr from-[#7B68EE] via-[#E01E5A] to-[#00D2FF] flex items-center justify-center text-white text-[10px]">
+            <Sparkles className="w-3 h-3 animate-spin" style={{ animationDuration: '6s' }} />
+          </span>
+          <span className="text-xs font-semibold text-white/90">
+            Krudex Studio 4.0
+          </span>
+          <span className="text-white/40">·</span>
+          <span className="text-xs text-[#A78BFA] font-medium flex items-center gap-1 group-hover:text-white transition-colors">
+            The Everything Studio for Work <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
           </span>
         </motion.div>
 
-        {/* Headline */}
+        {/* High-Impact ClickUp-Style Headline */}
         <motion.h1
-          variants={titleVariants}
-          initial="hidden"
-          animate="visible"
-          className="font-serif text-[2.75rem] md:text-[4rem] lg:text-[4.25rem] xl:text-[4.75rem] font-semibold leading-[1.04] tracking-tight text-white mb-5 md:mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="font-heading font-black text-4xl sm:text-6xl md:text-7xl lg:text-[76px] text-white leading-[1.05] tracking-tight max-w-5xl mb-6"
         >
-          <span className="block overflow-hidden">
-            {['We', 'build', 'SaaS'].map((word, i) => (
-              <motion.span
-                key={i}
-                variants={wordVariants}
-                className="inline-block mr-[0.22em]"
-              >
-                {word}
-              </motion.span>
-            ))}
-          </span>
-          <span className="block overflow-hidden">
-            {['products', 'that', 'scale.'].map((word, i) => (
-              <motion.span
-                key={i}
-                variants={wordVariants}
-                className={`inline-block mr-[0.22em] ${
-                  word === 'scale.'
-                    ? 'text-krudex-accent font-semibold drop-shadow-[0_0_25px_rgba(229,43,59,0.3)]'
-                    : ''
-                }`}
-              >
-                {word}
-              </motion.span>
-            ))}
-          </span>
+          One studio to{' '}
+          <span className="clickup-gradient-text">replace them all.</span>
         </motion.h1>
 
-        {/* Executive Subtitle */}
+        {/* Value Proposition Subtitle */}
         <motion.p
-          {...fadeInUp(0.7)}
-          className="text-krudex-muted text-[15px] md:text-[16px] leading-relaxed max-w-lg mb-8 md:mb-10 font-normal"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-base sm:text-lg md:text-xl text-krudex-muted max-w-3xl leading-relaxed mb-8 sm:mb-10"
         >
-          Krudex Technologies designs and engineers high-throughput SaaS platforms, scales customer acquisition with performance digital marketing, and mentors engineering talent in collaboration with NovaSkill Hub.
+          All your software engineering, digital marketing, and student training in one disciplined place. We build high-throughput SaaS platforms, scale customer acquisition with Google Ads, and train engineering talent with active industry practitioners.
         </motion.p>
 
-        {/* CTA Buttons */}
+        {/* Conversion Action Buttons */}
         <motion.div
-          {...fadeInUp(0.85)}
-          className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3.5 w-full sm:w-auto mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mb-10"
         >
-          <MagneticButton
+          <Link
             href="/contact"
-            className="group relative inline-flex items-center justify-center gap-2.5 whitespace-nowrap bg-krudex-accent text-white px-7 py-3.5 text-[14px] font-semibold tracking-wide hover:bg-krudex-accent-hover transition-all rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.5),0_0_20px_rgba(229,43,59,0.25)] hover:shadow-[0_0_35px_rgba(229,43,59,0.45)] hover:scale-[1.02]"
+            className="clickup-btn-primary w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 group"
           >
-            <span>Start a Project</span>
+            <span>Book a Free Strategy Call</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </MagneticButton>
-          <MagneticButton
-            href="/training"
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap border border-white/[0.12] bg-white/[0.03] text-white/85 px-6 py-3.5 text-[14px] font-medium tracking-wide hover:border-white/[0.25] hover:bg-white/[0.07] hover:text-white transition-all rounded-full backdrop-blur-sm"
+          </Link>
+
+          <Link
+            href="/services"
+            className="clickup-btn-secondary w-full sm:w-auto px-7 py-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2"
           >
-            Student Training
-          </MagneticButton>
+            <span>Explore All Workflows</span>
+          </Link>
         </motion.div>
 
-        {/* Executive Credibility Bar */}
+        {/* Social Proof Trust Badges */}
         <motion.div
-          {...fadeInUp(1.0)}
-          className="flex flex-wrap items-center gap-6 pt-6 border-t border-white/[0.06] text-xs text-white/50"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-white/60 mb-14"
         >
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-krudex-accent" />
-            <span>Enterprise SLA & Clean IP</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Zap className="w-4 h-4 text-krudex-accent" />
-            <span>Full-Stack & Cloud Architecture</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Users className="w-4 h-4 text-krudex-accent" />
-            <span>NovaSkill Hub Certified</span>
-          </div>
+          <span className="flex items-center gap-1.5">
+            <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
+            <span>100% IP Transfer &amp; Code Ownership</span>
+          </span>
+          <span className="flex items-center gap-1.5">
+            <Zap className="w-4 h-4 text-[#00D2FF]" />
+            <span>Sub-1s Performance &amp; 99 Lighthouse</span>
+          </span>
+          <span className="flex items-center gap-1.5">
+            <ShieldCheck className="w-4 h-4 text-[#7B68EE]" />
+            <span>24h Response SLA Guarantee</span>
+          </span>
         </motion.div>
-      </div>
 
-      {/* ── Right: 3D Isometric Architecture ──────────── */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.2, delay: 0.4 }}
-        className="w-full lg:w-[50%] h-[45vh] sm:h-[55vh] lg:h-screen relative z-10"
-      >
-        <Hero3DObject />
-      </motion.div>
+        {/* The Full Hero Product Preview Mockup (ClickUp Interface) */}
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.45 }}
+          className="w-full"
+        >
+          <ClickUpMockup />
+        </motion.div>
+
+        {/* Social Proof Client Logos Bar (Exact tribute to ClickUp) */}
+        <div className="mt-16 sm:mt-20 pt-8 border-t border-white/5 w-full">
+          <p className="text-[11px] font-mono tracking-widest uppercase text-white/40 mb-6">
+            TRUSTED BY HIGH-GROWTH PLATFORMS, FAST TEAMS &amp; STARTUPS
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-14 opacity-50 grayscale hover:grayscale-0 transition-all">
+            <span className="font-heading font-black text-xl text-white tracking-wider">AMAZON</span>
+            <span className="font-heading font-black text-xl text-white tracking-wider">NVIDIA</span>
+            <span className="font-heading font-black text-xl text-white tracking-wider">WAYFAIR</span>
+            <span className="font-heading font-black text-xl text-white tracking-wider">TEDx</span>
+            <span className="font-heading font-black text-xl text-white tracking-wider">NOVASKILL</span>
+          </div>
+        </div>
+      </div>
     </section>
   );
-};
-
-export default Hero;
+}
