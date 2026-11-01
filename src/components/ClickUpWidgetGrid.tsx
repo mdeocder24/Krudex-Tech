@@ -27,7 +27,7 @@ export default function ClickUpWidgetGrid() {
   };
 
   const models = [
-    { id: 'brain', name: 'Krudex Brain 4.0', tag: 'Native', latency: '12ms' },
+    { id: 'brain', name: 'Krudex Brain', tag: 'Native', latency: '12ms' },
     { id: 'gpt', name: 'OpenAI GPT-4o', tag: 'Fast', latency: '28ms' },
     { id: 'claude', name: 'Claude 3.5 Sonnet', tag: 'Code', latency: '35ms' },
     { id: 'gemini', name: 'Gemini 2.0 Flash', tag: 'Edge', latency: '18ms' },

@@ -13,7 +13,7 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
 
-  // Dynamic 3D perspective scroll animations matching ClickUp 4.0
+  // Dynamic 3D perspective scroll animations matching ClickUp
   const rotateX = useTransform(scrollYProgress, [0, 0.5], [14, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [0.94, 1.02]);
   const translateY = useTransform(scrollYProgress, [0, 0.5], [0, -20]);
@@ -39,7 +39,7 @@ export default function Hero() {
             <Sparkles className="w-3 h-3 animate-spin" style={{ animationDuration: '6s' }} />
           </span>
           <span className="text-xs font-semibold text-white/90">
-            Krudex Studio 4.0
+            Krudex Studio
           </span>
           <span className="text-white/40">·</span>
           <span className="text-xs text-[#A78BFA] font-medium flex items-center gap-1 group-hover:text-white transition-colors">

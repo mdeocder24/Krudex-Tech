@@ -261,7 +261,7 @@ export default function ClickUpMockup() {
         <div className="hidden md:flex items-center gap-2">
           <span className="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#7B68EE]/20 text-[#A78BFA] border border-[#7B68EE]/40 flex items-center gap-1 shadow-[0_0_12px_rgba(123,104,238,0.3)]">
             <span className="w-1.5 h-1.5 rounded-full bg-[#00D2FF] animate-pulse" />
-            Brain 4.0 Active
+            Brain Active
           </span>
         </div>
       </div>

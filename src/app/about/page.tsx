@@ -25,7 +25,7 @@ const timelineData = [
   },
   {
     year: "2026",
-    title: "Studio 4.0 Incorporation",
+    title: "Official Incorporation",
     text: "Krudex Technologies incorporated as a high-performance software engineering firm in Telangana, India."
   }
 ];
