@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/check-brand.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "check:brand": "node scripts/check-brand.mjs",
     "typecheck": "tsc --noEmit",
     "test:e2e": "playwright test"
   },

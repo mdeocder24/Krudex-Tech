@@ -46,7 +46,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1 flex flex-col items-start">
             <Link href="/" aria-label="Krudex Global — home" className="mb-6 block">
-              <BrandLogo decorative className="text-[18px] md:text-[20px]" />
+              <BrandLogo decorative className="text-[20px] md:text-[22px]" />
             </Link>
             <p className="text-krudex-muted text-sm leading-relaxed max-w-xs">
               SaaS products, Google Ads and digital marketing, and student training with industry experts, in collaboration with NovaSkill Hub.
