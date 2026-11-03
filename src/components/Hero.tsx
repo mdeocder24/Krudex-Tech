@@ -6,6 +6,8 @@ import { ArrowRight } from 'lucide-react';
 import MagneticButton from './MagneticButton';
 
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
+import { useCan3D } from '@/hooks/useCan3D';
 
 // Dynamically import 3D components with SSR disabled to optimize initial load
 const Hero3DObject = dynamic(() => import('./Hero3DObject'), {
@@ -48,11 +50,13 @@ const fadeInUp = (delay: number) => ({
 });
 
 const Hero = () => {
+  const can3D = useCan3D();
+
   return (
     <section className="relative min-h-screen w-full flex flex-col lg:flex-row items-center overflow-hidden bg-krudex-black">
       {/* Translucent Globe overlay — bottom left */}
       <div className="absolute bottom-0 left-0 w-[120vw] h-[120vw] lg:w-[50vw] lg:h-[50vw] translate-y-[40%] -translate-x-[20%] opacity-40 pointer-events-none z-0">
-        <GlobeObject />
+        {can3D && <GlobeObject />}
       </div>
 
       {/* Dot grid pattern overlay */}
@@ -83,7 +87,10 @@ const Hero = () => {
           animate="visible"
           className="font-serif text-[2.25rem] md:text-[3.5rem] lg:text-[3.75rem] xl:text-[4.25rem] font-normal leading-[1.08] tracking-tight text-white mb-5 md:mb-7"
         >
-          <span className="block overflow-hidden">
+          {/* Words are separate animated spans spaced by margin, so screen readers
+              and search engines get the sentence from this copy instead. */}
+          <span className="sr-only">We build SaaS products that scale.</span>
+          <span aria-hidden="true" className="block overflow-hidden">
             {['We', 'build', 'SaaS'].map((word, i) => (
               <motion.span
                 key={i}
@@ -94,7 +101,7 @@ const Hero = () => {
               </motion.span>
             ))}
           </span>
-          <span className="block overflow-hidden">
+          <span aria-hidden="true" className="block overflow-hidden">
             {['products', 'that', 'scale.'].map((word, i) => (
               <motion.span
                 key={i}
@@ -143,7 +150,20 @@ const Hero = () => {
         transition={{ duration: 1.5, delay: 0.6 }}
         className="w-full lg:w-[55%] h-[45vh] sm:h-[55vh] lg:h-screen relative z-10"
       >
-        <Hero3DObject />
+        {can3D === true && <Hero3DObject />}
+        {can3D === false && (
+          // Static stand-in for reduced-motion, Save-Data, or low-end devices.
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Image
+              src="/krudex-bg-gold.png"
+              alt=""
+              width={500}
+              height={500}
+              priority
+              className="w-[70%] max-w-[420px] h-auto opacity-90"
+            />
+          </div>
+        )}
 
         {/* Ambient glow layer (pillars have their own inner glow) */}
         <div className="absolute inset-0 pointer-events-none -z-10">

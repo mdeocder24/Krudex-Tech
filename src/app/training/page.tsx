@@ -1,8 +1,7 @@
-"use client";
 
 import React from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import * as motion from 'framer-motion/client';
 import { ArrowRight } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';

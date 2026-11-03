@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { WHATSAPP_URL } from '@/lib/site';
 
 const MotionLink = motion.create ? motion.create(Link) : motion(Link);
 
@@ -32,6 +33,7 @@ const footerLinks = [
       { label: 'Start a project', href: '/contact' },
       { label: 'krudextechnologies@gmail.com', href: 'mailto:krudextechnologies@gmail.com' },
       { label: '+91 89782 61053', href: 'tel:+918978261053' },
+      { label: 'WhatsApp', href: WHATSAPP_URL },
     ],
   },
 ];
@@ -46,7 +48,7 @@ const Footer = () => {
             <Link href="/" aria-label="Krudex Technologies — home" className="mb-6 block">
               <Image 
                 src="/krudex-bg-gold.png" 
-                alt="Krudex" 
+                alt="Krudex Technologies" 
                 width={240} 
                 height={80} 
                 className="h-16 w-auto object-contain scale-[2] md:scale-[2.5] origin-left"
@@ -66,6 +68,7 @@ const Footer = () => {
                   <li key={link.label}>
                     <MotionLink
                       href={link.href}
+                      {...(link.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                       whileHover={{ x: 4 }}
                       className="text-krudex-muted text-sm hover:text-white transition-colors inline-flex items-center gap-1 group min-h-11 max-w-full [overflow-wrap:anywhere]"
                     >
@@ -84,7 +87,15 @@ const Footer = () => {
           <p className="text-krudex-muted text-xs">
             © {new Date().getFullYear()} Krudex Technologies. All rights reserved.
           </p>
-          <p className="text-krudex-muted text-xs">Hyderabad, Telangana, India</p>
+          <nav aria-label="Legal" className="flex items-center gap-6">
+            <Link href="/privacy" className="text-krudex-muted text-xs hover:text-white transition-colors inline-flex items-center min-h-11">
+              Privacy
+            </Link>
+            <Link href="/terms" className="text-krudex-muted text-xs hover:text-white transition-colors inline-flex items-center min-h-11">
+              Terms
+            </Link>
+            <span className="text-krudex-muted text-xs">Hyderabad, Telangana, India</span>
+          </nav>
         </div>
       </div>
     </footer>

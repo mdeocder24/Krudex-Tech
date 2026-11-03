@@ -43,8 +43,18 @@ export default function GlobeObject() {
       markers: MARKERS,
     });
 
+    // Only render while the globe is on screen.
+    let visible = true;
+    const observer = new IntersectionObserver(([entry]) => {
+      const wasVisible = visible;
+      visible = entry.isIntersecting;
+      if (visible && !wasVisible) raf = requestAnimationFrame(animate);
+    });
+    observer.observe(canvas);
+
     let raf: number;
     const animate = () => {
+      if (!visible) return;
       if (!isDragging.current) {
         phi.current += 0.003;
       }
@@ -62,6 +72,7 @@ export default function GlobeObject() {
     window.addEventListener('resize', handleResize);
 
     return () => {
+      observer.disconnect();
       globe.destroy();
       cancelAnimationFrame(raf);
       window.removeEventListener('resize', handleResize);
