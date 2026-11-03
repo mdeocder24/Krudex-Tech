@@ -18,5 +18,5 @@ export const BRAND = {
   markSmallSrc: '/brand/krudex-global-mark-512.png',
   /** Transparent render of <BrandLogo variant="stacked" />, for the OG image. */
   lockupSrc: '/brand/krudex-global-lockup.png',
-  markAlt: 'Krudex Global symbol: chrome and gold orbit rings around a glass sphere with a glowing core',
+  markAlt: 'Krudex Global symbol: an isometric gold cube with a glowing core',
 } as const;
