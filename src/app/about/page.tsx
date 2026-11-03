@@ -6,23 +6,28 @@ import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
-const timelineData = [
+const vision =
+  "To be the technology partner that businesses and the next generation of builders trust to turn ideas into products that scale, from Hyderabad to the world.";
+
+const mission =
+  "To engineer dependable software, take it to market with growth you can measure, and train students in the skills the industry needs today.";
+
+const missionPillars = [
   {
-    year: "2022",
-    text: "Initial freelance practice established — delivering full-stack React and Python solutions."
+    label: "01 / BUILD",
+    title: "Products that last",
+    text: "We design and engineer SaaS platforms, mobile apps and AI features to production standards: documented, monitored and owned by you.",
   },
   {
-    year: "2023",
-    text: "Expanded into UI/UX and brand design. Delivered first AI/ML integration projects."
+    label: "02 / GROW",
+    title: "Growth you can measure",
+    text: "We take products to market with Google Ads, SEO, social and content, run as one system and judged by the leads and revenue they bring.",
   },
   {
-    year: "2024",
-    text: "TEDx MLRIT platform ships. Kemplast modernization completed. Client base exceeds 20 engagements."
+    label: "03 / EMPOWER",
+    title: "Skills for what's next",
+    text: "With NovaSkill Hub, we train students with industry experts so they learn how software and digital marketing are done in practice.",
   },
-  {
-    year: "2026",
-    text: "Krudex Global incorporated as an entity in Telangana, India."
-  }
 ];
 
 const principlesData = [
@@ -88,72 +93,72 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 2. Our Story / Timeline Section */}
+      {/* 2. Vision & Mission */}
       <section className="px-6 md:px-16 lg:px-24 py-24 md:py-32 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border relative z-10">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 lg:gap-32">
-            <motion.div 
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+            className="mb-16 md:mb-20"
+          >
+            <div className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-10">
+              <div className="w-1.5 h-1.5 rounded-full bg-krudex-accent"></div>
+              <span className="text-xs uppercase tracking-[0.2em] text-krudex-accent font-semibold">
+                VISION &amp; MISSION
+              </span>
+            </div>
+            <h2 className="font-serif text-4xl md:text-5xl text-white font-bold max-w-3xl leading-tight">
+              Why Krudex exists, and how we get there.
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-krudex-border border border-krudex-border mb-px">
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6 }}
-              className="flex flex-col"
+              className="bg-krudex-black p-10 lg:p-14"
             >
-              <div className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-10 self-start">
-                <div className="w-1.5 h-1.5 rounded-full bg-krudex-accent"></div>
-                <span className="text-xs uppercase tracking-[0.2em] text-krudex-accent font-semibold">
-                  OUR STORY
-                </span>
-              </div>
-              <h2 className="font-serif text-4xl md:text-5xl text-white font-bold mb-10">
-                From freelancer to firm.
-              </h2>
-              <div className="flex flex-col gap-8 text-krudex-muted text-base leading-relaxed">
-                <p>
-                  Krudex began as an independent engineering practice, taking on complex projects in full-stack React and Python. Driven by a commitment to quality and technical excellence, the work spoke for itself. Clients returned, and the scope of our engagements naturally evolved.
-                </p>
-                <p>
-                  Over three years, the practice expanded: first into AI and machine learning, then into UI/UX design and brand identity. We realized that each discipline reinforces the others. A product that performs at scale requires robust engineering and intuitive design in equal measure.
-                </p>
-                <p>
-                  In 2026, Krudex Global was incorporated in Telangana — formalizing what had already become a serious, multidisciplinary operation. The incorporation wasn&apos;t just a legal milestone. It was a clear signal: we are here to build enduring companies and scalable systems, not just websites.
-                </p>
-              </div>
+              <div className="text-krudex-accent font-mono text-sm mb-6">OUR VISION</div>
+              <p className="font-serif text-2xl md:text-3xl text-white leading-snug">
+                {vision}
+              </p>
             </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="bg-krudex-black p-10 lg:p-14"
+            >
+              <div className="text-krudex-accent font-mono text-sm mb-6">OUR MISSION</div>
+              <p className="font-serif text-2xl md:text-3xl text-white leading-snug">
+                {mission}
+              </p>
+            </motion.div>
+          </div>
 
-            <div className="flex flex-col">
-              {timelineData.map((item, idx) => (
-                <motion.div 
-                  key={idx}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.6, delay: idx * 0.1 }}
-                  className="flex gap-8 relative pb-16 last:pb-0"
-                >
-                  {/* Vertical Line */}
-                  {idx !== timelineData.length - 1 && (
-                    <div className="absolute left-6 top-8 bottom-0 w-px bg-krudex-border/50 hidden md:block"></div>
-                  )}
-                  
-                  <div className="flex-shrink-0">
-                    <div className="border border-krudex-border bg-krudex-black px-4 py-2 text-white font-mono text-sm relative z-10">
-                      {item.year}
-                    </div>
-                  </div>
-                  
-                  <div className="pt-2">
-                    <p className="text-krudex-muted text-sm leading-relaxed">{item.text}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-krudex-border border border-t-0 border-krudex-border">
+            {missionPillars.map((pillar, idx) => (
+              <motion.div
+                key={pillar.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="bg-krudex-black p-10"
+              >
+                <div className="text-krudex-muted font-mono text-sm mb-6">{pillar.label}</div>
+                <h3 className="text-white font-bold text-xl mb-4">{pillar.title}</h3>
+                <p className="text-krudex-muted text-sm leading-relaxed">{pillar.text}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
-
-
-
 
       {/* 4. Principles Section */}
       <section className="px-6 md:px-16 lg:px-24 py-24 md:py-32 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border relative z-10">

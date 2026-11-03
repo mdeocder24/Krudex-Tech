@@ -223,7 +223,7 @@ The assistant, scoper and triage answer only from the site's own content (`src/c
 | `/` | Landing page featuring 3D Hero, interactive globe, metrics, services overview, and engineering process. |
 | `/services` | Comprehensive breakdown of engineering capabilities (AI, Web, Cloud, Product Design, Digital Marketing). |
 | `/training` | Student training led by industry experts, in collaboration with NovaSkill Hub. |
-| `/about` | Company background, engineering timeline (2022–2026), and foundational principles. |
+| `/about` | Company overview, vision and mission, and operating principles. |
 | `/our-team` | Profiles and technical specializations of Krudex engineers and designers. |
 | `/contact` | Project scoping inquiry form connected to Cloudflare D1 database. |
 | `/privacy` | Privacy policy and data handling transparency. |
