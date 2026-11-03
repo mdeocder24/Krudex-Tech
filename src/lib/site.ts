@@ -17,8 +17,10 @@ export { BRAND } from '@/components/brand/brand';
 import { BRAND } from '@/components/brand/brand';
 export const SITE_NAME = BRAND.name;
 export const CONTACT_EMAIL = 'krudextechnologies@gmail.com';
-export const PHONES = ['+918978261053', '+919490248160'] as const;
-export const WHATSAPP_NUMBER = '918978261053';
+export const PHONES = ['+917207363444'] as const;
+/** How the phone number is shown on the page. */
+export const PHONE_DISPLAY = '+91 72073 63444';
+export const WHATSAPP_NUMBER = '917207363444';
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
   'Hi Krudex, I found you on your website and would like to talk.'
 )}`;

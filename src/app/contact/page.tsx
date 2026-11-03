@@ -7,7 +7,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Mail, Phone, MapPin, ChevronDown, Check, AlertCircle, ArrowRight, Loader2, MessageCircle } from 'lucide-react';
 import Turnstile, { TURNSTILE_SITE_KEY } from '@/components/Turnstile';
-import { WHATSAPP_URL } from '@/lib/site';
+import { PHONES, PHONE_DISPLAY, WHATSAPP_URL } from '@/lib/site';
 import { faqs } from '@/lib/faqs';
 import ServiceSuggester from '@/components/ServiceSuggester';
 
@@ -448,8 +448,7 @@ export default function ContactPage() {
                 <div className="flex flex-col">
                   <span className="text-xs uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">PHONE</span>
                   <div className="flex flex-wrap gap-x-4 gap-y-1">
-                    <a href="tel:+918978261053" className="inline-flex items-center min-h-11 text-white font-medium text-sm underline-offset-4 hover:underline">+91 89782 61053</a>
-                    <a href="tel:+919490248160" className="inline-flex items-center min-h-11 text-white font-medium text-sm underline-offset-4 hover:underline">+91 94902 48160</a>
+                    <a href={`tel:${PHONES[0]}`} className="inline-flex items-center min-h-11 text-white font-medium text-sm underline-offset-4 hover:underline">{PHONE_DISPLAY}</a>
                   </div>
                 </div>
               </div>

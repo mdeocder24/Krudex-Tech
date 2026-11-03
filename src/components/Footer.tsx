@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { BrandLogo } from '@/components/brand';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
-import { WHATSAPP_URL } from '@/lib/site';
+import { PHONES, PHONE_DISPLAY, WHATSAPP_URL } from '@/lib/site';
 
 const MotionLink = motion.create ? motion.create(Link) : motion(Link);
 
@@ -32,7 +32,7 @@ const footerLinks = [
     links: [
       { label: 'Start a project', href: '/contact' },
       { label: 'krudextechnologies@gmail.com', href: 'mailto:krudextechnologies@gmail.com' },
-      { label: '+91 89782 61053', href: 'tel:+918978261053' },
+      { label: PHONE_DISPLAY, href: `tel:${PHONES[0]}` },
       { label: 'WhatsApp', href: WHATSAPP_URL },
     ],
   },
