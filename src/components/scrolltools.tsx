@@ -7,26 +7,31 @@ const tools = [
   { name: 'Next.js', style: 'font-bold' },
   { name: 'TypeScript', style: 'italic' },
   { name: 'Node.js', style: 'font-medium' },
+  { name: 'Google Ads', style: 'font-semibold' },
   { name: 'Python', style: 'tracking-wider' },
   { name: 'TensorFlow', style: 'font-serif italic' },
   { name: 'PyTorch', style: 'font-bold' },
   { name: 'OpenAI', style: 'font-mono uppercase' },
   { name: 'LangChain', style: 'font-semibold' },
+  { name: 'Meta Ads', style: 'font-bold' },
   { name: 'Hugging Face', style: 'italic' },
   { name: 'React Native', style: 'italic' },
   { name: 'Flutter', style: 'font-medium tracking-wide' },
   { name: 'Swift', style: 'font-semibold' },
   { name: 'Kotlin', style: 'tracking-widest' },
   { name: 'Figma', style: 'font-medium' },
+  { name: 'Google Analytics 4', style: 'italic' },
   { name: 'Tailwind CSS', style: 'italic' },
   { name: 'Prisma', style: 'font-bold tracking-widest' },
   { name: 'GraphQL', style: 'font-semibold' },
   { name: 'Supabase', style: 'font-semibold' },
+  { name: 'Search Console', style: 'font-medium tracking-wide' },
   { name: 'Next.js', style: 'italic text-transparent bg-clip-text bg-gradient-to-r from-gray-500 via-white to-gray-500 animate-shine' },
   { name: 'PostgreSQL', style: 'font-serif' },
   { name: 'MongoDB', style: 'italic' },
   { name: 'Redis', style: 'font-bold' },
   { name: 'AWS', style: 'font-bold uppercase' },
+  { name: 'Tag Manager', style: 'font-semibold' },
   { name: 'Vercel', style: 'tracking-wider' },
   { name: 'Docker', style: 'italic' },
   { name: 'Kubernetes', style: 'font-semibold' },
@@ -35,7 +40,7 @@ const tools = [
 
 const ScrollTools = () => {
   return (
-    <section aria-label="Technologies we work with" className="w-full py-8 md:py-12 border-t border-krudex-border bg-krudex-black relative z-10 overflow-hidden">
+    <section aria-label="Technologies and marketing tools we work with" className="w-full py-8 md:py-12 border-t border-krudex-border bg-krudex-black relative z-10 overflow-hidden">
       <style>{`
         @keyframes marquee {
           0% { transform: translateX(0); }
@@ -46,7 +51,7 @@ const ScrollTools = () => {
           100% { background-position: -200% center; }
         }
         .animate-marquee {
-          animation: marquee 35s linear infinite;
+          animation: marquee 40s linear infinite;
         }
         .animate-shine {
           background-size: 200% auto;
