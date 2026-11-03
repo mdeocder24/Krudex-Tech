@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react';
 import MagneticButton from './MagneticButton';
 
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
+import { BrandLogo } from '@/components/brand';
 import { useCan3D } from '@/hooks/useCan3D';
 
 // Dynamically import 3D components with SSR disabled to optimize initial load
@@ -63,7 +63,7 @@ const Hero = () => {
       <div className="absolute inset-0 dot-grid opacity-100 pointer-events-none z-0" />
 
       {/* ── Left: Text Content ───────────────── */}
-      <div className="w-full lg:w-[45%] z-10 flex flex-col justify-center items-start px-6 md:px-14 lg:px-20 pt-[calc(8rem+env(safe-area-inset-top))] lg:pt-0 pb-4 lg:pb-0">
+      <div className="w-full lg:w-[45%] z-10 flex flex-col justify-center items-start px-6 md:px-14 lg:px-20 min-[1920px]:pl-32 pt-[calc(8rem+env(safe-area-inset-top))] lg:pt-0 pb-4 lg:pb-0">
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
@@ -75,7 +75,7 @@ const Hero = () => {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-krudex-accent opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-krudex-accent"></span>
           </span>
-          <span className="text-[10.5px] sm:text-xs font-mono text-krudex-muted group-hover:text-white sm:tracking-wide min-[360px]:whitespace-nowrap transition-colors">
+          <span className="text-[10.5px] sm:text-xs font-mono text-krudex-muted group-hover:text-white sm:tracking-wide min-[360px]:whitespace-nowrap lg:whitespace-normal xl:whitespace-nowrap min-[1920px]:text-sm transition-colors">
             SaaS · Digital Marketing · Student Training
           </span>
         </motion.div>
@@ -117,7 +117,7 @@ const Hero = () => {
         {/* Subtitle */}
         <motion.p
           {...fadeInUp(0.9)}
-          className="text-krudex-muted text-[14px] md:text-[15px] leading-relaxed max-w-md mb-8 md:mb-10"
+          className="text-krudex-muted text-[14px] md:text-[15px] min-[1920px]:text-[17px] min-[2400px]:text-[19px] leading-relaxed max-w-md mb-8 md:mb-10"
         >
           Krudex builds SaaS products, grows businesses with Google Ads and digital marketing, and trains students with industry experts in collaboration with NovaSkill Hub.
         </motion.p>
@@ -129,14 +129,14 @@ const Hero = () => {
         >
           <MagneticButton
             href="/contact"
-            className="group relative inline-flex items-center justify-center gap-2 whitespace-nowrap bg-krudex-accent text-krudex-black px-7 md:px-6 py-3.5 md:py-4 text-[13px] md:text-[14px] font-semibold tracking-wide hover:bg-krudex-accent-hover transition-all rounded-full shadow-[0_0_30px_rgba(212,180,131,0.25)] hover:shadow-[0_0_40px_rgba(212,180,131,0.4)] hover:scale-[1.02]"
+            className="group relative inline-flex items-center justify-center gap-2 whitespace-nowrap bg-krudex-accent text-krudex-black px-7 md:px-6 py-3.5 md:py-4 text-[13px] md:text-[14px] min-[1920px]:text-[16px] font-semibold tracking-wide hover:bg-krudex-accent-hover transition-all rounded-full shadow-[0_0_30px_rgba(212,180,131,0.25)] hover:shadow-[0_0_40px_rgba(212,180,131,0.4)] hover:scale-[1.02]"
           >
             <span>Book a Strategy Call</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </MagneticButton>
           <MagneticButton
             href="/training"
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap border border-white/30 text-white px-7 md:px-6 py-3.5 md:py-4 text-[13px] md:text-[14px] font-medium tracking-wide hover:bg-white/10 transition-colors rounded-full"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap border border-white/30 text-white px-7 md:px-6 py-3.5 md:py-4 text-[13px] md:text-[14px] min-[1920px]:text-[16px] font-medium tracking-wide hover:bg-white/10 transition-colors rounded-full"
           >
             Student Training
           </MagneticButton>
@@ -154,14 +154,7 @@ const Hero = () => {
         {can3D === false && (
           // Static stand-in for reduced-motion, Save-Data, or low-end devices.
           <div className="absolute inset-0 flex items-center justify-center">
-            <Image
-              src="/krudex-bg-gold.png"
-              alt=""
-              width={500}
-              height={500}
-              priority
-              className="w-[70%] max-w-[420px] h-auto opacity-90"
-            />
+            <BrandLogo variant="stacked" decorative priority className="text-[30px] sm:text-[40px] lg:text-[48px]" />
           </div>
         )}
 

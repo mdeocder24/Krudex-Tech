@@ -1,4 +1,5 @@
 import { CONTACT_EMAIL, PHONES, SITE_NAME, SITE_URL } from './site';
+import { BRAND } from '@/components/brand/brand';
 import { faqs } from './faqs';
 
 export const organizationJsonLd = {
@@ -7,7 +8,7 @@ export const organizationJsonLd = {
   '@id': `${SITE_URL}/#organization`,
   name: SITE_NAME,
   url: SITE_URL,
-  logo: `${SITE_URL}/krudex-bg-gold.png`,
+  logo: `${SITE_URL}${BRAND.markSmallSrc}`,
   email: CONTACT_EMAIL,
   telephone: PHONES[0],
   description:

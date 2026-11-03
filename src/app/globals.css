@@ -72,6 +72,15 @@ dd {
   scroll-margin-top: 6rem;
 }
 
+/* Large and ultra-wide monitors: scale every rem-based size and container
+   together so pages don't look like a small island in the middle. */
+@media (min-width: 1920px) {
+  html { font-size: 112.5%; }
+}
+@media (min-width: 2400px) {
+  html { font-size: 125%; }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -130,4 +139,32 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ── Krudex Global wordmark (src/components/brand/Wordmark.tsx) ──
+   Values from design/logo-gyro-reference/Gyro.dc.html; depth shadow
+   converted from px at 72px to em so it scales with the wordmark. */
+.kx-chrome {
+  background: linear-gradient(180deg, #ffffff 0%, #dadbe0 30%, #7a7c83 49%, #2e2f34 51%, #8c8e95 66%, #ececf0 86%, #ffffff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.kx-gold {
+  background: linear-gradient(180deg, #fff3d8 0%, #e7c98f 34%, #9c7742 49%, #5b4220 52%, #b8925a 70%, #f3ddb0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.kx-depth {
+  color: #16161a;
+  text-shadow:
+    0.014em 0.014em 0 #1c1c20,
+    0.028em 0.028em 0 #202025,
+    0.042em 0.042em 0 #25252a,
+    0.056em 0.056em 0 #29292f,
+    0.07em 0.07em 0 #222227,
+    0.14em 0.19em 0.28em rgba(0, 0, 0, 0.75);
 }
