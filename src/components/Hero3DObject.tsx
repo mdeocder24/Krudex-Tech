@@ -4,6 +4,7 @@ import React, { useRef, useMemo, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Edges, Text } from '@react-three/drei';
 import * as THREE from 'three';
+import { useInView } from 'framer-motion';
 
 /* ─────────────────────────────────────────────
    Pillar Material — Vertical Gradient Shader
@@ -247,9 +248,14 @@ const DataArchitectureScene = () => {
    Exported Canvas Component
    ───────────────────────────────────────────── */
 const Hero3DObject = () => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  // Stop rendering frames while the hero is scrolled out of view.
+  const inView = useInView(wrapperRef, { margin: '100px' });
+
   return (
-    <div className="w-full h-full absolute inset-0 pointer-events-none">
+    <div ref={wrapperRef} className="w-full h-full absolute inset-0 pointer-events-none">
       <Canvas
+        frameloop={inView ? 'always' : 'never'}
         // Camera positioned to perfectly frame the isometric layout on all screen sizes
         camera={{
           position: [0, 8, 20],

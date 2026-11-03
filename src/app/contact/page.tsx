@@ -5,46 +5,11 @@ import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Mail, Phone, MapPin, ChevronDown, Check, AlertCircle, ArrowRight, Loader2 } from 'lucide-react';
+import { Mail, Phone, MapPin, ChevronDown, Check, AlertCircle, ArrowRight, Loader2, MessageCircle } from 'lucide-react';
+import Turnstile, { TURNSTILE_SITE_KEY } from '@/components/Turnstile';
+import { WHATSAPP_URL } from '@/lib/site';
+import { faqs } from '@/lib/faqs';
 
-const faqs = [
-  {
-    question: "Do you work with international clients?",
-    answer: "Yes, we work with clients globally. We overlap our working hours to ensure synchronous communication and use async tools heavily to maintain momentum."
-  },
-  {
-    question: "Do you run Google Ads and digital marketing?",
-    answer: "Yes. We plan and run Google Ads alongside SEO, social, and content, and report results through GA4 conversion tracking."
-  },
-  {
-    question: "Do you offer training for students?",
-    answer: "Yes. We train students with industry experts, in collaboration with NovaSkill Hub. Choose Student training in the form and we'll share the current format, dates, and fees."
-  },
-  {
-    question: "How does the engagement process work?",
-    answer: "For product builds, it starts with a 30-minute scoping call, followed by a technical audit. We then present a detailed architecture document and statement of work before any code is written."
-  },
-  {
-    question: "Do you offer ongoing maintenance after launch?",
-    answer: "Yes. Every project includes a 30-day warranty period, after which we offer structured retainers for ongoing feature development and infrastructure maintenance."
-  },
-  {
-    question: "Who owns the IP and source code upon completion?",
-    answer: "Krudex transfers 100% of custom source code and intellectual property (IP) rights to you upon final project milestone payment. We do not lock you into proprietary vendor frameworks."
-  },
-  {
-    question: "What's the minimum project size you take on?",
-    answer: "We typically engage on product builds starting from 4-6 weeks in duration. Our focus is on complex, high-impact systems rather than simple brochure websites."
-  },
-  {
-    question: "What if our internal data is messy or incomplete for AI integration?",
-    answer: "Our AI discovery phase includes a thorough data audit. We build secure data pipelines to clean, structure, and sanitize your datasets before models are trained or RAG databases are compiled, ensuring complete security."
-  },
-  {
-    question: "How do you handle data security and compliance?",
-    answer: "We treat data privacy as a primary engineering requirement. We sign comprehensive NDAs, utilize end-to-end encryption for all pipeline stages, and design integrations adhering to SOC 2, HIPAA, and GDPR standards."
-  }
-];
 
 const serviceOptions = [
   'Web platform',
@@ -72,6 +37,8 @@ const emptyForm = {
   company: '',
   timeline: '',
   details: '',
+  // Honeypot. Hidden from people; bots that fill every field reveal themselves.
+  website: '',
 };
 
 const inputClass =
@@ -102,6 +69,8 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [turnstileReset, setTurnstileReset] = useState(0);
 
   const isTrainingEnquiry = services.includes(TRAINING_SERVICE);
 
@@ -129,6 +98,10 @@ export default function ContactPage() {
       setServicesError(true);
       return;
     }
+    if (TURNSTILE_SITE_KEY && !turnstileToken) {
+      setError('Please complete the verification check below.');
+      return;
+    }
     setIsSubmitting(true);
     setError('');
 
@@ -142,11 +115,17 @@ export default function ContactPage() {
         body: JSON.stringify({
           ...formData,
           scope: services.join(', '),
+          turnstileToken,
         }),
       });
 
       if (!res.ok) {
         const errorData = await res.json().catch(() => null);
+        // Show the server's message for problems the visitor can fix (validation, rate limit).
+        if (res.status === 400 || res.status === 413 || res.status === 429) {
+          setError(errorData?.error || "We couldn't send your inquiry.");
+          return;
+        }
         throw new Error(errorData?.error || 'Failed to submit inquiry');
       }
 
@@ -158,11 +137,14 @@ export default function ContactPage() {
       setError("We couldn't send your inquiry. Please try again, or email us directly.");
     } finally {
       setIsSubmitting(false);
+      // Turnstile tokens are single-use.
+      setTurnstileToken('');
+      setTurnstileReset((n) => n + 1);
     }
   };
 
   return (
-    <main className="min-h-screen bg-transparent selection:bg-krudex-accent selection:text-krudex-black flex flex-col">
+    <main className="min-h-svh bg-transparent selection:bg-krudex-accent selection:text-krudex-black flex flex-col">
       <Suspense fallback={null}>
         <TrainingInterest onMatch={selectTraining} />
       </Suspense>
@@ -238,7 +220,7 @@ export default function ContactPage() {
                     </button>
                   </motion.div>
                 ) : (
-                  <form className="flex flex-col gap-10" onSubmit={handleSubmit}>
+                  <form className="relative flex flex-col gap-10" onSubmit={handleSubmit}>
                     <div>
                       <h2 className="text-white text-2xl font-bold mb-2">Send an inquiry</h2>
                       <p className="text-krudex-muted text-sm">
@@ -259,6 +241,7 @@ export default function ContactPage() {
                             onChange={handleChange}
                             required
                             autoComplete="name"
+                            maxLength={120}
                             placeholder="Vishwanath Rao"
                             className={inputClass}
                           />
@@ -273,6 +256,7 @@ export default function ContactPage() {
                             onChange={handleChange}
                             required
                             autoComplete="email"
+                            maxLength={254}
                             inputMode="email"
                             placeholder="vishwa@company.in"
                             className={inputClass}
@@ -291,6 +275,7 @@ export default function ContactPage() {
                           value={formData.company}
                           onChange={handleChange}
                           autoComplete="organization"
+                          maxLength={160}
                           placeholder="Acme Technologies"
                           className={inputClass}
                         />
@@ -355,11 +340,27 @@ export default function ContactPage() {
                           ? 'What do you want to learn, and what are you studying now?'
                           : 'What are you building, who is it for, and what does success look like?'}
                         rows={5}
+                        maxLength={5000}
                         className={`${inputClass} resize-y min-h-32`}
                       ></textarea>
                     </div>
 
+                    {/* Honeypot: off-screen, skipped by keyboard and screen readers */}
+                    <div aria-hidden="true" className="absolute w-px h-px overflow-hidden opacity-0 pointer-events-none [clip-path:inset(50%)]">
+                      <label htmlFor="website">Website</label>
+                      <input
+                        id="website"
+                        type="text"
+                        name="website"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={formData.website}
+                        onChange={handleChange}
+                      />
+                    </div>
+
                     <div className="flex flex-col gap-4">
+                      <Turnstile onToken={setTurnstileToken} resetKey={turnstileReset} />
                       {error && (
                         <div role="alert" className="flex items-start gap-3 border border-white/40 bg-white/[0.04] rounded-md p-4 text-sm text-white">
                           <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
@@ -418,7 +419,7 @@ export default function ContactPage() {
               {/* Email */}
               <div className="flex items-center gap-6">
                 <div className="w-12 h-12 border border-krudex-border flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-5 h-5 text-white" />
+                  <Mail className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xs uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">EMAIL</span>
@@ -429,7 +430,7 @@ export default function ContactPage() {
               {/* Phone */}
               <div className="flex items-center gap-6">
                 <div className="w-12 h-12 border border-krudex-border flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-5 h-5 text-white" />
+                  <Phone className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xs uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">PHONE</span>
@@ -440,10 +441,23 @@ export default function ContactPage() {
                 </div>
               </div>
 
+              {/* WhatsApp */}
+              <div className="flex items-center gap-6">
+                <div className="w-12 h-12 border border-krudex-border flex items-center justify-center flex-shrink-0">
+                  <MessageCircle className="w-5 h-5 text-white" aria-hidden="true" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-xs uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">WHATSAPP</span>
+                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center min-h-11 text-white font-medium text-sm underline-offset-4 hover:underline">
+                    Chat on WhatsApp
+                  </a>
+                </div>
+              </div>
+
               {/* Office */}
               <div className="flex items-center gap-6">
                 <div className="w-12 h-12 border border-krudex-border flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-5 h-5 text-white" />
+                  <MapPin className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xs uppercase tracking-[0.2em] text-krudex-muted font-mono mb-1">OFFICE</span>
@@ -476,8 +490,11 @@ export default function ContactPage() {
                 {faqs.map((faq, idx) => (
                   <div key={idx} className="bg-krudex-card/30 border border-krudex-border overflow-hidden transition-colors hover:border-white/25">
                     <button
+                      type="button"
+                      id={`faq-q-${idx}`}
                       onClick={() => toggleFaq(idx)}
                       aria-expanded={openFaq === idx}
+                      aria-controls={`faq-a-${idx}`}
                       className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/[0.03] transition-colors"
                     >
                       <span className="text-white text-sm font-medium pr-8">{faq.question}</span>
@@ -486,6 +503,9 @@ export default function ContactPage() {
                     <AnimatePresence>
                       {openFaq === idx && (
                         <motion.div
+                          id={`faq-a-${idx}`}
+                          role="region"
+                          aria-labelledby={`faq-q-${idx}`}
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}

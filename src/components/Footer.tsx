@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { WHATSAPP_URL } from '@/lib/site';
 
 const MotionLink = motion.create ? motion.create(Link) : motion(Link);
 
@@ -32,21 +33,22 @@ const footerLinks = [
       { label: 'Start a project', href: '/contact' },
       { label: 'krudextechnologies@gmail.com', href: 'mailto:krudextechnologies@gmail.com' },
       { label: '+91 89782 61053', href: 'tel:+918978261053' },
+      { label: 'WhatsApp', href: WHATSAPP_URL },
     ],
   },
 ];
 
 const Footer = () => {
   return (
-    <footer className="px-6 md:px-14 lg:px-20 pt-20 pb-8 bg-krudex-black border-t border-krudex-border relative z-10">
+    <footer className="px-6 md:px-14 lg:px-20 pt-20 pb-[calc(2rem+env(safe-area-inset-bottom))] bg-krudex-black border-t border-krudex-border relative z-10">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 lg:gap-12 mb-16">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1 flex flex-col items-start">
-            <Link href="/" aria-label="Krudex Technologies — home" className="mb-6 block">
+            <Link href="/" aria-label="Krudex Global — home" className="mb-6 block">
               <Image 
                 src="/krudex-bg-gold.png" 
-                alt="Krudex" 
+                alt="Krudex Global" 
                 width={240} 
                 height={80} 
                 className="h-16 w-auto object-contain scale-[2] md:scale-[2.5] origin-left"
@@ -66,6 +68,7 @@ const Footer = () => {
                   <li key={link.label}>
                     <MotionLink
                       href={link.href}
+                      {...(link.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                       whileHover={{ x: 4 }}
                       className="text-krudex-muted text-sm hover:text-white transition-colors inline-flex items-center gap-1 group min-h-11 max-w-full [overflow-wrap:anywhere]"
                     >
@@ -82,9 +85,17 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="border-t border-krudex-border pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-krudex-muted text-xs">
-            © {new Date().getFullYear()} Krudex Technologies. All rights reserved.
+            © {new Date().getFullYear()} Krudex Global. All rights reserved.
           </p>
-          <p className="text-krudex-muted text-xs">Hyderabad, Telangana, India</p>
+          <nav aria-label="Legal" className="flex items-center gap-6">
+            <Link href="/privacy" className="text-krudex-muted text-xs hover:text-white transition-colors inline-flex items-center min-h-11">
+              Privacy
+            </Link>
+            <Link href="/terms" className="text-krudex-muted text-xs hover:text-white transition-colors inline-flex items-center min-h-11">
+              Terms
+            </Link>
+            <span className="text-krudex-muted text-xs">Hyderabad, Telangana, India</span>
+          </nav>
         </div>
       </div>
     </footer>

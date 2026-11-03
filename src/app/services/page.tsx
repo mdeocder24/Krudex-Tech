@@ -1,7 +1,6 @@
-"use client";
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import * as motion from 'framer-motion/client';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import Navbar from '@/components/Navbar';
@@ -89,7 +88,7 @@ const servicesData = [
 
 export default function ServicesPage() {
   return (
-    <main className="min-h-screen bg-transparent selection:bg-krudex-accent selection:text-krudex-black flex flex-col">
+    <main className="min-h-svh bg-transparent selection:bg-krudex-accent selection:text-krudex-black flex flex-col">
       <Navbar />
 
       <section className="px-6 md:px-16 lg:px-24 pt-40 md:pt-48 pb-24 md:pb-32 bg-krudex-black/40 backdrop-blur-md relative z-10">

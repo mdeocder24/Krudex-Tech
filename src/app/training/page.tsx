@@ -1,8 +1,7 @@
-"use client";
 
 import React from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import * as motion from 'framer-motion/client';
 import { ArrowRight } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -52,7 +51,7 @@ const stepsData = [
 
 export default function TrainingPage() {
   return (
-    <main className="min-h-screen bg-transparent selection:bg-krudex-accent selection:text-krudex-black flex flex-col">
+    <main className="min-h-svh bg-transparent selection:bg-krudex-accent selection:text-krudex-black flex flex-col">
       <Navbar />
 
       {/* 1. Hero Section */}
@@ -84,7 +83,7 @@ export default function TrainingPage() {
               className="flex flex-col items-start"
             >
               <p className="text-krudex-muted text-lg leading-relaxed mb-10">
-                Krudex Technologies trains students with industry experts, in collaboration with NovaSkill Hub. Learn how software and digital marketing work from people who practise them.
+                Krudex Global trains students with industry experts, in collaboration with NovaSkill Hub. Learn how software and digital marketing work from people who practise them.
               </p>
               <Link
                 href="/contact?interest=training"

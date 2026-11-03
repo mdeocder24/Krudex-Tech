@@ -1,7 +1,6 @@
-"use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import * as motion from 'framer-motion/client';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
@@ -108,7 +107,7 @@ const teamMembers = [
 
 export default function OurTeamPage() {
   return (
-    <main className="min-h-screen bg-transparent selection:bg-krudex-accent selection:text-krudex-black flex flex-col">
+    <main className="min-h-svh bg-transparent selection:bg-krudex-accent selection:text-krudex-black flex flex-col">
       <Navbar />
 
       {/* === Hero Section === */}

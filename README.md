@@ -1,6 +1,6 @@
-# Krudex Technologies — Official Website & Platform
+# Krudex Global — Official Website & Platform
 
-A high-performance, modern web application and corporate portfolio for **Krudex Technologies** — a specialized software engineering studio building high-impact web platforms, interactive 3D WebGL experiences, enterprise AI integrations, Google Ads and digital marketing, and student training with industry experts in collaboration with NovaSkill Hub.
+A high-performance, modern web application and corporate portfolio for **Krudex Global** — a specialized software engineering studio building high-impact web platforms, interactive 3D WebGL experiences, enterprise AI integrations, Google Ads and digital marketing, and student training with industry experts in collaboration with NovaSkill Hub.
 
 Built with **Next.js 16 (App Router)**, **React 19**, **Three.js / React Three Fiber**, **Tailwind CSS v4**, and backed by **Cloudflare D1** (Serverless Edge SQLite).
 
@@ -8,10 +8,13 @@ Built with **Next.js 16 (App Router)**, **React 19**, **Three.js / React Three F
 
 ## 🌟 Key Highlights & Features
 
-- **Interactive 3D Graphics & WebGL**: Immersive 3D hero canvas powered by Three.js and React Three Fiber (`@react-three/fiber`, `@react-three/drei`) with smooth mouse-tracking and custom post-processing shaders.
+- **Interactive 3D Graphics & WebGL**: Immersive 3D hero canvas powered by Three.js and React Three Fiber (`@react-three/fiber`, `@react-three/drei`) with smooth mouse-tracking and custom shaders. Falls back to a static logo for reduced-motion, Save-Data, and low-memory devices, and pauses rendering when off-screen.
 - **Interactive 3D Edge Globe**: Real-time canvas globe powered by `cobe` with auto-rotation, point markers, and coordinate mapping.
 - **Fluid Motion & Micro-interactions**: Smooth inertia scrolling powered by `lenis`, magnetic buttons, custom cursors, and layout transitions with `framer-motion`.
 - **Serverless Edge Database**: Contact form inquiries securely saved to **Cloudflare D1** SQLite database through dedicated Next.js App Router API Route Handlers.
+- **Hardened Contact API**: Field length caps, honeypot, per-IP rate limiting, optional Cloudflare Turnstile, and optional email notification via Resend.
+- **SEO**: `sitemap.xml`, `robots.txt`, canonical URLs, generated Open Graph image, and JSON-LD (Organization, WebSite, FAQPage).
+- **Security headers**: HSTS, X-Frame-Options, nosniff, Referrer-Policy, Permissions-Policy, and a Content-Security-Policy (currently Report-Only).
 - **Design System**: Tailored dark-mode aesthetic utilizing **Tailwind CSS v4** and modern typography.
 - **Fully Responsive**: Optimized across desktop, tablet, and mobile breakpoints.
 
@@ -48,7 +51,10 @@ Krudex-Tech/
 │   │   ├── privacy/        # Privacy policy documentation
 │   │   ├── services/       # Engineering capabilities & service offerings
 │   │   ├── terms/          # Terms of service
-│   │   ├── layout.tsx      # Root layout (fonts, metadata, smooth scroll)
+│   │   ├── layout.tsx      # Root layout (fonts, metadata, JSON-LD, smooth scroll)
+│   │   ├── sitemap.ts      # Generated sitemap.xml
+│   │   ├── robots.ts       # Generated robots.txt
+│   │   ├── opengraph-image.tsx # Generated social preview image
 │   │   └── page.tsx        # Homepage (Hero, 3D Canvas, Stats, Process, CTA)
 │   ├── components/         # Reusable UI & 3D WebGL components
 │   │   ├── Hero.tsx        # Hero section with headline and 3D integration
@@ -59,7 +65,15 @@ Krudex-Tech/
 │   │   ├── SmoothScroll.tsx# Lenis smooth-scroll wrapper
 │   │   └── ...             # Stats, Process, CTA, MagneticButton
 │   └── lib/
-│       └── d1.ts           # Cloudflare D1 client & query utility
+│       ├── d1.ts           # Cloudflare D1 client & query utility
+│       ├── site.ts         # Site URL, contact details, route list
+│       ├── rate-limit.ts   # In-memory per-IP rate limiter
+│       ├── turnstile.ts    # Optional Cloudflare Turnstile verification
+│       ├── notify.ts       # Optional Resend email on new inquiry
+│       └── structured-data.ts # JSON-LD payloads
+├── e2e/                    # Playwright smoke tests
+├── .github/workflows/ci.yml # Lint, typecheck, build, e2e on every PR
+├── design/brand-archive/   # Old brand images (not deployed)
 ├── d1_schema.sql           # SQLite database schema for Cloudflare D1
 ├── .env.example            # Sample environment variables template
 ├── next.config.ts          # Next.js configuration & routing rules
@@ -95,13 +109,17 @@ Copy `.env.example` to create your local `.env.local` file:
 cp .env.example .env.local
 ```
 
-Open `.env.local` and add your Cloudflare credentials:
-```env
-# Cloudflare D1 Database Configuration
-CLOUDFLARE_ACCOUNT_ID=your_account_id
-CLOUDFLARE_D1_DATABASE_ID=your_d1_database_id
-CLOUDFLARE_D1_API_TOKEN=your_cloudflare_api_token
-```
+Open `.env.local` and fill in the values:
+
+| Variable | Required | Purpose |
+|---|---|---|
+| `CLOUDFLARE_ACCOUNT_ID` | Yes | Cloudflare account that owns the D1 database |
+| `CLOUDFLARE_D1_DATABASE_ID` | Yes | D1 database for inquiries |
+| `CLOUDFLARE_D1_API_TOKEN` | Yes | API token with `Account.D1:Edit` |
+| `NEXT_PUBLIC_SITE_URL` | Yes in production | Origin used in canonical URLs, sitemap, robots, OG tags |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` / `TURNSTILE_SECRET_KEY` | Optional | Turnstile bot check on the contact form (set both) |
+| `RESEND_API_KEY` / `CONTACT_NOTIFY_EMAIL` | Optional | Email the team on each new inquiry |
+| `CONTACT_FROM_EMAIL` | Optional | Sender address on a Resend-verified domain |
 
 ---
 
@@ -153,11 +171,15 @@ npm run build
 npm run start
 ```
 
-### Code Quality & Linting
-Run ESLint to check for code standard conformance:
+### Code Quality & Tests
 ```bash
-npm run lint
+npm run lint        # ESLint
+npm run typecheck   # TypeScript
+npm run build && npm run test:e2e   # Playwright smoke tests against the production build
 ```
+The first Playwright run needs a browser: `npx playwright install chromium`, or reuse installed Chrome with `PW_CHANNEL=chrome npm run test:e2e`. The contact-form test mocks `/api/contact`, so it never writes to D1.
+
+CI (`.github/workflows/ci.yml`) runs all of the above on every push to `main` and every pull request.
 
 ---
 
@@ -172,7 +194,7 @@ npm run lint
 | `/our-team` | Profiles and technical specializations of Krudex engineers and designers. |
 | `/contact` | Project scoping inquiry form connected to Cloudflare D1 database. |
 | `/privacy` | Privacy policy and data handling transparency. |
-| `/terms` | Client engagement terms, deliverables, and IP transfer terms. |
+| `/terms` | Website terms of use. |
 
 ---
 
@@ -180,10 +202,7 @@ npm run lint
 
 ### Deploying on Vercel
 1. Import the repository into your [Vercel Dashboard](https://vercel.com).
-2. Under **Project Settings** → **Environment Variables**, add:
-   - `CLOUDFLARE_ACCOUNT_ID`
-   - `CLOUDFLARE_D1_DATABASE_ID`
-   - `CLOUDFLARE_D1_API_TOKEN`
+2. Under **Project Settings** → **Environment Variables**, add the variables from the table above (at least the three Cloudflare ones and `NEXT_PUBLIC_SITE_URL`).
 3. Click **Deploy**.
 
 ### Deploying on Cloudflare Pages / Workers
@@ -193,4 +212,4 @@ This project can also be deployed to Cloudflare using `@opennextjs/cloudflare` w
 
 ## 📄 License & Intellectual Property
 
-Copyright © 2026 Krudex Technologies. All rights reserved.
+Copyright © 2026 Krudex Global. All rights reserved.

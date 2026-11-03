@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS inquiries (
     email TEXT NOT NULL,
     company TEXT,
     scope TEXT,
-    budget TEXT,
+    budget TEXT, -- legacy: the form no longer collects budget; kept so existing rows stay intact
     timeline TEXT,
     details TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

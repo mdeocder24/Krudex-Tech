@@ -43,14 +43,14 @@ const Navbar = () => {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className={`w-full flex items-center justify-between px-6 md:px-14 lg:px-20 fixed top-0 z-50 transition-all duration-300
+      className={`w-full flex items-center justify-between pl-[max(1.5rem,env(safe-area-inset-left))] pr-[max(1.5rem,env(safe-area-inset-right))] md:px-14 lg:px-20 fixed top-0 z-50 transition-all duration-300
         bg-krudex-black/70 backdrop-blur-2xl border-b border-white/10 shadow-[inset_0_1px_1px_rgba(212,180,131,0.1),0_4px_30px_rgba(0,0,0,0.1)]
-        ${scrolled ? 'py-2 lg:py-4' : 'py-3 lg:py-6'}
+        ${scrolled ? 'pt-[calc(0.5rem+env(safe-area-inset-top))] pb-2 lg:pt-[calc(1rem+env(safe-area-inset-top))] lg:pb-4' : 'pt-[calc(0.75rem+env(safe-area-inset-top))] pb-3 lg:pt-[calc(1.5rem+env(safe-area-inset-top))] lg:pb-6'}
       `}
     >
       {/* Left side: Brand */}
       <div className="flex-1 flex items-center justify-start">
-        <Link href="/" aria-label="Krudex Technologies — home" className="flex items-center">
+        <Link href="/" aria-label="Krudex Global — home" className="flex items-center">
           <Image
             src="/krudex-bg-gold.png"
             alt="Krudex"
@@ -142,7 +142,7 @@ const Navbar = () => {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: -10 }}
               transition={{ duration: 0.2, ease: 'easeOut' }}
-              className="absolute top-4 right-4 left-4 sm:left-auto sm:w-72 max-h-[calc(100dvh-2rem)] overflow-y-auto bg-krudex-black border border-white/10 rounded-2xl p-6 flex flex-col shadow-2xl"
+              className="absolute top-[calc(1rem+env(safe-area-inset-top))] right-[max(1rem,env(safe-area-inset-right))] left-[max(1rem,env(safe-area-inset-left))] sm:left-auto sm:w-72 max-h-[calc(100dvh-2rem-env(safe-area-inset-top)-env(safe-area-inset-bottom))] overflow-y-auto overscroll-contain bg-krudex-black border border-white/10 rounded-2xl p-6 flex flex-col shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}

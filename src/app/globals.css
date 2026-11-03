@@ -25,6 +25,51 @@
 
 html {
   color-scheme: dark;
+  /* No gray flash on tap; controls give their own :active feedback. */
+  -webkit-tap-highlight-color: transparent;
+  /* No font inflation when an iPhone rotates to landscape. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Fire taps immediately (no double-tap-zoom wait) and stop long-press from
+   selecting control labels. Body text stays selectable. */
+a,
+button,
+[role='button'],
+label:has(> input[type='checkbox']),
+label:has(> input[type='radio']) {
+  touch-action: manipulation;
+}
+button,
+[role='button'] {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* iOS/iPadOS Safari zooms into inputs under 16px and never zooms back.
+   Touch devices of any width get 16px; mouse users keep the design size. */
+@media (pointer: coarse) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* Long words, URLs and emails wrap instead of pushing past narrow screens. */
+h1,
+h2,
+h3,
+p,
+li,
+dd {
+  overflow-wrap: break-word;
+}
+
+/* Smooth-scroll on in-page anchors, minus the fixed navbar. */
+:target {
+  scroll-margin-top: 6rem;
 }
 
 body {

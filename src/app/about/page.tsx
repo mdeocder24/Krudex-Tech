@@ -1,7 +1,6 @@
-"use client";
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import * as motion from 'framer-motion/client';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
@@ -22,7 +21,7 @@ const timelineData = [
   },
   {
     year: "2026",
-    text: "Krudex Technologies incorporated as an entity in Telangana, India."
+    text: "Krudex Global incorporated as an entity in Telangana, India."
   }
 ];
 
@@ -51,7 +50,7 @@ const principlesData = [
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-transparent selection:bg-krudex-accent selection:text-krudex-black flex flex-col">
+    <main className="min-h-svh bg-transparent selection:bg-krudex-accent selection:text-krudex-black flex flex-col">
       <Navbar />
       
       {/* 1. Hero Section */}
@@ -82,7 +81,7 @@ export default function AboutPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <p className="text-krudex-muted text-lg leading-relaxed pt-8 lg:pt-0">
-                Krudex Technologies is an incorporated engineering firm registered in Hyderabad, Telangana. We exist at the intersection of software engineering, artificial intelligence, digital design, and digital marketing — and we treat those disciplines as a unified craft, not separate silos. We build SaaS products, run Google Ads and digital marketing, and train students with industry experts in collaboration with NovaSkill Hub.
+                Krudex Global is an incorporated engineering firm registered in Hyderabad, Telangana. We exist at the intersection of software engineering, artificial intelligence, digital design, and digital marketing — and we treat those disciplines as a unified craft, not separate silos. We build SaaS products, run Google Ads and digital marketing, and train students with industry experts in collaboration with NovaSkill Hub.
               </p>
             </motion.div>
           </div>
@@ -117,7 +116,7 @@ export default function AboutPage() {
                   Over three years, the practice expanded: first into AI and machine learning, then into UI/UX design and brand identity. We realized that each discipline reinforces the others. A product that performs at scale requires robust engineering and intuitive design in equal measure.
                 </p>
                 <p>
-                  In 2026, Krudex Technologies was incorporated in Telangana — formalizing what had already become a serious, multidisciplinary operation. The incorporation wasn&apos;t just a legal milestone. It was a clear signal: we are here to build enduring companies and scalable systems, not just websites.
+                  In 2026, Krudex Global was incorporated in Telangana — formalizing what had already become a serious, multidisciplinary operation. The incorporation wasn&apos;t just a legal milestone. It was a clear signal: we are here to build enduring companies and scalable systems, not just websites.
                 </p>
               </div>
             </motion.div>
