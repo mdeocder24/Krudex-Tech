@@ -1,22 +1,20 @@
 /**
  * Single source of truth for Krudex Global brand assets.
  *
- * Every logo on the site (navbar, footer, hero fallback, 404, social card,
+ * Every logo on the site (navbar, footer, hero fallback, social card,
  * structured data) must come from this module or from <BrandLogo/>.
  * `npm run check:brand` fails the build if a logo file is referenced anywhere
  * else, so a rebrand only ever touches this folder.
  *
- * To regenerate the PNGs after changing gyroScene.ts, see README → "Brand assets".
+ * Source artwork: design/brand-archive/krudex-bg-gold.png (gold KK logo).
  */
 export const BRAND = {
   name: 'Krudex Global',
-  wordmark: 'KRUDEX',
-  descriptor: 'GLOBAL',
-  /** Transparent 1024×1024 still of the Gyro symbol. */
-  markSrc: '/brand/krudex-global-mark.png',
-  /** Transparent 512×512 still, for structured data and the OG image. */
+  /** Gold KK logo with KRUDEX and "Build · Solve · Scale", trimmed to its edges. */
+  logoSrc: '/brand/krudex-global-logo.png',
+  logoWidth: 334,
+  logoHeight: 221,
+  /** Gold KK symbol alone, 512×512 transparent, for structured data. */
   markSmallSrc: '/brand/krudex-global-mark-512.png',
-  /** Transparent render of <BrandLogo variant="stacked" />, for the OG image. */
-  lockupSrc: '/brand/krudex-global-lockup.png',
-  markAlt: 'Krudex Global symbol: chrome and gold orbit rings around a glass sphere with a glowing core',
+  logoAlt: 'Krudex Global: Build, Solve, Scale',
 } as const;

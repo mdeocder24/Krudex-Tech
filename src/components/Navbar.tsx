@@ -51,7 +51,7 @@ const Navbar = () => {
       {/* Left side: Brand */}
       <div className="flex-1 flex items-center justify-start">
         <Link href="/" aria-label="Krudex Global — home" className="flex items-center">
-          <BrandLogo decorative priority className="text-[16px] sm:text-[17px] lg:text-[20px] min-[1920px]:text-[22px]" />
+          <BrandLogo height={3.2} decorative priority className="text-[16px] sm:text-[17px] lg:text-[20px] min-[1920px]:text-[22px]" />
         </Link>
       </div>
 

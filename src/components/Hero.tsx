@@ -154,7 +154,7 @@ const Hero = () => {
         {can3D === false && (
           // Static stand-in for reduced-motion, Save-Data, or low-end devices.
           <div className="absolute inset-0 flex items-center justify-center">
-            <BrandLogo variant="stacked" decorative priority className="text-[30px] sm:text-[40px] lg:text-[48px]" />
+            <BrandLogo height={5.8} decorative priority className="text-[30px] sm:text-[40px] lg:text-[48px]" />
           </div>
         )}
 
