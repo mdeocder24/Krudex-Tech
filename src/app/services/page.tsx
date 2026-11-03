@@ -6,85 +6,10 @@ import { ArrowRight } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import ServicesCTA from '@/components/ServicesCTA';
 import Footer from '@/components/Footer';
+import ProductMock from '@/components/ui/ProductMock';
+import { OFFERINGS } from '@/content/offerings';
 
-const servicesData = [
-  {
-    num: "01",
-    title: "SaaS & Web Platforms",
-    subtitle: "From zero to production-grade — engineered to last.",
-    desc: "We design and build high-throughput web applications with clean architecture. Our process begins with a technical audit of your requirements, moves through system design, and ends with a fully deployed, monitored, and documented product. We don't deliver code — we deliver working systems.",
-    outcome: "Sub-1s Largest Contentful Paint guaranteed on every project.",
-    capabilities: [
-      "Next.js 16 App Router with production-grade monitoring gates",
-      "FastAPI / Node.js backends with strongly-typed API contracts",
-      "PostgreSQL database design with query optimization and connection pooling",
-      "Redis caching layer for sub-millisecond read times",
-      "CI/CD pipelines with automated vulnerability testing gates",
-      "Docker containerization with secure AWS/Vercel serverless deployment"
-    ]
-  },
-  {
-    num: "02",
-    title: "Mobile Applications",
-    subtitle: "One codebase. Native performance on both platforms.",
-    desc: "We build cross-platform mobile applications that behave like native apps — not compromises. React Native with Expo lets us ship to iOS and Android from a single, maintainable codebase while preserving access to native device APIs, smooth 60fps animations, and offline capability.",
-    outcome: "Single codebase delivering native experience across iOS and Android.",
-    capabilities: [
-      "React Native with Expo managed and bare workflows",
-      "Native module integration (camera, biometrics, GPS)",
-      "Offline-first architecture with background sync",
-      "Push notifications and deep linking",
-      "App Store and Google Play submission",
-      "Over-the-air updates with Expo EAS"
-    ]
-  },
-  {
-    num: "03",
-    title: "AI & ML Integration",
-    subtitle: "Intelligent features that work in production — not just demos.",
-    desc: "We embed AI and machine learning into real products. That means building inference pipelines optimized for latency, training custom models on your domain data, and integrating LLM-powered features that behave predictably under load. We've shipped computer vision, NLP, and recommendation systems into production.",
-    outcome: "18ms average inference latency. 94.7% accuracy on our vision projects.",
-    capabilities: [
-      "Custom model training with TensorFlow and PyTorch",
-      "Real-time computer vision with MediaPipe",
-      "In-browser inference with TensorFlow.js and WebGL",
-      "LLM integration with OpenAI API and LangChain",
-      "RAG pipelines for document-aware AI features",
-      "ML model monitoring and retraining pipelines"
-    ]
-  },
-  {
-    num: "04",
-    title: "UI/UX & Brand Design",
-    subtitle: "Design systems that scale. Identities that command credibility.",
-    desc: "We build design systems from component primitives up — not templates down. Every interface we design is grounded in user research and business goals, then executed in Figma with full specification and handed off to engineering with working prototypes. Our branding work covers identity, collateral, and digital campaigns.",
-    outcome: "40+ brand identities delivered across startups, enterprises, and events.",
-    capabilities: [
-      "User research, flows, and wireframes",
-      "High-fidelity Figma prototypes",
-      "Component library with Tailwind CSS v4",
-      "Corporate identity and logo design",
-      "Event campaign design (TEDx, conferences)",
-      "Investor-ready pitch deck design"
-    ]
-  },
-  {
-    num: "05",
-    id: "digital-marketing",
-    title: "Google Ads & Digital Marketing",
-    subtitle: "Growth that compounds. Every rupee tracked to revenue.",
-    desc: "We take the product we build to market. Our marketing work starts with analytics and positioning, then runs search, paid, social, and content channels as one system — measured against pipeline and revenue, not vanity metrics. Because we build the product too, landing pages, tracking, and experiments ship without a handoff.",
-    outcome: "One team from product build to customer acquisition, with full-funnel reporting.",
-    capabilities: [
-      "Google Ads and Meta performance campaigns",
-      "Technical and content SEO with keyword strategy",
-      "Social media strategy and content production",
-      "Conversion-optimized landing pages and A/B testing",
-      "Email marketing and lifecycle automation",
-      "GA4 analytics, conversion tracking, and reporting dashboards"
-    ]
-  }
-];
+const servicesData = OFFERINGS;
 
 export default function ServicesPage() {
   return (
@@ -124,8 +49,8 @@ export default function ServicesPage() {
           </div>
 
           <div className="flex flex-col gap-24 md:gap-32">
-            {servicesData.map((service, idx) => (
-              <div key={idx} id={service.id} className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 scroll-mt-32">
+            {servicesData.map((service) => (
+              <div key={service.id} id={service.id} className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 scroll-mt-32">
                 {/* Left Column: Description */}
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
@@ -136,9 +61,9 @@ export default function ServicesPage() {
                 >
                   <div className="text-krudex-muted font-mono text-sm mb-6 border-b border-krudex-border pb-4 inline-block w-full">{service.num}</div>
                   <h2 className="font-serif text-4xl text-white font-bold mb-4">{service.title}</h2>
-                  <h3 className="text-white/70 font-medium mb-6">{service.subtitle}</h3>
+                  <h3 className="text-white/70 font-medium mb-6">{service.tagline}</h3>
                   <p className="text-krudex-muted text-base leading-loose mb-10">
-                    {service.desc}
+                    {service.description}
                   </p>
                   <div className="border-l-2 border-krudex-accent pl-6 py-3 bg-gradient-to-r from-white/5 to-transparent">
                     <div className="text-xs text-krudex-muted font-mono uppercase tracking-[0.15em] mb-2">
@@ -148,6 +73,12 @@ export default function ServicesPage() {
                       {service.outcome}
                     </p>
                   </div>
+                  <ProductMock
+                    kind={service.mock}
+                    num={service.num}
+                    tags={service.tags}
+                    className="border border-krudex-border mt-10 min-h-[300px] sm:min-h-[340px]"
+                  />
                 </motion.div>
 
                 {/* Right Column: Capabilities */}

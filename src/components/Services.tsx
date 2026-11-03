@@ -4,36 +4,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import ProductMock from '@/components/ui/ProductMock';
+import { OFFERINGS } from '@/content/offerings';
 
 const MotionLink = motion.create ? motion.create(Link) : motion(Link);
-
-const services = [
-  {
-    num: "01",
-    title: "SaaS & Web Platforms",
-    desc: "SaaS products, customer portals, and web apps built to scale with your user base."
-  },
-  {
-    num: "02",
-    title: "Mobile Applications",
-    desc: "Cross-platform iOS & Android apps designed for speed, native feel, and maximum retention."
-  },
-  {
-    num: "03",
-    title: "AI Integrations",
-    desc: "Production-ready custom LLMs, RAG knowledge bases, and secure agentic workflows backed by SOC 2 compliance readiness and data sovereignty."
-  },
-  {
-    num: "04",
-    title: "UI/UX & MVP Design",
-    desc: "Fast-moving design sprints to get your Minimum Viable Product (MVP) looking premium from day one."
-  },
-  {
-    num: "05",
-    title: "Google Ads & Digital Marketing",
-    desc: "Google Ads, SEO, social, and content that bring the right users to your product and turn them into customers."
-  }
-];
 
 const Services = () => {
   return (
@@ -48,43 +22,63 @@ const Services = () => {
         >
           <div className="w-1.5 h-1.5 rounded-full bg-white/60"></div>
           <span className="text-xs text-krudex-muted tracking-wide">
-            WHAT WE DO
+            WHAT WE BUILD
           </span>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="lg:col-span-5"
-          >
-            <h2 className="font-serif text-4xl md:text-6xl text-white font-normal mb-6 leading-[1.1] tracking-tight">
-              Your SaaS <br /> and Growth Partner.
-            </h2>
-            <p className="text-krudex-muted text-base leading-relaxed">
-              We handle the end-to-end heavy lifting—from MVP to scalable product to growth—so you can focus on your users.
-            </p>
-          </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="max-w-2xl mb-16"
+        >
+          <h2 className="font-serif text-4xl md:text-6xl text-white font-normal mb-6 leading-[1.1] tracking-tight">
+            Your SaaS <br /> and Growth Partner.
+          </h2>
+          <p className="text-krudex-muted text-base leading-relaxed">
+            From first version to production scale, then to market. Five disciplines, one senior team, so you can focus on your users.
+          </p>
+        </motion.div>
 
-          <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-px bg-krudex-border border border-krudex-border">
-            {services.map((svc, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                whileHover={{ backgroundColor: '#111111' }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                className={`bg-krudex-black p-8 md:p-10 ${index === services.length - 1 && services.length % 2 === 1 ? 'md:col-span-2' : ''}`}
-              >
+        <div className="flex flex-col gap-px bg-krudex-border border border-krudex-border mb-16">
+          {OFFERINGS.map((svc, index) => (
+            <motion.article
+              key={svc.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5 }}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-krudex-border"
+            >
+              <ProductMock
+                kind={svc.mock}
+                num={svc.num}
+                tags={svc.tags}
+                className={`bg-krudex-black ${index % 2 ? 'lg:order-2' : ''}`}
+              />
+              <div className={`bg-krudex-black p-8 md:p-12 flex flex-col justify-center min-w-0 ${index % 2 ? 'lg:order-1' : ''}`}>
                 <div className="text-krudex-muted font-mono text-sm mb-6">{svc.num}</div>
-                <h3 className="text-white font-medium text-lg mb-3">{svc.title}</h3>
-                <p className="text-krudex-muted text-sm leading-relaxed">{svc.desc}</p>
-              </motion.div>
-            ))}
-          </div>
+                <h3 className="font-serif text-3xl md:text-4xl text-white font-normal mb-4 leading-[1.1] tracking-tight">{svc.title}</h3>
+                <p className="text-krudex-muted text-sm md:text-base leading-relaxed mb-8">{svc.summary}</p>
+                <ul className="flex flex-col gap-3 mb-10">
+                  {svc.highlights.map((h) => (
+                    <li key={h} className="flex items-start gap-3 text-sm text-white/80 leading-relaxed">
+                      <span className="w-1.5 h-1.5 rounded-full bg-krudex-accent flex-shrink-0 mt-2" />
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href={svc.href}
+                  className="group inline-flex items-center gap-2 self-start text-white text-sm font-medium hover:text-krudex-accent transition-colors"
+                >
+                  {svc.cta}
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </motion.article>
+          ))}
         </div>
 
         <motion.div

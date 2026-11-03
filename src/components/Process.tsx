@@ -2,36 +2,10 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { ASSURANCES, PROCESS } from '@/content/offerings';
 
-const steps = [
-  {
-    num: "01",
-    title: "Scoping call",
-    desc: "A free 30-minute call to understand the product, the users and the constraints.",
-  },
-  {
-    num: "02",
-    title: "Architecture & SOW",
-    desc: "A technical audit, then an architecture document and statement of work — agreed before any code is written.",
-  },
-  {
-    num: "03",
-    title: "Senior-led build",
-    desc: "The engineers who scoped your product build it, against success criteria we can measure.",
-  },
-  {
-    num: "04",
-    title: "Launch & support",
-    desc: "Deployed, monitored and documented. A 30-day warranty, then an optional retainer.",
-  },
-];
-
-const assurances = [
-  "100% IP & source code transfer",
-  "Reply within one business day",
-  "30-day warranty on every build",
-  "No lock-in to proprietary frameworks",
-];
+const steps = PROCESS;
+const assurances = ASSURANCES;
 
 const Process = () => {
   return (
@@ -73,11 +47,18 @@ const Process = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-krudex-black p-8"
+              className="bg-krudex-black p-8 flex flex-col"
             >
-              <div className="text-krudex-muted font-mono text-sm mb-6">{step.num}</div>
+              <div className="text-krudex-muted font-mono text-sm mb-6">{step.num} / {step.phase.toUpperCase()}</div>
               <h3 className="text-white font-medium text-lg mb-3">{step.title}</h3>
-              <p className="text-krudex-muted text-sm leading-relaxed">{step.desc}</p>
+              <p className="text-krudex-muted text-sm leading-relaxed">{step.text}</p>
+              <div className="mt-auto pt-6 flex flex-wrap gap-2">
+                {step.tags.map((t) => (
+                  <span key={t} className="border border-krudex-border px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-white/60">
+                    {t}
+                  </span>
+                ))}
+              </div>
             </motion.li>
           ))}
         </ol>

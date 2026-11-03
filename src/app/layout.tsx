@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import JsonLd from "@/components/JsonLd";
+import WhatsAppFab from "@/components/ui/WhatsAppFab";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/structured-data";
 
@@ -75,6 +76,7 @@ export default function RootLayout({
             {children}
           </div>
         </SmoothScroll>
+        <WhatsAppFab />
       </body>
     </html>
   );

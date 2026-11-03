@@ -20,9 +20,9 @@ const footerLinks = [
   {
     title: 'Services',
     links: [
-      { label: 'SaaS & Web Platforms', href: '/services' },
-      { label: 'Mobile Apps', href: '/services' },
-      { label: 'AI Integration', href: '/services' },
+      { label: 'SaaS & Web Platforms', href: '/services#saas-web' },
+      { label: 'Mobile Apps', href: '/services#mobile' },
+      { label: 'AI Integration', href: '/services#ai' },
       { label: 'Google Ads & Digital Marketing', href: '/services#digital-marketing' },
       { label: 'Student Training', href: '/training' },
     ],

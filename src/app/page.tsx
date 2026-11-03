@@ -6,6 +6,8 @@ import Stats from '@/components/Stats';
 import Services from '@/components/Services';
 import Process from '@/components/Process';
 import TrainingHighlight from '@/components/TrainingHighlight';
+import Work from '@/components/Work';
+import HomeFaq from '@/components/HomeFaq';
 import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
 
@@ -20,6 +22,8 @@ export default function Home() {
       <Services />
       <Process />
       <TrainingHighlight />
+      <Work />
+      <HomeFaq />
       <CTA />
       <Footer />
     </main>

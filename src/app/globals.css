@@ -141,3 +141,11 @@ body {
   }
 }
 
+
+/* Hollow numerals on product visuals (src/components/ui/ProductMock.tsx). */
+.kx-outline-num {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(245, 239, 228, 0.22);
+  letter-spacing: -0.04em;
+  font-family: var(--font-serif);
+}
