@@ -23,55 +23,8 @@
   --foreground: var(--color-krudex-text);
 }
 
-/* ── Light mode ──
-   Same token names, light values: every utility (text-white, bg-krudex-black,
-   border-white/10 …) follows. "white" becomes the ink colour and "black" the
-   page colour, so contrast pairs stay pairs. Gold darkens to antique gold so
-   it passes 4.5:1 as text on cream and with cream text on top of it. */
-:root[data-theme='light'] {
-  --color-white: #17130F;
-  --color-krudex-white: #17130F;
-  --color-krudex-white-dim: #4A4237;
-  --color-krudex-black: #FAF7F1;
-  --color-krudex-card: #FFFFFF;
-  --color-krudex-surface: #F1EBE0;
-  --color-krudex-border: #E2D9CA;
-  --color-krudex-text: #2B251E;
-  --color-krudex-muted: #6E6457; /* 5.4:1 on the cream page */
-  --color-krudex-accent: #8A6530; /* 4.9:1 both ways with cream */
-  --color-krudex-accent-hover: #75552A;
-}
-
-/* Dark values again, for islands that must stay dark in light mode
-   (product screenshots). Mirrors @theme above. */
-[data-theme='dark'] {
-  --color-white: #F5EFE4;
-  --color-krudex-white: #F5EFE4;
-  --color-krudex-white-dim: #CFC6B6;
-  --color-krudex-black: #0A0908;
-  --color-krudex-card: #11100E;
-  --color-krudex-surface: #191714;
-  --color-krudex-border: #2B2721;
-  --color-krudex-text: #ECE5D8;
-  --color-krudex-muted: #9A9184;
-  --color-krudex-accent: #D4B483;
-  --color-krudex-accent-hover: #E6CFA3;
-  color: var(--color-krudex-text);
-}
-
-/* Theme toggle shows the icon of the theme you would switch to. */
-.kx-theme-icon-moon { display: none; }
-:root[data-theme='light'] .kx-theme-icon-sun { display: none; }
-:root[data-theme='light'] .kx-theme-icon-moon { display: block; }
-
-/* Logo: light artwork on dark pages, ink artwork on light pages. */
-.kx-logo-on-light { display: none !important; }
-:root[data-theme='light'] .kx-logo-on-dark { display: none !important; }
-:root[data-theme='light'] .kx-logo-on-light { display: block !important; }
-
 html {
   color-scheme: dark;
-  transition: background-color 200ms ease;
   /* No gray flash on tap; controls give their own :active feedback. */
   -webkit-tap-highlight-color: transparent;
   /* No font inflation when an iPhone rotates to landscape. */
@@ -196,6 +149,3 @@ body {
   letter-spacing: -0.04em;
   font-family: var(--font-serif);
 }
-
-/* The hero globe is a light disc on cream; keep it behind the copy. */
-:root[data-theme='light'] .kx-hero-globe { opacity: 0.2; }

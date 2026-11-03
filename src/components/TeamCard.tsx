@@ -2,7 +2,6 @@
 
 import React, { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { useTheme } from '@/lib/theme';
 
 type SocialType = "linkedin" | "github" | "twitter" | "dribbble" | "behance";
 
@@ -55,8 +54,6 @@ const socialLabels: Record<SocialType, string> = {
 };
 
 function TeamCard({ member, index }: { member: TeamMember; index: number }) {
-  // Champagne gold on dark; antique gold on light so tags and initials stay readable.
-  const accent = useTheme() === 'light' ? '#8A6530' : member.accent;
   // Placeholder "#" profiles are hidden until real URLs are added
   const socials = (member.socials ?? []).filter((s) => s.url && s.url !== "#");
   const cardRef = useRef<HTMLDivElement>(null);
@@ -119,7 +116,7 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
         <div
           className="absolute -inset-[1px] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"
           style={{
-            background: `linear-gradient(135deg, ${accent}, transparent 40%, ${accent}66 60%, transparent 80%, ${accent})`,
+            background: `linear-gradient(135deg, ${member.accent}, transparent 40%, ${member.accent}66 60%, transparent 80%, ${member.accent})`,
             backgroundSize: "300% 300%",
             animation: isHovered
               ? "holoShift 3s ease-in-out infinite"
@@ -128,7 +125,7 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
         />
 
         {/* === Card body === */}
-        <div className="relative rounded-2xl bg-krudex-card border border-white/[0.06] overflow-hidden z-10">
+        <div className="relative rounded-2xl bg-[#0a0a0a] border border-white/[0.06] overflow-hidden z-10">
           {/* Cursor-following glow */}
           <motion.div
             className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
@@ -136,7 +133,7 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
               background: useTransform(
                 [glowX, glowY],
                 ([x, y]) =>
-                  `radial-gradient(circle at ${x}% ${y}%, ${accent}18 0%, transparent 60%)`
+                  `radial-gradient(circle at ${x}% ${y}%, ${member.accent}18 0%, transparent 60%)`
               ),
             }}
           />
@@ -155,11 +152,11 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
             <div className="absolute top-0 right-0 w-24 h-24 pointer-events-none overflow-hidden">
               <div
                 className="absolute top-3 right-3 w-12 h-[1px] opacity-20"
-                style={{ background: accent }}
+                style={{ background: member.accent }}
               />
               <div
                 className="absolute top-3 right-3 w-[1px] h-12 opacity-20"
-                style={{ background: accent }}
+                style={{ background: member.accent }}
               />
             </div>
 
@@ -173,7 +170,7 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
                   }}
                   transition={{ duration: 2, repeat: Infinity }}
                   className="w-2 h-2 rounded-full"
-                  style={{ background: accent }}
+                  style={{ background: member.accent }}
                 />
                 <span className="text-xs uppercase tracking-[0.25em] text-white/50 font-medium">
                   Active
@@ -181,7 +178,7 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
               </div>
               <span
                 className="text-xs font-mono opacity-30"
-                style={{ color: accent }}
+                style={{ color: member.accent }}
               >
                 {String(index + 1).padStart(2, "0")}
               </span>
@@ -198,15 +195,15 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
                 <div
                   className="absolute -inset-1 rounded-xl opacity-40 blur-sm"
                   style={{
-                    background: `linear-gradient(135deg, ${accent}, transparent)`,
+                    background: `linear-gradient(135deg, ${member.accent}, transparent)`,
                   }}
                 />
                 <div
                   className="relative w-16 h-16 rounded-xl flex items-center justify-center font-serif text-xl font-bold border"
                   style={{
-                    background: `linear-gradient(135deg, ${accent}15, ${accent}05)`,
-                    borderColor: `${accent}30`,
-                    color: accent,
+                    background: `linear-gradient(135deg, ${member.accent}15, ${member.accent}05)`,
+                    borderColor: `${member.accent}30`,
+                    color: member.accent,
                   }}
                 >
                   {member.initials}
@@ -229,7 +226,7 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
             <div className="h-[1px] bg-white/[0.06]" />
             <div
               className="absolute left-6 top-0 w-12 h-[1px] opacity-50"
-              style={{ background: accent }}
+              style={{ background: member.accent }}
             />
           </div>
 
@@ -252,22 +249,22 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
                   }}
                   className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium border transition-colors duration-200 cursor-default"
                   style={{
-                    background: `${accent}08`,
-                    borderColor: `${accent}15`,
-                    color: `${accent}cc`,
+                    background: `${member.accent}08`,
+                    borderColor: `${member.accent}15`,
+                    color: `${member.accent}cc`,
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = `${accent}40`;
-                    e.currentTarget.style.background = `${accent}15`;
+                    e.currentTarget.style.borderColor = `${member.accent}40`;
+                    e.currentTarget.style.background = `${member.accent}15`;
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = `${accent}15`;
-                    e.currentTarget.style.background = `${accent}08`;
+                    e.currentTarget.style.borderColor = `${member.accent}15`;
+                    e.currentTarget.style.background = `${member.accent}08`;
                   }}
                 >
                   <span
                     className="w-1 h-1 rounded-full"
-                    style={{ background: accent }}
+                    style={{ background: member.accent }}
                   />
                   {skill}
                 </motion.span>
@@ -289,20 +286,20 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
                     whileTap={{ scale: 0.95 }}
                     className="relative flex items-center justify-center w-9 h-9 rounded-lg border transition-all duration-300 group/social"
                     style={{
-                      background: `${accent}06`,
-                      borderColor: `${accent}12`,
-                      color: `${accent}aa`,
+                      background: `${member.accent}06`,
+                      borderColor: `${member.accent}12`,
+                      color: `${member.accent}aa`,
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = `${accent}50`;
-                      e.currentTarget.style.background = `${accent}18`;
-                      e.currentTarget.style.color = accent;
-                      e.currentTarget.style.boxShadow = `0 0 16px ${accent}20`;
+                      e.currentTarget.style.borderColor = `${member.accent}50`;
+                      e.currentTarget.style.background = `${member.accent}18`;
+                      e.currentTarget.style.color = member.accent;
+                      e.currentTarget.style.boxShadow = `0 0 16px ${member.accent}20`;
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = `${accent}12`;
-                      e.currentTarget.style.background = `${accent}06`;
-                      e.currentTarget.style.color = `${accent}aa`;
+                      e.currentTarget.style.borderColor = `${member.accent}12`;
+                      e.currentTarget.style.background = `${member.accent}06`;
+                      e.currentTarget.style.color = `${member.accent}aa`;
                       e.currentTarget.style.boxShadow = "none";
                     }}
                     title={socialLabels[social.type]}
@@ -316,11 +313,11 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
                 <div className="flex-1 flex items-center gap-3 ml-1">
                   <div
                     className="flex-1 h-[1px] opacity-10"
-                    style={{ background: accent }}
+                    style={{ background: member.accent }}
                   />
                   <span
                     className="text-xs uppercase tracking-[0.2em] opacity-50 font-medium whitespace-nowrap"
-                    style={{ color: accent }}
+                    style={{ color: member.accent }}
                   >
                     Connect
                   </span>
@@ -337,7 +334,7 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
               transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
               className="absolute left-0 right-0 h-[2px] pointer-events-none z-30"
               style={{
-                background: `linear-gradient(90deg, transparent, ${accent}20, transparent)`,
+                background: `linear-gradient(90deg, transparent, ${member.accent}20, transparent)`,
               }}
             />
           )}

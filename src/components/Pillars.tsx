@@ -58,7 +58,7 @@ const Pillars = () => {
             >
               <Link
                 href={pillar.href}
-                className="group flex flex-col h-full p-8 md:p-10 transition-colors duration-200 hover:bg-krudex-surface active:bg-krudex-surface"
+                className="group flex flex-col h-full p-8 md:p-10 transition-colors duration-200 hover:bg-[#111111] active:bg-[#111111]"
               >
                 <div className="text-krudex-accent font-mono text-xs uppercase tracking-[0.2em] mb-6">{pillar.label}</div>
                 <h3 className="text-white font-medium text-xl mb-2">{pillar.title}</h3>

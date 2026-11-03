@@ -6,7 +6,6 @@ import JsonLd from "@/components/JsonLd";
 import WhatsAppFab from "@/components/ui/WhatsAppFab";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/structured-data";
-import { THEME_INIT_SCRIPT } from "@/lib/theme-script";
 
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -50,12 +49,9 @@ export const viewport: Viewport = {
   viewportFit: "cover",
   // Android Chrome: the on-screen keyboard shrinks the layout like iOS does.
   interactiveWidget: "resizes-content",
-  // Browser chrome matches the page in either theme.
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#FAF7F1" },
-    { media: "(prefers-color-scheme: dark)", color: "#0A0908" },
-  ],
-  colorScheme: "dark light",
+  // Site is dark-only; matches the navbar background.
+  themeColor: "#0A0908",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
@@ -64,11 +60,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${plusJakartaSans.variable} ${dmSerifDisplay.variable}`} data-theme="dark">
-      <head>
-        {/* Sets data-theme before first paint so there is no flash of the wrong theme. */}
-        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
-      </head>
+    <html lang="en" suppressHydrationWarning className={`${plusJakartaSans.variable} ${dmSerifDisplay.variable} dark`}>
       <body suppressHydrationWarning className="min-h-svh bg-krudex-black text-krudex-text antialiased overflow-x-hidden">
         <a
           href="#main-content"

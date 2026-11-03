@@ -12,8 +12,6 @@ export const BRAND = {
   name: 'Krudex Global',
   /** Gold KK logo with KRUDEX and "Build · Solve · Scale", trimmed to its edges. */
   logoSrc: '/brand/krudex-global-logo.png',
-  /** Same logo with ink instead of ivory and a deeper gold, for light mode. */
-  logoOnLightSrc: '/brand/krudex-global-logo-on-light.png',
   logoWidth: 334,
   logoHeight: 221,
   /** Gold KK symbol alone, 512×512 transparent, for structured data. */

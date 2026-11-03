@@ -6,7 +6,6 @@ import { BrandLogo } from '@/components/brand';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import ThemeToggle from '@/components/ThemeToggle';
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -85,8 +84,6 @@ const Navbar = () => {
             );
           })}
         </div>
-
-        <ThemeToggle className="-mr-2 lg:mr-0" />
 
         {/* Desktop CTA */}
         <div className="hidden lg:flex items-center">

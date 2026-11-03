@@ -1,18 +1,10 @@
 "use client";
 
-import React, { useRef, useMemo, useEffect, Suspense } from 'react';
+import React, { useRef, useMemo, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Edges, Text } from '@react-three/drei';
 import * as THREE from 'three';
 import { useInView } from 'framer-motion';
-import { useTheme } from '@/lib/theme';
-
-/** Scene colours per theme. Light mode fades the pillars into the cream page. */
-const PALETTE = {
-  dark: { gold: '#D4B483', surface: '#1A1712', label: '#F5EFE4', pillarTop: '#1F1B15', page: '#0A0908', additive: true },
-  light: { gold: '#9A7238', surface: '#EFE5D3', label: '#2B251E', pillarTop: '#D8CBB3', page: '#FAF7F1', additive: false },
-} as const;
-type Palette = (typeof PALETTE)[keyof typeof PALETTE];
 
 /* ─────────────────────────────────────────────
    Pillar Material — Vertical Gradient Shader
@@ -52,11 +44,9 @@ interface PlatformProps {
   size: [number, number]; // width, depth (square)
   label?: string;
   sideLabel?: string;
-  palette: Palette;
 }
 
-const Platform = ({ position, size, label, sideLabel, palette }: PlatformProps) => {
-  const blending = palette.additive ? THREE.AdditiveBlending : THREE.NormalBlending;
+const Platform = ({ position, size, label, sideLabel }: PlatformProps) => {
   const [w, d] = size;
   const depth = 18; // Depth of the pillar body for fading into fog
 
@@ -142,24 +132,24 @@ const Platform = ({ position, size, label, sideLabel, palette }: PlatformProps) 
       <group rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, 0]}>
         {/* Core solid bright white frame */}
         <mesh geometry={frameGeometry}>
-          <meshBasicMaterial color={palette.gold} />
+          <meshBasicMaterial color="#D4B483" />
         </mesh>
 
         {/* Soft Bloom layers (transparent, additive blending) */}
         <mesh geometry={bloomGeometry} position={[0, 0, -0.01]}>
-          <meshBasicMaterial color={palette.gold} transparent opacity={0.25} blending={blending} depthWrite={false} />
+          <meshBasicMaterial color="#D4B483" transparent opacity={0.25} blending={THREE.AdditiveBlending} depthWrite={false} />
         </mesh>
 
         {/* Outer large diffuse glow */}
         <mesh geometry={outerGlowGeometry} position={[0, 0, -0.02]}>
-          <meshBasicMaterial color={palette.gold} transparent opacity={0.08} blending={blending} depthWrite={false} />
+          <meshBasicMaterial color="#D4B483" transparent opacity={0.08} blending={THREE.AdditiveBlending} depthWrite={false} />
         </mesh>
       </group>
 
       {/* 2. Top Dark Surface (inside the neon frame) */}
       <mesh position={[0, -0.01, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[w, d]} />
-        <meshBasicMaterial color={palette.surface} />
+        <meshBasicMaterial color="#1A1712" />
       </mesh>
 
       {/* Label Text on top of the platform */}
@@ -168,7 +158,7 @@ const Platform = ({ position, size, label, sideLabel, palette }: PlatformProps) 
           position={[0, 0.05, 0]}
           rotation={[-Math.PI / 2, 0, -Math.PI / 4]}
           fontSize={w * 0.20}
-          color={palette.label}
+          color="#F5EFE4"
           anchorX="center"
           anchorY="middle"
           fillOpacity={0.9}
@@ -184,7 +174,7 @@ const Platform = ({ position, size, label, sideLabel, palette }: PlatformProps) 
         {/* Custom shader for smooth vertical gradient fading into darkness */}
         <primitive object={pillarMaterial} attach="material" />
         {/* Subtle structural edge highlights to enhance the 3D volume */}
-        <Edges scale={1.001} threshold={15} color={palette.gold} transparent opacity={palette.additive ? 0.15 : 0.3} />
+        <Edges scale={1.001} threshold={15} color="#D4B483" transparent opacity={0.15} />
       </mesh>
 
       {/* 4. Side Label Text on the pillar face */}
@@ -193,7 +183,7 @@ const Platform = ({ position, size, label, sideLabel, palette }: PlatformProps) 
           position={[0, -1.2, d / 2 + 0.05]} // Positioned cleanly on the top part of the side face
           rotation={[0, 0, 0]} // Horizontal across the face
           fontSize={w * 0.11}
-          color={palette.gold}
+          color="#D4B483"
           anchorX="center"
           anchorY="middle"
           fillOpacity={0.6}
@@ -212,14 +202,8 @@ const Platform = ({ position, size, label, sideLabel, palette }: PlatformProps) 
 /* ─────────────────────────────────────────────
    Main Scene
    ───────────────────────────────────────────── */
-const DataArchitectureScene = ({ palette }: { palette: Palette }) => {
+const DataArchitectureScene = () => {
   const groupRef = useRef<THREE.Group>(null);
-
-  // The pillar shader is shared by every platform; retint it with the theme.
-  useEffect(() => {
-    (pillarMaterial.uniforms.colorTop.value as THREE.Color).set(palette.pillarTop);
-    (pillarMaterial.uniforms.colorBottom.value as THREE.Color).set(palette.page);
-  }, [palette]);
 
   useFrame((state, delta) => {
     if (groupRef.current) {
@@ -244,17 +228,17 @@ const DataArchitectureScene = ({ palette }: { palette: Palette }) => {
       <directionalLight position={[15, 5, -5]} intensity={0.2} color="#FFF3DE" />
 
       {/* Deep fog to blend the pillars seamlessly into the pitch-black background */}
-      <fog attach="fog" args={[palette.page, 15, 45]} />
+      <fog attach="fog" args={['#0A0908', 15, 45]} />
 
       {/* ── Platforms Stepping Up ── */}
       {/* 1. Lowest, largest, front-left */}
-      <Platform position={[-3.2, -2.5, 3.2]} size={[4.2, 4.2]} label="WEB" sideLabel="REACT // NEXT.JS" palette={palette} />
+      <Platform position={[-3.2, -2.5, 3.2]} size={[4.2, 4.2]} label="WEB" sideLabel="REACT // NEXT.JS" />
 
       {/* 2. Middle, medium, center */}
-      <Platform position={[0, -0.5, 0]} size={[3.2, 3.2]} label="APP" sideLabel="IOS // ANDROID" palette={palette} />
+      <Platform position={[0, -0.5, 0]} size={[3.2, 3.2]} label="APP" sideLabel="IOS // ANDROID" />
 
       {/* 3. Highest, smallest, back-right */}
-      <Platform position={[2.5, 1.5, -2.5]} size={[2.2, 2.2]} label="AI" sideLabel="MACHINE LEARNING" palette={palette} />
+      <Platform position={[2.5, 1.5, -2.5]} size={[2.2, 2.2]} label="AI" sideLabel="MACHINE LEARNING" />
 
     </group>
   );
@@ -267,7 +251,6 @@ const Hero3DObject = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   // Stop rendering frames while the hero is scrolled out of view.
   const inView = useInView(wrapperRef, { margin: '100px' });
-  const palette = PALETTE[useTheme()];
 
   return (
     <div ref={wrapperRef} className="w-full h-full absolute inset-0 pointer-events-none">
@@ -285,7 +268,7 @@ const Hero3DObject = () => {
         dpr={[1, 1.5]}
       >
         <Suspense fallback={null}>
-          <DataArchitectureScene palette={palette} />
+          <DataArchitectureScene />
         </Suspense>
       </Canvas>
     </div>

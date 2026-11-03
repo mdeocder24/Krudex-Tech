@@ -55,7 +55,7 @@ const Hero = () => {
   return (
     <section className="relative min-h-svh w-full flex flex-col lg:flex-row items-center overflow-hidden bg-krudex-black">
       {/* Translucent Globe overlay — bottom left */}
-      <div className="absolute bottom-0 left-0 w-[120vw] h-[120vw] lg:w-[50vw] lg:h-[50vw] translate-y-[40%] -translate-x-[20%] opacity-40 pointer-events-none z-0 kx-hero-globe">
+      <div className="absolute bottom-0 left-0 w-[120vw] h-[120vw] lg:w-[50vw] lg:h-[50vw] translate-y-[40%] -translate-x-[20%] opacity-40 pointer-events-none z-0">
         {can3D && <GlobeObject />}
       </div>
 
