@@ -38,13 +38,20 @@ export default function BrandLogo({
 
   return (
     <span
-      className={`inline-flex items-center ${stacked ? 'flex-col gap-[0.25em]' : 'flex-row gap-[0.45em]'} ${className}`}
+      className={`inline-flex items-center ${stacked ? 'flex-col' : 'flex-row gap-[0.45em]'} ${className}`}
       style={size ? { fontSize: size } : undefined}
       role={decorative ? undefined : 'img'}
       aria-label={decorative ? undefined : BRAND.name}
     >
       <GyroMark size={markSize} animated={animated} priority={priority} decorative />
-      <Wordmark />
+      {stacked && (
+        // Warm floor glow under the symbol (reference: 280×24px at a 72px wordmark).
+        <span
+          aria-hidden="true"
+          className="-mt-[0.72em] h-[0.33em] w-[3.9em] rounded-[50%] bg-[radial-gradient(ellipse_at_center,rgba(255,201,120,0.18),rgba(255,201,120,0)_70%)]"
+        />
+      )}
+      <Wordmark className={stacked ? 'mt-[0.36em]' : undefined} />
     </span>
   );
 }
