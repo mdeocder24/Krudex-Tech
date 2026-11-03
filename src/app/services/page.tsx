@@ -8,6 +8,7 @@ import ServicesCTA from '@/components/ServicesCTA';
 import Footer from '@/components/Footer';
 import ProductMock from '@/components/ui/ProductMock';
 import { OFFERINGS } from '@/content/offerings';
+import AIDemo from '@/components/ai/AIDemo';
 
 const servicesData = OFFERINGS;
 
@@ -109,6 +110,8 @@ export default function ServicesPage() {
               </div>
             ))}
           </div>
+
+          <AIDemo />
 
           <div className="mt-24 md:mt-32 border border-krudex-border bg-krudex-card/40 p-8 md:p-12 flex flex-col md:flex-row md:items-center justify-between gap-8">
             <div>

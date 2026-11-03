@@ -120,6 +120,8 @@ Open `.env.local` and fill in the values:
 | `NEXT_PUBLIC_TURNSTILE_SITE_KEY` / `TURNSTILE_SECRET_KEY` | Optional | Turnstile bot check on the contact form (set both) |
 | `RESEND_API_KEY` / `CONTACT_NOTIFY_EMAIL` | Optional | Email the team on each new inquiry |
 | `CONTACT_FROM_EMAIL` | Optional | Sender address on a Resend-verified domain |
+| `ANTHROPIC_API_KEY` | Optional | Turns on the AI features (assistant, scoper, demo, path finder, inquiry triage). Empty = AI features hidden |
+| `KRUDEX_AI_MODEL` | Optional | Claude model for AI features. Default `claude-opus-5-5`; `claude-haiku-5-5` costs far less |
 
 ---
 
@@ -199,6 +201,20 @@ Static files live in `public/brand/`: `krudex-global-logo.png` (full logo, trimm
 **Changing the logo:** replace the PNGs in `public/brand/` and both icons, keeping the same file names, and update `logoWidth` / `logoHeight` in `brand.ts`.
 
 ---
+
+## 🤖 AI features
+
+All AI code lives in `src/lib/ai/` (server) and `src/components/ai/` (UI). Every feature is off and hidden until `ANTHROPIC_API_KEY` is set.
+
+| Feature | Where | Route |
+|---|---|---|
+| **Ask Krudex** assistant | Floating button on every page | `POST /api/ai/chat` (streams text) |
+| **AI project scoper** | Contact form, above "What do you need?" | `POST /api/ai/scope` |
+| **Inquiry triage** | Team notification email only (needs Resend set up) | Runs after `POST /api/contact` |
+| **Live document Q&A demo** | `/services`, after the service list | `POST /api/ai/demo` |
+| **Training path finder** | `/training` | `POST /api/ai/training-path` |
+
+The assistant, scoper and triage answer only from the site's own content (`src/content/offerings.ts`, `src/lib/faqs.ts`), via `src/lib/ai/knowledge.ts`, so editing the site content updates what they say. Each route is rate limited per IP and caps input size; prompts tell the model never to promise prices or dates.
 
 ## 🌐 Site Map & Pages
 

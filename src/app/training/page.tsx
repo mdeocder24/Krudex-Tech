@@ -5,6 +5,7 @@ import * as motion from 'framer-motion/client';
 import { ArrowRight } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import TrainingPathFinder from '@/components/ai/TrainingPathFinder';
 
 const reasonsData = [
   {
@@ -163,6 +164,8 @@ export default function TrainingPage() {
           </div>
         </div>
       </section>
+
+      <TrainingPathFinder />
 
       {/* 4. Enquiry CTA */}
       <section className="px-6 md:px-16 lg:px-24 py-24 md:py-32 bg-krudex-black/40 backdrop-blur-md border-t border-krudex-border relative z-10">

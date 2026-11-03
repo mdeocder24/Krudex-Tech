@@ -4,6 +4,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import JsonLd from "@/components/JsonLd";
 import WhatsAppFab from "@/components/ui/WhatsAppFab";
+import AIAssistant from "@/components/ai/AIAssistant";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/structured-data";
 
@@ -77,6 +78,7 @@ export default function RootLayout({
           </div>
         </SmoothScroll>
         <WhatsAppFab />
+        <AIAssistant />
       </body>
     </html>
   );
