@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "src/app/globals.css"
+        ],
+        "createdAt": "2026-11-03T12:35:29.705Z",
+        "reason": "Brand logo lettering (.kx-chrome/.kx-gold) replicated from the user-supplied design reference design/logo-gyro-reference/Gyro.dc.html; used only by the Wordmark component"
+      }
+    ]
+  }
+}
