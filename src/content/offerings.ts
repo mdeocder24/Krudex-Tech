@@ -231,7 +231,7 @@ export const ASSURANCES = [
 
 export const STATS = [
   { value: '4+', label: 'Client engagements' },
-  { value: '99', label: 'Peak Lighthouse score' },
-  { value: '24h', label: 'Response time' },
-  { value: '100%', label: 'IP transferred to you' },
+  { value: '5', label: 'Core services' },
+  { value: '4', label: 'Student training tracks' },
+  { value: '30-day', label: 'Post-launch warranty' },
 ] as const;
