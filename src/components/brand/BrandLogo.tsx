@@ -1,4 +1,4 @@
-import GyroMark from './GyroMark';
+import CubeGlyph from './CubeGlyph';
 import Wordmark from './Wordmark';
 import { BRAND } from './brand';
 
@@ -7,51 +7,42 @@ type Variant = 'horizontal' | 'stacked';
 /**
  * The Krudex Global logo. Use this everywhere a logo appears.
  *
- * - `horizontal`: symbol left, wordmark right. Navbar and footer.
- * - `stacked`: symbol above wordmark, as in the design reference. Heroes, 404.
+ * - `horizontal`: Cube mark left, wordmark right, as in the reference lockup.
+ *   Navbar and footer.
+ * - `stacked`: mark above a centred wordmark. Hero fallback, social card.
  *
  * `size` is the KRUDEX cap size (px number). Omit it and set a text size via
  * `className` (e.g. "text-[15px] lg:text-[19px]") for a responsive logo:
  * every part is sized in em.
- * `animated` spins the 3D symbol on capable devices; it is off by default
- * because a WebGL context per logo is expensive.
+ * The mark is static SVG here; the live 3D version is <CubeMark/>.
  * Inside a link that already has an aria-label, pass `decorative`.
  */
 export default function BrandLogo({
   variant = 'horizontal',
   size,
-  animated = false,
-  priority = false,
   decorative = false,
   className = '',
 }: {
   variant?: Variant;
   size?: number;
-  animated?: boolean;
+  /** Kept for call-site compatibility; the SVG mark needs no preloading. */
   priority?: boolean;
   decorative?: boolean;
   className?: string;
 }) {
   const stacked = variant === 'stacked';
-  // Proportions from the design reference: 440px symbol over a 72px wordmark.
-  const markSize = stacked ? '6.1em' : '2.4em';
+  // Reference lockup at a 68px wordmark: 130px-tall mark, 32px gap.
+  const markHeight = stacked ? '3.2em' : '1.91em';
 
   return (
     <span
-      className={`inline-flex items-center ${stacked ? 'flex-col' : 'flex-row gap-[0.45em]'} ${className}`}
+      className={`inline-flex items-center ${stacked ? 'flex-col gap-[0.5em]' : 'flex-row gap-[0.47em]'} ${className}`}
       style={size ? { fontSize: size } : undefined}
       role={decorative ? undefined : 'img'}
       aria-label={decorative ? undefined : BRAND.name}
     >
-      <GyroMark size={markSize} animated={animated} priority={priority} decorative />
-      {stacked && (
-        // Warm floor glow under the symbol (reference: 280×24px at a 72px wordmark).
-        <span
-          aria-hidden="true"
-          className="-mt-[0.72em] h-[0.33em] w-[3.9em] rounded-[50%] bg-[radial-gradient(ellipse_at_center,rgba(255,201,120,0.18),rgba(255,201,120,0)_70%)]"
-        />
-      )}
-      <Wordmark className={stacked ? 'mt-[0.36em]' : undefined} />
+      <CubeGlyph height={markHeight} />
+      <Wordmark align={stacked ? 'center' : 'start'} />
     </span>
   );
 }

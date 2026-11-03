@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Krudex Cube — 2D and 3D</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+<script src="./assets/8ee7b0964e3e649468459cde43522098.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#D4B483}a:hover{color:#F5EFE4}
+</style>
+</helmet>
+<div style="width: 1200px; height: 760px; box-sizing: border-box; padding: 40px; background-color: #0A0908; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: 420px 236px; gap: 24px; font-family: 'Plus Jakarta Sans', sans-serif; color: #F5EFE4;">
+  <svg aria-hidden="true" width="0" height="0" style="position: absolute;">
+    <defs>
+      <polygon id="kc-top" points="0,-118 86.6,-68 0,-18 -86.6,-68"></polygon>
+      <polygon id="kc-left" points="-92.66,-46.5 -6.06,3.5 -6.06,103.5 -92.66,53.5"></polygon>
+      <polygon id="kc-right" points="92.66,-46.5 6.06,3.5 6.06,103.5 92.66,53.5"></polygon>
+      <circle id="kc-core" cx="0" cy="-5" r="9"></circle>
+    </defs>
+  </svg>
+
+  <div style="border-radius: 20px; border: 1px solid #2B2721; background: #12100E; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 24px; box-sizing: border-box;">
+    <span style="align-self: flex-start; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; letter-spacing: 0.18em; color: #9A9184;">2D · FULL COLOR</span>
+    <svg role="img" aria-label="Krudex Cube mark, flat full-color" viewBox="-104 -128 208 242" width="230" height="268">
+      <use href="#kc-top" fill="#F2DFB8"></use>
+      <use href="#kc-left" fill="#D4B483"></use>
+      <use href="#kc-right" fill="#8F6C3C"></use>
+      <use href="#kc-core" fill="#FFC978"></use>
+    </svg>
+    <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; letter-spacing: 0.12em; color: #9A9184;">#F2DFB8 · #D4B483 · #8F6C3C</span>
+  </div>
+
+  <div style="border-radius: 20px; border: 1px solid #2B2721; background: #12100E; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 24px; box-sizing: border-box;">
+    <span style="align-self: flex-start; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; letter-spacing: 0.18em; color: #9A9184;">3D · LIVE RENDER</span>
+    <canvas ref="{{setCanvas}}" width="640" height="640" role="img" aria-label="Krudex Cube in 3D: six floating gold plates around a glowing core, turning in quarter steps and settling back into the flat mark" style="width: 300px; height: 300px; display: block;"></canvas>
+    <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; letter-spacing: 0.12em; color: #9A9184;">SAME SHAPE, SEEN IN DEPTH</span>
+  </div>
+
+  <div style="border-radius: 20px; background: #F5EFE4; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 24px; box-sizing: border-box;">
+    <span style="align-self: flex-start; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; letter-spacing: 0.18em; color: #5F574C;">2D · ONE COLOR</span>
+    <svg role="img" aria-label="Krudex Cube mark, one color" viewBox="-104 -128 208 242" width="230" height="268">
+      <use href="#kc-top" fill="#0A0908"></use>
+      <use href="#kc-left" fill="#0A0908"></use>
+      <use href="#kc-right" fill="#0A0908"></use>
+      <use href="#kc-core" fill="#0A0908"></use>
+    </svg>
+    <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; letter-spacing: 0.12em; color: #5F574C;">PRINT · STAMP · EMBOSS</span>
+  </div>
+
+  <div style="grid-column: span 2; border-radius: 20px; border: 1px solid #2B2721; background: #12100E; display: flex; align-items: center; justify-content: center; gap: 32px; position: relative;">
+    <span style="position: absolute; left: 24px; top: 20px; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; letter-spacing: 0.18em; color: #9A9184;">LOCKUP</span>
+    <svg role="img" aria-label="Krudex Cube mark" viewBox="-104 -128 208 242" width="112" height="130">
+      <use href="#kc-top" fill="#F2DFB8"></use>
+      <use href="#kc-left" fill="#D4B483"></use>
+      <use href="#kc-right" fill="#8F6C3C"></use>
+      <use href="#kc-core" fill="#FFC978"></use>
+    </svg>
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <div style="font-weight: 800; font-size: 68px; line-height: 1; letter-spacing: 0.12em; color: #F5EFE4;">KRUDEX</div>
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <span style="font-weight: 600; font-size: 19px; letter-spacing: 0.62em; color: #D4B483;">GLOBAL</span>
+        <span aria-hidden="true" style="height: 1px; flex-grow: 1; background: #2B2721;"></span>
+      </div>
+    </div>
+  </div>
+
+  <div style="border-radius: 20px; border: 1px solid #2B2721; background: #12100E; display: flex; flex-direction: column; justify-content: space-between; padding: 20px 24px 28px; box-sizing: border-box;">
+    <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; letter-spacing: 0.18em; color: #9A9184;">APP ICON · FAVICON</span>
+    <div style="display: flex; align-items: flex-end; gap: 18px;">
+      <div style="width: 104px; height: 104px; border-radius: 24px; background: linear-gradient(160deg, #1C1915 0%, #0A0908 100%); border: 1px solid #2B2721; display: flex; align-items: center; justify-content: center;">
+        <svg role="img" aria-label="App icon" viewBox="-104 -128 208 242" width="60" height="70"><use href="#kc-top" fill="#F2DFB8"></use><use href="#kc-left" fill="#D4B483"></use><use href="#kc-right" fill="#8F6C3C"></use><use href="#kc-core" fill="#FFC978"></use></svg>
+      </div>
+      <div style="width: 48px; height: 48px; border-radius: 12px; background: #D4B483; display: flex; align-items: center; justify-content: center;">
+        <svg role="img" aria-label="Icon, 48 pixels" viewBox="-104 -128 208 242" width="28" height="33"><use href="#kc-top" fill="#0A0908"></use><use href="#kc-left" fill="#0A0908"></use><use href="#kc-right" fill="#0A0908"></use></svg>
+      </div>
+      <svg role="img" aria-label="Favicon, 32 pixels" viewBox="-104 -128 208 242" width="27" height="32"><use href="#kc-top" fill="#F2DFB8"></use><use href="#kc-left" fill="#D4B483"></use><use href="#kc-right" fill="#8F6C3C"></use></svg>
+      <svg role="img" aria-label="Favicon, 16 pixels" viewBox="-104 -128 208 242" width="14" height="16"><use href="#kc-top" fill="#F2DFB8"></use><use href="#kc-left" fill="#D4B483"></use><use href="#kc-right" fill="#8F6C3C"></use></svg>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1200,"height":760}}'>
+class Component extends DCLogic {
+  componentDidMount() { this._mounted = true; this._start(); }
+  componentWillUnmount() { this._mounted = false; clearTimeout(this._wait); if (this._raf) cancelAnimationFrame(this._raf); if (this._r) { this._r.dispose(); this._r = null; } this._running = false; }
+  _start() {
+    if (this._running || !this._canvas || !this._mounted) return;
+    var T = window.THREE;
+    if (!T) { clearTimeout(this._wait); var self = this; this._wait = setTimeout(function () { self._start(); }, 150); return; }
+    this._running = true;
+    try { this._build(T); } catch (e) { console.error(e); }
+  }
+  _env(T, r) {
+    var pmrem = new T.PMREMGenerator(r);
+    var s = new T.Scene();
+    s.add(new T.Mesh(new T.BoxGeometry(10, 10, 10), new T.MeshBasicMaterial({ color: 0x0E0D0C, side: T.BackSide })));
+    var panel = function (w, h, hex, k, x, y, z, rx, ry) {
+      var m = new T.Mesh(new T.PlaneGeometry(w, h), new T.MeshBasicMaterial({ color: new T.Color(hex).multiplyScalar(k), side: T.DoubleSide }));
+      m.position.set(x, y, z); m.rotation.set(rx, ry, 0); s.add(m);
+    };
+    panel(8, 4, 0xFFFFFF, 4, 0, 4.9, 0, Math.PI / 2, 0);
+    panel(1.4, 6, 0xFFF1D6, 3.5, -4.9, 0.5, 1, 0, Math.PI / 2);
+    panel(0.5, 6, 0xFFE9C4, 1.2, 4.9, 0.5, -1, 0, Math.PI / 2);
+    panel(8, 0.7, 0xFFFFFF, 1.5, 0, 0.6, 4.9, 0, 0);
+    panel(10, 10, 0x2A2420, 0.8, 0, -4.9, 0, Math.PI / 2, 0);
+    var tex = pmrem.fromScene(s, 0.03).texture;
+    pmrem.dispose();
+    return tex;
+  }
+  _build(T) {
+    var c = this._canvas, W = c.width, H = c.height;
+    var r = new T.WebGLRenderer({ canvas: c, antialias: true, alpha: true, preserveDrawingBuffer: true });
+    r.setPixelRatio(1); r.setSize(W, H, false);
+    r.outputEncoding = T.sRGBEncoding; r.toneMapping = T.ACESFilmicToneMapping; r.toneMappingExposure = 1.1; r.physicallyCorrectLights = true;
+    this._r = r;
+    var scene = new T.Scene(); scene.environment = this._env(T, r);
+    var hh = 2.05;
+    var cam = new T.OrthographicCamera(-hh, hh, hh, -hh, 0.1, 50); cam.position.set(0, 0, 10); cam.lookAt(0, 0, 0);
+    var outer = new T.Group(); outer.position.y = -0.12; outer.rotation.x = Math.atan(1 / Math.SQRT2); scene.add(outer);
+    var inner = new T.Group(); outer.add(inner);
+    var gold = new T.MeshPhysicalMaterial({ color: 0xD4B483, metalness: 1, roughness: 0.22, clearcoat: 1, clearcoatRoughness: 0.08 });
+    var glow = new T.MeshStandardMaterial({ color: 0xFFE3B0, emissive: 0xFFC978, emissiveIntensity: 2.6, roughness: 0.4 });
+    var side = 1.46, half = 0.8;
+    var sq = new T.Shape(); sq.moveTo(-side / 2, -side / 2); sq.lineTo(side / 2, -side / 2); sq.lineTo(side / 2, side / 2); sq.lineTo(-side / 2, side / 2); sq.lineTo(-side / 2, -side / 2);
+    var plateGeo = new T.ExtrudeGeometry(sq, { depth: 0.1, bevelEnabled: true, bevelThickness: 0.03, bevelSize: 0.03, bevelSegments: 3 });
+    plateGeo.center();
+    var faces = [
+      { n: new T.Vector3(0, 1, 0), base: 0.32 },
+      { n: new T.Vector3(0, -1, 0), base: 0.1 },
+      { n: new T.Vector3(1, 0, 0), base: 0.1 },
+      { n: new T.Vector3(-1, 0, 0), base: 0.1 },
+      { n: new T.Vector3(0, 0, 1), base: 0.1 },
+      { n: new T.Vector3(0, 0, -1), base: 0.1 }
+    ];
+    var zAxis = new T.Vector3(0, 0, 1);
+    faces.forEach(function (f) {
+      var m = new T.Mesh(plateGeo, gold);
+      m.quaternion.setFromUnitVectors(zAxis, f.n);
+      inner.add(m); f.mesh = m;
+    });
+    var place = function (extra) { faces.forEach(function (f) { f.mesh.position.copy(f.n).multiplyScalar(half + f.base + extra); }); };
+    place(0);
+    var core = new T.Mesh(new T.IcosahedronGeometry(0.3, 4), glow); inner.add(core);
+    inner.add(new T.PointLight(0xFFC978, 6, 4, 2));
+    inner.rotation.y = Math.PI / 4;
+    var ease = function (x) { return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var self = this, t0 = performance.now(), P = 3.8, HOLD = 2.4;
+    var tick = function (now) {
+      if (!self._r) return;
+      var t = (now - t0) / 1000, k = Math.floor(t / P), u = t - k * P;
+      var fr = u < HOLD ? 0 : ease((u - HOLD) / (P - HOLD));
+      inner.rotation.y = Math.PI / 4 + (k + fr) * Math.PI / 2;
+      place(0.16 * Math.sin(Math.PI * fr));
+      core.scale.setScalar(1 + 0.06 * Math.sin(t * 2.4));
+      r.render(scene, cam);
+      self._raf = requestAnimationFrame(tick);
+    };
+    if (reduce) r.render(scene, cam); else this._raf = requestAnimationFrame(tick);
+  }
+  renderVals() {
+    if (!this._setCanvas) { var self = this; this._setCanvas = function (el) { self._canvas = el; if (el) self._start(); }; }
+    return { setCanvas: this._setCanvas };
+  }
+}
+</script>
+</body>
+</html>
