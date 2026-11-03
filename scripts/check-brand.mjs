@@ -5,12 +5,11 @@
  * Fails (exit 1) when:
  *  1. A file outside src/components/brand/ references a logo image directly
  *     (anything under /brand/, or an old logo filename), instead of using
- *     <BrandLogo/>, <CubeGlyph/>, <CubeMark/> or the BRAND constants.
+ *     <BrandLogo/>, <GyroMark/> or the BRAND constants.
  *  2. The retired company name "Krudex Technologies" appears in the site
  *     source (the email inbox address is allowed).
  *  3. A file listed in BRAND, or the favicon / apple icon, is missing.
  *  4. An old logo image is back in public/.
- *  5. The retired Gyro mark (GyroMark / gyroScene) is used again.
  *
  * Runs automatically before every `npm run build` (prebuild) and in CI.
  */
@@ -33,7 +32,6 @@ const BRAND_DIR = join('src', 'components', 'brand') + sep;
 const OLD_LOGO_FILES = /krudex-(bg|bg-gold|logo|nav)\.png|banner\.png/;
 const BRAND_ASSET_REF = /["'`(]\/brand\//;
 const OLD_NAME = /Krudex Technologies/i;
-const OLD_MARK = /\bGyroMark\b|gyroScene/;
 
 const sourceFiles = walk(join(root, 'src')).filter((f) => /\.(tsx?|jsx?|css|mdx?)$/.test(f));
 
@@ -44,10 +42,7 @@ for (const file of sourceFiles) {
   lines.forEach((line, i) => {
     const at = `${rel}:${i + 1}`;
     if (!inBrandDir && (BRAND_ASSET_REF.test(line) || OLD_LOGO_FILES.test(line))) {
-      errors.push(`${at}  logo image referenced directly. Use <BrandLogo/>, <CubeGlyph/>, <CubeMark/> or BRAND from '@/components/brand'.`);
-    }
-    if (OLD_MARK.test(line)) {
-      errors.push(`${at}  retired Gyro mark. The logo is the Cube: use <CubeGlyph/> or <CubeMark/>.`);
+      errors.push(`${at}  logo image referenced directly. Use <BrandLogo/>, <GyroMark/> or BRAND from '@/components/brand'.`);
     }
     if (OLD_NAME.test(line.replace(/krudextechnologies@[\w.]+/gi, ''))) {
       errors.push(`${at}  old company name "Krudex Technologies". Use BRAND.name ("Krudex Global").`);
@@ -61,7 +56,7 @@ for (const [, path] of brandTs.matchAll(/:\s*'(\/brand\/[^']+)'/g)) {
   if (!existsSync(join(root, 'public', path))) errors.push(`public${path}  listed in BRAND but missing.`);
 }
 for (const icon of ['src/app/icon.png', 'src/app/apple-icon.png']) {
-  if (!existsSync(join(root, icon))) errors.push(`${icon}  missing (favicon must be the Cube mark; run npm run brand:render).`);
+  if (!existsSync(join(root, icon))) errors.push(`${icon}  missing (favicon must be the Gyro mark).`);
 }
 
 // Old logo images must not be deployed again.

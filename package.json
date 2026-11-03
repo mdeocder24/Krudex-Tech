@@ -10,8 +10,7 @@
     "lint": "eslint",
     "check:brand": "node scripts/check-brand.mjs",
     "typecheck": "tsc --noEmit",
-    "test:e2e": "playwright test",
-    "brand:render": "node scripts/render-brand.mjs"
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

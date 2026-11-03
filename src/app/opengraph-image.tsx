@@ -26,7 +26,7 @@ export default async function Image() {
           gap: 64,
         }}
       >
-        <img src={lockupSrc} width={420} height={435} alt="" />
+        <img src={lockupSrc} width={400} height={486} alt="" />
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24, flex: 1 }}>
           <div style={{ fontSize: 62, color: '#F5EFE4', lineHeight: 1.1, fontWeight: 600 }}>
             Build. Solve. Scale.

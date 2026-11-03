@@ -10,7 +10,7 @@ for (const path of paths) {
     const home = page.getByRole('link', { name: 'Krudex Global — home' });
     await expect(home).toHaveCount(2); // navbar + footer
     for (const link of await home.all()) {
-      await expect(link.locator('svg[data-brand-mark]')).toHaveCount(1);
+      await expect(link.locator('img[src*="brand%2Fkrudex-global-mark"]')).toHaveCount(1);
       await expect(link).toContainText('KRUDEX');
       await expect(link).toContainText('GLOBAL');
     }
