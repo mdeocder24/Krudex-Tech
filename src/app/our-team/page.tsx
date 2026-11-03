@@ -3,7 +3,6 @@ import React from "react";
 import * as motion from 'framer-motion/client';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Link from "next/link";
 import TeamCard from "@/components/TeamCard";
 
 const teamMembers = [
@@ -35,72 +34,63 @@ const teamMembers = [
     ],
   },
   {
-    name: "Aarav Mehta",
+    name: "Abhinay Reddy",
+    role: "Chief Technology Officer",
+    initials: "AR",
+    accent: "#D4B483",
+    accentRgb: "212, 180, 131",
+    bio: "Leads technology at Krudex: sets the technical direction, owns architecture and engineering standards, and makes sure every product is built to last.",
+    skills: ["Technical Strategy", "System Architecture", "Engineering Leadership", "Cloud", "Product Delivery"],
+    socials: [
+      { type: "linkedin" as const, url: "#" },
+    ],
+  },
+  {
+    name: "Anil",
+    role: "Marketing Lead",
+    initials: "AN",
+    accent: "#D4B483",
+    accentRgb: "212, 180, 131",
+    bio: "Leads Krudex's marketing: positioning, campaigns and brand presence, so the right customers find our products and services.",
+    skills: ["Marketing Strategy", "Brand", "Campaign Planning", "Content", "Market Research"],
+    socials: [
+      { type: "linkedin" as const, url: "#" },
+    ],
+  },
+  {
+    name: "Allu Nanda Kishore",
+    role: "Digital Marketing Head",
+    initials: "AK",
+    accent: "#D4B483",
+    accentRgb: "212, 180, 131",
+    bio: "Heads digital marketing for Krudex and its clients, running Google Ads, SEO, social and content as one system measured by leads and revenue.",
+    skills: ["Google Ads", "SEO", "Social Media", "Analytics", "Performance Marketing"],
+    socials: [
+      { type: "linkedin" as const, url: "#" },
+    ],
+  },
+  {
+    name: "Karing Raghawendhra",
     role: "Lead AI/ML Engineer",
-    initials: "AM",
+    initials: "KR",
     accent: "#D4B483",
     accentRgb: "212, 180, 131",
-    bio: "Builds production-grade machine learning pipelines and intelligent systems. Deep expertise in NLP, recommendation engines, and real-time inference at scale.",
-    skills: ["PyTorch", "MLOps", "NLP", "LLMs", "Data Engineering"],
+    bio: "Leads AI and machine learning work: designing and building intelligent features, from LLM integrations to custom models, that work reliably in production.",
+    skills: ["Machine Learning", "LLMs", "Python", "Computer Vision", "MLOps"],
     socials: [
       { type: "linkedin" as const, url: "#" },
-      { type: "github" as const, url: "#" },
-      { type: "twitter" as const, url: "#" },
     ],
   },
   {
-    name: "Priya Venkatesh",
-    role: "Senior Frontend Engineer",
-    initials: "PV",
+    name: "Siddharth Naidu",
+    role: "Training Team Lead (Students)",
+    initials: "SN",
     accent: "#D4B483",
     accentRgb: "212, 180, 131",
-    bio: "Crafts pixel-perfect, high-performance interfaces with meticulous attention to animation, accessibility, and cross-browser consistency. Design-engineering hybrid.",
-    skills: ["React", "TypeScript", "Framer Motion", "WebGL", "CSS Architecture"],
+    bio: "Leads student training at Krudex with NovaSkill Hub, shaping programs with industry experts so students learn how the work is done in practice.",
+    skills: ["Training Programs", "Mentoring", "Curriculum Design", "Student Success", "Industry Partnerships"],
     socials: [
       { type: "linkedin" as const, url: "#" },
-      { type: "github" as const, url: "#" },
-      { type: "dribbble" as const, url: "#" },
-    ],
-  },
-  {
-    name: "Rohan Iyer",
-    role: "Backend & Infrastructure",
-    initials: "RI",
-    accent: "#D4B483",
-    accentRgb: "212, 180, 131",
-    bio: "Designs resilient backend architectures and cloud infrastructure. Obsessed with zero-downtime deployments, observability, and sub-100ms API responses.",
-    skills: ["Node.js", "PostgreSQL", "AWS", "Docker", "Kubernetes"],
-    socials: [
-      { type: "linkedin" as const, url: "#" },
-      { type: "github" as const, url: "#" },
-    ],
-  },
-  {
-    name: "Sneha Reddy",
-    role: "UI/UX Design Lead",
-    initials: "SR",
-    accent: "#D4B483",
-    accentRgb: "212, 180, 131",
-    bio: "Translates complex product requirements into intuitive, beautiful interfaces. Bridges the gap between design vision and engineering reality with systematic design systems.",
-    skills: ["Figma", "Design Systems", "Prototyping", "User Research", "Brand"],
-    socials: [
-      { type: "linkedin" as const, url: "#" },
-      { type: "dribbble" as const, url: "#" },
-      { type: "behance" as const, url: "#" },
-    ],
-  },
-  {
-    name: "Vikram Nair",
-    role: "Mobile & Cross-Platform",
-    initials: "VN",
-    accent: "#D4B483",
-    accentRgb: "212, 180, 131",
-    bio: "Ships cross-platform mobile experiences that feel truly native. Expert in performance optimization, offline-first architectures, and smooth 60fps animations.",
-    skills: ["React Native", "Swift", "Kotlin", "Firebase", "App Performance"],
-    socials: [
-      { type: "linkedin" as const, url: "#" },
-      { type: "github" as const, url: "#" },
-      { type: "twitter" as const, url: "#" },
     ],
   },
 ];
@@ -194,40 +184,6 @@ export default function OurTeamPage() {
               <TeamCard key={member.initials} member={member} index={index} />
             ))}
 
-            {/* "You?" ghost card */}
-            <motion.div
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{
-                duration: 0.7,
-                delay: 0.7,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-            >
-              <Link href="/contact" className="relative rounded-2xl h-full min-h-[320px] border border-dashed border-white/20 bg-krudex-card/50 flex flex-col items-center justify-center gap-4 group/ghost hover:border-white/50 transition-colors duration-500">
-                <motion.div
-                  animate={{
-                    scale: [1, 1.1, 1],
-                    opacity: [0.2, 0.4, 0.2],
-                  }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                  className="w-16 h-16 rounded-xl border border-dashed border-white/30 flex items-center justify-center group-hover/ghost:border-white/40 transition-colors duration-500"
-                >
-                  <span className="text-2xl text-white/50 group-hover/ghost:text-white transition-colors duration-500">
-                    +
-                  </span>
-                </motion.div>
-                <div className="text-center">
-                  <p className="text-white/80 text-sm font-medium group-hover/ghost:text-white transition-colors duration-500">
-                    Could be you
-                  </p>
-                  <p className="text-krudex-muted text-xs mt-1 group-hover/ghost:text-white/80 transition-colors duration-500">
-                    We&apos;re always hiring great engineers — get in touch
-                  </p>
-                </div>
-              </Link>
-            </motion.div>
           </div>
         </div>
       </section>

@@ -235,21 +235,3 @@ export const STATS = [
   { value: '24h', label: 'Response time' },
   { value: '100%', label: 'IP transferred to you' },
 ] as const;
-
-/** Real projects named in the company timeline. */
-export const WORK = [
-  {
-    name: 'TEDx MLRIT',
-    year: '2024',
-    kind: 'Event platform & campaign design',
-    text: 'We built and shipped the TEDx MLRIT platform and designed the event campaign.',
-    tags: ['Web Platform', 'Event Campaign'],
-  },
-  {
-    name: 'Kemplast',
-    year: '2024',
-    kind: 'Modernisation',
-    text: 'We completed a modernisation project for Kemplast.',
-    tags: ['Modernisation'],
-  },
-] as const;

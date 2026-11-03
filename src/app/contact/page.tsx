@@ -9,7 +9,7 @@ import { Mail, Phone, MapPin, ChevronDown, Check, AlertCircle, ArrowRight, Loade
 import Turnstile, { TURNSTILE_SITE_KEY } from '@/components/Turnstile';
 import { WHATSAPP_URL } from '@/lib/site';
 import { faqs } from '@/lib/faqs';
-import AIScoper, { type ScopeResult } from '@/components/ai/AIScoper';
+import ServiceSuggester from '@/components/ServiceSuggester';
 
 
 const serviceOptions = [
@@ -88,14 +88,13 @@ export default function ContactPage() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // AI scoper result: preselect services and timeline, and add the brief to details.
-  const applyScope = React.useCallback((result: ScopeResult) => {
+  // Idea helper: preselect suggested services and add the idea to details.
+  const applySuggestion = React.useCallback((suggested: string[], idea: string) => {
     setServicesError(false);
-    setServices(result.services.filter((sv) => serviceOptions.includes(sv)));
+    setServices(suggested.filter((sv) => serviceOptions.includes(sv)));
     setFormData((prev) => ({
       ...prev,
-      timeline: result.timeline,
-      details: prev.details.trim() ? `${prev.details.trim()}\n\n${result.brief}` : result.brief,
+      details: prev.details.trim() ? prev.details : idea,
     }));
   }, []);
 
@@ -294,7 +293,7 @@ export default function ContactPage() {
                       </div>
                     </div>
 
-                    <AIScoper onApply={applyScope} />
+                    <ServiceSuggester onApply={applySuggestion} />
 
                     {/* Project */}
                     <fieldset className="flex flex-col gap-3" aria-describedby={servicesError ? 'services-error' : undefined}>

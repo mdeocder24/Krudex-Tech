@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Loader2, Sparkles } from 'lucide-react';
-import { postAi, useAiEnabled } from './useAiEnabled';
+import { ArrowRight, Compass } from 'lucide-react';
 
 type Key = 'goal' | 'level' | 'interest' | 'time';
 
@@ -22,30 +21,63 @@ interface PathResult {
   alsoConsider: string | null;
 }
 
-/** Four quick questions, then an AI-suggested learning track. Hidden without AI. */
-export default function TrainingPathFinder() {
-  const enabled = useAiEnabled();
-  const [answers, setAnswers] = useState<Partial<Record<Key, string>>>({});
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState('');
-  const [result, setResult] = useState<PathResult | null>(null);
+// Interest decides the track; each track lists its learning steps.
+const TRACKS: Record<string, { track: string; steps: string[] }> = {
+  'Building websites and apps': {
+    track: 'SaaS & web development',
+    steps: ['Web fundamentals: HTML, CSS and JavaScript', 'A modern framework like React and Next.js', 'Back ends, APIs and databases', 'Ship a real project end to end'],
+  },
+  'AI and data': {
+    track: 'AI & machine learning',
+    steps: ['Python and data basics', 'Core machine learning ideas', 'Working with LLMs and AI APIs', 'Add an AI feature to a real product'],
+  },
+  'Design and user experience': {
+    track: 'UI/UX design',
+    steps: ['Design basics: layout, type and colour', 'User research and flows', 'Prototyping in Figma', 'Design and test a complete product screen set'],
+  },
+  'Marketing and growth': {
+    track: 'Google Ads & digital marketing',
+    steps: ['How customers search and buy online', 'Google Ads and paid campaigns', 'SEO, social and content', 'Run and measure a campaign with GA4'],
+  },
+};
 
-  if (!enabled) return null;
+// A goal can point to a useful second topic.
+const ALSO: Record<string, string> = {
+  'Build my own product': 'SaaS & web development',
+  'Grow a business': 'Google Ads & digital marketing',
+  'Get my first job': 'UI/UX design',
+  'Switch careers': 'SaaS & web development',
+};
+
+const PACE: Record<string, string> = {
+  'A few hours a week': 'at a steady pace alongside your studies or work',
+  'Evenings and weekends': 'with focused evening and weekend sessions',
+  'Full time': 'at full speed',
+};
+
+function buildPath(a: Record<Key, string>): PathResult {
+  const t = TRACKS[a.interest];
+  const beginner = a.level === 'Complete beginner';
+  const steps = beginner ? ['Start from zero with guided fundamentals', ...t.steps.slice(1)] : t.steps;
+  const also = ALSO[a.goal];
+  return {
+    track: t.track,
+    headline: beginner ? `Start your ${t.track} journey` : `Level up in ${t.track}`,
+    why: `You told us you want to ${a.goal.toLowerCase()} and enjoy ${a.interest.toLowerCase()}. This track builds those skills ${PACE[a.time]}, with guidance from industry experts.`,
+    steps,
+    alsoConsider: also && also !== t.track ? also : null,
+  };
+}
+
+/** Four quick questions, then a suggested learning track. Runs in the browser. */
+export default function TrainingPathFinder() {
+  const [answers, setAnswers] = useState<Partial<Record<Key, string>>>({});
+  const [result, setResult] = useState<PathResult | null>(null);
 
   const complete = QUESTIONS.every((q) => answers[q.key]);
 
-  async function find() {
-    if (!complete || busy) return;
-    setBusy(true);
-    setError('');
-    setResult(null);
-    try {
-      setResult(await postAi<PathResult>('/api/ai/training-path', answers));
-    } catch (e) {
-      setError(e instanceof Error ? e.message : 'Something went wrong.');
-    } finally {
-      setBusy(false);
-    }
+  function find() {
+    if (complete) setResult(buildPath(answers as Record<Key, string>));
   }
 
   return (
@@ -53,14 +85,14 @@ export default function TrainingPathFinder() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
         <div className="lg:col-span-5">
           <div className="inline-flex items-center gap-2 border border-krudex-border px-3 py-1.5 mb-8">
-            <Sparkles aria-hidden="true" className="h-3.5 w-3.5 text-krudex-accent" />
-            <span className="text-xs uppercase tracking-[0.2em] text-krudex-accent font-semibold">AI path finder</span>
+            <Compass aria-hidden="true" className="h-3.5 w-3.5 text-krudex-accent" />
+            <span className="text-xs uppercase tracking-[0.2em] text-krudex-accent font-semibold">Path finder</span>
           </div>
           <h2 id="path-finder-title" className="font-serif text-4xl md:text-5xl text-white font-bold mb-6">
             Find your learning path.
           </h2>
           <p className="text-krudex-muted text-base leading-relaxed">
-            Answer four quick questions and our AI suggests the track that fits you best. The team then shares the current format, dates and fees.
+            Answer four quick questions and we suggest the track that fits you best. The team then shares the current format, dates and fees.
           </p>
         </div>
 
@@ -90,15 +122,14 @@ export default function TrainingPathFinder() {
           <button
             type="button"
             onClick={find}
-            disabled={!complete || busy}
+            disabled={!complete}
             className="self-start inline-flex min-h-12 items-center gap-2 rounded-full bg-krudex-accent px-7 text-sm font-semibold text-krudex-black transition-[background-color,opacity,transform] duration-200 hover:bg-krudex-accent-hover active:scale-[0.97] disabled:opacity-40"
           >
-            {busy ? <Loader2 aria-hidden="true" className="h-4 w-4 animate-spin" /> : <Sparkles aria-hidden="true" className="h-4 w-4" />}
-            {busy ? 'Finding your path…' : 'Suggest my path'}
+            <Compass aria-hidden="true" className="h-4 w-4" />
+            Suggest my path
           </button>
 
           <div aria-live="polite">
-            {error && <p role="alert" className="text-sm text-white/80">{error}</p>}
             {result && (
               <div className="border border-krudex-border bg-krudex-card/50 p-6 md:p-8">
                 <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-krudex-accent">Suggested track · {result.track}</p>

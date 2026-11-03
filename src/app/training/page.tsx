@@ -5,7 +5,7 @@ import * as motion from 'framer-motion/client';
 import { ArrowRight } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import TrainingPathFinder from '@/components/ai/TrainingPathFinder';
+import TrainingPathFinder from '@/components/TrainingPathFinder';
 
 const reasonsData = [
   {
