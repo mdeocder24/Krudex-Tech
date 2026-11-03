@@ -4,6 +4,9 @@ import { BRAND } from './brand';
 /**
  * The Krudex Global logo (gold KK). Use this everywhere a logo appears.
  *
+ * Renders the light artwork and the ink artwork; CSS in globals.css shows the
+ * one that matches the theme (no flash, no hydration mismatch).
+ *
  * Size it with a text class (e.g. "text-[20px]"): the logo is `height` em
  * tall, so one font size scales it responsively. Default 3em.
  * Inside a link that already has an aria-label, pass `decorative`.
@@ -22,15 +25,21 @@ export default function BrandLogo({
 }) {
   return (
     <span className={`inline-flex ${className}`}>
-      <Image
-        src={BRAND.logoSrc}
-        alt={decorative ? '' : BRAND.logoAlt}
-        width={BRAND.logoWidth}
-        height={BRAND.logoHeight}
-        priority={priority}
-        className="w-auto max-w-none"
-        style={{ height: `${height}em` }}
-      />
+      {[
+        { src: BRAND.logoSrc, cls: 'kx-logo-on-dark' },
+        { src: BRAND.logoOnLightSrc, cls: 'kx-logo-on-light' },
+      ].map(({ src, cls }) => (
+        <Image
+          key={cls}
+          src={src}
+          alt={decorative ? '' : BRAND.logoAlt}
+          width={BRAND.logoWidth}
+          height={BRAND.logoHeight}
+          priority={priority}
+          className={`${cls} w-auto max-w-none`}
+          style={{ height: `${height}em` }}
+        />
+      ))}
     </span>
   );
 }

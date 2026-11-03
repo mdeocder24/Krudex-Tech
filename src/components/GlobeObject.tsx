@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import createGlobe from 'cobe';
+import { useTheme } from '@/lib/theme';
 
 const MARKERS = [
   { location: [37.7595, -122.4367] as [number, number], size: 0.07 }, // San Francisco
@@ -21,6 +22,7 @@ export default function GlobeObject() {
   const phi = useRef(0);
   const isDragging = useRef(false);
   const lastX = useRef(0);
+  const light = useTheme() === 'light';
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -33,13 +35,14 @@ export default function GlobeObject() {
       height: width * 2,
       phi: phi.current,
       theta: 0.3,
-      dark: 1,
-      diffuse: 1.4,
+      // Light mode: cream globe with warm-ink land dots on the cream page.
+      dark: light ? 0 : 1,
+      diffuse: light ? 1.2 : 1.4,
       mapSamples: 8000,
-      mapBrightness: 2.8,
-      baseColor: [0.07, 0.06, 0.05],
-      markerColor: [0.83, 0.71, 0.51], // champagne gold
-      glowColor: [0.2, 0.17, 0.12],
+      mapBrightness: light ? 6 : 2.8,
+      baseColor: light ? [0.95, 0.92, 0.86] : [0.07, 0.06, 0.05],
+      markerColor: light ? [0.54, 0.4, 0.19] : [0.83, 0.71, 0.51], // gold
+      glowColor: light ? [0.96, 0.93, 0.87] : [0.2, 0.17, 0.12],
       markers: MARKERS,
     });
 
@@ -77,7 +80,7 @@ export default function GlobeObject() {
       cancelAnimationFrame(raf);
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [light]);
 
   return (
     <div className="relative w-full h-full flex items-center justify-center">

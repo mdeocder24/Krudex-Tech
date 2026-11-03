@@ -14,6 +14,8 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Design references and exported bundles — third-party/minified, not app source.
     "design/**",
+    // Local agent worktrees and settings.
+    ".claude/**",
     "Logo/**",
     "**/vendor/**",
     "**/*.min.js",

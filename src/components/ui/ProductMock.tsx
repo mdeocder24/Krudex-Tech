@@ -265,6 +265,8 @@ export default function ProductMock({
   return (
     <div
       aria-hidden="true"
+      // Product screens stay dark in light mode, like screenshots of a dark app.
+      data-theme="dark"
       className={`relative flex min-h-[320px] min-w-0 items-center justify-center overflow-hidden px-5 pb-20 pt-14 sm:min-h-[400px] sm:px-8 ${className}`}
       style={{ background: BACKDROPS[kind] }}
     >
