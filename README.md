@@ -189,17 +189,14 @@ Every logo on the site comes from **`src/components/brand/`**. Nothing else may 
 
 | File | What it is |
 |---|---|
-| `brand.ts` | `BRAND` constants: name, wordmark, asset paths |
-| `BrandLogo.tsx` | The logo. `variant="horizontal"` (navbar, footer) or `"stacked"` (hero fallback). Size it with a text class, e.g. `className="text-[20px]"`; every part scales in em |
-| `GyroMark.tsx` | The 3D Gyro symbol. Live WebGL on capable devices (used on the 404 page), static PNG otherwise |
-| `Wordmark.tsx` | Chrome "KRUDEX" over gold "GLOBAL" (styles: `.kx-chrome`, `.kx-gold`, `.kx-depth` in `globals.css`) |
-| `gyroScene.ts` | The Three.js scene, ported from the design reference in `design/logo-gyro-reference/` |
+| `brand.ts` | `BRAND` constants: name, logo path and size, alt text |
+| `BrandLogo.tsx` | The gold KK logo. Size it with a text class, e.g. `className="text-[20px]"`; the logo is `height` em tall (default 3) |
 
-Static renders live in `public/brand/` (mark 1024px and 512px, stacked lockup). The favicon (`src/app/icon.png`), Apple icon (`src/app/apple-icon.png`), social card (`src/app/opengraph-image.tsx`) and JSON-LD logo all use them.
+Static files live in `public/brand/`: `krudex-global-logo.png` (full logo, trimmed) and `krudex-global-mark-512.png` (KK symbol, JSON-LD logo). The favicon (`src/app/icon.png`) and Apple icon (`src/app/apple-icon.png`) are the KK symbol. The social card (`src/app/opengraph-image.tsx`) uses the full logo. Source artwork: `design/brand-archive/krudex-bg-gold.png`.
 
 **Guard:** `npm run check:brand` runs before every build and in CI. It fails if a file outside `src/components/brand/` references a logo image, if "Krudex Technologies" reappears, if a brand asset is missing, or if an old logo is put back in `public/`. `e2e/brand.spec.ts` checks that every page renders the logo in the navbar and footer.
 
-**Changing the logo:** edit `gyroScene.ts` / `Wordmark.tsx`, then re-render the PNGs in `public/brand/` and both icons from the live components (a headless-Chrome screenshot of `<GyroMark animated={false} />` and `<BrandLogo variant="stacked" />` with a transparent background), keeping the same file names.
+**Changing the logo:** replace the PNGs in `public/brand/` and both icons, keeping the same file names, and update `logoWidth` / `logoHeight` in `brand.ts`.
 
 ---
 

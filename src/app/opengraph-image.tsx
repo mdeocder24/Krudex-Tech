@@ -8,10 +8,9 @@ export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
 // Shared social preview for every route (twitter falls back to og:image).
-// The lockup PNG is a render of <BrandLogo variant="stacked" />; see README → "Brand assets".
 export default async function Image() {
-  const lockup = await readFile(join(process.cwd(), 'public', BRAND.lockupSrc));
-  const lockupSrc = `data:image/png;base64,${lockup.toString('base64')}`;
+  const logo = await readFile(join(process.cwd(), 'public', BRAND.logoSrc));
+  const logoSrc = `data:image/png;base64,${logo.toString('base64')}`;
 
   return new ImageResponse(
     (
@@ -26,7 +25,7 @@ export default async function Image() {
           gap: 64,
         }}
       >
-        <img src={lockupSrc} width={400} height={486} alt="" />
+        <img src={logoSrc} width={460} height={Math.round((460 * BRAND.logoHeight) / BRAND.logoWidth)} alt="" />
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24, flex: 1 }}>
           <div style={{ fontSize: 62, color: '#F5EFE4', lineHeight: 1.1, fontWeight: 600 }}>
             Build. Solve. Scale.

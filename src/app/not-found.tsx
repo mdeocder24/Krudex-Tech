@@ -2,7 +2,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import { GyroMark } from "@/components/brand";
 
 export default function NotFound() {
   return (
@@ -14,7 +13,6 @@ export default function NotFound() {
 
         {/* ════════════ HERO / 404 ════════════ */}
         <section className="flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-24 pb-12 sm:pt-28 sm:pb-16 md:py-0">
-          <GyroMark size="clamp(96px, 22vw, 180px)" decorative className="mb-6 sm:mb-8" />
           <h1 className="text-white/80 text-lg sm:text-3xl md:text-5xl font-light leading-snug tracking-tight mb-8 sm:mb-12">
             This page seems to have
             <br />

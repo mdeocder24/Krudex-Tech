@@ -5,7 +5,7 @@
  * Fails (exit 1) when:
  *  1. A file outside src/components/brand/ references a logo image directly
  *     (anything under /brand/, or an old logo filename), instead of using
- *     <BrandLogo/>, <GyroMark/> or the BRAND constants.
+ *     <BrandLogo/> or the BRAND constants.
  *  2. The retired company name "Krudex Technologies" appears in the site
  *     source (the email inbox address is allowed).
  *  3. A file listed in BRAND, or the favicon / apple icon, is missing.
@@ -42,7 +42,7 @@ for (const file of sourceFiles) {
   lines.forEach((line, i) => {
     const at = `${rel}:${i + 1}`;
     if (!inBrandDir && (BRAND_ASSET_REF.test(line) || OLD_LOGO_FILES.test(line))) {
-      errors.push(`${at}  logo image referenced directly. Use <BrandLogo/>, <GyroMark/> or BRAND from '@/components/brand'.`);
+      errors.push(`${at}  logo image referenced directly. Use <BrandLogo/> or BRAND from '@/components/brand'.`);
     }
     if (OLD_NAME.test(line.replace(/krudextechnologies@[\w.]+/gi, ''))) {
       errors.push(`${at}  old company name "Krudex Technologies". Use BRAND.name ("Krudex Global").`);
@@ -56,7 +56,7 @@ for (const [, path] of brandTs.matchAll(/:\s*'(\/brand\/[^']+)'/g)) {
   if (!existsSync(join(root, 'public', path))) errors.push(`public${path}  listed in BRAND but missing.`);
 }
 for (const icon of ['src/app/icon.png', 'src/app/apple-icon.png']) {
-  if (!existsSync(join(root, icon))) errors.push(`${icon}  missing (favicon must be the Gyro mark).`);
+  if (!existsSync(join(root, icon))) errors.push(`${icon}  missing (favicon must be the gold KK mark).`);
 }
 
 // Old logo images must not be deployed again.
