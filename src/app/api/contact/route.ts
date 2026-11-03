@@ -1,10 +1,8 @@
-import { NextResponse, after } from 'next/server';
+import { NextResponse } from 'next/server';
 import { queryD1 } from '@/lib/d1';
 import { rateLimit } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
-import { notifyConfigured, notifyNewInquiry } from '@/lib/notify';
-import { triageInquiry } from '@/lib/ai/triage';
-import { clientIp } from '@/lib/ip';
+import { notifyNewInquiry } from '@/lib/notify';
 
 // Field caps keep a single request from writing arbitrarily large rows.
 const LIMITS = {
@@ -33,6 +31,18 @@ function readField(body: Record<string, unknown>, key: Field): string | null {
 }
 
 class FieldError extends Error {}
+
+function clientIp(request: Request): string {
+  // Headers are only as trustworthy as the proxy in front of the app.
+  // x-real-ip is set by Vercel; cf-connecting-ip by Cloudflare.
+  const forwarded = request.headers.get('x-forwarded-for');
+  return (
+    request.headers.get('x-real-ip') ||
+    request.headers.get('cf-connecting-ip') ||
+    forwarded?.split(',')[0]?.trim() ||
+    'unknown'
+  );
+}
 
 export async function POST(request: Request) {
   const ip = clientIp(request);
@@ -101,20 +111,15 @@ export async function POST(request: Request) {
       [id, name, email, company, scope, timeline, details]
     );
 
-    // After the visitor has their answer: AI triage, then the team email.
-    // Neither can lose the inquiry, which is already stored.
-    after(async () => {
-      if (!notifyConfigured()) return;
-      const inquiry = { id, name, email, company, scope, timeline, details };
-      try {
-        await notifyNewInquiry(inquiry, await triageInquiry(inquiry));
-      } catch (notifyError) {
-        console.error(
-          'Inquiry stored but notification email failed:',
-          notifyError instanceof Error ? notifyError.message : notifyError
-        );
-      }
-    });
+    // Notification failure must not lose the inquiry, which is already stored.
+    try {
+      await notifyNewInquiry({ id, name, email, company, scope, timeline, details });
+    } catch (notifyError) {
+      console.error(
+        'Inquiry stored but notification email failed:',
+        notifyError instanceof Error ? notifyError.message : notifyError
+      );
+    }
 
     return NextResponse.json({ success: true, id }, { status: 201 });
   } catch (error: unknown) {
