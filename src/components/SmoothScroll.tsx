@@ -2,6 +2,7 @@
 
 import React, { useEffect } from 'react';
 import Lenis from 'lenis';
+import { MotionConfig } from 'framer-motion';
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
@@ -29,5 +30,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     };
   }, []);
 
-  return <>{children}</>;
+  // reducedMotion="user": framer-motion drops transform/layout animations
+  // (keeps opacity) when the OS asks for reduced motion.
+  return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
 }

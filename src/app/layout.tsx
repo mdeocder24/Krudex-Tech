@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -41,6 +41,18 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  // Paint under the notch / Dynamic Island; content is padded back with env(safe-area-inset-*).
+  viewportFit: "cover",
+  // Android Chrome: the on-screen keyboard shrinks the layout like iOS does.
+  interactiveWidget: "resizes-content",
+  // Site is dark-only; matches the navbar background.
+  themeColor: "#0A0908",
+  colorScheme: "dark",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -48,7 +60,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className={`${plusJakartaSans.variable} ${dmSerifDisplay.variable} dark`}>
-      <body suppressHydrationWarning className="min-h-screen bg-krudex-black text-krudex-text antialiased overflow-x-hidden">
+      <body suppressHydrationWarning className="min-h-svh bg-krudex-black text-krudex-text antialiased overflow-x-hidden">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-full focus:bg-krudex-accent focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-krudex-black"

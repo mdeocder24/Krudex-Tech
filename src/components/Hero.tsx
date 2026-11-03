@@ -53,7 +53,7 @@ const Hero = () => {
   const can3D = useCan3D();
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col lg:flex-row items-center overflow-hidden bg-krudex-black">
+    <section className="relative min-h-svh w-full flex flex-col lg:flex-row items-center overflow-hidden bg-krudex-black">
       {/* Translucent Globe overlay — bottom left */}
       <div className="absolute bottom-0 left-0 w-[120vw] h-[120vw] lg:w-[50vw] lg:h-[50vw] translate-y-[40%] -translate-x-[20%] opacity-40 pointer-events-none z-0">
         {can3D && <GlobeObject />}
@@ -63,19 +63,19 @@ const Hero = () => {
       <div className="absolute inset-0 dot-grid opacity-100 pointer-events-none z-0" />
 
       {/* ── Left: Text Content ───────────────── */}
-      <div className="w-full lg:w-[45%] z-10 flex flex-col justify-center items-start px-6 md:px-14 lg:px-20 pt-32 md:pt-32 lg:pt-0 pb-4 lg:pb-0">
+      <div className="w-full lg:w-[45%] z-10 flex flex-col justify-center items-start px-6 md:px-14 lg:px-20 pt-[calc(8rem+env(safe-area-inset-top))] lg:pt-0 pb-4 lg:pb-0">
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="group inline-flex items-center gap-2.5 bg-krudex-surface/90 border border-white/10 hover:border-white/40 px-3.5 md:px-4 py-1.5 md:py-2 rounded-full mb-6 md:mb-8 shadow-[0_0_20px_rgba(212,180,131,0.06)] transition-all duration-300"
+          className="group inline-flex max-w-full items-center gap-2.5 bg-krudex-surface/90 border border-white/10 hover:border-white/40 px-3.5 md:px-4 py-1.5 md:py-2 rounded-full mb-6 md:mb-8 shadow-[0_0_20px_rgba(212,180,131,0.06)] transition-all duration-300"
         >
-          <span className="relative flex h-2 w-2">
+          <span className="relative flex h-2 w-2 shrink-0">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-krudex-accent opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-krudex-accent"></span>
           </span>
-          <span className="text-[10.5px] sm:text-xs font-mono text-krudex-muted group-hover:text-white sm:tracking-wide whitespace-nowrap transition-colors">
+          <span className="text-[10.5px] sm:text-xs font-mono text-krudex-muted group-hover:text-white sm:tracking-wide min-[360px]:whitespace-nowrap transition-colors">
             SaaS · Digital Marketing · Student Training
           </span>
         </motion.div>
@@ -148,7 +148,7 @@ const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5, delay: 0.6 }}
-        className="w-full lg:w-[55%] h-[45vh] sm:h-[55vh] lg:h-screen relative z-10"
+        className="w-full lg:w-[55%] h-[45svh] sm:h-[55svh] lg:h-svh relative z-10"
       >
         {can3D === true && <Hero3DObject />}
         {can3D === false && (

@@ -5,9 +5,9 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="relative min-h-screen flex flex-col">
+    <div className="relative min-h-svh flex flex-col">
       {/* ── Content wrapper ── */}
-      <div className="relative z-10 flex flex-col min-h-screen">
+      <div className="relative z-10 flex flex-col min-h-svh">
         {/* Navbar */}
         <Navbar />
 

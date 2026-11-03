@@ -11,7 +11,7 @@ import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-krudex-black flex flex-col">
+    <main className="min-h-svh bg-krudex-black flex flex-col">
       <Navbar />
       <Hero />
       <ScrollTools />

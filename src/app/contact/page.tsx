@@ -144,7 +144,7 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="min-h-screen bg-transparent selection:bg-krudex-accent selection:text-krudex-black flex flex-col">
+    <main className="min-h-svh bg-transparent selection:bg-krudex-accent selection:text-krudex-black flex flex-col">
       <Suspense fallback={null}>
         <TrainingInterest onMatch={selectTraining} />
       </Suspense>
@@ -346,7 +346,7 @@ export default function ContactPage() {
                     </div>
 
                     {/* Honeypot: off-screen, skipped by keyboard and screen readers */}
-                    <div aria-hidden="true" className="absolute -left-[9999px] w-px h-px overflow-hidden">
+                    <div aria-hidden="true" className="absolute w-px h-px overflow-hidden opacity-0 pointer-events-none [clip-path:inset(50%)]">
                       <label htmlFor="website">Website</label>
                       <input
                         id="website"

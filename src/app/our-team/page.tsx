@@ -107,7 +107,7 @@ const teamMembers = [
 
 export default function OurTeamPage() {
   return (
-    <main className="min-h-screen bg-transparent selection:bg-krudex-accent selection:text-krudex-black flex flex-col">
+    <main className="min-h-svh bg-transparent selection:bg-krudex-accent selection:text-krudex-black flex flex-col">
       <Navbar />
 
       {/* === Hero Section === */}

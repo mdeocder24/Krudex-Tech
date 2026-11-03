@@ -40,7 +40,7 @@ const footerLinks = [
 
 const Footer = () => {
   return (
-    <footer className="px-6 md:px-14 lg:px-20 pt-20 pb-8 bg-krudex-black border-t border-krudex-border relative z-10">
+    <footer className="px-6 md:px-14 lg:px-20 pt-20 pb-[calc(2rem+env(safe-area-inset-bottom))] bg-krudex-black border-t border-krudex-border relative z-10">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 lg:gap-12 mb-16">
           {/* Brand */}

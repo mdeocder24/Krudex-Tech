@@ -21,7 +21,7 @@ export default function LegalPage({
   sections: LegalSection[];
 }) {
   return (
-    <main className="min-h-screen bg-krudex-black selection:bg-krudex-accent selection:text-krudex-black flex flex-col">
+    <main className="min-h-svh bg-krudex-black selection:bg-krudex-accent selection:text-krudex-black flex flex-col">
       <Navbar />
 
       <article className="px-6 md:px-16 lg:px-24 pt-40 md:pt-48 pb-24 relative z-10">
