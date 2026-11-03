@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { BrandLogo } from '@/components/brand';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
@@ -51,14 +51,7 @@ const Navbar = () => {
       {/* Left side: Brand */}
       <div className="flex-1 flex items-center justify-start">
         <Link href="/" aria-label="Krudex Global — home" className="flex items-center">
-          <Image
-            src="/krudex-bg-gold.png"
-            alt="Krudex"
-            width={240}
-            height={80}
-            className="h-14 lg:h-20 w-auto object-contain scale-[2] lg:scale-[2.5] origin-left"
-            preload
-          />
+          <BrandLogo decorative priority className="text-[14px] sm:text-[15px] lg:text-[17px] min-[1920px]:text-[19px]" />
         </Link>
       </div>
 

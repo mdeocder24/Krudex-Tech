@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react';
 import MagneticButton from './MagneticButton';
 
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
+import { BrandLogo } from '@/components/brand';
 import { useCan3D } from '@/hooks/useCan3D';
 
 // Dynamically import 3D components with SSR disabled to optimize initial load
@@ -154,14 +154,7 @@ const Hero = () => {
         {can3D === false && (
           // Static stand-in for reduced-motion, Save-Data, or low-end devices.
           <div className="absolute inset-0 flex items-center justify-center">
-            <Image
-              src="/krudex-bg-gold.png"
-              alt=""
-              width={500}
-              height={500}
-              priority
-              className="w-[70%] max-w-[420px] h-auto opacity-90"
-            />
+            <BrandLogo variant="stacked" decorative priority className="text-[30px] sm:text-[40px] lg:text-[48px]" />
           </div>
         )}
 

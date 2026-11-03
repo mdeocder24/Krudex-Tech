@@ -8,7 +8,7 @@ export const contentType = 'image/png';
 
 // Shared social preview for every route (twitter falls back to og:image).
 export default async function Image() {
-  const logo = await readFile(join(process.cwd(), 'public/krudex-bg-gold.png'));
+  const logo = await readFile(join(process.cwd(), 'public/brand/krudex-global-mark-512.png'));
   const logoSrc = `data:image/png;base64,${logo.toString('base64')}`;
 
   return new ImageResponse(

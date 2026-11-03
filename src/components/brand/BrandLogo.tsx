@@ -44,7 +44,7 @@ export default function BrandLogo({
       aria-label={decorative ? undefined : BRAND.name}
     >
       <GyroMark size={markSize} animated={animated} priority={priority} decorative />
-      <Wordmark size={size} />
+      <Wordmark />
     </span>
   );
 }
