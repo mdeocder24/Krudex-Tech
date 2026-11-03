@@ -75,7 +75,7 @@ const Navbar = () => {
                 whileHover={{ scale: 1.05, opacity: 1 }}
                 whileTap={{ scale: 0.95 }}
                 aria-current={isActive ? 'page' : undefined}
-                className={`whitespace-nowrap py-3 px-1 text-[14px] transition-colors duration-200 relative ${isActive ? 'text-white font-medium' : 'text-krudex-muted hover:text-white'
+                className={`whitespace-nowrap py-3 px-1 text-[14px] min-[1920px]:text-[16px] transition-colors duration-200 relative ${isActive ? 'text-white font-medium' : 'text-krudex-muted hover:text-white'
                   }`}
               >
                 {link.label}
@@ -98,7 +98,7 @@ const Navbar = () => {
             href="/contact"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="whitespace-nowrap inline-flex items-center min-h-11 text-[14px] font-medium text-white border border-white/20 bg-white/5 px-5 rounded-full hover:bg-krudex-accent hover:text-krudex-black hover:border-krudex-accent hover:shadow-[0_0_25px_rgba(212,180,131,0.4)] transition-all duration-300"
+            className="whitespace-nowrap inline-flex items-center min-h-11 text-[14px] min-[1920px]:text-[16px] font-medium text-white border border-white/20 bg-white/5 px-5 rounded-full hover:bg-krudex-accent hover:text-krudex-black hover:border-krudex-accent hover:shadow-[0_0_25px_rgba(212,180,131,0.4)] transition-all duration-300"
           >
             Contact Us
           </MotionLink>
