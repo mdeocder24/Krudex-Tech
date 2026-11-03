@@ -1,6 +1,6 @@
-# Krudex Technologies — Official Website & Platform
+# Krudex Global — Official Website & Platform
 
-A high-performance, modern web application and corporate portfolio for **Krudex Technologies** — a specialized software engineering studio building high-impact web platforms, interactive 3D WebGL experiences, enterprise AI integrations, Google Ads and digital marketing, and student training with industry experts in collaboration with NovaSkill Hub.
+A high-performance, modern web application and corporate portfolio for **Krudex Global** — a specialized software engineering studio building high-impact web platforms, interactive 3D WebGL experiences, enterprise AI integrations, Google Ads and digital marketing, and student training with industry experts in collaboration with NovaSkill Hub.
 
 Built with **Next.js 16 (App Router)**, **React 19**, **Three.js / React Three Fiber**, **Tailwind CSS v4**, and backed by **Cloudflare D1** (Serverless Edge SQLite).
 
@@ -212,4 +212,4 @@ This project can also be deployed to Cloudflare using `@opennextjs/cloudflare` w
 
 ## 📄 License & Intellectual Property
 
-Copyright © 2026 Krudex Technologies. All rights reserved.
+Copyright © 2026 Krudex Global. All rights reserved.

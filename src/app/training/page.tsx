@@ -83,7 +83,7 @@ export default function TrainingPage() {
               className="flex flex-col items-start"
             >
               <p className="text-krudex-muted text-lg leading-relaxed mb-10">
-                Krudex Technologies trains students with industry experts, in collaboration with NovaSkill Hub. Learn how software and digital marketing work from people who practise them.
+                Krudex Global trains students with industry experts, in collaboration with NovaSkill Hub. Learn how software and digital marketing work from people who practise them.
               </p>
               <Link
                 href="/contact?interest=training"

@@ -5,7 +5,7 @@ import { CONTACT_EMAIL } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
-  description: 'How Krudex Technologies collects, uses, and protects the information you share through this website.',
+  description: 'How Krudex Global collects, uses, and protects the information you share through this website.',
   alternates: { canonical: '/privacy' },
 };
 
@@ -19,7 +19,7 @@ export default function PrivacyPage() {
       updated="3 November 2026"
       intro={
         <p>
-          Krudex Technologies (&ldquo;Krudex&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) is based in Hyderabad,
+          Krudex Global (&ldquo;Krudex&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) is based in Hyderabad,
           Telangana, India. This policy explains what personal data we collect through this website, why, and the
           choices you have. It is written to meet our obligations under India&apos;s Digital Personal Data Protection
           Act, 2023 and, where it applies to you, the EU/UK GDPR.

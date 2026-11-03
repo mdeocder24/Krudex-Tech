@@ -50,7 +50,7 @@ const Navbar = () => {
     >
       {/* Left side: Brand */}
       <div className="flex-1 flex items-center justify-start">
-        <Link href="/" aria-label="Krudex Technologies — home" className="flex items-center">
+        <Link href="/" aria-label="Krudex Global — home" className="flex items-center">
           <Image
             src="/krudex-bg-gold.png"
             alt="Krudex"

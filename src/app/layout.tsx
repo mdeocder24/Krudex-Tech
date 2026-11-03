@@ -22,12 +22,12 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   alternates: { canonical: "/" },
   title: {
-    default: "Krudex Technologies | SaaS Products, Digital Marketing & Student Training",
-    template: "%s | Krudex Technologies",
+    default: "Krudex Global | SaaS Products, Digital Marketing & Student Training",
+    template: "%s | Krudex Global",
   },
-  description: "Krudex Technologies builds SaaS products, runs Google Ads and digital marketing, and trains students with industry experts in collaboration with NovaSkill Hub.",
+  description: "Krudex Global builds SaaS products, runs Google Ads and digital marketing, and trains students with industry experts in collaboration with NovaSkill Hub.",
   openGraph: {
-    title: "Krudex Technologies | SaaS Products, Digital Marketing & Student Training",
+    title: "Krudex Global | SaaS Products, Digital Marketing & Student Training",
     description: "We build SaaS products, run Google Ads and digital marketing, and train students with industry experts in collaboration with NovaSkill Hub.",
     siteName: SITE_NAME,
     type: "website",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Krudex Technologies | SaaS Products, Digital Marketing & Student Training",
+    title: "Krudex Global | SaaS Products, Digital Marketing & Student Training",
     description: "We build SaaS products, run Google Ads and digital marketing, and train students with industry experts in collaboration with NovaSkill Hub.",
   },
 };

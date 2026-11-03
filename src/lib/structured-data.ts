@@ -11,7 +11,7 @@ export const organizationJsonLd = {
   email: CONTACT_EMAIL,
   telephone: PHONES[0],
   description:
-    'Krudex Technologies builds SaaS products, runs Google Ads and digital marketing, and trains students with industry experts in collaboration with NovaSkill Hub.',
+    'Krudex Global builds SaaS products, runs Google Ads and digital marketing, and trains students with industry experts in collaboration with NovaSkill Hub.',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Hyderabad',

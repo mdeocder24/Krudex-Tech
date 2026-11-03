@@ -15,7 +15,7 @@ for (const { path, heading } of pages) {
   test(`${path} renders with title and h1`, async ({ page }) => {
     const res = await page.goto(path);
     expect(res?.status()).toBe(200);
-    await expect(page).toHaveTitle(/Krudex Technologies/);
+    await expect(page).toHaveTitle(/Krudex Global/);
     // Accessible name, i.e. what screen readers announce.
     await expect(page.getByRole('heading', { level: 1 }).first()).toHaveAccessibleName(heading);
   });

@@ -45,10 +45,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 lg:gap-12 mb-16">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1 flex flex-col items-start">
-            <Link href="/" aria-label="Krudex Technologies — home" className="mb-6 block">
+            <Link href="/" aria-label="Krudex Global — home" className="mb-6 block">
               <Image 
                 src="/krudex-bg-gold.png" 
-                alt="Krudex Technologies" 
+                alt="Krudex Global" 
                 width={240} 
                 height={80} 
                 className="h-16 w-auto object-contain scale-[2] md:scale-[2.5] origin-left"
@@ -85,7 +85,7 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="border-t border-krudex-border pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-krudex-muted text-xs">
-            © {new Date().getFullYear()} Krudex Technologies. All rights reserved.
+            © {new Date().getFullYear()} Krudex Global. All rights reserved.
           </p>
           <nav aria-label="Legal" className="flex items-center gap-6">
             <Link href="/privacy" className="text-krudex-muted text-xs hover:text-white transition-colors inline-flex items-center min-h-11">

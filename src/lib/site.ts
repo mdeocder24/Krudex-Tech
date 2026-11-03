@@ -13,7 +13,7 @@ function resolveSiteUrl(): string {
 }
 
 export const SITE_URL = resolveSiteUrl();
-export const SITE_NAME = 'Krudex Technologies';
+export const SITE_NAME = 'Krudex Global';
 export const CONTACT_EMAIL = 'krudextechnologies@gmail.com';
 export const PHONES = ['+918978261053', '+919490248160'] as const;
 export const WHATSAPP_NUMBER = '918978261053';

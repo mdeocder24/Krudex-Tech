@@ -5,7 +5,7 @@ import { CONTACT_EMAIL } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Terms of Use',
-  description: 'The terms that apply when you use the Krudex Technologies website.',
+  description: 'The terms that apply when you use the Krudex Global website.',
   alternates: { canonical: '/terms' },
 };
 
@@ -17,7 +17,7 @@ export default function TermsPage() {
       updated="3 November 2026"
       intro={
         <p>
-          These terms apply to your use of this website, operated by Krudex Technologies, Hyderabad, Telangana, India.
+          These terms apply to your use of this website, operated by Krudex Global, Hyderabad, Telangana, India.
           By using the site you agree to them. Client projects and training programmes are governed by their own
           written agreements, which take precedence over these terms.
         </p>
@@ -40,7 +40,7 @@ export default function TermsPage() {
           heading: 'Content and intellectual property',
           body: (
             <p>
-              The Krudex name, logo, text, graphics, and code on this website belong to Krudex Technologies or its
+              The Krudex name, logo, text, graphics, and code on this website belong to Krudex Global or its
               licensors. You may not copy or reuse them for commercial purposes without written permission. Ownership
               of work we build for clients is set out in each client agreement.
             </p>

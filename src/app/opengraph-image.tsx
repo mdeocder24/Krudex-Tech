@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
-export const alt = 'Krudex Technologies — SaaS products, digital marketing and student training';
+export const alt = 'Krudex Global — SaaS products, digital marketing and student training';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
