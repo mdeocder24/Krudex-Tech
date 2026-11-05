@@ -171,12 +171,11 @@ export const TRAINING = {
   title: 'Student Training',
   tagline: 'Learn from people who do the work.',
   summary:
-    'Practical training led by industry experts, in collaboration with NovaSkill Hub, so students learn how software and digital marketing are done outside the classroom.',
+    'AI & Machine Learning, Java Full Stack and Python Full Stack programs, led by industry experts in collaboration with NovaSkill Hub. Each one ends in a deployed capstone project.',
   topics: [
-    { title: 'SaaS & web development', text: 'How web products are planned, built and shipped.' },
-    { title: 'AI & machine learning', text: 'How AI features are added to real products.' },
-    { title: 'UI/UX design', text: 'How research and design shape a product people can use.' },
-    { title: 'Google Ads & digital marketing', text: 'How search, ads, social and content bring in customers.' },
+    { title: 'AI & Machine Learning', text: 'Python, machine learning, deep learning and generative AI.' },
+    { title: 'Java Full Stack', text: 'Core Java, Spring Boot, databases and React.' },
+    { title: 'Python Full Stack', text: 'Python, Django, FastAPI, PostgreSQL and React.' },
   ],
   reasons: [
     { title: 'Taught by industry experts', text: 'You learn from people who work in the field, so the examples and advice come from practice.' },

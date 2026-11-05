@@ -3,17 +3,19 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Compass } from 'lucide-react';
+import { getProgram, programEnquiryHref, type ProgramId } from '@/content/training';
 
 type Key = 'goal' | 'level' | 'interest' | 'time';
 
 const QUESTIONS: Array<{ key: Key; label: string; options: string[] }> = [
-  { key: 'goal', label: 'What do you want from training?', options: ['Get my first job', 'Build my own product', 'Grow a business', 'Switch careers'] },
+  { key: 'goal', label: 'What do you want from training?', options: ['Get my first job', 'Build my own product', 'Switch careers', 'Strengthen my skills'] },
   { key: 'level', label: 'Where are you today?', options: ['Complete beginner', 'Know some basics', 'Built a few projects'] },
-  { key: 'interest', label: 'What excites you most?', options: ['Building websites and apps', 'AI and data', 'Design and user experience', 'Marketing and growth'] },
+  { key: 'interest', label: 'What excites you most?', options: ['AI, data and smart features', 'Large, structured enterprise apps', 'Building web apps quickly, end to end'] },
   { key: 'time', label: 'How much time can you give?', options: ['A few hours a week', 'Evenings and weekends', 'Full time'] },
 ];
 
 interface PathResult {
+  programId: ProgramId;
   track: string;
   headline: string;
   why: string;
@@ -21,32 +23,18 @@ interface PathResult {
   alsoConsider: string | null;
 }
 
-// Interest decides the track; each track lists its learning steps.
-const TRACKS: Record<string, { track: string; steps: string[] }> = {
-  'Building websites and apps': {
-    track: 'SaaS & web development',
-    steps: ['Web fundamentals: HTML, CSS and JavaScript', 'A modern framework like React and Next.js', 'Back ends, APIs and databases', 'Ship a real project end to end'],
-  },
-  'AI and data': {
-    track: 'AI & machine learning',
-    steps: ['Python and data basics', 'Core machine learning ideas', 'Working with LLMs and AI APIs', 'Add an AI feature to a real product'],
-  },
-  'Design and user experience': {
-    track: 'UI/UX design',
-    steps: ['Design basics: layout, type and colour', 'User research and flows', 'Prototyping in Figma', 'Design and test a complete product screen set'],
-  },
-  'Marketing and growth': {
-    track: 'Google Ads & digital marketing',
-    steps: ['How customers search and buy online', 'Google Ads and paid campaigns', 'SEO, social and content', 'Run and measure a campaign with GA4'],
-  },
+// Interest decides the program.
+const PROGRAM_FOR_INTEREST: Record<string, ProgramId> = {
+  'AI, data and smart features': 'aiml',
+  'Large, structured enterprise apps': 'java',
+  'Building web apps quickly, end to end': 'python',
 };
 
-// A goal can point to a useful second topic.
-const ALSO: Record<string, string> = {
-  'Build my own product': 'SaaS & web development',
-  'Grow a business': 'Google Ads & digital marketing',
-  'Get my first job': 'UI/UX design',
-  'Switch careers': 'SaaS & web development',
+// A useful second program once the first is done.
+const ALSO: Record<ProgramId, ProgramId> = {
+  aiml: 'python',
+  java: 'aiml',
+  python: 'aiml',
 };
 
 const PACE: Record<string, string> = {
@@ -56,16 +44,21 @@ const PACE: Record<string, string> = {
 };
 
 function buildPath(a: Record<Key, string>): PathResult {
-  const t = TRACKS[a.interest];
+  const program = getProgram(PROGRAM_FOR_INTEREST[a.interest])!;
   const beginner = a.level === 'Complete beginner';
-  const steps = beginner ? ['Start from zero with guided fundamentals', ...t.steps.slice(1)] : t.steps;
-  const also = ALSO[a.goal];
+  const modules = program.modules.map((m) => m.title);
+  const steps = [
+    ...(beginner ? ['Start from zero with guided fundamentals'] : []),
+    ...modules,
+    'Build and deploy your capstone project',
+  ];
   return {
-    track: t.track,
-    headline: beginner ? `Start your ${t.track} journey` : `Level up in ${t.track}`,
-    why: `You told us you want to ${a.goal.toLowerCase()} and enjoy ${a.interest.toLowerCase()}. This track builds those skills ${PACE[a.time]}, with guidance from industry experts.`,
+    programId: program.id,
+    track: program.title,
+    headline: beginner ? `Start your ${program.title} journey` : `Level up with ${program.title}`,
+    why: `You told us you want to ${a.goal.toLowerCase()} and enjoy ${a.interest.toLowerCase()}. This program builds those skills ${PACE[a.time]}, with guidance from industry experts.`,
     steps,
-    alsoConsider: also && also !== t.track ? also : null,
+    alsoConsider: getProgram(ALSO[program.id])?.title ?? null,
   };
 }
 
@@ -92,7 +85,7 @@ export default function TrainingPathFinder() {
             Find your learning path.
           </h2>
           <p className="text-krudex-muted text-base leading-relaxed">
-            Answer four quick questions and we suggest the track that fits you best. The team then shares the current format, dates and fees.
+            Answer four quick questions and we suggest the program that fits you best. The team then shares the current format, dates and fees.
           </p>
         </div>
 
@@ -132,7 +125,7 @@ export default function TrainingPathFinder() {
           <div aria-live="polite">
             {result && (
               <div className="border border-krudex-border bg-krudex-card/50 p-6 md:p-8">
-                <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-krudex-accent">Suggested track · {result.track}</p>
+                <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-krudex-accent">Suggested program · {result.track}</p>
                 <h3 className="mt-3 text-white text-xl font-bold">{result.headline}</h3>
                 <p className="mt-3 text-krudex-muted text-sm leading-relaxed">{result.why}</p>
                 <ol className="mt-5 space-y-2">
@@ -147,10 +140,10 @@ export default function TrainingPathFinder() {
                   <p className="mt-5 text-sm text-white/70">Later, also consider: <span className="text-white">{result.alsoConsider}</span></p>
                 )}
                 <Link
-                  href="/contact?interest=training"
+                  href={programEnquiryHref(result.programId)}
                   className="group mt-6 inline-flex items-center gap-2 text-sm font-medium text-white hover:text-krudex-accent transition-colors"
                 >
-                  Enquire about this track
+                  Enquire about this program
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>

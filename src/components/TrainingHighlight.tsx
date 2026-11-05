@@ -35,7 +35,7 @@ const TrainingHighlight = () => {
           className="lg:col-span-5 flex flex-col items-start"
         >
           <p className="text-krudex-muted text-base leading-relaxed mb-8">
-            In collaboration with NovaSkill Hub, Krudex trains students with industry experts, so they can learn how software and digital marketing work outside the classroom.
+            In collaboration with NovaSkill Hub, Krudex trains students in AI & Machine Learning, Java Full Stack and Python Full Stack, taught by industry experts and finished with a real, deployed project.
           </p>
           <Link
             href="/training"

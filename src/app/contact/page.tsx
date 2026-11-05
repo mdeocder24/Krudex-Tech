@@ -10,6 +10,7 @@ import Turnstile, { TURNSTILE_SITE_KEY } from '@/components/Turnstile';
 import { PHONES, PHONE_DISPLAY, WHATSAPP_URL } from '@/lib/site';
 import { faqs } from '@/lib/faqs';
 import ServiceSuggester from '@/components/ServiceSuggester';
+import { getProgram } from '@/content/training';
 
 
 const serviceOptions = [
@@ -48,14 +49,17 @@ const labelClass = 'text-[13px] font-medium text-white/80';
 const chipClass =
   'inline-flex items-center gap-2 min-h-11 cursor-pointer select-none rounded-full border border-white/15 px-4 text-[14px] text-white/70 transition-colors hover:border-white/40 hover:text-white peer-checked:border-krudex-accent peer-checked:bg-krudex-accent peer-checked:text-krudex-black peer-checked:font-medium peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-krudex-accent';
 
-// Preselects the training option for visitors arriving from /training.
+// Preselects the training option for visitors arriving from /training, and
+// names the program when ?program= matches one of ours (unknown values are ignored).
 // Kept in its own Suspense boundary so the rest of the page still prerenders.
-function TrainingInterest({ onMatch }: { onMatch: () => void }) {
-  const isTraining = useSearchParams().get('interest') === 'training';
+function TrainingInterest({ onMatch }: { onMatch: (programTitle?: string) => void }) {
+  const params = useSearchParams();
+  const isTraining = params.get('interest') === 'training';
+  const programTitle = getProgram(params.get('program'))?.title;
 
   useEffect(() => {
-    if (isTraining) onMatch();
-  }, [isTraining, onMatch]);
+    if (isTraining) onMatch(programTitle);
+  }, [isTraining, programTitle, onMatch]);
 
   return null;
 }
@@ -75,8 +79,13 @@ export default function ContactPage() {
 
   const isTrainingEnquiry = services.includes(TRAINING_SERVICE);
 
-  const selectTraining = React.useCallback(() => {
+  const selectTraining = React.useCallback((programTitle?: string) => {
     setServices(prev => (prev.includes(TRAINING_SERVICE) ? prev : [...prev, TRAINING_SERVICE]));
+    if (programTitle) {
+      setFormData(prev => (prev.details.trim()
+        ? prev
+        : { ...prev, details: `I'm interested in the ${programTitle} training program.` }));
+    }
   }, []);
 
   const toggleFaq = (index: number) => {

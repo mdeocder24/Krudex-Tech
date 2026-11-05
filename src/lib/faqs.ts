@@ -10,7 +10,7 @@ export const faqs = [
   },
   {
     question: "Do you offer training for students?",
-    answer: "Yes. We train students with industry experts, in collaboration with NovaSkill Hub. Choose Student training in the form and we'll share the current format, dates, and fees."
+    answer: "Yes. In collaboration with NovaSkill Hub, we run AI & Machine Learning, Java Full Stack and Python Full Stack programs taught by industry experts. Choose Student training in the form and we'll share the current format, dates, and fees."
   },
   {
     question: "How does the engagement process work?",
