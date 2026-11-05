@@ -51,7 +51,7 @@ export const viewport: Viewport = {
   // Android Chrome: the on-screen keyboard shrinks the layout like iOS does.
   interactiveWidget: "resizes-content",
   // Site is dark-only; matches the navbar background.
-  themeColor: "#0A0908",
+  themeColor: "#000000",
   colorScheme: "dark",
 };
 

@@ -125,7 +125,7 @@ function TeamCard({ member, index }: { member: TeamMember; index: number }) {
         />
 
         {/* === Card body === */}
-        <div className="relative rounded-2xl bg-[#0a0a0a] border border-white/[0.06] overflow-hidden z-10">
+        <div className="relative rounded-2xl bg-[#0A0A0A] border border-white/[0.06] overflow-hidden z-10">
           {/* Cursor-following glow */}
           <motion.div
             className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"

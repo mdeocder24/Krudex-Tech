@@ -44,7 +44,7 @@ const Navbar = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
       className={`w-full flex items-center justify-between pl-[max(1.5rem,env(safe-area-inset-left))] pr-[max(1.5rem,env(safe-area-inset-right))] md:px-14 lg:px-20 fixed top-0 z-50 transition-all duration-300
-        bg-krudex-black/70 backdrop-blur-2xl border-b border-white/10 shadow-[inset_0_1px_1px_rgba(212,180,131,0.1),0_4px_30px_rgba(0,0,0,0.1)]
+        bg-krudex-black/70 backdrop-blur-2xl border-b border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_4px_30px_rgba(0,0,0,0.1)]
         ${scrolled ? 'pt-[calc(0.5rem+env(safe-area-inset-top))] pb-2 lg:pt-[calc(1rem+env(safe-area-inset-top))] lg:pb-4' : 'pt-[calc(0.75rem+env(safe-area-inset-top))] pb-3 lg:pt-[calc(1.5rem+env(safe-area-inset-top))] lg:pb-6'}
       `}
     >
@@ -91,7 +91,7 @@ const Navbar = () => {
             href="/contact"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="whitespace-nowrap inline-flex items-center min-h-11 text-[14px] min-[1920px]:text-[16px] font-medium text-white border border-white/20 bg-white/5 px-5 rounded-full hover:bg-krudex-accent hover:text-krudex-black hover:border-krudex-accent hover:shadow-[0_0_25px_rgba(212,180,131,0.4)] transition-all duration-300"
+            className="whitespace-nowrap inline-flex items-center min-h-11 text-[14px] min-[1920px]:text-[16px] font-medium text-white border border-white/20 bg-white/5 px-5 rounded-full hover:bg-krudex-accent hover:text-krudex-black hover:border-krudex-accent hover:shadow-[0_0_25px_rgba(255,255,255,0.4)] transition-all duration-300"
           >
             Contact Us
           </MotionLink>

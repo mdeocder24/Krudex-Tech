@@ -6,7 +6,7 @@ import type { MockKind } from '@/content/offerings';
  * carries the meaning.
  */
 
-const panel = 'rounded-2xl border border-white/10 bg-[#13110F]/95 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7)]';
+const panel = 'rounded-2xl border border-white/10 bg-[#101010]/95 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7)]';
 const line = (w: string, tone = 'bg-white/10') => <span className={`block h-2 rounded-full ${tone}`} style={{ width: w }} />;
 
 function Saas() {
@@ -58,12 +58,12 @@ function Saas() {
 function Mobile() {
   return (
     <div className="flex min-w-0 max-w-full items-end gap-4">
-      <div className="relative w-[190px] max-w-full rounded-[34px] border border-white/15 bg-[#0E0D0B] p-2.5 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.8)] sm:w-[210px]">
+      <div className="relative w-[190px] max-w-full rounded-[34px] border border-white/15 bg-[#0A0A0A] p-2.5 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.8)] sm:w-[210px]">
         <div className="mx-auto mb-2 h-4 w-20 rounded-full bg-black" />
-        <div className="rounded-[24px] bg-[#16130F] p-3">
+        <div className="rounded-[24px] bg-[#121212] p-3">
           <p className="text-[10px] text-white/45">Good morning</p>
           <p className="text-sm font-bold text-white">Your orders</p>
-          <div className="mt-3 rounded-2xl bg-gradient-to-br from-krudex-accent to-[#8F6C3C] p-3 text-krudex-black">
+          <div className="mt-3 rounded-2xl bg-gradient-to-br from-krudex-accent to-[#525252] p-3 text-krudex-black">
             <p className="text-[9px] font-semibold uppercase tracking-wider opacity-70">Arriving today</p>
             <p className="mt-1 text-[15px] font-extrabold">Order #2041</p>
             <div className="mt-2 h-1.5 rounded-full bg-black/15">
@@ -128,7 +128,7 @@ function Design() {
   return (
     <div className={`${panel} relative w-full max-w-[460px] p-4`}>
       <div className="flex items-center gap-2">
-        {['#F2DFB8', '#D4B483', '#8F6C3C', '#0A0908', '#F5EFE4'].map((c) => (
+        {['#E5E5E5', '#FFFFFF', '#525252', '#000000', '#FAFAFA'].map((c) => (
           <span key={c} className="h-6 w-6 rounded-full border border-white/15" style={{ background: c }} />
         ))}
         <span className="ml-auto text-[10px] font-semibold text-white/45">Design system · v2</span>
@@ -157,7 +157,7 @@ function Design() {
         ))}
       </div>
       {/* Cursor */}
-      <svg viewBox="0 0 24 24" className="absolute right-10 top-24 h-5 w-5 drop-shadow" fill="#D4B483">
+      <svg viewBox="0 0 24 24" className="absolute right-10 top-24 h-5 w-5 drop-shadow" fill="#FFFFFF">
         <path d="M4 2l16 9-7 2-3 7z" />
       </svg>
     </div>
@@ -186,12 +186,12 @@ function Marketing() {
       <svg viewBox="0 0 300 100" className="mt-3 h-28 w-full rounded-xl bg-white/[0.03]" preserveAspectRatio="none">
         <defs>
           <linearGradient id="mk-fill" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0" stopColor="#D4B483" stopOpacity="0.35" />
-            <stop offset="1" stopColor="#D4B483" stopOpacity="0" />
+            <stop offset="0" stopColor="#FFFFFF" stopOpacity="0.35" />
+            <stop offset="1" stopColor="#FFFFFF" stopOpacity="0" />
           </linearGradient>
         </defs>
         <path d="M0 82 L30 76 L60 79 L90 64 L120 66 L150 52 L180 55 L210 40 L240 34 L270 24 L300 16 L300 100 L0 100Z" fill="url(#mk-fill)" />
-        <path d="M0 82 L30 76 L60 79 L90 64 L120 66 L150 52 L180 55 L210 40 L240 34 L270 24 L300 16" fill="none" stroke="#D4B483" strokeWidth="2.5" vectorEffect="non-scaling-stroke" />
+        <path d="M0 82 L30 76 L60 79 L90 64 L120 66 L150 52 L180 55 L210 40 L240 34 L270 24 L300 16" fill="none" stroke="#FFFFFF" strokeWidth="2.5" vectorEffect="non-scaling-stroke" />
       </svg>
       <div className="mt-3 flex flex-wrap gap-1.5">
         {['Google Ads', 'Meta', 'SEO', 'GA4'].map((c) => (
@@ -240,14 +240,14 @@ const MOCKS: Record<MockKind, () => React.JSX.Element> = {
   training: Training,
 };
 
-/** Warm backdrops, one per offering, all inside the black/gold palette. */
+/** Graphite backdrops, one per offering, all inside the black/white palette. */
 const BACKDROPS: Record<MockKind, string> = {
-  saas: 'radial-gradient(120% 90% at 0% 0%, #3A2C18 0%, #17130E 55%, #0D0B09 100%)',
-  mobile: 'radial-gradient(120% 90% at 100% 0%, #43301A 0%, #1A1510 55%, #0D0B09 100%)',
-  ai: 'radial-gradient(110% 90% at 50% 0%, #2F2617 0%, #16120D 55%, #0D0B09 100%)',
-  design: 'radial-gradient(120% 90% at 0% 100%, #3F2E1B 0%, #17130E 55%, #0D0B09 100%)',
-  marketing: 'radial-gradient(120% 90% at 100% 100%, #3B2D19 0%, #17130E 55%, #0D0B09 100%)',
-  training: 'radial-gradient(120% 90% at 50% 100%, #3A2C18 0%, #17130E 55%, #0D0B09 100%)',
+  saas: 'radial-gradient(120% 90% at 0% 0%, #262626 0%, #111111 55%, #000000 100%)',
+  mobile: 'radial-gradient(120% 90% at 100% 0%, #2A2A2A 0%, #141414 55%, #000000 100%)',
+  ai: 'radial-gradient(110% 90% at 50% 0%, #1F1F1F 0%, #101010 55%, #000000 100%)',
+  design: 'radial-gradient(120% 90% at 0% 100%, #292929 0%, #111111 55%, #000000 100%)',
+  marketing: 'radial-gradient(120% 90% at 100% 100%, #242424 0%, #111111 55%, #000000 100%)',
+  training: 'radial-gradient(120% 90% at 50% 100%, #262626 0%, #111111 55%, #000000 100%)',
 };
 
 export default function ProductMock({

@@ -10,8 +10,8 @@ const teamMembers = [
     name: "Kushwant Kumar Reddy",
     role: "Founder & Principal Engineer",
     initials: "KK",
-    accent: "#D4B483",
-    accentRgb: "212, 180, 131",
+    accent: "#FFFFFF",
+    accentRgb: "255, 255, 255",
     bio: "Founding engineer leading every client engagement end-to-end — from technical scoping through production deployment. Specializes in full-stack web engineering, computer vision, and ML systems.",
     skills: ["Next.js", "FastAPI", "TensorFlow", "Computer Vision", "System Design"],
     socials: [
@@ -24,8 +24,8 @@ const teamMembers = [
     name: "Sri Likhin Prasad",
     role: "Co-Founder",
     initials: "SL",
-    accent: "#D4B483",
-    accentRgb: "212, 180, 131",
+    accent: "#FFFFFF",
+    accentRgb: "255, 255, 255",
     bio: "Architects scalable solutions and ensures every digital product meets rigorous standards for performance and reliability. Champion of the 'Architecture first' principle.",
     skills: ["Architecture", "Systems Integration", "React", "DevOps", "Scaling"],
     socials: [
@@ -37,8 +37,8 @@ const teamMembers = [
     name: "Abhinay Reddy",
     role: "Chief Technology Officer",
     initials: "AR",
-    accent: "#D4B483",
-    accentRgb: "212, 180, 131",
+    accent: "#FFFFFF",
+    accentRgb: "255, 255, 255",
     bio: "Leads technology at Krudex: sets the technical direction, owns architecture and engineering standards, and makes sure every product is built to last.",
     skills: ["Technical Strategy", "System Architecture", "Engineering Leadership", "Cloud", "Product Delivery"],
     socials: [
@@ -49,8 +49,8 @@ const teamMembers = [
     name: "Anil",
     role: "Marketing Lead",
     initials: "AN",
-    accent: "#D4B483",
-    accentRgb: "212, 180, 131",
+    accent: "#FFFFFF",
+    accentRgb: "255, 255, 255",
     bio: "Leads Krudex's marketing: positioning, campaigns and brand presence, so the right customers find our products and services.",
     skills: ["Marketing Strategy", "Brand", "Campaign Planning", "Content", "Market Research"],
     socials: [
@@ -61,8 +61,8 @@ const teamMembers = [
     name: "Allu Nanda Kishore",
     role: "Digital Marketing Head",
     initials: "AK",
-    accent: "#D4B483",
-    accentRgb: "212, 180, 131",
+    accent: "#FFFFFF",
+    accentRgb: "255, 255, 255",
     bio: "Heads digital marketing for Krudex and its clients, running Google Ads, SEO, social and content as one system measured by leads and revenue.",
     skills: ["Google Ads", "SEO", "Social Media", "Analytics", "Performance Marketing"],
     socials: [
@@ -73,8 +73,8 @@ const teamMembers = [
     name: "Karing Raghawendhra",
     role: "Lead AI/ML Engineer",
     initials: "KR",
-    accent: "#D4B483",
-    accentRgb: "212, 180, 131",
+    accent: "#FFFFFF",
+    accentRgb: "255, 255, 255",
     bio: "Leads AI and machine learning work: designing and building intelligent features, from LLM integrations to custom models, that work reliably in production.",
     skills: ["Machine Learning", "LLMs", "Python", "Computer Vision", "MLOps"],
     socials: [
@@ -85,8 +85,8 @@ const teamMembers = [
     name: "Siddharth Naidu",
     role: "Training Team Lead (Students)",
     initials: "SN",
-    accent: "#D4B483",
-    accentRgb: "212, 180, 131",
+    accent: "#FFFFFF",
+    accentRgb: "255, 255, 255",
     bio: "Leads student training at Krudex with NovaSkill Hub, shaping programs with industry experts so students learn how the work is done in practice.",
     skills: ["Training Programs", "Mentoring", "Curriculum Design", "Student Success", "Industry Partnerships"],
     socials: [
@@ -112,7 +112,7 @@ export default function OurTeamPage() {
             }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
             className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-[128px] opacity-[0.07]"
-            style={{ background: "#D4B483" }}
+            style={{ background: "#FFFFFF" }}
           />
           <motion.div
             animate={{
@@ -122,7 +122,7 @@ export default function OurTeamPage() {
             }}
             transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
             className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full blur-[128px] opacity-[0.05]"
-            style={{ background: "#D4B483" }}
+            style={{ background: "#FFFFFF" }}
           />
         </div>
 
@@ -171,7 +171,7 @@ export default function OurTeamPage() {
           className="absolute inset-0 opacity-[0.02] pointer-events-none"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(212,180,131,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(212,180,131,0.1) 1px, transparent 1px)",
+              "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
             backgroundSize: "60px 60px",
           }}
         />

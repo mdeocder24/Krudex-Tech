@@ -11,8 +11,8 @@ import { useInView } from 'framer-motion';
    ───────────────────────────────────────────── */
 const pillarMaterial = new THREE.ShaderMaterial({
   uniforms: {
-    colorTop: { value: new THREE.Color("#1F1B15") }, // warm charcoal
-    colorBottom: { value: new THREE.Color("#0A0908") }, // page black
+    colorTop: { value: new THREE.Color("#1A1A1A") }, // near black
+    colorBottom: { value: new THREE.Color("#000000") }, // page black
     height: { value: 30.0 }, // default depth
   },
   vertexShader: `
@@ -132,24 +132,24 @@ const Platform = ({ position, size, label, sideLabel }: PlatformProps) => {
       <group rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, 0]}>
         {/* Core solid bright white frame */}
         <mesh geometry={frameGeometry}>
-          <meshBasicMaterial color="#D4B483" />
+          <meshBasicMaterial color="#FFFFFF" />
         </mesh>
 
         {/* Soft Bloom layers (transparent, additive blending) */}
         <mesh geometry={bloomGeometry} position={[0, 0, -0.01]}>
-          <meshBasicMaterial color="#D4B483" transparent opacity={0.25} blending={THREE.AdditiveBlending} depthWrite={false} />
+          <meshBasicMaterial color="#FFFFFF" transparent opacity={0.25} blending={THREE.AdditiveBlending} depthWrite={false} />
         </mesh>
 
         {/* Outer large diffuse glow */}
         <mesh geometry={outerGlowGeometry} position={[0, 0, -0.02]}>
-          <meshBasicMaterial color="#D4B483" transparent opacity={0.08} blending={THREE.AdditiveBlending} depthWrite={false} />
+          <meshBasicMaterial color="#FFFFFF" transparent opacity={0.08} blending={THREE.AdditiveBlending} depthWrite={false} />
         </mesh>
       </group>
 
       {/* 2. Top Dark Surface (inside the neon frame) */}
       <mesh position={[0, -0.01, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[w, d]} />
-        <meshBasicMaterial color="#1A1712" />
+        <meshBasicMaterial color="#141414" />
       </mesh>
 
       {/* Label Text on top of the platform */}
@@ -158,7 +158,7 @@ const Platform = ({ position, size, label, sideLabel }: PlatformProps) => {
           position={[0, 0.05, 0]}
           rotation={[-Math.PI / 2, 0, -Math.PI / 4]}
           fontSize={w * 0.20}
-          color="#F5EFE4"
+          color="#FAFAFA"
           anchorX="center"
           anchorY="middle"
           fillOpacity={0.9}
@@ -174,7 +174,7 @@ const Platform = ({ position, size, label, sideLabel }: PlatformProps) => {
         {/* Custom shader for smooth vertical gradient fading into darkness */}
         <primitive object={pillarMaterial} attach="material" />
         {/* Subtle structural edge highlights to enhance the 3D volume */}
-        <Edges scale={1.001} threshold={15} color="#D4B483" transparent opacity={0.15} />
+        <Edges scale={1.001} threshold={15} color="#FFFFFF" transparent opacity={0.15} />
       </mesh>
 
       {/* 4. Side Label Text on the pillar face */}
@@ -183,7 +183,7 @@ const Platform = ({ position, size, label, sideLabel }: PlatformProps) => {
           position={[0, -1.2, d / 2 + 0.05]} // Positioned cleanly on the top part of the side face
           rotation={[0, 0, 0]} // Horizontal across the face
           fontSize={w * 0.11}
-          color="#D4B483"
+          color="#FFFFFF"
           anchorX="center"
           anchorY="middle"
           fillOpacity={0.6}
@@ -222,13 +222,13 @@ const DataArchitectureScene = () => {
       <ambientLight intensity={0.1} />
 
       {/* Main light from left to illuminate the left-facing walls of the pillars */}
-      <directionalLight position={[-15, 10, 5]} intensity={1.5} color="#FFF3DE" />
+      <directionalLight position={[-15, 10, 5]} intensity={1.5} color="#FFFFFF" />
 
       {/* Subtle fill light from right */}
-      <directionalLight position={[15, 5, -5]} intensity={0.2} color="#FFF3DE" />
+      <directionalLight position={[15, 5, -5]} intensity={0.2} color="#FFFFFF" />
 
       {/* Deep fog to blend the pillars seamlessly into the pitch-black background */}
-      <fog attach="fog" args={['#0A0908', 15, 45]} />
+      <fog attach="fog" args={['#000000', 15, 45]} />
 
       {/* ── Platforms Stepping Up ── */}
       {/* 1. Lowest, largest, front-left */}

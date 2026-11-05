@@ -20,20 +20,20 @@ export default async function Image() {
           height: '100%',
           display: 'flex',
           alignItems: 'center',
-          background: '#0A0908',
+          background: '#000000',
           padding: '0 72px',
           gap: 64,
         }}
       >
         <img src={logoSrc} width={460} height={Math.round((460 * BRAND.logoHeight) / BRAND.logoWidth)} alt="" />
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24, flex: 1 }}>
-          <div style={{ fontSize: 62, color: '#F5EFE4', lineHeight: 1.1, fontWeight: 600 }}>
+          <div style={{ fontSize: 62, color: '#FAFAFA', lineHeight: 1.1, fontWeight: 600 }}>
             Build. Solve. Scale.
           </div>
-          <div style={{ fontSize: 30, color: '#9A9184', lineHeight: 1.4 }}>
+          <div style={{ fontSize: 30, color: '#8F8F8F', lineHeight: 1.4 }}>
             SaaS products, Google Ads &amp; digital marketing, and student training, from Hyderabad to the world.
           </div>
-          <div style={{ width: 96, height: 4, background: '#D4B483', marginTop: 8 }} />
+          <div style={{ width: 96, height: 4, background: '#FFFFFF', marginTop: 8 }} />
         </div>
       </div>
     ),

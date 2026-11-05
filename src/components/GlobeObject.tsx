@@ -37,9 +37,9 @@ export default function GlobeObject() {
       diffuse: 1.4,
       mapSamples: 8000,
       mapBrightness: 2.8,
-      baseColor: [0.07, 0.06, 0.05],
-      markerColor: [0.83, 0.71, 0.51], // champagne gold
-      glowColor: [0.2, 0.17, 0.12],
+      baseColor: [0.05, 0.05, 0.05],
+      markerColor: [1, 1, 1], // white accent
+      glowColor: [0.15, 0.15, 0.15],
       markers: MARKERS,
     });
 

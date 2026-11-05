@@ -69,7 +69,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="group inline-flex max-w-full items-center gap-2.5 bg-krudex-surface/90 border border-white/10 hover:border-white/40 px-3.5 md:px-4 py-1.5 md:py-2 rounded-full mb-6 md:mb-8 shadow-[0_0_20px_rgba(212,180,131,0.06)] transition-all duration-300"
+          className="group inline-flex max-w-full items-center gap-2.5 bg-krudex-surface/90 border border-white/10 hover:border-white/40 px-3.5 md:px-4 py-1.5 md:py-2 rounded-full mb-6 md:mb-8 shadow-[0_0_20px_rgba(255,255,255,0.06)] transition-all duration-300"
         >
           <span className="relative flex h-2 w-2 shrink-0">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-krudex-accent opacity-75"></span>
@@ -129,7 +129,7 @@ const Hero = () => {
         >
           <MagneticButton
             href="/contact"
-            className="group relative inline-flex items-center justify-center gap-2 whitespace-nowrap bg-krudex-accent text-krudex-black px-7 md:px-6 py-3.5 md:py-4 text-[13px] md:text-[14px] min-[1920px]:text-[16px] font-semibold tracking-wide hover:bg-krudex-accent-hover transition-all rounded-full shadow-[0_0_30px_rgba(212,180,131,0.25)] hover:shadow-[0_0_40px_rgba(212,180,131,0.4)] hover:scale-[1.02]"
+            className="group relative inline-flex items-center justify-center gap-2 whitespace-nowrap bg-krudex-accent text-krudex-black px-7 md:px-6 py-3.5 md:py-4 text-[13px] md:text-[14px] min-[1920px]:text-[16px] font-semibold tracking-wide hover:bg-krudex-accent-hover transition-all rounded-full shadow-[0_0_30px_rgba(255,255,255,0.25)] hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] hover:scale-[1.02]"
           >
             <span>Book a Strategy Call</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
