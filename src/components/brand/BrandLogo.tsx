@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { BRAND } from './brand';
 
 /**
- * The Krudex Global logo (gold KK). Use this everywhere a logo appears.
+ * The Krudex Global logo (blue KK). Use this everywhere a logo appears.
  *
  * Size it with a text class (e.g. "text-[20px]"): the logo is `height` em
  * tall, so one font size scales it responsively. Default 3em.

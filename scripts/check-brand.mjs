@@ -56,7 +56,7 @@ for (const [, path] of brandTs.matchAll(/:\s*'(\/brand\/[^']+)'/g)) {
   if (!existsSync(join(root, 'public', path))) errors.push(`public${path}  listed in BRAND but missing.`);
 }
 for (const icon of ['src/app/icon.png', 'src/app/apple-icon.png']) {
-  if (!existsSync(join(root, icon))) errors.push(`${icon}  missing (favicon must be the gold KK mark).`);
+  if (!existsSync(join(root, icon))) errors.push(`${icon}  missing (favicon must be the blue KK mark).`);
 }
 
 // Old logo images must not be deployed again.

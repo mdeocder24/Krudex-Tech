@@ -192,7 +192,7 @@ Every logo on the site comes from **`src/components/brand/`**. Nothing else may 
 | `brand.ts` | `BRAND` constants: name, logo path and size, alt text |
 | `BrandLogo.tsx` | The gold KK logo. Size it with a text class, e.g. `className="text-[20px]"`; the logo is `height` em tall (default 3) |
 
-Static files live in `public/brand/`: `krudex-global-logo.png` (full logo, trimmed) and `krudex-global-mark-512.png` (KK symbol, JSON-LD logo). The favicon (`src/app/icon.png`) and Apple icon (`src/app/apple-icon.png`) are the KK symbol. The social card (`src/app/opengraph-image.tsx`) uses the full logo. Source artwork: `design/brand-archive/krudex-bg-gold.png`.
+Static files live in `public/brand/`: `krudex-global-logo-royal.png` (full logo, trimmed) and `krudex-global-mark-royal-512.png` (KK symbol, JSON-LD logo). The favicon (`src/app/icon.png`) and Apple icon (`src/app/apple-icon.png`) are the KK symbol. The social card (`src/app/opengraph-image.tsx`) uses the full logo. Source artwork: `design/brand-archive/krudex-bg-gold.png`, recolored to royal blue `#2C65DD`.
 
 **Guard:** `npm run check:brand` runs before every build and in CI. It fails if a file outside `src/components/brand/` references a logo image, if "Krudex Technologies" reappears, if a brand asset is missing, or if an old logo is put back in `public/`. `e2e/brand.spec.ts` checks that every page renders the logo in the navbar and footer.
 
