@@ -84,8 +84,10 @@ export default function PrivacyPage() {
               <p>We share personal data only with service providers that help us run this website:</p>
               <ul>
                 <li>
-                  <strong>Cloudflare</strong> stores inquiry records (Cloudflare D1 database) and provides spam
-                  protection.
+                  <strong>MongoDB Atlas</strong> securely stores inquiry records in a cloud database.
+                </li>
+                <li>
+                  <strong>Cloudflare</strong> provides spam verification (Turnstile).
                 </li>
                 <li>
                   <strong>Our email provider</strong> delivers a copy of your inquiry to our team&apos;s inbox.

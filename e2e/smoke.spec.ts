@@ -42,7 +42,7 @@ test('security headers are set', async ({ request }) => {
   expect(h['x-powered-by']).toBeUndefined();
 });
 
-test('contact form submits (API mocked, nothing written to D1)', async ({ page }) => {
+test('contact form submits (API mocked, nothing written to database)', async ({ page }) => {
   let payload: Record<string, unknown> | null = null;
   await page.route('**/api/contact', async (route) => {
     payload = route.request().postDataJSON();

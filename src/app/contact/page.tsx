@@ -126,7 +126,7 @@ export default function ContactPage() {
     setError('');
 
     try {
-      // Send inquiry to our backend API connected to Cloudflare D1
+      // Send inquiry to our backend API connected to MongoDB Atlas
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: {

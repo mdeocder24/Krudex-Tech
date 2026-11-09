@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { queryD1 } from '@/lib/d1';
+import { getInquiriesCollection } from '@/lib/mongodb';
 import { rateLimit } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
 import { notifyNewInquiry } from '@/lib/notify';
@@ -105,11 +105,17 @@ export async function POST(request: Request) {
 
     const id = crypto.randomUUID();
 
-    await queryD1(
-      `INSERT INTO inquiries (id, name, email, company, scope, timeline, details)
-       VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [id, name, email, company, scope, timeline, details]
-    );
+    const inquiries = await getInquiriesCollection();
+    await inquiries.insertOne({
+      id,
+      name,
+      email,
+      company,
+      scope,
+      timeline,
+      details,
+      createdAt: new Date(),
+    });
 
     // Notification failure must not lose the inquiry, which is already stored.
     try {
@@ -127,7 +133,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
     const message = error instanceof Error ? error.message : 'Unknown error';
-    console.error('Error submitting inquiry to Cloudflare D1:', message);
+    console.error('Error submitting inquiry to MongoDB Atlas:', message);
 
     return NextResponse.json(
       { error: 'Failed to submit inquiry. Please try again or contact us directly.' },
