@@ -25,14 +25,20 @@ export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURICo
   'Hi Krudex, I found you on your website and would like to talk.'
 )}`;
 
-/** Public routes, used by the sitemap. */
+/**
+ * Public, indexable routes, used by the sitemap.
+ *
+ * `lastModified` is the date the page's content last changed. Update it when
+ * you edit a page: search engines ignore the field if it changes on every
+ * deploy without the content changing.
+ */
 export const ROUTES = [
-  { path: '/', priority: 1 },
-  { path: '/services', priority: 0.9 },
-  { path: '/training', priority: 0.8 },
-  { path: '/about', priority: 0.7 },
-  { path: '/our-team', priority: 0.6 },
-  { path: '/contact', priority: 0.8 },
-  { path: '/privacy', priority: 0.2 },
-  { path: '/terms', priority: 0.2 },
+  { path: '/', priority: 1, changeFrequency: 'weekly', lastModified: '2026-11-05' },
+  { path: '/services', priority: 0.9, changeFrequency: 'monthly', lastModified: '2026-11-05' },
+  { path: '/training', priority: 0.8, changeFrequency: 'weekly', lastModified: '2026-11-05' },
+  { path: '/contact', priority: 0.8, changeFrequency: 'monthly', lastModified: '2026-11-09' },
+  { path: '/about', priority: 0.7, changeFrequency: 'monthly', lastModified: '2026-11-04' },
+  { path: '/our-team', priority: 0.6, changeFrequency: 'monthly', lastModified: '2026-11-05' },
+  { path: '/privacy', priority: 0.2, changeFrequency: 'yearly', lastModified: '2026-11-09' },
+  { path: '/terms', priority: 0.2, changeFrequency: 'yearly', lastModified: '2026-11-03' },
 ] as const;
