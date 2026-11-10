@@ -34,6 +34,15 @@ test('sitemap and robots are served', async ({ request }) => {
   expect(await robots.text()).toContain('Sitemap:');
 });
 
+test('llms.txt is served as Markdown', async ({ request }) => {
+  const res = await request.get('/llms.txt');
+  expect(res.ok()).toBeTruthy();
+  expect(res.headers()['content-type']).toContain('text/markdown');
+  const body = await res.text();
+  expect(body).toMatch(/^# Krudex Global/);
+  expect(body).toContain('## Services');
+});
+
 test('security headers are set', async ({ request }) => {
   const res = await request.get('/');
   const h = res.headers();
