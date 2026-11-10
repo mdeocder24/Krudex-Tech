@@ -4,7 +4,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import JsonLd from "@/components/JsonLd";
 import WhatsAppFab from "@/components/ui/WhatsAppFab";
-import GoogleTagManager from "@/components/GoogleTagManager";
+import { GoogleTagHead, GoogleTagNoscript } from "@/components/GoogleTagManager";
 import QuickAnswers from "@/components/QuickAnswers";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/structured-data";
@@ -96,14 +96,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className={`${plusJakartaSans.variable} ${dmSerifDisplay.variable} dark`}>
+      <head>
+        <GoogleTagHead />
+      </head>
       <body suppressHydrationWarning className="min-h-svh bg-krudex-black text-krudex-text antialiased overflow-x-hidden">
+        <GoogleTagNoscript />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-full focus:bg-krudex-accent focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-krudex-black"
         >
           Skip to content
         </a>
-        <GoogleTagManager />
         <JsonLd data={organizationJsonLd} />
         <JsonLd data={websiteJsonLd} />
 
