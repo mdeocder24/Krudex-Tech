@@ -12,7 +12,7 @@ export const organizationJsonLd = {
   email: CONTACT_EMAIL,
   telephone: PHONES[0],
   description:
-    'Krudex Global builds SaaS products, runs Google Ads and digital marketing, and trains students with industry experts in collaboration with NovaSkill Hub.',
+    'Krudex Global builds websites, web apps, mobile apps and SaaS products, runs Google Ads and digital marketing, and trains students with industry experts in collaboration with NovaSkill Hub.',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Hyderabad',
@@ -30,13 +30,15 @@ export const organizationJsonLd = {
     '@type': 'OfferCatalog',
     name: 'Services',
     itemListElement: [
-      'SaaS & web platforms',
-      'Mobile apps',
-      'AI integration',
-      'UI/UX design',
-      'Google Ads',
-      'Digital marketing',
-      'Student training',
+      'Website development',
+      'Web app development',
+      'SaaS product development',
+      'Mobile app development',
+      'AI and machine learning integration',
+      'UI/UX and brand design',
+      'Google Ads management',
+      'Digital marketing and SEO',
+      'Student training in AI/ML and full stack development',
     ].map((name) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name } })),
   },
 };

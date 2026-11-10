@@ -4,6 +4,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import JsonLd from "@/components/JsonLd";
 import WhatsAppFab from "@/components/ui/WhatsAppFab";
+import GoogleTagManager from "@/components/GoogleTagManager";
 import QuickAnswers from "@/components/QuickAnswers";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/structured-data";
@@ -20,17 +21,45 @@ const dmSerifDisplay = DM_Serif_Display({
   subsets: ["latin"],
 });
 
+const SITE_TITLE = "Krudex Global | Website, Web App & SaaS Development, Digital Marketing";
+const SITE_DESCRIPTION =
+  "Krudex Global builds websites, web apps, mobile apps and SaaS products, and runs Google Ads and digital marketing to bring customers. Hyderabad, India, working worldwide. Also student training in AI/ML and full stack development.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   alternates: { canonical: "/" },
   title: {
-    default: "Krudex Global | SaaS Products, Digital Marketing & Student Training",
+    default: SITE_TITLE,
     template: "%s | Krudex Global",
   },
-  description: "Krudex Global builds SaaS products, runs Google Ads and digital marketing, and trains students with industry experts in collaboration with NovaSkill Hub.",
+  description: SITE_DESCRIPTION,
+  keywords: [
+    "website development",
+    "web app development",
+    "SaaS development",
+    "SaaS product development",
+    "mobile app development",
+    "custom software development",
+    "web development company Hyderabad",
+    "app development company India",
+    "Next.js development",
+    "AI integration",
+    "UI UX design",
+    "Google Ads agency",
+    "digital marketing agency",
+    "SEO services",
+    "social media marketing",
+    "full stack development training",
+    "AI ML training Hyderabad",
+    "Krudex Global",
+  ],
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  category: "technology",
   openGraph: {
-    title: "Krudex Global | SaaS Products, Digital Marketing & Student Training",
-    description: "We build SaaS products, run Google Ads and digital marketing, and train students with industry experts in collaboration with NovaSkill Hub.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     siteName: SITE_NAME,
     type: "website",
     locale: "en_IN",
@@ -38,8 +67,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Krudex Global | SaaS Products, Digital Marketing & Student Training",
-    description: "We build SaaS products, run Google Ads and digital marketing, and train students with industry experts in collaboration with NovaSkill Hub.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
   },
 };
 
@@ -69,6 +103,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <GoogleTagManager />
         <JsonLd data={organizationJsonLd} />
         <JsonLd data={websiteJsonLd} />
 
