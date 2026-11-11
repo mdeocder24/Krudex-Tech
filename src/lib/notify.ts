@@ -1,3 +1,5 @@
+import { Resend } from 'resend';
+
 export interface InquiryNotice {
   id: string;
   name: string;
@@ -23,7 +25,7 @@ function oneLine(value: string): string {
 }
 
 /**
- * Emails the team about a new inquiry through Resend's HTTP API.
+ * Emails the team about a new inquiry using the official Resend SDK.
  *
  * Optional: does nothing unless RESEND_API_KEY and CONTACT_NOTIFY_EMAIL are set.
  * CONTACT_FROM_EMAIL must be an address on a domain verified in Resend;
@@ -34,6 +36,7 @@ export async function notifyNewInquiry(inquiry: InquiryNotice): Promise<void> {
   const to = process.env.CONTACT_NOTIFY_EMAIL?.trim();
   if (!apiKey || !to) return;
 
+  const resend = new Resend(apiKey);
   const from = process.env.CONTACT_FROM_EMAIL?.trim() || 'Krudex Website <onboarding@resend.dev>';
 
   const rows: Array<[string, string | null]> = [
@@ -57,24 +60,16 @@ export async function notifyNewInquiry(inquiry: InquiryNotice): Promise<void> {
 
   const text = rows.map(([label, value]) => `${label}: ${value || '—'}`).join('\n');
 
-  const res = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      from,
-      to: to.split(',').map((s) => s.trim()).filter(Boolean),
-      reply_to: inquiry.email,
-      subject: `New inquiry: ${oneLine(inquiry.name)}${inquiry.scope ? ` (${oneLine(inquiry.scope)})` : ''}`,
-      html,
-      text,
-    }),
-    cache: 'no-store',
+  const { error } = await resend.emails.send({
+    from,
+    to: to.split(',').map((s) => s.trim()).filter(Boolean),
+    replyTo: inquiry.email,
+    subject: `New inquiry: ${oneLine(inquiry.name)}${inquiry.scope ? ` (${oneLine(inquiry.scope)})` : ''}`,
+    html,
+    text,
   });
 
-  if (!res.ok) {
-    throw new Error(`Resend HTTP ${res.status}: ${await res.text()}`);
+  if (error) {
+    throw new Error(`Resend Error: ${error.message}`);
   }
 }
