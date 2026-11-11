@@ -30,11 +30,11 @@ function oneLine(value: string): string {
  * it defaults to Resend's shared test sender.
  */
 export async function notifyNewInquiry(inquiry: InquiryNotice): Promise<void> {
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_NOTIFY_EMAIL;
+  const apiKey = process.env.RESEND_API_KEY?.trim();
+  const to = process.env.CONTACT_NOTIFY_EMAIL?.trim();
   if (!apiKey || !to) return;
 
-  const from = process.env.CONTACT_FROM_EMAIL || 'Krudex Website <onboarding@resend.dev>';
+  const from = process.env.CONTACT_FROM_EMAIL?.trim() || 'Krudex Website <onboarding@resend.dev>';
 
   const rows: Array<[string, string | null]> = [
     ['Name', inquiry.name],
