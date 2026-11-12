@@ -58,6 +58,18 @@ const teamMembers = [
     ],
   },
   {
+    name: "Vivek Krishna",
+    role: "Lead Android Developer",
+    initials: "VK",
+    accent: "#FFFFFF",
+    accentRgb: "255, 255, 255",
+    bio: "Leads Android development at Krudex, building fast, reliable native apps with clean architecture and a polished user experience.",
+    skills: ["Kotlin", "Jetpack Compose", "Android SDK", "Firebase", "Play Store Release"],
+    socials: [
+      { type: "linkedin" as const, url: "#" },
+    ],
+  },
+  {
     name: "Allu Nanda Kishore",
     role: "Digital Marketing Head",
     initials: "AK",
